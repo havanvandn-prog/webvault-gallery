@@ -486,48 +486,20 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 6.5s cubic-bezier(0.2, 0.6, 0.2, 1);
       transform: translateY(0);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
       will-change: transform;
     }
 
+    /* Di chuột vào: Cuộn chậm rãi, đều đặn 15s để mắt người kịp quan sát trọn vẹn bố cục */
     .card-thumbnail-box:hover .card-thumb-img {
       transform: translateY(calc(-100% + 240px));
+      transition: transform 15s linear;
     }
 
+    /* Giữ ảnh rõ 100%, triệt tiêu hoàn toàn lớp phủ tối và hiệu ứng mờ */
     .thumbnail-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(7, 7, 9, 0.5);
-      backdrop-filter: blur(2px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-    }
-
-    .card-thumbnail-box:hover .thumbnail-overlay {
-      opacity: 1;
-    }
-
-    .zoom-pill {
-      background: rgba(255, 255, 255, 0.95);
-      color: #09090b;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-      transform: translateY(6px);
-      transition: transform 0.2s ease;
-    }
-
-    .card-thumbnail-box:hover .zoom-pill {
-      transform: translateY(0);
+      display: none !important;
     }
 
     .file-size-tag {
@@ -1641,7 +1613,7 @@
         </div>
 
         <!-- THUMBNAIL WITH HOVER SCROLL -->
-        <div class="card-thumbnail-box" onclick="openLightbox('${item.id}')">
+        <div class="card-thumbnail-box" onclick="openLightbox('${item.id}')" title="Nhấp để xem ảnh phóng to Full-Page">
           <img src="${item.thumb}" class="card-thumb-img" alt="${item.name}" loading="lazy">
           <div class="thumbnail-overlay">
             <div class="zoom-pill">

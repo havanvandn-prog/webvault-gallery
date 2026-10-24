@@ -262,11 +262,15 @@
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 6.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+      transform: translateY(0);
+      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform;
     }
 
+    /* Di chuột vào: Cuộn chậm rãi, đều đặn 15s */
     .card-thumbnail-box:hover .card-thumb-img {
       transform: translateY(calc(-100% + 230px));
+      transition: transform 15s linear;
     }
 
     /* CARD BODY */

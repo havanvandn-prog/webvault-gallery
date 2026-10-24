@@ -1747,7 +1747,7 @@
       // Xác định URL: Nếu chạy cục bộ file:/// -> nạp từ GitHub CDN để hỗ trợ CORS Clipboard Blob
       let fbUrl = fbRelative;
       if (window.location.protocol === 'file:') {
-        fbUrl = 'https://havanvandn-prog.github.io/webvault-gallery/' + fbRelative;
+        fbUrl = 'https://raw.githubusercontent.com/havanvandn-prog/webvault-gallery/main/' + fbRelative;
       }
 
       const resp = await fetch(fbUrl);

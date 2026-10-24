@@ -27,6 +27,37 @@
       --sidebar-w: 260px;
     }
 
+    /* CUSTOM ULTRA-SLEEK DARK SCROLLBAR (CHUẨN ZEIT & APPLE DARK MODE) */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      transition: background 0.2s ease;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 59, 48, 0.7); /* Zeit Red Glow on Hover */
+    }
+
+    ::-webkit-scrollbar-button {
+      display: none !important;
+      width: 0;
+      height: 0;
+    }
+
     html, body {
       box-sizing: border-box;
       margin: 0;
@@ -673,6 +704,22 @@
       padding: 24px;
       display: flex;
       justify-content: center;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 59, 48, 0.5) rgba(255, 255, 255, 0.04);
+    }
+    .lightbox-body::-webkit-scrollbar {
+      width: 7px;
+    }
+    .lightbox-body::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
+    }
+    .lightbox-body::-webkit-scrollbar-thumb {
+      background: rgba(255, 59, 48, 0.5);
+      border-radius: 8px;
+    }
+    .lightbox-body::-webkit-scrollbar-thumb:hover {
+      background: #ff3b30;
     }
 
     .lightbox-img-wrapper {

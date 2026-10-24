@@ -1,0 +1,9 @@
+# Thư viện ảnh gốc thô PNG (đã có kho Kho_Anh_Webp tối ưu nhẹ 16MB)
+Anh_Chup_Website/
+
+# Cache Python
+__pycache__/
+*.pyc
+
+# System logs
+*.log

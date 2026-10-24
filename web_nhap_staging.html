@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trạm Kiểm Duyệt Mẫu Website (WebVault Staging) — Dark Zeit Edition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070709;
+      --bg-surface: #101014;
+      --bg-card: #121217;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.22);
+      --accent: #ff3b30;
+      --success: #01a915;
+      --success-glow: rgba(1, 169, 21, 0.25);
+      --danger: #ef4444;
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* STICKY TOP STAGING BAR */
+    .staging-header {
+      background: rgba(16, 16, 20, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 16px 32px;
+    }
+
+    .staging-header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .staging-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .staging-badge {
+      background: linear-gradient(135deg, #ff3b30, #ff6b5b);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .staging-title h1 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .staging-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .staging-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-approve-all {
+      background: rgba(1, 169, 21, 0.15);
+      border-color: rgba(1, 169, 21, 0.4);
+      color: #4ade80;
+    }
+    .btn-approve-all:hover {
+      background: rgba(1, 169, 21, 0.25);
+    }
+
+    .btn-sync-hub {
+      background: linear-gradient(135deg, #01a915, #018f12);
+      color: #fff;
+      box-shadow: 0 4px 14px var(--success-glow);
+    }
+    .btn-sync-hub:hover {
+      background: linear-gradient(135deg, #02b918, #019914);
+      transform: translateY(-1px);
+    }
+
+    .btn-view-hub {
+      background: #181820;
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+    .btn-view-hub:hover {
+      background: #22222d;
+      color: #fff;
+    }
+
+    /* COUNTER STRIP */
+    .counter-strip {
+      max-width: 1440px;
+      margin: 20px auto 0;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .counter-text {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .counter-text b {
+      color: #4ade80;
+      font-size: 16px;
+    }
+
+    /* GRID CONTAINER */
+    .main-container {
+      max-width: 1440px;
+      margin: 16px auto 80px;
+      padding: 0 32px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    /* STAGING CARD */
+    .staging-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .staging-card.approved {
+      border-color: rgba(1, 169, 21, 0.5);
+      box-shadow: 0 8px 24px -6px var(--success-glow);
+    }
+
+    .staging-card.rejected {
+      opacity: 0.45;
+      border-color: rgba(239, 68, 68, 0.3);
+      filter: grayscale(60%);
+    }
+
+    .staging-card.rejected:hover {
+      opacity: 0.85;
+      filter: none;
+    }
+
+    /* BROWSER BAR */
+    .card-browser-bar {
+      background: #16161d;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .browser-url-pill {
+      background: #0d0d12;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      font-size: 11px;
+      color: var(--text-dim);
+      padding: 2px 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+      flex: 1;
+    }
+
+    /* THUMBNAIL BOX */
+    .card-thumbnail-box {
+      position: relative;
+      height: 230px;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-thumb-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 3.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .card-thumbnail-box:hover .card-thumb-img {
+      transform: translateY(-40%);
+    }
+
+    /* CARD BODY */
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .badge-vibe {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 59, 48, 0.12);
+      color: #ff6e66;
+      border: 1px solid rgba(255, 59, 48, 0.2);
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    /* TOGGLE APPROVAL BUTTON */
+    .approval-toggle-btn {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      margin-top: auto;
+    }
+
+    .approval-toggle-btn.is-approved {
+      background: rgba(1, 169, 21, 0.18);
+      border-color: rgba(1, 169, 21, 0.5);
+      color: #4ade80;
+    }
+    .approval-toggle-btn.is-approved:hover {
+      background: rgba(1, 169, 21, 0.3);
+    }
+
+    .approval-toggle-btn.is-rejected {
+      background: rgba(239, 68, 68, 0.15);
+      border-color: rgba(239, 68, 68, 0.3);
+      color: #f87171;
+    }
+    .approval-toggle-btn.is-rejected:hover {
+      background: rgba(239, 68, 68, 0.25);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1f1f28;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 120;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- STAGING HEADER -->
+  <header class="staging-header">
+    <div class="staging-header-inner">
+      <div class="staging-brand">
+        <span class="staging-badge">Kiểm Duyệt Nháp</span>
+        <div class="staging-title">
+          <h1>Trạm Thẩm Định Mẫu Website Trước Khi Đẩy Lên Hub</h1>
+          <p>Xem lướt từng mẫu, bấm vào nút bên dưới card để Duyệt hoặc Bỏ qua</p>
+        </div>
+      </div>
+
+      <div class="staging-actions">
+        <button class="btn btn-approve-all" onclick="toggleAll()">
+          Chọn/Bỏ Tất Cả
+        </button>
+
+        <button class="btn btn-sync-hub" onclick="saveApprovalSelection()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Xác Nhận & Đồng Bộ (<span id="btnApprovedCount">20</span> Mẫu)
+        </button>
+
+        <a href="index.html" class="btn btn-view-hub">
+          Mở Thư Viện Chính WebVault ↗
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- COUNTER STRIP -->
+  <div class="counter-strip">
+    <div class="counter-text">
+      Trạng thái phê duyệt: Đang chọn <b id="statApproved">20</b> / 20 mẫu hợp lệ
+    </div>
+    <div style="font-size: 13px; color: var(--text-dim);">
+      💡 Mẹo: Những mẫu bạn bấm 'Bỏ qua' sẽ không được nạp vào kho chính thức
+    </div>
+  </div>
+
+  <!-- MAIN CARDS -->
+  <main class="main-container">
+    <div class="cards-grid" id="cardsGrid">
+      <!-- Generated by JS -->
+    </div>
+  </main>
+
+  <div class="toast" id="toastBox">
+    <span id="toastMsg">Thao tác thành công</span>
+  </div>
+
+<script>
+  // Dữ liệu ứng viên (kế thừa từ database.json)
+  const CANDIDATES = [
+    {"id": "01", "name": "Square Experiential Communications", "short_name": "Square Experiential", "url": "https://square-vn.com/", "domain": "square-vn.com", "vibe": "Dark Mode & Sang trọng", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/square-vn_com_thumb.webp", "full": "Kho_Anh_Webp/square-vn_com_full.webp", "desc": "Agency hàng đầu về Brand Activation và Experiential Marketing. Giao diện full-bleed tràn viền, hiệu ứng visual storytelling đẳng cấp quốc tế."},
+    {"id": "02", "name": "Per-fectiv", "short_name": "Per-fectiv", "url": "https://per-fectiv.com/", "domain": "per-fectiv.com", "vibe": "Dark Mode & Sang trọng", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/per-fectiv_com_thumb.webp", "full": "Kho_Anh_Webp/per-fectiv_com_full.webp", "desc": "Giao diện Dark Mode sang trọng, thời thượng; chuyên các sự kiện trải nghiệm sáng tạo, ra mắt thương hiệu xa xỉ (BMW, Hennessy)."},
+    {"id": "03", "name": "Le Bros", "short_name": "Le Bros", "url": "https://lebros.vn/", "domain": "lebros.vn", "vibe": "Editorial & Tối giản", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/lebros_vn_thumb.webp", "full": "Kho_Anh_Webp/lebros_vn_full.webp", "desc": "Thuộc Le Group. Thiết kế phong cách tạp chí tối giản (Editorial Minimalist), đậm chất văn hóa nghệ thuật cho sự kiện tầm vóc quốc gia."},
+    {"id": "04", "name": "BS Group", "short_name": "BS Group", "url": "https://bsgroup.com.vn/", "domain": "bsgroup.com.vn", "vibe": "Dark Mode & Sang trọng", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/bsgroup_com_vn_thumb.webp", "full": "Kho_Anh_Webp/bsgroup_com_vn_full.webp", "desc": "Sự kiện may đo độc bản (Bespoke Events). Bố cục phân tầng mạch lạc, video showreel chất lượng cao, stage production chuyên nghiệp."},
+    {"id": "05", "name": "Zeit Media", "short_name": "Zeit Media", "url": "https://zeitmedia.vn/", "domain": "zeitmedia.vn", "vibe": "Sáng tạo & Đương đại", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/zeitmedia_vn_thumb.webp", "full": "Kho_Anh_Webp/zeitmedia_vn_full.webp", "desc": "Tinh thần nghệ thuật đương đại 'Creative Above All'. Dàn trang dự án đánh số thứ tự độc đáo, hình ảnh sự kiện sáng tạo nổi bật."},
+    {"id": "06", "name": "HoaBinh Events", "short_name": "HoaBinh Events", "url": "https://hoabinhevents.com/", "domain": "hoabinhevents.com", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "Toàn quốc", "thumb": "Kho_Anh_Webp/hoabinhevents_com_thumb.webp", "full": "Kho_Anh_Webp/hoabinhevents_com_full.webp", "desc": "Ông lớn số 1 về Hội nghị, Hội thảo quốc tế và M.I.C.E. Thống trị hàng trăm từ khóa tìm kiếm Google với cấu trúc danh mục đồ sộ."},
+    {"id": "07", "name": "Á Châu Event", "short_name": "Á Châu Event", "url": "https://sukienachau.com/", "domain": "sukienachau.com", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/sukienachau_com_thumb.webp", "full": "Kho_Anh_Webp/sukienachau_com_full.webp", "desc": "Đơn vị kỳ cựu từ 2008 giữ vững top đầu tìm kiếm Google. Cung cấp gói dịch vụ sự kiện trọn gói từ thiết bị, nhân sự đến kịch bản."},
+    {"id": "08", "name": "Vietlink Event", "short_name": "Vietlink Event", "url": "https://vietlinkevent.vn/", "domain": "vietlinkevent.vn", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/vietlinkevent_vn_thumb.webp", "full": "Kho_Anh_Webp/vietlinkevent_vn_full.webp", "desc": "Top đầu tìm kiếm phía Nam mảng khai trương, khánh thành, hội nghị khách hàng, Year End Party với bố cục nhận báo giá tối ưu."},
+    {"id": "09", "name": "Apex Media", "short_name": "Apex Media", "url": "https://apexevent.vn/", "domain": "apexevent.vn", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/apexevent_vn_thumb.webp", "full": "Kho_Anh_Webp/apexevent_vn_full.webp", "desc": "Thiết kế hiện đại, chỉn chu, truyền tải chiều sâu năng lực chiến lược tổ chức sự kiện đối ngoại và hội nghị thượng đỉnh kinh tế."},
+    {"id": "10", "name": "Newday Media", "short_name": "Newday Media", "url": "https://newdaymedia.com.vn/", "domain": "newdaymedia.com.vn", "vibe": "Sáng tạo & Đương đại", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/newdaymedia_com_vn_thumb.webp", "full": "Kho_Anh_Webp/newdaymedia_com_vn_full.webp", "desc": "Agency sáng tạo đạt giải thưởng danh giá Stevie Awards (Mỹ). Chuyên lễ hội văn hóa di sản, sự kiện công nghệ và đại nhạc hội."},
+    {"id": "11", "name": "Cyber Show", "short_name": "Cyber Show", "url": "https://cybershow.vn/", "domain": "cybershow.vn", "vibe": "Trẻ trung & Năng động", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/cybershow_vn_thumb.webp", "full": "Kho_Anh_Webp/cybershow_vn_full.webp", "desc": "Giao diện tràn đầy năng lượng, tối ưu di động xuất sắc; chuyên tiệc tất niên, gala dinner kết hợp hiệu ứng âm thanh ánh sáng hiện đại."},
+    {"id": "12", "name": "YesEvents", "short_name": "YesEvents", "url": "https://www.yesevents.vn/", "domain": "yesevents.vn", "vibe": "Dark Mode & Sang trọng", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/yesevents_vn_thumb.webp", "full": "Kho_Anh_Webp/yesevents_vn_full.webp", "desc": "Phong cách thanh lịch, song ngữ Anh - Việt; đối tác chiến lược của các khách sạn 5 sao và resort cao cấp tại TP.HCM và Phú Quốc."},
+    {"id": "13", "name": "CAT Event", "short_name": "CAT Event", "url": "https://cat-event.com.vn/", "domain": "cat-event.com.vn", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/cat-event_com_vn_thumb.webp", "full": "Kho_Anh_Webp/cat-event_com_vn_full.webp", "desc": "Kinh nghiệm từ 2004, thể hiện hình ảnh vững chãi của doanh nghiệp kỳ cựu chuyên tổ chức sự kiện khánh tiết nhà nước và tập đoàn lớn."},
+    {"id": "14", "name": "Hoàng Sa Việt", "short_name": "Hoàng Sa Việt", "url": "https://hoangsaviet.com/", "domain": "hoangsaviet.com", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/hoangsaviet_com_thumb.webp", "full": "Kho_Anh_Webp/hoangsaviet_com_full.webp", "desc": "Sở hữu nhà máy Viettruss lớn nhất miền Nam; trực tiếp tham gia sản xuất concert Anh Trai Say Hi. Hệ sinh thái thiết bị toàn diện."},
+    {"id": "15", "name": "Đất Việt Event", "short_name": "Đất Việt Event", "url": "https://datvietevent.com/", "domain": "datvietevent.com", "vibe": "Trẻ trung & Năng động", "location": "TP.HCM", "thumb": "Kho_Anh_Webp/datvietevent_com_thumb.webp", "full": "Kho_Anh_Webp/datvietevent_com_full.webp", "desc": "Thuộc Đất Việt Tour. Tông màu cam trắng hiện đại, thông số năng lực minh bạch (500+ sự kiện/năm) cho teambuilding và gala lớn."},
+    {"id": "16", "name": "Danang Events", "short_name": "Danang Events", "url": "https://danangevents.com.vn/", "domain": "danangevents.com.vn", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "Đà Nẵng", "thumb": "Kho_Anh_Webp/danangevents_com_vn_thumb.webp", "full": "Kho_Anh_Webp/danangevents_com_vn_full.webp", "desc": "Dẫn đầu thị phần sự kiện và M.I.C.E tại Đà Nẵng - Hội An - Huế; cấu trúc cẩm nang sự kiện và du lịch kết hợp teambuilding biển chuẩn SEO."},
+    {"id": "17", "name": "Sea Event", "short_name": "Sea Event", "url": "https://seaevent.vn/", "domain": "seaevent.vn", "vibe": "Trẻ trung & Năng động", "location": "Đà Nẵng", "thumb": "Kho_Anh_Webp/seaevent_vn_thumb.webp", "full": "Kho_Anh_Webp/seaevent_vn_full.webp", "desc": "Tone xanh biển duyên hải tươi sáng, top 1-2 tìm kiếm sự kiện tại Đà Nẵng, am hiểu văn hóa bản địa và tối ưu chi phí tổ chức."},
+    {"id": "18", "name": "AN Media", "short_name": "AN Media", "url": "https://anmedia.vn/", "domain": "anmedia.vn", "vibe": "Sáng tạo & Đương đại", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/anmedia_vn_thumb.webp", "full": "Kho_Anh_Webp/anmedia_vn_full.webp", "desc": "Sáng lập bởi ca sĩ / MC Duy Khoa. Kết hợp hoàn hảo giữa tổ chức sự kiện chuyên nghiệp và mạng lưới sản xuất TVC, báo chí, nghệ sĩ."},
+    {"id": "19", "name": "Thăng Long Event", "short_name": "Thăng Long Event", "url": "https://thanglongevent.com/", "domain": "thanglongevent.com", "vibe": "Dark Mode & Sang trọng", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/thanglongevent_com_thumb.webp", "full": "Kho_Anh_Webp/thanglongevent_com_full.webp", "desc": "Thiết kế nhận diện thương hiệu bài bản bởi Sao Kim Branding; giao diện sang trọng chuyên phục vụ các bộ ban ngành và tập đoàn lớn."},
+    {"id": "20", "name": "AzEvent", "short_name": "AzEvent", "url": "https://azevent.vn/", "domain": "azevent.vn", "vibe": "Tập đoàn & Doanh nghiệp lớn", "location": "Hà Nội", "thumb": "Kho_Anh_Webp/azevent_vn_thumb.webp", "full": "Kho_Anh_Webp/azevent_vn_full.webp", "desc": "Bố cục tinh gọn, tốc độ tải nhanh, hiển thị số liệu kinh nghiệm minh bạch, thứ hạng tìm kiếm top đầu thủ đô cho dịch vụ sự kiện."}
+  ];
+
+  // Trạng thái: Mặc định duyệt tất cả
+  let approvalMap = {};
+  CANDIDATES.forEach(c => approvalMap[c.id] = true);
+
+  function renderStaging() {
+    const grid = document.getElementById('cardsGrid');
+    grid.innerHTML = '';
+
+    let approvedCount = 0;
+
+    CANDIDATES.forEach(item => {
+      const isApproved = approvalMap[item.id];
+      if (isApproved) approvedCount++;
+
+      const card = document.createElement('div');
+      card.className = `staging-card ${isApproved ? 'approved' : 'rejected'}`;
+      card.id = `card-${item.id}`;
+
+      card.innerHTML = `
+        <div class="card-browser-bar">
+          <a href="${item.url}" target="_blank" class="browser-url-pill">https://${item.domain}/</a>
+          <span style="font-size: 11px; color: var(--text-dim);">${item.location}</span>
+        </div>
+
+        <div class="card-thumbnail-box">
+          <img src="${item.thumb}" class="card-thumb-img" alt="${item.name}">
+        </div>
+
+        <div class="card-body">
+          <div class="card-meta-row">
+            <span class="badge-vibe">${item.vibe}</span>
+            <span style="font-size: 11px; color: ${isApproved ? '#4ade80' : '#f87171'}; font-weight: 700;">
+              ${isApproved ? '✓ ĐÃ DUYỆT' : '✕ ĐÃ LOẠI'}
+            </span>
+          </div>
+
+          <h3 class="card-title">${item.id}. ${item.short_name}</h3>
+          <p class="card-desc">${item.desc}</p>
+
+          <button class="approval-toggle-btn ${isApproved ? 'is-approved' : 'is-rejected'}" onclick="toggleApproval('${item.id}')">
+            ${isApproved 
+              ? `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Giữ Lại Mẫu Này (Đã Duyệt)` 
+              : `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> Bỏ Qua (Không Lưu Mẫu Này)`}
+          </button>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+    document.getElementById('statApproved').textContent = approvedCount;
+    document.getElementById('btnApprovedCount').textContent = approvedCount;
+  }
+
+  function toggleApproval(id) {
+    approvalMap[id] = !approvalMap[id];
+    renderStaging();
+  }
+
+  function toggleAll() {
+    const values = Object.values(approvalMap);
+    const hasRejected = values.includes(false);
+    // Nếu có mẫu nào bị reject thì duyệt tất cả, ngược lại bỏ tất cả
+    const nextState = hasRejected;
+    CANDIDATES.forEach(c => approvalMap[c.id] = nextState);
+    renderStaging();
+  }
+
+  function saveApprovalSelection() {
+    const approvedList = CANDIDATES.filter(c => approvalMap[c.id]);
+    const jsonStr = JSON.stringify(approvedList, null, 2);
+
+    // Lưu vào localStorage
+    localStorage.setItem('webvault_approved_selection', jsonStr);
+
+    showToast(`✓ Đã lưu danh sách phê duyệt (${approvedList.length} mẫu)! Sẵn sàng đồng bộ.`);
+  }
+
+  let toastTimer = null;
+  function showToast(msg) {
+    const toast = document.getElementById('toastBox');
+    const toastMsg = document.getElementById('toastMsg');
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  document.addEventListener('DOMContentLoaded', renderStaging);
+</script>
+
+</body>
+</html>

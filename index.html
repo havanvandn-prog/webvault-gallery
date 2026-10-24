@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebVault — Thư Viện Mẫu Website Cao Cấp (Dark Mode Zeit Edition)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #070709;
+      --bg-surface: #101014;
+      --bg-surface-hover: #16161e;
+      --bg-card: #121217;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(255, 255, 255, 0.22);
+      --border-active: #ff3b30;
+      --accent: #ff3b30;
+      --accent-glow: rgba(255, 59, 48, 0.25);
+      --success: #01a915;
+      --success-glow: rgba(1, 169, 21, 0.25);
+      --text-main: #f4f4f5;
+      --text-muted: #a1a1aa;
+      --text-dim: #71717a;
+      --radius: 12px;
+      --sidebar-w: 260px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* APP LAYOUT */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: var(--sidebar-w);
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 30;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo-badge {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #ff3b30, #ff6b5b);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      color: #fff;
+      font-size: 15px;
+      letter-spacing: -0.5px;
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+
+    .brand-text h1 {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .brand-text span {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-section {
+      padding: 20px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      letter-spacing: 0.8px;
+      margin-bottom: 12px;
+      padding-left: 8px;
+    }
+
+    .nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-surface-hover);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background: rgba(255, 59, 48, 0.12);
+      color: #fff;
+      font-weight: 600;
+      border-left: 3px solid var(--accent);
+      padding-left: 9px;
+    }
+
+    .nav-count {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 10px;
+      color: var(--text-dim);
+    }
+
+    .nav-item.active .nav-count {
+      background: rgba(255, 59, 48, 0.25);
+      color: #ff857d;
+    }
+
+    /* MAIN CONTENT */
+    .main-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* TOP HEADER */
+    .top-header {
+      background: rgba(16, 16, 20, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 25;
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex: 1;
+      max-width: 460px;
+    }
+
+    .search-input {
+      width: 100%;
+      background: #181820;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 14px 9px 38px;
+      font-size: 13px;
+      color: #fff;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
+      background: #1d1d26;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff3b30, #e0281d);
+      color: #fff;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #ff4d44, #eb3328);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-hover);
+      color: #fff;
+    }
+
+    .btn-pitch {
+      background: rgba(1, 169, 21, 0.15);
+      border: 1px solid rgba(1, 169, 21, 0.4);
+      color: #4ade80;
+    }
+    .btn-pitch:hover {
+      background: rgba(1, 169, 21, 0.25);
+      border-color: var(--success);
+    }
+
+    /* PITCH VIP BANNER (Only in pitch mode) */
+    .pitch-banner {
+      display: none;
+      background: linear-gradient(135deg, #181412, #1f1110);
+      border-bottom: 1px solid rgba(255, 59, 48, 0.3);
+      padding: 24px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .pitch-banner.active {
+      display: block;
+    }
+    .pitch-banner h2 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .pitch-banner p {
+      font-size: 13px;
+      color: #cbd5e1;
+      max-width: 700px;
+    }
+
+    /* HERO STRIP */
+    .hero-strip {
+      padding: 24px 32px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-title-group h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #fff;
+    }
+    .hero-title-group p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .stats-badge-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .badge-stat b {
+      color: #fff;
+    }
+    .badge-stat.green {
+      border-color: rgba(1, 169, 21, 0.3);
+      color: #4ade80;
+    }
+
+    /* MAIN GRID CONTAINER */
+    .content-area {
+      padding: 12px 32px 80px;
+      flex: 1;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    /* WEBSITE CARD */
+    .website-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+
+    .website-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), 0 0 24px -6px var(--accent-glow);
+    }
+
+    .website-card.selected-for-pitch {
+      border-color: var(--success);
+      box-shadow: 0 0 0 1px var(--success), 0 12px 28px -6px var(--success-glow);
+    }
+
+    /* CARD BROWSER BAR */
+    .card-browser-bar {
+      background: #16161d;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+    .b-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .b-dot.red { background: #ff5f56; }
+    .b-dot.yellow { background: #ffbd2e; }
+    .b-dot.green { background: #27c93f; }
+
+    .browser-url-pill {
+      flex: 1;
+      margin-left: 6px;
+      background: #0d0d12;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      font-size: 11px;
+      color: var(--text-dim);
+      padding: 2px 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .browser-url-pill:hover {
+      color: #fff;
+    }
+
+    /* PITCH SELECT CHECKBOX */
+    .pitch-checkbox-label {
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      padding: 2px;
+    }
+    .pitch-checkbox {
+      accent-color: var(--success);
+      width: 14px;
+      height: 14px;
+      cursor: pointer;
+    }
+
+    /* THUMBNAIL WRAPPER & HOVER SCROLL */
+    .card-thumbnail-box {
+      position: relative;
+      height: 240px;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-thumb-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 3.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transform: translateY(0);
+      will-change: transform;
+    }
+
+    .card-thumbnail-box:hover .card-thumb-img {
+      transform: translateY(-40%);
+    }
+
+    .thumbnail-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 7, 9, 0.5);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card-thumbnail-box:hover .thumbnail-overlay {
+      opacity: 1;
+    }
+
+    .zoom-pill {
+      background: rgba(255, 255, 255, 0.95);
+      color: #09090b;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      transform: translateY(6px);
+      transition: transform 0.2s ease;
+    }
+
+    .card-thumbnail-box:hover .zoom-pill {
+      transform: translateY(0);
+    }
+
+    .file-size-tag {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(16, 16, 20, 0.85);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #4ade80;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+
+    /* CARD BODY */
+    .card-body {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .badge-vibe {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255, 59, 48, 0.12);
+      color: #ff6e66;
+      border: 1px solid rgba(255, 59, 48, 0.2);
+    }
+
+    .card-location {
+      font-size: 11px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* CARD ACTION BUTTONS */
+    .card-actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .btn-action {
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* FACEBOOK LEAD BUTTONS */
+    .btn-fb-text {
+      background: #1877f2;
+      color: #fff;
+      grid-column: span 1;
+    }
+    .btn-fb-text:hover {
+      background: #1464cc;
+    }
+
+    .btn-fb-image {
+      background: rgba(24, 119, 242, 0.15);
+      border: 1px solid rgba(24, 119, 242, 0.4);
+      color: #70b4ff;
+      grid-column: span 1;
+    }
+    .btn-fb-image:hover {
+      background: rgba(24, 119, 242, 0.25);
+      border-color: #1877f2;
+      color: #fff;
+    }
+
+    .btn-view-full {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border);
+      color: #fff;
+    }
+    .btn-view-full:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: var(--border-hover);
+    }
+
+    .btn-open-web {
+      background: #1a1a24;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+    .btn-open-web:hover {
+      background: #232330;
+      color: #fff;
+    }
+
+    /* LIGHTBOX MODAL */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.94);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+
+    .lightbox-header {
+      padding: 12px 24px;
+      background: #111116;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: #fff;
+    }
+
+    .lightbox-title-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lightbox-title-box h3 {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .lightbox-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .lightbox-img-wrapper {
+      max-width: 1280px;
+      width: 100%;
+      background: #000;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
+    }
+    .lightbox-img-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* FLOATING PITCH BAR */
+    .floating-pitch-bar {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #14141a;
+      border: 1px solid rgba(1, 169, 21, 0.4);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.7), 0 0 20px var(--success-glow);
+      padding: 12px 24px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 90;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .floating-pitch-bar.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1f1f28;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: all 0.25s ease;
+      z-index: 120;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+      .top-header {
+        padding: 12px 16px;
+      }
+      .content-area {
+        padding: 12px 16px 80px;
+      }
+      .hero-strip {
+        padding: 16px 16px 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-layout">
+  
+  <!-- SIDEBAR (2-TIER FILTER) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="brand-logo-badge">W</div>
+      <div class="brand-text">
+        <h1>WebVault</h1>
+        <span>Dark Zeit Edition</span>
+      </div>
+    </div>
+
+    <!-- TIER 1: NGÀNH NGHỀ -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">Ngành Nghề & Lĩnh Vực</div>
+      <ul class="nav-list">
+        <li class="nav-item active" onclick="setIndustry('all', this)">
+          <span>Tất Cả Danh Mục</span>
+          <span class="nav-count" id="countAll">20</span>
+        </li>
+        <li class="nav-item" onclick="setIndustry('su-kien', this)">
+          <span>Sự Kiện & Activation</span>
+          <span class="nav-count">20</span>
+        </li>
+        <li class="nav-item" style="opacity: 0.45; cursor: not-allowed;" title="Sắp nạp dữ liệu">
+          <span>Bất Động Sản</span>
+          <span class="nav-count">Sắp có</span>
+        </li>
+        <li class="nav-item" style="opacity: 0.45; cursor: not-allowed;" title="Sắp nạp dữ liệu">
+          <span>Kiến Trúc & Nội Thất</span>
+          <span class="nav-count">Sắp có</span>
+        </li>
+        <li class="nav-item" style="opacity: 0.45; cursor: not-allowed;" title="Sắp nạp dữ liệu">
+          <span>Thẩm Mỹ & Spa</span>
+          <span class="nav-count">Sắp có</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- TIER 2: PHONG CÁCH / VIBE -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">Phong Cách Thẩm Mỹ (Vibe)</div>
+      <ul class="nav-list">
+        <li class="nav-item active" onclick="setVibe('all', this)">
+          <span>Tất cả phong cách</span>
+          <span class="nav-count">20</span>
+        </li>
+        <li class="nav-item" onclick="setVibe('dark-luxury', this)">
+          <span>Dark Mode & Sang trọng</span>
+          <span class="nav-count">5</span>
+        </li>
+        <li class="nav-item" onclick="setVibe('creative-art', this)">
+          <span>Sáng tạo & Đương đại</span>
+          <span class="nav-count">3</span>
+        </li>
+        <li class="nav-item" onclick="setVibe('editorial', this)">
+          <span>Editorial & Tối giản</span>
+          <span class="nav-count">1</span>
+        </li>
+        <li class="nav-item" onclick="setVibe('corporate', this)">
+          <span>Tập đoàn & Uy tín</span>
+          <span class="nav-count">7</span>
+        </li>
+        <li class="nav-item" onclick="setVibe('vibrant', this)">
+          <span>Trẻ trung & Năng động</span>
+          <span class="nav-count">4</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- TIER 3: ĐỊA PHƯƠNG -->
+    <div class="sidebar-section">
+      <div class="sidebar-title">Khu Vực Địa Lý</div>
+      <ul class="nav-list">
+        <li class="nav-item active" onclick="setLocation('all', this)">
+          <span>Toàn quốc & Quốc tế</span>
+          <span class="nav-count">20</span>
+        </li>
+        <li class="nav-item" onclick="setLocation('TP.HCM', this)">
+          <span>TP. Hồ Chí Minh</span>
+          <span class="nav-count">11</span>
+        </li>
+        <li class="nav-item" onclick="setLocation('Hà Nội', this)">
+          <span>Hà Nội</span>
+          <span class="nav-count">8</span>
+        </li>
+        <li class="nav-item" onclick="setLocation('Đà Nẵng', this)">
+          <span>Đà Nẵng & Miền Trung</span>
+          <span class="nav-count">2</span>
+        </li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <div class="main-wrap">
+    
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="search-wrapper">
+        <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Tìm theo tên thương hiệu, tên miền hoặc từ khóa..." oninput="handleSearch()">
+      </div>
+
+      <div class="header-actions">
+        <a href="web_nhap_staging.html" class="btn btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          Trạm Kiểm Duyệt Nháp
+        </a>
+
+        <button class="btn btn-pitch" onclick="togglePitchMode()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <span id="pitchBtnText">Tạo Gói Gửi Khách</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- VIP PITCH BANNER (Active when URL has ?pitch=...) -->
+    <div class="pitch-banner" id="pitchBanner">
+      <h2>💎 Bộ Sưu Tập Mẫu Website Được Tuyển Chọn Riêng Cho Bạn</h2>
+      <p>Dưới đây là các mẫu website có phong cách thiết kế, chuyển đổi và tính năng tương thích nhất với định hướng thương hiệu của bạn. Rê chuột vào ảnh để trải nghiệm hiệu ứng cuộn trang.</p>
+    </div>
+
+    <!-- HERO STRIP -->
+    <div class="hero-strip">
+      <div class="hero-title-group">
+        <h2 id="viewHeading">Tất Cả Mẫu Tuyển Chọn (20 Website)</h2>
+        <p id="viewSubheading">Ảnh WebP 2 tầng siêu nhẹ • Tự động cuộn khi rê chuột • Sẵn sàng gửi khách hàng</p>
+      </div>
+
+      <div class="stats-badge-group">
+        <div class="badge-stat green">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Đã giảm <b>82.7%</b> dung lượng (WebP)
+        </div>
+        <div class="badge-stat" id="statFilteredCount">
+          Hiển thị: <b>20/20</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CARDS AREA -->
+    <main class="content-area">
+      <div class="cards-grid" id="cardsGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<!-- FLOATING PITCH GENERATOR BAR -->
+<div class="floating-pitch-bar" id="floatingPitchBar">
+  <span style="font-size: 13px; color: #fff;">Đã chọn <b id="selectedCount" style="color: #4ade80;">0</b> mẫu</span>
+  <button class="btn btn-primary" onclick="copyPitchLink()">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+    Copy Link Gói Gửi Khách
+  </button>
+  <button class="btn btn-secondary" onclick="clearPitchSelection()">Hủy</button>
+</div>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox-modal" id="lightboxModal">
+  <div class="lightbox-header">
+    <div class="lightbox-title-box">
+      <span id="lbIndex" style="color: var(--accent); font-weight: 800; font-size: 13px;">01</span>
+      <h3 id="lbTitle">Square Experiential Communications</h3>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <a id="lbExternalLink" href="#" target="_blank" class="btn btn-secondary">
+        Mở Website Thật ↗
+      </a>
+      <button class="btn btn-secondary" onclick="closeLightbox()">Đóng (ESC)</button>
+    </div>
+  </div>
+  <div class="lightbox-body" onclick="closeLightboxOnBackdrop(event)">
+    <div class="lightbox-img-wrapper">
+      <img id="lbImage" src="" alt="Full website preview">
+    </div>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toastBox">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+  <span id="toastMsg">Đã sao chép thành công!</span>
+</div>
+
+<script>
+  // DỮ LIỆU TẬP TRUNG (Kế thừa từ pipeline_sync.py)
+  const WEBSITES_DATA = [
+    {
+      "id": "01",
+      "name": "Square Experiential Communications",
+      "short_name": "Square Experiential",
+      "url": "https://square-vn.com/",
+      "domain": "square-vn.com",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "dark-luxury",
+      "vibe_name": "Dark Mode & Sang trọng",
+      "location": "TP.HCM",
+      "desc": "Agency hàng đầu về Brand Activation và Experiential Marketing. Giao diện full-bleed tràn viền, hiệu ứng visual storytelling đẳng cấp quốc tế.",
+      "thumb": "Kho_Anh_Webp/square-vn_com_thumb.webp",
+      "full": "Kho_Anh_Webp/square-vn_com_full.webp",
+      "thumb_kb": 127.1,
+      "full_kb": 651.1
+    },
+    {
+      "id": "02",
+      "name": "Per-fectiv",
+      "short_name": "Per-fectiv",
+      "url": "https://per-fectiv.com/",
+      "domain": "per-fectiv.com",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "dark-luxury",
+      "vibe_name": "Dark Mode & Sang trọng",
+      "location": "TP.HCM",
+      "desc": "Giao diện Dark Mode sang trọng, thời thượng; chuyên các sự kiện trải nghiệm sáng tạo, ra mắt thương hiệu xa xỉ (BMW, Hennessy).",
+      "thumb": "Kho_Anh_Webp/per-fectiv_com_thumb.webp",
+      "full": "Kho_Anh_Webp/per-fectiv_com_full.webp",
+      "thumb_kb": 146.8,
+      "full_kb": 561.3
+    },
+    {
+      "id": "03",
+      "name": "Le Bros",
+      "short_name": "Le Bros",
+      "url": "https://lebros.vn/",
+      "domain": "lebros.vn",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "editorial",
+      "vibe_name": "Editorial & Tối giản",
+      "location": "Hà Nội",
+      "desc": "Thuộc Le Group. Thiết kế phong cách tạp chí tối giản (Editorial Minimalist), đậm chất văn hóa nghệ thuật cho sự kiện tầm vóc quốc gia.",
+      "thumb": "Kho_Anh_Webp/lebros_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/lebros_vn_full.webp",
+      "thumb_kb": 97.7,
+      "full_kb": 359.0
+    },
+    {
+      "id": "04",
+      "name": "BS Group",
+      "short_name": "BS Group",
+      "url": "https://bsgroup.com.vn/",
+      "domain": "bsgroup.com.vn",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "dark-luxury",
+      "vibe_name": "Dark Mode & Sang trọng",
+      "location": "TP.HCM",
+      "desc": "Sự kiện may đo độc bản (Bespoke Events). Bố cục phân tầng mạch lạc, video showreel chất lượng cao, stage production chuyên nghiệp.",
+      "thumb": "Kho_Anh_Webp/bsgroup_com_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/bsgroup_com_vn_full.webp",
+      "thumb_kb": 29.6,
+      "full_kb": 104.2
+    },
+    {
+      "id": "05",
+      "name": "Zeit Media",
+      "short_name": "Zeit Media",
+      "url": "https://zeitmedia.vn/",
+      "domain": "zeitmedia.vn",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "creative-art",
+      "vibe_name": "Sáng tạo & Đương đại",
+      "location": "Hà Nội",
+      "desc": "Tinh thần nghệ thuật đương đại 'Creative Above All'. Dàn trang dự án đánh số thứ tự độc đáo, hình ảnh sự kiện sáng tạo nổi bật.",
+      "thumb": "Kho_Anh_Webp/zeitmedia_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/zeitmedia_vn_full.webp",
+      "thumb_kb": 182.1,
+      "full_kb": 656.0
+    },
+    {
+      "id": "06",
+      "name": "HoaBinh Events",
+      "short_name": "HoaBinh Events",
+      "url": "https://hoabinhevents.com/",
+      "domain": "hoabinhevents.com",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "Toàn quốc",
+      "desc": "Ông lớn số 1 về Hội nghị, Hội thảo quốc tế và M.I.C.E. Thống trị hàng trăm từ khóa tìm kiếm Google với cấu trúc danh mục đồ sộ.",
+      "thumb": "Kho_Anh_Webp/hoabinhevents_com_thumb.webp",
+      "full": "Kho_Anh_Webp/hoabinhevents_com_full.webp",
+      "thumb_kb": 101.1,
+      "full_kb": 393.0
+    },
+    {
+      "id": "07",
+      "name": "Á Châu Event",
+      "short_name": "Á Châu Event",
+      "url": "https://sukienachau.com/",
+      "domain": "sukienachau.com",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "Hà Nội",
+      "desc": "Đơn vị kỳ cựu từ 2008 giữ vững top đầu tìm kiếm Google. Cung cấp gói dịch vụ sự kiện trọn gói từ thiết bị, nhân sự đến kịch bản.",
+      "thumb": "Kho_Anh_Webp/sukienachau_com_thumb.webp",
+      "full": "Kho_Anh_Webp/sukienachau_com_full.webp",
+      "thumb_kb": 105.5,
+      "full_kb": 481.6
+    },
+    {
+      "id": "08",
+      "name": "Vietlink Event",
+      "short_name": "Vietlink Event",
+      "url": "https://vietlinkevent.vn/",
+      "domain": "vietlinkevent.vn",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "TP.HCM",
+      "desc": "Top đầu tìm kiếm phía Nam mảng khai trương, khánh thành, hội nghị khách hàng, Year End Party với bố cục nhận báo giá tối ưu.",
+      "thumb": "Kho_Anh_Webp/vietlinkevent_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/vietlinkevent_vn_full.webp",
+      "thumb_kb": 234.1,
+      "full_kb": 1007.1
+    },
+    {
+      "id": "09",
+      "name": "Apex Media",
+      "short_name": "Apex Media",
+      "url": "https://apexevent.vn/",
+      "domain": "apexevent.vn",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "TP.HCM",
+      "desc": "Thiết kế hiện đại, chỉn chu, truyền tải chiều sâu năng lực chiến lược tổ chức sự kiện đối ngoại và hội nghị thượng đỉnh kinh tế.",
+      "thumb": "Kho_Anh_Webp/apexevent_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/apexevent_vn_full.webp",
+      "thumb_kb": 145.2,
+      "full_kb": 573.2
+    },
+    {
+      "id": "10",
+      "name": "Newday Media",
+      "short_name": "Newday Media",
+      "url": "https://newdaymedia.com.vn/",
+      "domain": "newdaymedia.com.vn",
+      "industry": "su-kien",
+      "tag": "creative",
+      "vibe": "creative-art",
+      "vibe_name": "Sáng tạo & Đương đại",
+      "location": "Hà Nội",
+      "desc": "Agency sáng tạo đạt giải thưởng danh giá Stevie Awards (Mỹ). Chuyên lễ hội văn hóa di sản, sự kiện công nghệ và đại nhạc hội.",
+      "thumb": "Kho_Anh_Webp/newdaymedia_com_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/newdaymedia_com_vn_full.webp",
+      "thumb_kb": 128.2,
+      "full_kb": 495.5
+    },
+    {
+      "id": "11",
+      "name": "Cyber Show",
+      "short_name": "Cyber Show",
+      "url": "https://cybershow.vn/",
+      "domain": "cybershow.vn",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "vibrant",
+      "vibe_name": "Trẻ trung & Năng động",
+      "location": "TP.HCM",
+      "desc": "Giao diện tràn đầy năng lượng, tối ưu di động xuất sắc; chuyên tiệc tất niên, gala dinner kết hợp hiệu ứng âm thanh ánh sáng hiện đại.",
+      "thumb": "Kho_Anh_Webp/cybershow_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/cybershow_vn_full.webp",
+      "thumb_kb": 227.3,
+      "full_kb": 1010.8
+    },
+    {
+      "id": "12",
+      "name": "YesEvents",
+      "short_name": "YesEvents",
+      "url": "https://www.yesevents.vn/",
+      "domain": "yesevents.vn",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "dark-luxury",
+      "vibe_name": "Dark Mode & Sang trọng",
+      "location": "TP.HCM",
+      "desc": "Phong cách thanh lịch, song ngữ Anh - Việt; đối tác chiến lược của các khách sạn 5 sao và resort cao cấp tại TP.HCM và Phú Quốc.",
+      "thumb": "Kho_Anh_Webp/yesevents_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/yesevents_vn_full.webp",
+      "thumb_kb": 108.5,
+      "full_kb": 469.1
+    },
+    {
+      "id": "13",
+      "name": "CAT Event",
+      "short_name": "CAT Event",
+      "url": "https://cat-event.com.vn/",
+      "domain": "cat-event.com.vn",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "TP.HCM",
+      "desc": "Kinh nghiệm từ 2004, thể hiện hình ảnh vững chãi của doanh nghiệp kỳ cựu chuyên tổ chức sự kiện khánh tiết nhà nước và tập đoàn lớn.",
+      "thumb": "Kho_Anh_Webp/cat-event_com_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/cat-event_com_vn_full.webp",
+      "thumb_kb": 107.3,
+      "full_kb": 435.9
+    },
+    {
+      "id": "14",
+      "name": "Hoàng Sa Việt",
+      "short_name": "Hoàng Sa Việt",
+      "url": "https://hoangsaviet.com/",
+      "domain": "hoangsaviet.com",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "TP.HCM",
+      "desc": "Sở hữu nhà máy Viettruss lớn nhất miền Nam; trực tiếp tham gia sản xuất concert Anh Trai Say Hi. Hệ sinh thái thiết bị toàn diện.",
+      "thumb": "Kho_Anh_Webp/hoangsaviet_com_thumb.webp",
+      "full": "Kho_Anh_Webp/hoangsaviet_com_full.webp",
+      "thumb_kb": 240.1,
+      "full_kb": 1036.9
+    },
+    {
+      "id": "15",
+      "name": "Đất Việt Event",
+      "short_name": "Đất Việt Event",
+      "url": "https://datvietevent.com/",
+      "domain": "datvietevent.com",
+      "industry": "su-kien",
+      "tag": "top-seo",
+      "vibe": "vibrant",
+      "vibe_name": "Trẻ trung & Năng động",
+      "location": "TP.HCM",
+      "desc": "Thuộc Đất Việt Tour. Tông màu cam trắng hiện đại, thông số năng lực minh bạch (500+ sự kiện/năm) cho teambuilding và gala lớn.",
+      "thumb": "Kho_Anh_Webp/datvietevent_com_thumb.webp",
+      "full": "Kho_Anh_Webp/datvietevent_com_full.webp",
+      "thumb_kb": 151.2,
+      "full_kb": 640.4
+    },
+    {
+      "id": "16",
+      "name": "Danang Events",
+      "short_name": "Danang Events",
+      "url": "https://danangevents.com.vn/",
+      "domain": "danangevents.com.vn",
+      "industry": "su-kien",
+      "tag": "regional",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "Đà Nẵng",
+      "desc": "Dẫn đầu thị phần sự kiện và M.I.C.E tại Đà Nẵng - Hội An - Huế; cấu trúc cẩm nang sự kiện và du lịch kết hợp teambuilding biển chuẩn SEO.",
+      "thumb": "Kho_Anh_Webp/danangevents_com_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/danangevents_com_vn_full.webp",
+      "thumb_kb": 230.8,
+      "full_kb": 1011.1
+    },
+    {
+      "id": "17",
+      "name": "Sea Event",
+      "short_name": "Sea Event",
+      "url": "https://seaevent.vn/",
+      "domain": "seaevent.vn",
+      "industry": "su-kien",
+      "tag": "regional",
+      "vibe": "vibrant",
+      "vibe_name": "Trẻ trung & Năng động",
+      "location": "Đà Nẵng",
+      "desc": "Tone xanh biển duyên hải tươi sáng, top 1-2 tìm kiếm sự kiện tại Đà Nẵng, am hiểu văn hóa bản địa và tối ưu chi phí tổ chức.",
+      "thumb": "Kho_Anh_Webp/seaevent_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/seaevent_vn_full.webp",
+      "thumb_kb": 159.6,
+      "full_kb": 711.7
+    },
+    {
+      "id": "18",
+      "name": "AN Media",
+      "short_name": "AN Media",
+      "url": "https://anmedia.vn/",
+      "domain": "anmedia.vn",
+      "industry": "su-kien",
+      "tag": "regional",
+      "vibe": "creative-art",
+      "vibe_name": "Sáng tạo & Đương đại",
+      "location": "Hà Nội",
+      "desc": "Sáng lập bởi ca sĩ / MC Duy Khoa. Kết hợp hoàn hảo giữa tổ chức sự kiện chuyên nghiệp và mạng lưới sản xuất TVC, báo chí, nghệ sĩ.",
+      "thumb": "Kho_Anh_Webp/anmedia_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/anmedia_vn_full.webp",
+      "thumb_kb": 241.2,
+      "full_kb": 1016.2
+    },
+    {
+      "id": "19",
+      "name": "Thăng Long Event",
+      "short_name": "Thăng Long Event",
+      "url": "https://thanglongevent.com/",
+      "domain": "thanglongevent.com",
+      "industry": "su-kien",
+      "tag": "regional",
+      "vibe": "dark-luxury",
+      "vibe_name": "Dark Mode & Sang trọng",
+      "location": "Hà Nội",
+      "desc": "Thiết kế nhận diện thương hiệu bài bản bởi Sao Kim Branding; giao diện sang trọng chuyên phục vụ các bộ ban ngành và tập đoàn lớn.",
+      "thumb": "Kho_Anh_Webp/thanglongevent_com_thumb.webp",
+      "full": "Kho_Anh_Webp/thanglongevent_com_full.webp",
+      "thumb_kb": 166.2,
+      "full_kb": 750.7
+    },
+    {
+      "id": "20",
+      "name": "AzEvent",
+      "short_name": "AzEvent",
+      "url": "https://azevent.vn/",
+      "domain": "azevent.vn",
+      "industry": "su-kien",
+      "tag": "regional",
+      "vibe": "corporate",
+      "vibe_name": "Tập đoàn & Doanh nghiệp lớn",
+      "location": "Hà Nội",
+      "desc": "Bố cục tinh gọn, tốc độ tải nhanh, hiển thị số liệu kinh nghiệm minh bạch, thứ hạng tìm kiếm top đầu thủ đô cho dịch vụ sự kiện.",
+      "thumb": "Kho_Anh_Webp/azevent_vn_thumb.webp",
+      "full": "Kho_Anh_Webp/azevent_vn_full.webp",
+      "thumb_kb": 252.9,
+      "full_kb": 1070.1
+    }
+  ];
+
+  // STATE MANAGEMENT
+  let currentIndustry = 'all';
+  let currentVibe = 'all';
+  let currentLocation = 'all';
+  let currentSearch = '';
+  let selectedPitchIds = new Set();
+  let isPitchMode = false;
+
+  // INITIALIZATION
+  document.addEventListener("DOMContentLoaded", () => {
+    checkPitchUrlParam();
+    renderCards();
+  });
+
+  function checkPitchUrlParam() {
+    const params = new URLSearchParams(window.location.search);
+    const pitchParam = params.get('pitch');
+    if (pitchParam) {
+      const ids = pitchParam.split(',').map(s => s.trim().padStart(2, '0'));
+      selectedPitchIds = new Set(ids);
+      isPitchMode = true;
+      document.getElementById('pitchBanner').classList.add('active');
+      document.getElementById('viewHeading').textContent = `Mẫu Tuyển Chọn Riêng Cho Dự Án Của Bạn (${ids.length} Mẫu)`;
+      document.getElementById('viewSubheading').textContent = `Được sàng lọc kỹ lưỡng theo định hướng phong cách và mục tiêu chuyển đổi của bạn`;
+      document.getElementById('pitchBtnText').textContent = 'Xem Toàn Bộ Mẫu';
+    }
+  }
+
+  function togglePitchMode() {
+    if (isPitchMode) {
+      window.history.pushState({}, '', window.location.pathname);
+      isPitchMode = false;
+      document.getElementById('pitchBanner').classList.remove('active');
+      document.getElementById('viewHeading').textContent = 'Tất Cả Mẫu Tuyển Chọn (20 Website)';
+      document.getElementById('viewSubheading').textContent = 'Ảnh WebP 2 tầng siêu nhẹ • Tự động cuộn khi rê chuột • Sẵn sàng gửi khách hàng';
+      document.getElementById('pitchBtnText').textContent = 'Tạo Gói Gửi Khách';
+      renderCards();
+    } else {
+      if (selectedPitchIds.size === 0) {
+        showToast("💡 Hãy tick chọn ô vuông ở góc trên các card để tạo gói gửi khách!");
+        return;
+      }
+      copyPitchLink();
+    }
+  }
+
+  function handleSearch() {
+    currentSearch = document.getElementById('searchInput').value.trim().toLowerCase();
+    renderCards();
+  }
+
+  function setIndustry(ind, el) {
+    currentIndustry = ind;
+    updateNavActive(el);
+    renderCards();
+  }
+
+  function setVibe(vibe, el) {
+    currentVibe = vibe;
+    updateNavActive(el);
+    renderCards();
+  }
+
+  function setLocation(loc, el) {
+    currentLocation = loc;
+    updateNavActive(el);
+    renderCards();
+  }
+
+  function updateNavActive(el) {
+    const parentList = el.closest('.nav-list');
+    parentList.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function toggleSelectPitch(id, event) {
+    event.stopPropagation();
+    if (selectedPitchIds.has(id)) {
+      selectedPitchIds.delete(id);
+    } else {
+      selectedPitchIds.add(id);
+    }
+    updateFloatingPitchBar();
+    renderCards();
+  }
+
+  function updateFloatingPitchBar() {
+    const bar = document.getElementById('floatingPitchBar');
+    const countEl = document.getElementById('selectedCount');
+    countEl.textContent = selectedPitchIds.size;
+    if (selectedPitchIds.size > 0 && !isPitchMode) {
+      bar.classList.add('show');
+    } else {
+      bar.classList.remove('show');
+    }
+  }
+
+  function clearPitchSelection() {
+    selectedPitchIds.clear();
+    updateFloatingPitchBar();
+    renderCards();
+  }
+
+  function copyPitchLink() {
+    if (selectedPitchIds.size === 0) {
+      showToast("Vui lòng chọn ít nhất 1 mẫu website!");
+      return;
+    }
+    const ids = Array.from(selectedPitchIds).join(',');
+    const pitchUrl = `${window.location.origin}${window.location.pathname}?pitch=${ids}`;
+    navigator.clipboard.writeText(pitchUrl).then(() => {
+      showToast(`✨ Đã sao chép Link Gói Tuyển Chọn (${selectedPitchIds.size} mẫu) để gửi khách!`);
+    });
+  }
+
+  // RENDER CARDS GRID
+  function renderCards() {
+    const grid = document.getElementById('cardsGrid');
+    grid.innerHTML = '';
+
+    const filtered = WEBSITES_DATA.filter(item => {
+      if (isPitchMode && !selectedPitchIds.has(item.id)) return false;
+      if (currentIndustry !== 'all' && item.industry !== currentIndustry) return false;
+      if (currentVibe !== 'all' && item.vibe !== currentVibe) return false;
+      if (currentLocation !== 'all' && !item.location.includes(currentLocation)) return false;
+
+      if (currentSearch) {
+        const text = `${item.name} ${item.short_name} ${item.domain} ${item.desc} ${item.vibe_name} ${item.location}`.toLowerCase();
+        if (!text.includes(currentSearch)) return false;
+      }
+      return true;
+    });
+
+    document.getElementById('statFilteredCount').innerHTML = `Hiển thị: <b>${filtered.length}/${WEBSITES_DATA.length}</b>`;
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--text-dim);">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom: 12px; opacity: 0.5;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <p style="font-size: 15px; color: #fff; font-weight: 600;">Không tìm thấy mẫu phù hợp</p>
+          <p style="font-size: 13px; margin-top: 4px;">Thử thay đổi từ khóa tìm kiếm hoặc bấm chọn 'Tất Cả Danh Mục' ở sidebar.</p>
+        </div>
+      `;
+      return;
+    }
+
+    filtered.forEach(item => {
+      const isSelected = selectedPitchIds.has(item.id);
+      const card = document.createElement('div');
+      card.className = `website-card ${isSelected ? 'selected-for-pitch' : ''}`;
+      card.id = `card-${item.id}`;
+
+      card.innerHTML = `
+        <!-- BROWSER HEADER -->
+        <div class="card-browser-bar">
+          <label class="pitch-checkbox-label" title="Tick chọn mẫu này vào gói gửi khách">
+            <input type="checkbox" class="pitch-checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelectPitch('${item.id}', event)">
+          </label>
+          <div class="browser-dots">
+            <span class="b-dot red"></span>
+            <span class="b-dot yellow"></span>
+            <span class="b-dot green"></span>
+          </div>
+          <a href="${item.url}" target="_blank" class="browser-url-pill" title="Mở ${item.url}">
+            https://${item.domain}/
+          </a>
+        </div>
+
+        <!-- THUMBNAIL WITH HOVER SCROLL -->
+        <div class="card-thumbnail-box" onclick="openLightbox('${item.id}')">
+          <img src="${item.thumb}" class="card-thumb-img" alt="${item.name}" loading="lazy">
+          <div class="thumbnail-overlay">
+            <div class="zoom-pill">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              Xem Chi Tiết Full-Page
+            </div>
+          </div>
+          <span class="file-size-tag">${item.thumb_kb} KB WebP</span>
+        </div>
+
+        <!-- BODY -->
+        <div class="card-body">
+          <div class="card-meta-row">
+            <span class="badge-vibe">${item.vibe_name}</span>
+            <span class="card-location">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              ${item.location}
+            </span>
+          </div>
+
+          <h3 class="card-title">${item.id}. ${item.short_name}</h3>
+          <p class="card-desc">${item.desc}</p>
+
+          <!-- VŨ KHÍ SĂN LEAD FACEBOOK -->
+          <div class="card-actions-grid">
+            <button class="btn-action btn-fb-text" onclick="copyFbComment('${item.id}', this)" title="Copy đoạn text có link preview để dán Ctrl+V vào comment Facebook">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Copy Comment FB
+            </button>
+
+            <button class="btn-action btn-fb-image" onclick="copyDirectImageToClipboard('${item.id}', this)" title="Copy ảnh tỷ lệ chuẩn 1080x1920 (9:16) để dán Facebook/Zalo to rõ, không bị dài và thu nhỏ">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+              Copy Ảnh FB (1080x1920)
+            </button>
+
+            <button class="btn-action btn-view-full" onclick="openLightbox('${item.id}')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Xem Full-Page
+            </button>
+
+            <a href="${item.url}" target="_blank" class="btn-action btn-open-web">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              Truy cập Web ↗
+            </a>
+          </div>
+
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+  }
+
+  // 1. COPY FACEBOOK COMMENT TEXT
+  function copyFbComment(id, btn) {
+    const item = WEBSITES_DATA.find(w => w.id === id);
+    if (!item) return;
+
+    const currentUrl = (window.location.protocol === 'file:')
+      ? item.url
+      : `${window.location.origin}${window.location.pathname}`;
+
+    const commentText = 
+      "Dạ gửi bạn tham khảo mẫu website " + item.short_name + " chuẩn chuyên nghiệp:\n" +
+      "🌐 Link trải nghiệm: " + item.url + "\n" +
+      "⭐ Phong cách: " + item.vibe_name + "\n" +
+      "✨ Điểm nổi bật: " + item.desc + "\n" +
+      "👉 Bạn tham khảo thêm mẫu tại: " + currentUrl;
+
+    navigator.clipboard.writeText(commentText).then(() => {
+      showToast(`📋 Đã copy mẫu comment của ${item.short_name}! Qua Facebook bấm Ctrl + V để dán ngay.`);
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = `✓ Đã Copy Text!`;
+      setTimeout(() => { btn.innerHTML = origHtml; }, 2000);
+    });
+  }
+
+  // 2. COPY DIRECT IMAGE TO CLIPBOARD (CẮT CHUẨN TỶ LỆ 1080x1920 9:16 CHO FACEBOOK/MESSENGER/ZALO)
+  async function copyDirectImageToClipboard(targetId, btn) {
+    const origHtml = btn.innerHTML;
+    const item = WEBSITES_DATA.find(w => w.id === targetId) || { full: targetId, short_name: "Website" };
+    const imageUrl = item.full || item.thumb;
+
+    try {
+      btn.innerHTML = `<span style="font-size: 11px;">⏳ Đang cắt 1080x1920...</span>`;
+
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = imageUrl;
+
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error("Không thể nạp file ảnh"));
+      });
+
+      const natW = img.naturalWidth || img.width;
+      const natH = img.naturalHeight || img.height;
+
+      // Tính toán cắt lát chuẩn 9:16 từ đỉnh trang (Hero + phần nổi bật)
+      // Với chiều rộng 1440px -> Chiều cao cắt là 1440 * (16/9) = 2560px
+      const sliceH = Math.min(natH, Math.round(natW * (16 / 9)));
+
+      // Tạo canvas kích thước chuẩn quốc tế 1080 x 1920
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const ctx = canvas.getContext("2d");
+
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+
+      // Đổ nền đen
+      ctx.fillStyle = "#070709";
+      ctx.fillRect(0, 0, 1080, 1920);
+
+      // Cắt phần đầu trang và co giãn chuẩn về 1080x1920
+      ctx.drawImage(img, 0, 0, natW, sliceH, 0, 0, 1080, 1920);
+
+      // Nếu đang mở qua file:/// -> Hiện modal hướng dẫn với ảnh đã cắt sẵn 1080x1920
+      if (window.location.protocol === 'file:') {
+        const croppedDataUrl = canvas.toDataURL("image/png");
+        showCopyGuideModal(croppedDataUrl, item.short_name);
+        btn.innerHTML = origHtml;
+        return;
+      }
+
+      const pngBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+      if (!pngBlob) throw new Error("Chuyển đổi Blob thất bại");
+
+      await navigator.clipboard.write([
+        new ClipboardItem({ "image/png": pngBlob })
+      ]);
+
+      showToast(`✨ Đã nạp ảnh tỷ lệ 1080x1920 vào Clipboard! Qua Facebook/Messenger bấm Ctrl + V để dán ngay.`);
+      btn.innerHTML = `✓ Đã Copy 1080x1920!`;
+      setTimeout(() => { btn.innerHTML = origHtml; }, 2500);
+
+    } catch (e) {
+      console.warn("Clipboard API blocked, showing guide modal:", e);
+      // Fallback modal
+      showCopyGuideModal(imageUrl, item.short_name);
+      btn.innerHTML = origHtml;
+    }
+  }
+
+  // MODAL HƯỚNG DẪN COPY ẢNH KHI MỞ TRÊN FILE:///
+  function showCopyGuideModal(previewSrc, title) {
+    const modalHtml = `
+      <div class="lightbox-modal active" id="guideModal" style="z-index: 200;">
+        <div style="background: #14141a; border: 1px solid var(--border-hover); border-radius: 14px; max-width: 520px; width: 90%; margin: auto; padding: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="background: rgba(255, 59, 48, 0.2); color: #ff6e66; font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 4px;">TỶ LỆ 1080x1920 (9:16)</span>
+              <h3 style="font-size: 16px; font-weight: 800; color: #fff;">Dán Ảnh Vào Facebook / Zalo</h3>
+            </div>
+            <button onclick="document.getElementById('guideModal').remove()" style="background: none; border: none; color: #a1a1aa; font-size: 18px; cursor: pointer;">✕</button>
+          </div>
+
+          <p style="font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px;">
+            Ảnh đã được tự động cắt gọn theo tỷ lệ chuẩn <b>1080x1920</b> (không bị dài, chữ to rõ ràng khi gửi khách).
+          </p>
+
+          <div style="background: #1a1a24; border: 1px solid rgba(1, 169, 21, 0.3); border-radius: 10px; padding: 14px; margin-bottom: 14px;">
+            <div style="font-size: 13px; font-weight: 700; color: #4ade80; margin-bottom: 4px;">👉 Cách dán vào Facebook ngay:</div>
+            <p style="font-size: 12.5px; color: #f4f4f5; line-height: 1.5;">
+              <b>Nhấp chuột phải vào ảnh bên dưới</b> &rarr; Chọn <b>"Sao chép hình ảnh" (Copy image)</b> &rarr; Sang Facebook/Messenger nhấn <b>Ctrl + V</b> là ảnh tự đính kèm chuẩn 1080x1920!
+            </p>
+            <div style="text-align: center; margin-top: 10px; background: #000; padding: 8px; border-radius: 8px;">
+              <img src="${previewSrc}" style="max-height: 240px; max-width: 100%; border-radius: 4px; cursor: context-menu; box-shadow: 0 4px 12px rgba(0,0,0,0.5);" title="Nhấp chuột phải vào đây -> Chọn Sao chép hình ảnh">
+              <div style="font-size: 11px; color: #a1a1aa; margin-top: 6px;">(Chuột phải vào ảnh trên &rarr; Chọn 'Sao chép hình ảnh')</div>
+            </div>
+          </div>
+
+          <div style="background: #1a1a24; border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+            <div style="font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px;">🚀 Mẹo 1-Click tự động:</div>
+            <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5;">
+              Nhấp đúp file <b><code style="color: #4ade80;">run_webvault.bat</code></b> tại thư mục dự án. Trình duyệt tự mở cổng localhost và khi đó bạn chỉ cần bấm nút <b>"Copy Ảnh FB (1080x1920)"</b> là máy tự nạp 1-click không cần chuột phải!
+            </p>
+          </div>
+
+          <button onclick="document.getElementById('guideModal').remove()" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 10px;">
+            Đã Hiểu, Đóng Thông Báo
+          </button>
+        </div>
+      </div>
+    `;
+
+    const oldModal = document.getElementById('guideModal');
+    if (oldModal) oldModal.remove();
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+  }
+
+  // LIGHTBOX MODAL
+  function openLightbox(id) {
+    const item = WEBSITES_DATA.find(w => w.id === id);
+    if (!item) return;
+
+    document.getElementById('lbIndex').textContent = `${item.id}/20`;
+    document.getElementById('lbTitle').textContent = item.name;
+    document.getElementById('lbExternalLink').href = item.url;
+    document.getElementById('lbImage').src = item.full;
+
+    const modal = document.getElementById('lightboxModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const modal = document.getElementById('lightboxModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOnBackdrop(e) {
+    if (e.target.classList.contains('lightbox-body')) {
+      closeLightbox();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // TOAST
+  let toastTimer = null;
+  function showToast(msg) {
+    const toast = document.getElementById('toastBox');
+    const toastMsg = document.getElementById('toastMsg');
+    toastMsg.textContent = msg;
+    toast.classList.add('show');
+
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3500);
+  }
+</script>
+
+</body>
+</html>

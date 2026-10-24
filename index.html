@@ -94,6 +94,7 @@
       left: 0;
       height: 100vh;
       overflow-y: auto;
+      overscroll-behavior: contain;
       z-index: 30;
       flex-shrink: 0;
     }
@@ -911,7 +912,7 @@
 <div class="app-layout">
   
   <!-- SIDEBAR (2-TIER FILTER) -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="brand-logo-badge">W</div>
       <div class="brand-text">
@@ -1493,6 +1494,20 @@
   document.addEventListener("DOMContentLoaded", () => {
     checkPitchUrlParam();
     renderCards();
+
+    // KHÓA CUỘN ĐỘC LẬP CHO SIDEBAR: Khi cuộn trên sidebar, giao diện chính tuyệt đối không bị cuộn theo
+    const sidebarEl = document.querySelector('.sidebar');
+    if (sidebarEl) {
+      sidebarEl.addEventListener('wheel', (e) => {
+        const { scrollTop, scrollHeight, clientHeight } = sidebarEl;
+        const isAtTop = scrollTop <= 0 && e.deltaY < 0;
+        const isAtBottom = (scrollTop + clientHeight >= scrollHeight - 1) && e.deltaY > 0;
+        if (scrollHeight <= clientHeight || isAtTop || isAtBottom) {
+          e.preventDefault();
+        }
+        e.stopPropagation();
+      }, { passive: false });
+    }
   });
 
   function checkPitchUrlParam() {

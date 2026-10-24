@@ -1426,14 +1426,17 @@
   function checkPitchUrlParam() {
     const params = new URLSearchParams(window.location.search);
     const pitchParam = params.get('pitch');
-    if (pitchParam) {
-      const ids = pitchParam.split(',').map(s => s.trim().padStart(2, '0'));
-      selectedPitchIds = new Set(ids);
-      isPitchMode = true;
-      document.getElementById('pitchBanner').classList.add('active');
-      document.getElementById('viewHeading').textContent = `Mẫu Tuyển Chọn Riêng Cho Dự Án Của Bạn (${ids.length} Mẫu)`;
-      document.getElementById('viewSubheading').textContent = `Được sàng lọc kỹ lưỡng theo định hướng phong cách và mục tiêu chuyển đổi của bạn`;
-      document.getElementById('pitchBtnText').textContent = 'Xem Toàn Bộ Mẫu';
+    if (pitchParam && pitchParam.trim()) {
+      const rawIds = pitchParam.split(',').map(s => s.trim().padStart(2, '0'));
+      const validIds = rawIds.filter(id => WEBSITES_DATA.some(w => w.id === id));
+      if (validIds.length > 0) {
+        selectedPitchIds = new Set(validIds);
+        isPitchMode = true;
+        document.getElementById('pitchBanner').classList.add('active');
+        document.getElementById('viewHeading').textContent = `Mẫu Tuyển Chọn Riêng Cho Dự Án Của Bạn (${validIds.length} Mẫu)`;
+        document.getElementById('viewSubheading').textContent = `Được sàng lọc kỹ lưỡng theo định hướng phong cách và mục tiêu chuyển đổi của bạn`;
+        document.getElementById('pitchBtnText').textContent = 'Xem Toàn Bộ Mẫu';
+      }
     }
   }
 
@@ -1572,7 +1575,7 @@
             <span class="b-dot yellow"></span>
             <span class="b-dot green"></span>
           </div>
-          <a href="${item.url}" target="_blank" class="browser-url-pill" title="Mở ${item.url}">
+          <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="browser-url-pill" title="Mở ${item.url}">
             https://${item.domain}/
           </a>
         </div>
@@ -1622,7 +1625,7 @@
               <span class="mobile-label">Full-Page</span>
             </button>
 
-            <a href="${item.url}" target="_blank" class="btn-action btn-open-web">
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="btn-action btn-open-web">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
               <span class="desktop-label">Truy cập Web ↗</span>
               <span class="mobile-label">Xem Web ↗</span>

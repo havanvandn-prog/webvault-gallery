@@ -27,10 +27,13 @@
       --sidebar-w: 260px;
     }
 
-    * {
+    html, body {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
     }
 
     body {
@@ -735,18 +738,138 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 900px) {
+    .mobile-label { display: none; }
+
+    /* RESPONSIVE AUDIT & ZERO-OVERFLOW FIX */
+    @media (max-width: 1024px) {
       .sidebar {
-        display: none;
+        width: 220px;
+      }
+      .cards-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .sidebar {
+        display: none !important;
+      }
+      .app-layout {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100vw !important;
+        overflow-x: hidden !important;
+      }
+      .main-wrap {
+        width: 100% !important;
+        max-width: 100vw !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
       }
       .top-header {
-        padding: 12px 16px;
+        padding: 12px 14px !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 10px !important;
       }
-      .content-area {
-        padding: 12px 16px 80px;
+      .search-wrapper {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+      .header-actions {
+        width: 100% !important;
+        display: flex !important;
+        gap: 8px !important;
+      }
+      .header-actions .btn {
+        flex: 1 !important;
+        justify-content: center !important;
+        padding: 8px 8px !important;
+        font-size: 11.5px !important;
       }
       .hero-strip {
-        padding: 16px 16px 8px;
+        padding: 14px 14px 6px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+      .hero-title-group h2 {
+        font-size: 17px !important;
+      }
+      .stats-badge-group {
+        width: 100% !important;
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+      }
+      .content-area {
+        padding: 8px 14px 70px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        width: 100% !important;
+      }
+      .website-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .floating-pitch-bar {
+        width: calc(100% - 24px) !important;
+        left: 12px !important;
+        transform: translateY(120px) !important;
+        padding: 8px 12px !important;
+        gap: 8px !important;
+        justify-content: space-between !important;
+        box-sizing: border-box !important;
+      }
+      .floating-pitch-bar.show {
+        transform: translateY(0) !important;
+      }
+      .floating-pitch-bar .btn {
+        padding: 6px 10px !important;
+        font-size: 11px !important;
+      }
+      .lightbox-header {
+        padding: 10px 14px !important;
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px !important;
+      }
+      .lightbox-title-box h3 {
+        font-size: 13.5px !important;
+      }
+      .lightbox-body {
+        padding: 8px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .desktop-label { display: none !important; }
+      .mobile-label { display: inline !important; }
+
+      .card-body {
+        padding: 12px !important;
+      }
+      .card-title {
+        font-size: 14.5px !important;
+      }
+      .card-actions-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px !important;
+      }
+      .btn-action {
+        padding: 7px 4px !important;
+        font-size: 10.5px !important;
+        gap: 3px !important;
+      }
+      .btn-action svg {
+        width: 11px !important;
+        height: 11px !important;
+        flex-shrink: 0 !important;
       }
     }
   </style>
@@ -1483,22 +1606,26 @@
           <div class="card-actions-grid">
             <button class="btn-action btn-fb-text" onclick="copyFbComment('${item.id}', this)" title="Copy đoạn text có link preview để dán Ctrl+V vào comment Facebook">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              Copy Comment FB
+              <span class="desktop-label">Copy Comment FB</span>
+              <span class="mobile-label">Copy Comment</span>
             </button>
 
             <button class="btn-action btn-fb-image" onclick="copyDirectImageToClipboard('${item.id}', this)" title="Copy ảnh tỷ lệ chuẩn 1080x1920 (9:16) để dán Facebook/Zalo to rõ, không bị dài và thu nhỏ">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
-              Copy Ảnh FB (1080x1920)
+              <span class="desktop-label">Copy Ảnh FB (1080x1920)</span>
+              <span class="mobile-label">Copy Ảnh 9:16</span>
             </button>
 
             <button class="btn-action btn-view-full" onclick="openLightbox('${item.id}')">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              Xem Full-Page
+              <span class="desktop-label">Xem Full-Page</span>
+              <span class="mobile-label">Full-Page</span>
             </button>
 
             <a href="${item.url}" target="_blank" class="btn-action btn-open-web">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              Truy cập Web ↗
+              <span class="desktop-label">Truy cập Web ↗</span>
+              <span class="mobile-label">Xem Web ↗</span>
             </a>
           </div>
 

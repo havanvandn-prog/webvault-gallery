@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="brandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4d44"/>
+      <stop offset="50%" stop-color="#ff3b30"/>
+      <stop offset="100%" stop-color="#d32015"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#brandGrad)"/>
+  <text x="32" y="46.5" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="39" text-anchor="middle" fill="#ffffff" letter-spacing="-1">W</text>
+</svg>

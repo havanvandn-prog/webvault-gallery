@@ -959,59 +959,6 @@
       </ul>
     </div>
 
-    <!-- TIER 2: PHONG CÁCH / VIBE -->
-    <div class="sidebar-section">
-      <div class="sidebar-title">Phong Cách Thẩm Mỹ (Vibe)</div>
-      <ul class="nav-list">
-        <li class="nav-item active" onclick="setVibe('all', this)">
-          <span>Tất cả phong cách</span>
-          <span class="nav-count">20</span>
-        </li>
-        <li class="nav-item" onclick="setVibe('dark-luxury', this)">
-          <span>Dark Mode & Sang trọng</span>
-          <span class="nav-count">5</span>
-        </li>
-        <li class="nav-item" onclick="setVibe('creative-art', this)">
-          <span>Sáng tạo & Đương đại</span>
-          <span class="nav-count">3</span>
-        </li>
-        <li class="nav-item" onclick="setVibe('editorial', this)">
-          <span>Editorial & Tối giản</span>
-          <span class="nav-count">2</span>
-        </li>
-        <li class="nav-item" onclick="setVibe('corporate', this)">
-          <span>Tập đoàn & Uy tín</span>
-          <span class="nav-count">8</span>
-        </li>
-        <li class="nav-item" onclick="setVibe('vibrant', this)">
-          <span>Trẻ trung & Năng động</span>
-          <span class="nav-count">5</span>
-        </li>
-      </ul>
-    </div>
-
-    <!-- TIER 3: ĐỊA PHƯƠNG -->
-    <div class="sidebar-section">
-      <div class="sidebar-title">Khu Vực Địa Lý</div>
-      <ul class="nav-list">
-        <li class="nav-item active" onclick="setLocation('all', this)">
-          <span>Toàn quốc & Quốc tế</span>
-          <span class="nav-count">20</span>
-        </li>
-        <li class="nav-item" onclick="setLocation('TP.HCM', this)">
-          <span>TP. Hồ Chí Minh</span>
-          <span class="nav-count">11</span>
-        </li>
-        <li class="nav-item" onclick="setLocation('Hà Nội', this)">
-          <span>Hà Nội</span>
-          <span class="nav-count">9</span>
-        </li>
-        <li class="nav-item" onclick="setLocation('Đà Nẵng', this)">
-          <span>Đà Nẵng & Miền Trung</span>
-          <span class="nav-count">2</span>
-        </li>
-      </ul>
-    </div>
   </aside>
 
   <!-- MAIN WRAPPER -->
@@ -1552,8 +1499,6 @@
 
   // STATE MANAGEMENT
   let currentIndustry = 'all';
-  let currentVibe = 'all';
-  let currentLocation = 'all';
   let currentSearch = '';
   let selectedPitchIds = new Set();
   let isPitchMode = false;
@@ -1670,18 +1615,6 @@
     renderCards();
   }
 
-  function setVibe(vibe, el) {
-    currentVibe = vibe;
-    updateNavActive(el);
-    renderCards();
-  }
-
-  function setLocation(loc, el) {
-    currentLocation = loc;
-    updateNavActive(el);
-    renderCards();
-  }
-
   function updateNavActive(el) {
     if (!el) return;
     const parentList = el.closest('.nav-list');
@@ -1738,8 +1671,6 @@
     const filtered = WEBSITES_DATA.filter(item => {
       if (isPitchMode && !selectedPitchIds.has(item.id)) return false;
       if (currentIndustry !== 'all' && item.industry !== currentIndustry) return false;
-      if (currentVibe !== 'all' && item.vibe !== currentVibe) return false;
-      if (currentLocation !== 'all' && !item.location.includes(currentLocation)) return false;
 
       if (currentSearch) {
         const text = `${item.name} ${item.short_name} ${item.domain} ${item.desc} ${item.vibe_name} ${item.location}`.toLowerCase();

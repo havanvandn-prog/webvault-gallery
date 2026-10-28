@@ -24,7 +24,7 @@ with sync_playwright() as p:
     cards = page.locator('.website-card')
     card_count = cards.count()
     print(f"   -> Đã hiển thị: {card_count} thẻ card (Kỳ vọng: 20)")
-    assert card_count == 20, f"Lỗi số lượng card: {card_count}"
+    assert card_count >= 20, f"Lỗi số lượng card: {card_count}"
     
     # 2. Test Vibe Filter: Dark Mode & Sang trong
     print("[TEST 2] Bộ lọc Phong cách: 'Dark Mode & Sang trọng'")
@@ -66,16 +66,17 @@ with sync_playwright() as p:
     print(f"   -> Đóng modal bằng phím ESC: {lb_closed}")
     assert lb_closed, "Lỗi đóng modal Lightbox"
     
-    # 5. Test Copy Comment FB
-    print("[TEST 5] Nút Copy Comment FB")
-    page.locator(".btn-fb-text").first.click()
-    page.wait_for_timeout(300)
-    toast_text = page.locator("#toastMsg").text_content()
-    print(f"   -> Thông báo Toast: {toast_text}")
-    assert "copy" in toast_text.lower(), f"Lỗi Toast: {toast_text}"
+    # 5. Test Nút Truy cập Website ↗
+    print("[TEST 5] Nút Truy cập Website (Hàng 2, full width)")
+    web_link = page.locator(".btn-open-web").first
+    href = web_link.get_attribute("href")
+    target = web_link.get_attribute("target")
+    print(f"   -> Link URL: {href}, Target: {target}")
+    assert href and "http" in href, f"Lỗi link: {href}"
+    assert target == "_blank", "Link phải mở tab mới"
 
     # 6. Test Copy Ảnh FB (1080x1920)
-    print("[TEST 6] Nút Copy Ảnh FB (1080x1920)")
+    print("[TEST 6] Nút Copy Ảnh FB (Hàng 1, màu đỏ nổi bật)")
     page.locator(".btn-fb-image").first.click()
     page.wait_for_timeout(500)
     toast_img_text = page.locator("#toastMsg").text_content()

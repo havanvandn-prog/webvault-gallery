@@ -1,0 +1,194 @@
+[
+  {
+    "name": "Bliss Weddings & Events",
+    "url": "https://www.blissvn.com/",
+    "domain": "blissvn.com",
+    "status": "ERROR",
+    "code": 0,
+    "error": "<urlopen error timed out>"
+  },
+  {
+    "name": "7799 Wedding Storyteller",
+    "url": "https://7799wedding.vn/",
+    "domain": "7799wedding.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Lutèce Wedding & Party Design",
+    "url": "https://lutece.vn/",
+    "domain": "lutece.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Phi Điệp Wedding & Event Decor",
+    "url": "https://phidiepwedding.com/",
+    "domain": "phidiepwedding.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "AZ Party",
+    "url": "https://azparty.vn/",
+    "domain": "azparty.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Party Design VN",
+    "url": "https://partydesign.vn/",
+    "domain": "partydesign.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Vua Trang Trí Event",
+    "url": "https://vuatrangtri.vn/",
+    "domain": "vuatrangtri.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "GU Decorate",
+    "url": "https://gudecorate.com/",
+    "domain": "gudecorate.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Hoàng Luân Event",
+    "url": "https://hoangluanevent.com/",
+    "domain": "hoangluanevent.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Lucky Balloons",
+    "url": "https://bongbaysukien.com/",
+    "domain": "bongbaysukien.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Sinh Nhật 5 Sao",
+    "url": "https://sinhnhat5sao.com/",
+    "domain": "sinhnhat5sao.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Angeline Birthday & Event",
+    "url": "https://angeline.vn/",
+    "domain": "angeline.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Cát Decor Đà Nẵng",
+    "url": "https://trangtrisinhnhatdanang.com/",
+    "domain": "trangtrisinhnhatdanang.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Oha Decor",
+    "url": "https://ohadecor.com/",
+    "domain": "ohadecor.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Palamun Event",
+    "url": "https://palamunevent.com/",
+    "domain": "palamunevent.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Will Event",
+    "url": "https://willevent.vn/",
+    "domain": "willevent.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Cyber Show",
+    "url": "https://cybershow.vn/",
+    "domain": "cybershow.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Perfect Media",
+    "url": "https://tochucsukienperfect.com/",
+    "domain": "tochucsukienperfect.com",
+    "status": "ERROR",
+    "code": 0,
+    "error": "<urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "name": "HoaBinh Events",
+    "url": "https://hoabinhevents.com/",
+    "domain": "hoabinhevents.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Venus Decor Hà Nội",
+    "url": "https://venusdecor.vn/",
+    "domain": "venusdecor.vn",
+    "status": "ERROR",
+    "code": 0,
+    "error": "<urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "name": "Chill Decor",
+    "url": "https://chilldecor.net/",
+    "domain": "chilldecor.net",
+    "status": "ERROR",
+    "code": 0,
+    "error": "<urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  {
+    "name": "Shop Babystyle",
+    "url": "https://sinhnhatchobe.vn/",
+    "domain": "sinhnhatchobe.vn",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "D2 Events Đà Nẵng",
+    "url": "https://d2events.com/",
+    "domain": "d2events.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "name": "Anh Đức Wedding & Decor",
+    "url": "https://anhducwedding.com/",
+    "domain": "anhducwedding.com",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  }
+]

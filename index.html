@@ -1029,16 +1029,6 @@
       </div>
 
       <div class="header-actions">
-        <a href="preview_mau_website_decor_su_kien.html" class="btn btn-secondary" style="border-color: #d97706; color: #fbbf24;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Bộ Mẫu Decor Tiệc
-        </a>
-
-        <a href="preview_mau_website_du_lich.html" class="btn btn-secondary" style="border-color: #0284c7; color: #38bdf8;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
-          Bộ Mẫu Du Lịch
-        </a>
-
         <a href="web_nhap_staging.html" class="btn btn-secondary">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
           Trạm Kiểm Duyệt Nháp
@@ -1060,7 +1050,7 @@
     <!-- HERO STRIP -->
     <div class="hero-strip">
       <div class="hero-title-group">
-        <h2 id="viewHeading">Tất Cả Mẫu Tuyển Chọn (20 Website)</h2>
+        <h2 id="viewHeading">Tất Cả Mẫu Tuyển Chọn (43 Website)</h2>
         <p id="viewSubheading">Ảnh WebP 2 tầng siêu nhẹ • Tự động cuộn khi rê chuột • Sẵn sàng gửi khách hàng</p>
       </div>
 
@@ -1070,7 +1060,7 @@
           Đã giảm <b>82.7%</b> dung lượng (WebP)
         </div>
         <div class="badge-stat" id="statFilteredCount">
-          Hiển thị: <b>20/20</b>
+          Hiển thị: <b>43/43</b>
         </div>
       </div>
     </div>
@@ -1954,7 +1944,7 @@
 
   // INITIALIZATION
   document.addEventListener("DOMContentLoaded", () => {
-    checkPitchUrlParam();
+    initUrlParams();
     renderCards();
 
     // KHÓA CUỘN ĐỘC LẬP CHO SIDEBAR: Khi cuộn trên sidebar, giao diện chính tuyệt đối không bị cuộn theo
@@ -1972,8 +1962,10 @@
     }
   });
 
-  function checkPitchUrlParam() {
+    function initUrlParams() {
     const params = new URLSearchParams(window.location.search);
+
+    // 1. Kiểm tra Pitch Mode (?pitch=01,02,...)
     const pitchParam = params.get('pitch');
     if (pitchParam && pitchParam.trim()) {
       const rawIds = pitchParam.split(',').map(s => s.trim().padStart(2, '0'));
@@ -1985,8 +1977,41 @@
         document.getElementById('viewHeading').textContent = `Mẫu Tuyển Chọn Riêng Cho Dự Án Của Bạn (${validIds.length} Mẫu)`;
         document.getElementById('viewSubheading').textContent = `Được sàng lọc kỹ lưỡng theo định hướng phong cách và mục tiêu chuyển đổi của bạn`;
         document.getElementById('pitchBtnText').textContent = 'Xem Toàn Bộ Mẫu';
+        return;
       }
     }
+
+    // 2. Kiểm tra lọc chuyên mục ngành nghề trực tiếp (?industry=... hoặc ?cat=...)
+    const indParam = params.get('industry') || params.get('cat');
+    if (indParam && indParam.trim()) {
+      const targetNav = document.querySelector(`.nav-item[onclick*="'${indParam}'"]`);
+      if (targetNav) {
+        currentIndustry = indParam;
+        updateNavActive(targetNav);
+      }
+    }
+    updateViewHeading();
+  }
+
+  function updateViewHeading() {
+    if (isPitchMode) return;
+    const headingEl = document.getElementById('viewHeading');
+    const subHeadingEl = document.getElementById('viewSubheading');
+
+    const industryMap = {
+      'all': 'Tất Cả Mẫu Tuyển Chọn',
+      'su-kien': 'Sự Kiện & Activation',
+      'decor-su-kien': 'Trang Trí & Decor Tiệc',
+      'du-lich': 'Du Lịch & Tour Tuyến'
+    };
+
+    const indName = industryMap[currentIndustry] || 'Mẫu Website Tuyển Chọn';
+    const totalCount = currentIndustry === 'all'
+      ? WEBSITES_DATA.length
+      : WEBSITES_DATA.filter(w => w.industry === currentIndustry).length;
+
+    headingEl.textContent = `${indName} (${totalCount} Website)`;
+    subHeadingEl.textContent = 'Ảnh WebP 2 tầng siêu nhẹ • Tự động cuộn khi rê chuột • Sẵn sàng gửi khách hàng';
   }
 
   function togglePitchMode() {
@@ -1994,9 +2019,8 @@
       window.history.pushState({}, '', window.location.pathname);
       isPitchMode = false;
       document.getElementById('pitchBanner').classList.remove('active');
-      document.getElementById('viewHeading').textContent = 'Tất Cả Mẫu Tuyển Chọn (20 Website)';
-      document.getElementById('viewSubheading').textContent = 'Ảnh WebP 2 tầng siêu nhẹ • Tự động cuộn khi rê chuột • Sẵn sàng gửi khách hàng';
       document.getElementById('pitchBtnText').textContent = 'Tạo Gói Gửi Khách';
+      updateViewHeading();
       renderCards();
     } else {
       if (selectedPitchIds.size === 0) {
@@ -2015,6 +2039,18 @@
   function setIndustry(ind, el) {
     currentIndustry = ind;
     updateNavActive(el);
+
+    // Cập nhật tham số URL mà không load lại trang
+    const url = new URL(window.location);
+    if (ind === 'all') {
+      url.searchParams.delete('industry');
+      url.searchParams.delete('cat');
+    } else {
+      url.searchParams.set('industry', ind);
+    }
+    window.history.replaceState({}, '', url);
+
+    updateViewHeading();
     renderCards();
   }
 
@@ -2031,7 +2067,9 @@
   }
 
   function updateNavActive(el) {
+    if (!el) return;
     const parentList = el.closest('.nav-list');
+    if (!parentList) return;
     parentList.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
     el.classList.add('active');
   }

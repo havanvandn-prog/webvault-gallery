@@ -1,0 +1,162 @@
+[
+  {
+    "id": "dh01",
+    "name": "Gia Bảo Luxury",
+    "url": "https://giabaoluxury.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh02",
+    "name": "Boss Luxury Watch",
+    "url": "https://bossluxurywatch.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh03",
+    "name": "Empire Luxury",
+    "url": "https://empireluxury.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh04",
+    "name": "Authentic Luxury",
+    "url": "https://authenticluxury.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh05",
+    "name": "24Kara Authentic Watches",
+    "url": "https://24kara.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh06",
+    "name": "Tam Sơn Luxury",
+    "url": "https://tamsonvn.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh07",
+    "name": "Đồng Hồ Hải Triều",
+    "url": "https://donghohaitrieu.com/",
+    "status": "FAIL",
+    "code": 0,
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "dh08",
+    "name": "Galle Watch",
+    "url": "https://galle.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh09",
+    "name": "Xwatch Chính Hãng",
+    "url": "https://xwatch.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh10",
+    "name": "Đồng Hồ Duy Anh",
+    "url": "https://donghoduyanh.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh11",
+    "name": "Đồng Hồ Tân Tân",
+    "url": "https://donghotantan.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh12",
+    "name": "Đăng Quang Watch",
+    "url": "https://www.dangquangwatch.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh13",
+    "name": "Luxshopping",
+    "url": "https://luxshopping.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh14",
+    "name": "Thế Giới Thời Gian",
+    "url": "https://thegioithoigian.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh15",
+    "name": "Curnon Watch",
+    "url": "https://curnonwatch.com/",
+    "status": "FAIL",
+    "code": 0,
+    "error": "HTTP Error 526: <none>"
+  },
+  {
+    "id": "dh16",
+    "name": "ViWat Watch",
+    "url": "https://viwat.vn/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh17",
+    "name": "Hodinkee",
+    "url": "https://www.hodinkee.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh18",
+    "name": "The 1916 Company",
+    "url": "https://www.the1916company.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  },
+  {
+    "id": "dh19",
+    "name": "Chrono24",
+    "url": "https://www.chrono24.com/",
+    "status": "FAIL",
+    "code": 0,
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "id": "dh20",
+    "name": "The Hour Glass",
+    "url": "https://www.thehourglass.com/",
+    "status": "OK",
+    "code": 200,
+    "error": ""
+  }
+]

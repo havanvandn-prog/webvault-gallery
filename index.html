@@ -643,12 +643,12 @@
       color: #fff;
     }
 
-    /* LIGHTBOX MODAL */
+    /* LIGHTBOX MODAL & MODES */
     .lightbox-modal {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.94);
-      backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.96);
+      backdrop-filter: blur(12px);
       z-index: 100;
       display: none;
       flex-direction: column;
@@ -658,7 +658,7 @@
     }
 
     .lightbox-header {
-      padding: 12px 24px;
+      padding: 10px 24px;
       background: #111116;
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -666,6 +666,7 @@
       justify-content: space-between;
       gap: 16px;
       color: #fff;
+      z-index: 10;
     }
 
     .lightbox-title-box {
@@ -676,21 +677,23 @@
     .lightbox-title-box h3 {
       font-size: 15px;
       font-weight: 700;
+      color: #fff;
     }
 
+    /* LIGHTBOX BODY CÁC CHẾ ĐỘ HIỂN THỊ */
     .lightbox-body {
       flex: 1;
-      overflow-y: auto;
-      overflow-x: clip;
-      padding: 24px;
+      position: relative;
+      padding: 16px;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      user-select: none;
       scrollbar-width: thin;
       scrollbar-color: rgba(255, 59, 48, 0.5) rgba(255, 255, 255, 0.04);
     }
     .lightbox-body::-webkit-scrollbar {
       width: 7px;
+      height: 7px;
     }
     .lightbox-body::-webkit-scrollbar-track {
       background: rgba(255, 255, 255, 0.04);
@@ -704,21 +707,162 @@
       background: #ff3b30;
     }
 
-    .lightbox-img-wrapper {
-      max-width: 1280px;
-      width: 100%;
-      height: auto;
-      background: #000;
-      border-radius: 8px;
-      border: 1px solid var(--border);
+    /* CHẾ ĐỘ 1: VỪA VẶN MÀN HÌNH (FIT 100% GIAO DIỆN) */
+    .lightbox-body.mode-fit {
+      align-items: center;
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
-      flex-shrink: 0;
     }
-    .lightbox-img-wrapper img {
-      width: 100%;
-      height: auto;
+    .lightbox-body.mode-fit .lightbox-img-wrapper {
+      max-width: 100%;
+      width: auto !important;
+      height: calc(100vh - 110px);
+      max-height: calc(100vh - 110px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+    .lightbox-body.mode-fit .lightbox-img-wrapper img {
+      width: auto !important;
+      height: 100% !important;
+      max-height: calc(100vh - 110px);
+      object-fit: contain;
       display: block;
+      cursor: zoom-in;
+    }
+
+    /* CHẾ ĐỘ 2: FULL SIZE 100% (CUỘN ĐỌC TỪNG CHI TIẾT) */
+    .lightbox-body.mode-full {
+      align-items: flex-start;
+      overflow-y: auto;
+      overflow-x: auto;
+    }
+    .lightbox-body.mode-full .lightbox-img-wrapper {
+      max-width: 1360px;
+      width: 100% !important;
+      height: auto !important;
+      background: #000;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 0 auto;
+      cursor: zoom-out;
+    }
+    .lightbox-body.mode-full .lightbox-img-wrapper img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      display: block;
+      cursor: zoom-out;
+    }
+
+    /* CHẾ ĐỘ 3: TỰ DO ZOOM BẰNG CTRL + SCROLL */
+    .lightbox-body.mode-custom {
+      align-items: flex-start;
+      overflow: auto;
+    }
+    .lightbox-body.mode-custom .lightbox-img-wrapper {
+      max-width: none !important;
+      height: auto !important;
+      background: #000;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 0 auto;
+      cursor: grab;
+      transition: width 0.08s ease-out;
+    }
+    .lightbox-body.mode-custom .lightbox-img-wrapper img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* THANH ĐIỀU KHIỂN ZOOM NỔI (FLOATING ZOOM BAR) */
+    .lightbox-zoom-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(18, 18, 24, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 30px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      font-size: 12px;
+      color: #fff;
+    }
+    .zoom-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 14px;
+      transition: all 0.15s ease;
+    }
+    .zoom-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.08);
+    }
+    .zoom-pill-mode-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      padding: 4px 10px;
+      border-radius: 14px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .zoom-pill-mode-btn:hover, .zoom-pill-mode-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .zoom-level-text {
+      font-weight: 700;
+      color: #4ade80;
+      min-width: 50px;
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
+    }
+    .zoom-hint-text {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-left: 4px;
+      padding-left: 8px;
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    @media (max-width: 768px) {
+      .zoom-hint-text {
+        display: none;
+      }
     }
 
     /* FLOATING PITCH BAR */
@@ -1042,9 +1186,24 @@
       <button class="btn btn-secondary" onclick="closeLightbox()">Đóng (ESC)</button>
     </div>
   </div>
-  <div class="lightbox-body" onclick="closeLightboxOnBackdrop(event)">
-    <div class="lightbox-img-wrapper">
+  <div class="lightbox-body mode-fit" id="lbBody" onclick="handleLightboxBodyClick(event)">
+    <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)" title="Nhấp để chuyển đổi giữa Fit toàn bộ giao diện và Phóng to 100%">
       <img id="lbImage" src="" alt="Full website preview">
+    </div>
+
+    <!-- THANH ĐIỀU KHIỂN ZOOM NỔI -->
+    <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
+      <button class="zoom-btn" onclick="zoomStep(-1)" title="Thu nhỏ (Ctrl + Cuộn chuột xuống)">−</button>
+      <span class="zoom-level-text" id="lbZoomLevel">Fit 100%</span>
+      <button class="zoom-btn" onclick="zoomStep(1)" title="Phóng to (Ctrl + Cuộn chuột lên)">+</button>
+      <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 2px;"></div>
+      <button class="zoom-pill-mode-btn active" id="btnModeFit" onclick="setLightboxMode('fit')">
+        ⛶ Toàn bộ (Fit)
+      </button>
+      <button class="zoom-pill-mode-btn" id="btnModeFull" onclick="setLightboxMode('full')">
+        100% Chi tiết
+      </button>
+      <span class="zoom-hint-text">💡 Ctrl + Cuộn chuột để zoom</span>
     </div>
   </div>
 </div>
@@ -1825,7 +1984,74 @@
     }
   }
 
-  // LIGHTBOX MODAL
+  // LIGHTBOX MODAL & CHẾ ĐỘ ZOOM THÔNG MINH
+  let currentLbMode = 'fit'; // 'fit' (vừa màn hình) | 'full' (100% chi tiết) | 'custom' (tỷ lệ tùy chỉnh)
+  let currentCustomWidth = 1360;
+  const BASE_FULL_WIDTH = 1360;
+
+  function setLightboxMode(mode) {
+    const lbBody = document.getElementById('lbBody');
+    const wrapper = document.getElementById('lbImgWrapper');
+    const levelText = document.getElementById('lbZoomLevel');
+    const fitBtn = document.getElementById('btnModeFit');
+    const fullBtn = document.getElementById('btnModeFull');
+    if (!lbBody || !wrapper) return;
+
+    currentLbMode = mode;
+    lbBody.className = `lightbox-body mode-${mode}`;
+
+    if (mode === 'fit') {
+      wrapper.style.width = '';
+      wrapper.style.maxWidth = '';
+      if (levelText) levelText.textContent = 'Fit 100%';
+      if (fitBtn) fitBtn.classList.add('active');
+      if (fullBtn) fullBtn.classList.remove('active');
+      lbBody.scrollTop = 0;
+      lbBody.scrollLeft = 0;
+    } else if (mode === 'full') {
+      currentCustomWidth = BASE_FULL_WIDTH;
+      wrapper.style.width = '100%';
+      wrapper.style.maxWidth = '1360px';
+      if (levelText) levelText.textContent = '100%';
+      if (fitBtn) fitBtn.classList.remove('active');
+      if (fullBtn) fullBtn.classList.add('active');
+    } else if (mode === 'custom') {
+      wrapper.style.maxWidth = 'none';
+      wrapper.style.width = `${currentCustomWidth}px`;
+      const pct = Math.round((currentCustomWidth / BASE_FULL_WIDTH) * 100);
+      if (levelText) levelText.textContent = `${pct}%`;
+      if (fitBtn) fitBtn.classList.remove('active');
+      if (fullBtn) fullBtn.classList.remove('active');
+    }
+  }
+
+  function handleImageClick(e) {
+    e.stopPropagation();
+    // Click vào ảnh: chuyển đổi giữa Fit toàn bộ và Full Size 100%
+    if (currentLbMode === 'fit') {
+      setLightboxMode('full');
+      showToast('🔍 Đã mở Full Size (100%) — Cuộn chuột để xem chi tiết');
+    } else {
+      setLightboxMode('fit');
+      showToast('⛶ Đã thu về Vừa Khung Hình (100% Giao diện)');
+    }
+  }
+
+  function zoomStep(delta) {
+    if (currentLbMode === 'fit') {
+      currentCustomWidth = BASE_FULL_WIDTH;
+    }
+    const step = 200;
+    let newWidth = currentCustomWidth + (delta * step);
+    if (newWidth < 450) {
+      setLightboxMode('fit');
+      return;
+    }
+    if (newWidth > 3600) newWidth = 3600;
+    currentCustomWidth = newWidth;
+    setLightboxMode('custom');
+  }
+
   function openLightbox(id) {
     const item = WEBSITES_DATA.find(w => w.id === id);
     if (!item) return;
@@ -1838,8 +2064,9 @@
     const modal = document.getElementById('lightboxModal');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    const lbBody = document.querySelector('.lightbox-body');
-    if (lbBody) lbBody.scrollTop = 0;
+
+    // Mặc định luôn mở ở chế độ Fit toàn bộ giao diện 100%
+    setLightboxMode('fit');
   }
 
   function closeLightbox() {
@@ -1848,17 +2075,42 @@
     document.body.style.overflow = '';
   }
 
-  function closeLightboxOnBackdrop(e) {
-    if (e.target.classList.contains('lightbox-body')) {
+  function handleLightboxBodyClick(e) {
+    if (e.target.id === 'lbBody') {
       closeLightbox();
     }
   }
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
+    const modal = document.getElementById('lightboxModal');
+    if (!modal || !modal.classList.contains('active')) return;
+
+    if (e.key === 'Escape') {
+      closeLightbox();
+    } else if (e.key === '+' || e.key === '=') {
+      zoomStep(1);
+    } else if (e.key === '-' || e.key === '_') {
+      zoomStep(-1);
+    } else if (e.key === '0') {
+      setLightboxMode('fit');
+    } else if (e.key === '1') {
+      setLightboxMode('full');
+    }
   });
 
-  // TOAST
+  // HỖ TRỢ CTRL + CUỘN CHUỘT ĐỂ ZOOM TỶ LỆ GIAO DIỆN
+  window.addEventListener('wheel', (e) => {
+    const modal = document.getElementById('lightboxModal');
+    if (!modal || !modal.classList.contains('active')) return;
+
+    if (e.ctrlKey) {
+      e.preventDefault();
+      const delta = e.deltaY < 0 ? 1 : -1;
+      zoomStep(delta);
+    }
+  }, { passive: false });
+
+    // TOAST
   let toastTimer = null;
   function showToast(msg) {
     const toast = document.getElementById('toastBox');

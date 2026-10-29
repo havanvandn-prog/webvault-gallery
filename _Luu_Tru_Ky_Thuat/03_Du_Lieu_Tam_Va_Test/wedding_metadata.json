@@ -11,7 +11,10 @@
     "desc": "Đơn vị Wedding Planner tiên phong hàng đầu Việt Nam. Chuyên tổ chức tiệc cưới độc bản, cá nhân hóa và Destination Wedding tại các resort 5 sao quốc tế.",
     "image": "Anh_Chup_Website/theplannersvn.com.png",
     "size_mb": "5.94 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/theplannersvn_com_thumb.webp",
+    "full": "Kho_Anh_Webp/theplannersvn_com_full.webp",
+    "fb": "Kho_Anh_Webp/theplannersvn_com_fb.png"
   },
   {
     "id": "w02",
@@ -25,7 +28,10 @@
     "desc": "Phong cách lãng mạn, nên thơ và ngập tràn cảm xúc. Chuyên gia tiệc cưới ngoài trời, bãi biển và concept nghệ thuật độc đáo tôn vinh tình yêu.",
     "image": "Anh_Chup_Website/merakiweddingplanner.com.png",
     "size_mb": "6.69 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/merakiweddingplanner_com_thumb.webp",
+    "full": "Kho_Anh_Webp/merakiweddingplanner_com_full.webp",
+    "fb": "Kho_Anh_Webp/merakiweddingplanner_com_fb.png"
   },
   {
     "id": "w03",
@@ -39,7 +45,10 @@
     "desc": "Định hướng 'Keep It Special Story', tập trung sâu vào câu chuyện tình yêu của từng cặp đôi để kiến tạo không gian cưới ấm cúng, tinh tế.",
     "image": "Anh_Chup_Website/kisswe.com.png",
     "size_mb": "2.63 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/kisswe_com_thumb.webp",
+    "full": "Kho_Anh_Webp/kisswe_com_full.webp",
+    "fb": "Kho_Anh_Webp/kisswe_com_fb.png"
   },
   {
     "id": "w04",
@@ -53,7 +62,10 @@
     "desc": "Thương hiệu trang trí và tổ chức tiệc cưới kỳ cựu tại Hà Nội. Đối tác chiến lược tại các khách sạn 5 sao lớn (JW Marriott, InterContinental, Daewoo).",
     "image": "Anh_Chup_Website/voan.vn.png",
     "size_mb": "8.68 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/voan_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/voan_vn_full.webp",
+    "fb": "Kho_Anh_Webp/voan_vn_fb.png"
   },
   {
     "id": "w05",
@@ -67,7 +79,10 @@
     "desc": "Chuyên sâu lập kế hoạch và điều phối tiệc cưới cao cấp (Luxury Wedding), phong cách hiện đại, chỉn chu đến từng chi tiết nhỏ.",
     "image": "Anh_Chup_Website/tiff.vn.png",
     "size_mb": "3.50 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/tiff_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/tiff_vn_full.webp",
+    "fb": "Kho_Anh_Webp/tiff_vn_fb.png"
   },
   {
     "id": "w06",
@@ -81,7 +96,10 @@
     "desc": "Biểu tượng trung tâm sự kiện và tiệc cưới đẳng cấp quốc tế tại TP.HCM. Kiến trúc mái vòm tráng lệ, không gian yến tiệc hoàng gia.",
     "image": "Anh_Chup_Website/whitepalace.com.vn.png",
     "size_mb": "5.48 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/whitepalace_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/whitepalace_com_vn_full.webp",
+    "fb": "Kho_Anh_Webp/whitepalace_com_vn_fb.png"
   },
   {
     "id": "w07",
@@ -95,7 +113,10 @@
     "desc": "Không gian yến tiệc đương đại tọa lạc tại trung tâm Quận 10. Sự kết hợp tinh tế giữa ánh sáng nghệ thuật và dịch vụ cưới chuyên nghiệp.",
     "image": "Anh_Chup_Website/capellagallery.com.png",
     "size_mb": "3.29 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/capellagallery_com_thumb.webp",
+    "full": "Kho_Anh_Webp/capellagallery_com_full.webp",
+    "fb": "Kho_Anh_Webp/capellagallery_com_fb.png"
   },
   {
     "id": "w08",
@@ -109,7 +130,10 @@
     "desc": "Trung tâm hội nghị tiệc cưới ven sông Bến Vân Đồn mang phong cách tân cổ điển Châu Âu thanh lịch, lãng mạn.",
     "image": "Anh_Chup_Website/riversidepalace.vn.png",
     "size_mb": "4.19 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/riversidepalace_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/riversidepalace_vn_full.webp",
+    "fb": "Kho_Anh_Webp/riversidepalace_vn_fb.png"
   },
   {
     "id": "w09",
@@ -123,7 +147,10 @@
     "desc": "Cung điện yến tiệc tráng lệ với kiến trúc chiết trung vương giả, ẩm thực phong phú và hệ thống âm thanh ánh sáng hiện đại.",
     "image": "Anh_Chup_Website/asiana-plaza.com.png",
     "size_mb": "13.28 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/asiana-plaza_com_thumb.webp",
+    "full": "Kho_Anh_Webp/asiana-plaza_com_full.webp",
+    "fb": "Kho_Anh_Webp/asiana-plaza_com_fb.png"
   },
   {
     "id": "w10",
@@ -137,7 +164,10 @@
     "desc": "Chuỗi trung tâm tiệc cưới và sự kiện quy mô lớn nhất miền Bắc với hơn 12 chi nhánh sang trọng tại Hà Nội và các tỉnh lân cận.",
     "image": "Anh_Chup_Website/trongdongpalace.com.png",
     "size_mb": "5.27 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/trongdongpalace_com_thumb.webp",
+    "full": "Kho_Anh_Webp/trongdongpalace_com_full.webp",
+    "fb": "Kho_Anh_Webp/trongdongpalace_com_fb.png"
   },
   {
     "id": "w11",
@@ -151,7 +181,10 @@
     "desc": "Hệ sinh thái cưới all-in-one lớn nhất Việt Nam: Studio ảnh cưới, học viện đào tạo, xưởng váy cưới Bella Bridal và phim trường độc quyền.",
     "image": "Anh_Chup_Website/tuarts.net.png",
     "size_mb": "6.83 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/tuarts_net_thumb.webp",
+    "full": "Kho_Anh_Webp/tuarts_net_full.webp",
+    "fb": "Kho_Anh_Webp/tuarts_net_fb.png"
   },
   {
     "id": "w12",
@@ -165,7 +198,10 @@
     "desc": "Nổi tiếng với những bộ ảnh pre-wedding phong cách Châu Âu phóng khoáng, nghệ thuật; có chi nhánh tại cả Việt Nam và nước ngoài (Pháp, Singapore).",
     "image": "Anh_Chup_Website/nupakachi.com.png",
     "size_mb": "7.61 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/nupakachi_com_thumb.webp",
+    "full": "Kho_Anh_Webp/nupakachi_com_full.webp",
+    "fb": "Kho_Anh_Webp/nupakachi_com_fb.png"
   },
   {
     "id": "w13",
@@ -179,7 +215,10 @@
     "desc": "Studio ảnh cưới được giới trẻ yêu thích hàng đầu với phong cách trong trẻo Hàn Quốc, bắt trọn từng khoảnh khắc cảm xúc tự nhiên.",
     "image": "Anh_Chup_Website/rinwedding.vn.png",
     "size_mb": "3.29 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/rinwedding_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/rinwedding_vn_full.webp",
+    "fb": "Kho_Anh_Webp/rinwedding_vn_fb.png"
   },
   {
     "id": "w14",
@@ -193,7 +232,10 @@
     "desc": "Thương hiệu may đo và thiết kế váy cưới tối giản phong cách Châu Âu (Minimalist/Boho), form dáng tinh xảo tôn vinh vẻ đẹp tự nhiên của cô dâu.",
     "image": "Anh_Chup_Website/nicolebridal.vn.png",
     "size_mb": "5.67 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/nicolebridal_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/nicolebridal_vn_full.webp",
+    "fb": "Kho_Anh_Webp/nicolebridal_vn_fb.png"
   },
   {
     "id": "w15",
@@ -207,7 +249,10 @@
     "desc": "Thương hiệu váy cưới thiết kế cao cấp (Haute Couture) được các ngôi sao, người nổi tiếng và dâu hào môn tin tưởng lựa chọn.",
     "image": "Anh_Chup_Website/linhnga.vn.png",
     "size_mb": "10.10 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/linhnga_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/linhnga_vn_full.webp",
+    "fb": "Kho_Anh_Webp/linhnga_vn_fb.png"
   },
   {
     "id": "w16",
@@ -221,7 +266,10 @@
     "desc": "Nền tảng tạo website đám cưới & thiệp cưới online hàng đầu Việt Nam. Tích hợp album ảnh, video, RSVP xác nhận khách mời và QR mừng cưới thông minh.",
     "image": "Anh_Chup_Website/biihappy.com.png",
     "size_mb": "2.47 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/biihappy_com_thumb.webp",
+    "full": "Kho_Anh_Webp/biihappy_com_full.webp",
+    "fb": "Kho_Anh_Webp/biihappy_com_fb.png"
   },
   {
     "id": "w17",
@@ -235,7 +283,10 @@
     "desc": "Nền tảng tạo thiệp cưới online và website đám cưới nhanh chóng, giao diện hiện đại tối ưu trên mobile, cá nhân hóa tên khách mời.",
     "image": "Anh_Chup_Website/zenlove.me.png",
     "size_mb": "1.95 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/zenlove_me_thumb.webp",
+    "full": "Kho_Anh_Webp/zenlove_me_full.webp",
+    "fb": "Kho_Anh_Webp/zenlove_me_fb.png"
   },
   {
     "id": "w18",
@@ -249,7 +300,10 @@
     "desc": "Dịch vụ thiệp cưới online và website cưới mang đậm nét đẹp văn hóa truyền thống kết hợp giao diện số hiện đại, chia sẻ dễ dàng qua Zalo.",
     "image": "Anh_Chup_Website/chungdoi.com.png",
     "size_mb": "1.96 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/chungdoi_com_thumb.webp",
+    "full": "Kho_Anh_Webp/chungdoi_com_full.webp",
+    "fb": "Kho_Anh_Webp/chungdoi_com_fb.png"
   },
   {
     "id": "w19",
@@ -263,7 +317,10 @@
     "desc": "Nền tảng gửi thiệp điện tử tiện lợi, theo dõi trạng thái phản hồi RSVP thời gian thực và quản trị danh sách khách mời thông minh.",
     "image": "Anh_Chup_Website/traothiep.vn.png",
     "size_mb": "3.57 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/traothiep_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/traothiep_vn_full.webp",
+    "fb": "Kho_Anh_Webp/traothiep_vn_fb.png"
   },
   {
     "id": "w20",
@@ -277,6 +334,9 @@
     "desc": "Nền tảng thiệp cưới trực tuyến với trải nghiệm thị giác điện ảnh (cinematic), âm nhạc du dương và hiệu ứng chuyển động cảm xúc.",
     "image": "Anh_Chup_Website/cinelove.me.png",
     "size_mb": "2.52 MB",
-    "status": "SUCCESS"
+    "status": "SUCCESS",
+    "thumb": "Kho_Anh_Webp/cinelove_me_thumb.webp",
+    "full": "Kho_Anh_Webp/cinelove_me_full.webp",
+    "fb": "Kho_Anh_Webp/cinelove_me_fb.png"
   }
 ]

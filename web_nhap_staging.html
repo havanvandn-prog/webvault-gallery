@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trạm Kiểm Duyệt Mẫu Website (WebVault Staging) — Dark Zeit Edition</title>
+  <title>Trạm Kiểm Duyệt Mẫu Website Đa Ngành (WebVault Staging) — Dark Zeit Edition</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
@@ -18,6 +18,7 @@
       --border: rgba(255, 255, 255, 0.08);
       --border-hover: rgba(255, 255, 255, 0.22);
       --accent: #ff3b30;
+      --accent-glow: rgba(255, 59, 48, 0.25);
       --success: #01a915;
       --success-glow: rgba(1, 169, 21, 0.25);
       --danger: #ef4444;
@@ -66,17 +67,20 @@
       color: var(--text-main);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* STICKY TOP STAGING BAR */
     .staging-header {
-      background: rgba(16, 16, 20, 0.92);
+      background: rgba(16, 16, 20, 0.94);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 50;
-      padding: 16px 32px;
+      padding: 14px 24px;
     }
 
     .staging-header-inner {
@@ -107,7 +111,7 @@
     }
 
     .staging-title h1 {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       color: #fff;
     }
@@ -119,30 +123,33 @@
     .staging-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
-      padding: 9px 16px;
+      padding: 8px 14px;
       border-radius: 8px;
       cursor: pointer;
       border: 1px solid transparent;
       transition: all 0.2s ease;
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .btn-approve-all {
-      background: rgba(1, 169, 21, 0.15);
-      border-color: rgba(1, 169, 21, 0.4);
-      color: #4ade80;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
     .btn-approve-all:hover {
-      background: rgba(1, 169, 21, 0.25);
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .btn-sync-hub {
@@ -151,25 +158,90 @@
       box-shadow: 0 4px 14px var(--success-glow);
     }
     .btn-sync-hub:hover {
-      background: linear-gradient(135deg, #02b918, #019914);
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(1, 169, 21, 0.4);
     }
 
     .btn-view-hub {
-      background: #181820;
+      background: rgba(255, 255, 255, 0.05);
       border-color: var(--border);
-      color: var(--text-main);
+      color: var(--text-muted);
     }
     .btn-view-hub:hover {
-      background: #22222d;
+      color: #fff;
+      border-color: var(--border-hover);
+    }
+
+    /* STAGING TABS BAR (CHUYỂN ĐỔI CHỦ ĐỀ ĐA NGÀNH) */
+    .staging-tabs-bar {
+      background: rgba(14, 14, 18, 0.95);
+      border-bottom: 1px solid var(--border);
+      padding: 10px 24px;
+      position: sticky;
+      top: 61px;
+      z-index: 45;
+      backdrop-filter: blur(10px);
+    }
+
+    .staging-tabs-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .staging-tabs-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .staging-tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+      user-select: none;
+    }
+    .staging-tab-btn:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+    .staging-tab-btn.active {
+      background: #ff3b30;
+      color: #fff;
+      border-color: #ff3b30;
+      box-shadow: 0 4px 14px rgba(255, 59, 48, 0.35);
+    }
+    .tab-badge {
+      background: rgba(0, 0, 0, 0.25);
+      padding: 1px 7px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .staging-tab-btn.active .tab-badge {
+      background: rgba(255, 255, 255, 0.25);
       color: #fff;
     }
 
     /* COUNTER STRIP */
     .counter-strip {
       max-width: 1440px;
-      margin: 20px auto 0;
-      padding: 0 32px;
+      margin: 16px auto 0;
+      padding: 0 24px;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -178,25 +250,44 @@
     }
 
     .counter-text {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
     }
     .counter-text b {
       color: #4ade80;
-      font-size: 16px;
     }
 
-    /* GRID CONTAINER */
+    .topic-guide-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 59, 48, 0.08);
+      border: 1px solid rgba(255, 59, 48, 0.2);
+      color: #ff9b94;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* MAIN CONTAINER & GRID */
     .main-container {
       max-width: 1440px;
-      margin: 16px auto 80px;
-      padding: 0 32px;
+      margin: 16px auto 40px;
+      padding: 0 24px;
+      width: 100%;
+      flex: 1;
     }
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    @media (min-width: 1280px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     /* STAGING CARD */
@@ -210,24 +301,21 @@
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
     }
-
     .staging-card:hover {
-      border-color: rgba(255, 255, 255, 0.22);
-      transform: translateY(-2px);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
     }
 
-    /* KHI ĐÃ ĐƯỢC CHỌN THÊM ĐỒNG BỘ */
     .staging-card.is-selected {
-      border-color: rgba(1, 169, 21, 0.7);
-      box-shadow: 0 10px 30px -6px var(--success-glow);
-      background: linear-gradient(180deg, rgba(1, 169, 21, 0.05) 0%, var(--bg-card) 100%);
+      border-color: rgba(1, 169, 21, 0.6);
+      box-shadow: 0 8px 24px rgba(1, 169, 21, 0.15);
     }
 
-    /* BROWSER BAR */
     .card-browser-bar {
-      background: #16161d;
-      border-bottom: 1px solid var(--border);
       padding: 8px 12px;
+      background: #0d0d10;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -235,171 +323,58 @@
     }
 
     .browser-url-pill {
-      background: #0d0d12;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 4px;
       font-size: 11px;
-      color: var(--text-dim);
-      padding: 2px 8px;
+      color: var(--text-muted);
+      text-decoration: none;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-decoration: none;
-      flex: 1;
+      max-width: 210px;
+      font-family: monospace;
+    }
+    .browser-url-pill:hover {
+      color: #fff;
+      text-decoration: underline;
     }
 
-    /* THUMBNAIL BOX */
     .card-thumbnail-box {
       position: relative;
-      height: 230px;
-      background: #000;
+      width: 100%;
+      height: 200px;
+      background: #09090b;
       overflow: hidden;
       cursor: pointer;
     }
 
     .card-thumb-img {
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform 0.4s ease;
       display: block;
-      transform: translateY(0);
-      transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: transform;
     }
 
-    /* Di chuột vào: Cuộn chậm rãi, đều đặn 15s */
     .card-thumbnail-box:hover .card-thumb-img {
-      transform: translateY(calc(-100% + 230px));
-      transition: transform 15s linear;
+      transform: scale(1.03);
     }
 
-    /* CARD BODY */
-    .card-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .card-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .badge-vibe {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      background: rgba(255, 59, 48, 0.12);
-      color: #ff6e66;
-      border: 1px solid rgba(255, 59, 48, 0.2);
-    }
-
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.3;
-      margin-bottom: 8px;
-    }
-
-    .card-desc {
-      font-size: 12.5px;
-      color: var(--text-muted);
-      line-height: 1.5;
-      margin-bottom: 16px;
-      flex: 1;
-    }
-
-    /* TOGGLE APPROVAL BUTTON */
-    .approval-toggle-btn {
-      width: 100%;
-      padding: 11px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: all 0.2s ease;
-      margin-top: auto;
-    }
-
-    /* CHƯA CHỌN: Nút CTA rõ ràng kêu gọi bấm để THÊM VÀO ĐỒNG BỘ */
-    .approval-toggle-btn.btn-unselected {
-      background: #181824;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: #fff;
-    }
-    .approval-toggle-btn.btn-unselected:hover {
-      background: #252536;
-      border-color: var(--accent);
-      color: #fff;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
-    }
-
-    /* ĐÃ CHỌN: Nút xác nhận ĐÃ THÊM VÀO ĐỒNG BỘ */
-    .approval-toggle-btn.btn-selected {
-      background: rgba(1, 169, 21, 0.18);
-      border: 1px solid rgba(1, 169, 21, 0.55);
-      color: #4ade80;
-      font-weight: 700;
-    }
-    .approval-toggle-btn.btn-selected:hover {
-      background: rgba(1, 169, 21, 0.28);
-      border-color: rgba(1, 169, 21, 0.8);
-    }
-
-    /* TOAST */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #1f1f28;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #fff;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      box-shadow: 0 12px 32px rgba(0,0,0,0.6);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: all 0.25s ease;
-      z-index: 120;
-      pointer-events: none;
-    }
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ZOOM OVERLAY HINT ON THUMBNAIL */
     .thumbnail-zoom-hint {
       position: absolute;
       bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(15, 15, 20, 0.9);
+      background: rgba(15, 15, 20, 0.92);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.18);
       color: #fff;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 5px 12px;
+      padding: 4px 10px;
       border-radius: 20px;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       opacity: 0;
       transition: opacity 0.2s ease, transform 0.2s ease;
       pointer-events: none;
@@ -411,12 +386,106 @@
       transform: translateX(-50%) translateY(-2px);
     }
 
-    /* LIGHTBOX MODAL & MODES */
+    .card-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 8px;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .badge-industry {
+      background: rgba(255, 59, 48, 0.12);
+      color: #ff756d;
+      border: 1px solid rgba(255, 59, 48, 0.25);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 700;
+    }
+
+    .badge-vibe {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 140px;
+    }
+
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .card-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .approval-toggle-btn {
+      margin-top: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      width: 100%;
+    }
+
+    .btn-selected {
+      background: rgba(1, 169, 21, 0.16);
+      border-color: rgba(1, 169, 21, 0.5);
+      color: #4ade80;
+    }
+    .btn-selected:hover {
+      background: rgba(239, 68, 68, 0.18);
+      border-color: rgba(239, 68, 68, 0.45);
+      color: #f87171;
+    }
+
+    .btn-unselected {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--text-main);
+    }
+    .btn-unselected:hover {
+      background: rgba(1, 169, 21, 0.18);
+      border-color: rgba(1, 169, 21, 0.4);
+      color: #4ade80;
+    }
+
+    /* LIGHTBOX MODAL */
     .lightbox-modal {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.96);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(14px);
       z-index: 999;
       display: none;
       flex-direction: column;
@@ -426,8 +495,8 @@
     }
 
     .lightbox-header {
-      padding: 10px 24px;
-      background: #111116;
+      padding: 10px 20px;
+      background: #101015;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
@@ -435,13 +504,12 @@
       gap: 16px;
       color: #fff;
       flex-wrap: wrap;
-      z-index: 10;
     }
 
     .lightbox-title-box {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
     .lightbox-badge-id {
       background: rgba(255, 59, 48, 0.18);
@@ -449,12 +517,11 @@
       border: 1px solid rgba(255, 59, 48, 0.3);
       padding: 3px 8px;
       border-radius: 4px;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 700;
-      letter-spacing: 0.5px;
     }
     .lightbox-title-box h3 {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #fff;
     }
@@ -462,12 +529,12 @@
     .lightbox-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
     .lightbox-nav-btn {
-      background: #1e1e28;
+      background: #1c1c24;
       border: 1px solid var(--border);
       color: var(--text-main);
       padding: 6px 12px;
@@ -486,7 +553,7 @@
     }
 
     .lightbox-toggle-btn {
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 6px;
       font-size: 12px;
       font-weight: 700;
@@ -497,141 +564,74 @@
       transition: all 0.2s ease;
       border: 1px solid transparent;
     }
-    .lightbox-toggle-btn.is-unselected {
-      background: #1e1e28;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-    }
-    .lightbox-toggle-btn.is-unselected:hover {
-      background: #2b2b3a;
-      border-color: var(--accent);
-    }
     .lightbox-toggle-btn.is-approved {
       background: rgba(1, 169, 21, 0.2);
-      border: 1px solid rgba(1, 169, 21, 0.55);
+      border-color: rgba(1, 169, 21, 0.4);
       color: #4ade80;
     }
-    .lightbox-toggle-btn.is-approved:hover {
-      background: rgba(1, 169, 21, 0.32);
+    .lightbox-toggle-btn.is-unselected {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
     }
 
-    /* LIGHTBOX BODY CÁC CHẾ ĐỘ HIỂN THỊ */
     .lightbox-body {
       flex: 1;
-      position: relative;
-      padding: 16px;
+      overflow-y: auto;
+      overflow-x: auto;
+      padding: 20px;
       display: flex;
       justify-content: center;
-      user-select: none;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255, 59, 48, 0.5) rgba(255, 255, 255, 0.04);
-    }
-    .lightbox-body::-webkit-scrollbar {
-      width: 7px;
-      height: 7px;
-    }
-    .lightbox-body::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.04);
-      border-radius: 8px;
-    }
-    .lightbox-body::-webkit-scrollbar-thumb {
-      background: rgba(255, 59, 48, 0.5);
-      border-radius: 8px;
-    }
-    .lightbox-body::-webkit-scrollbar-thumb:hover {
-      background: #ff3b30;
+      align-items: flex-start;
+      position: relative;
     }
 
-    /* CHẾ ĐỘ 1: VỪA VẶN MÀN HÌNH (FIT 100% GIAO DIỆN) */
     .lightbox-body.mode-fit {
-      align-items: center;
       overflow: hidden;
+      align-items: center;
     }
     .lightbox-body.mode-fit .lightbox-img-wrapper {
       max-width: 100%;
-      width: auto !important;
-      height: calc(100vh - 110px);
-      max-height: calc(100vh - 110px);
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: transparent;
-      box-shadow: 0 16px 48px rgba(0,0,0,0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 6px;
-      overflow: hidden;
-      cursor: zoom-in;
     }
     .lightbox-body.mode-fit .lightbox-img-wrapper img {
-      width: auto !important;
-      height: 100% !important;
-      max-height: calc(100vh - 110px);
+      max-width: 100%;
+      max-height: 85vh;
       object-fit: contain;
-      display: block;
       cursor: zoom-in;
     }
 
-    /* CHẾ ĐỘ 2: FULL SIZE 100% (CUỘN ĐỌC TỪNG CHI TIẾT) */
-    .lightbox-body.mode-full {
-      align-items: flex-start;
-      overflow-y: auto;
-      overflow-x: auto;
-    }
     .lightbox-body.mode-full .lightbox-img-wrapper {
       max-width: 1360px;
-      width: 100% !important;
-      height: auto !important;
-      background: #000;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
+      width: 100%;
       margin: 0 auto;
-      cursor: zoom-out;
     }
     .lightbox-body.mode-full .lightbox-img-wrapper img {
-      width: 100% !important;
-      height: auto !important;
-      max-height: none !important;
+      width: 100%;
+      height: auto;
       display: block;
       cursor: zoom-out;
     }
 
-    /* CHẾ ĐỘ 3: TỰ DO ZOOM BẰNG CTRL + SCROLL */
-    .lightbox-body.mode-custom {
-      align-items: flex-start;
-      overflow: auto;
-    }
     .lightbox-body.mode-custom .lightbox-img-wrapper {
-      max-width: none !important;
-      height: auto !important;
-      background: #000;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.9);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
+      max-width: none;
       margin: 0 auto;
-      cursor: grab;
-      transition: width 0.08s ease-out;
-    }
-    .lightbox-body.mode-custom.is-dragging .lightbox-img-wrapper {
-      cursor: grabbing;
     }
     .lightbox-body.mode-custom .lightbox-img-wrapper img {
-      width: 100% !important;
-      height: auto !important;
-      max-height: none !important;
+      width: 100%;
+      height: auto;
       display: block;
-      pointer-events: none;
     }
 
-    /* THANH ĐIỀU KHIỂN ZOOM NỔI (FLOATING ZOOM BAR) */
     .lightbox-zoom-bar {
       position: absolute;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(18, 18, 24, 0.92);
+      background: rgba(18, 18, 24, 0.94);
       backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 30px;
@@ -644,6 +644,7 @@
       font-size: 12px;
       color: #fff;
     }
+
     .zoom-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -656,13 +657,11 @@
       justify-content: center;
       cursor: pointer;
       font-weight: 700;
-      font-size: 14px;
-      transition: all 0.15s ease;
     }
     .zoom-btn:hover {
       background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.08);
     }
+
     .zoom-pill-mode-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -673,55 +672,72 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
-      display: flex;
-      align-items: center;
-      gap: 4px;
     }
-    .zoom-pill-mode-btn:hover, .zoom-pill-mode-btn.active {
+    .zoom-pill-mode-btn.active {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
     }
+
     .zoom-level-text {
       font-weight: 700;
       color: #4ade80;
       min-width: 50px;
       text-align: center;
-      font-variant-numeric: tabular-nums;
-      font-size: 12px;
     }
+
     .zoom-hint-text {
       font-size: 11px;
       color: var(--text-dim);
-      margin-left: 4px;
-      padding-left: 8px;
       border-left: 1px solid rgba(255, 255, 255, 0.12);
+      padding-left: 8px;
     }
-    @media (max-width: 768px) {
-      .zoom-hint-text {
-        display: none;
-      }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #16161e;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     @media (max-width: 768px) {
-      .lightbox-header {
-        padding: 10px 14px;
-        gap: 8px;
+      .staging-header {
+        padding: 12px 16px;
       }
-      .lightbox-actions {
-        width: 100%;
-        justify-content: space-between;
-        gap: 6px;
+      .staging-tabs-bar {
+        top: 104px;
+        padding: 8px 16px;
       }
-      .lightbox-title-box h3 {
-        font-size: 13px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 180px;
+      .counter-strip {
+        padding: 0 16px;
       }
-      .lightbox-body {
-        padding: 10px;
+      .main-container {
+        padding: 0 16px;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+      .zoom-hint-text {
+        display: none;
       }
     }
   </style>
@@ -734,19 +750,19 @@
       <div class="staging-brand">
         <span class="staging-badge">Kiểm Duyệt Nháp</span>
         <div class="staging-title">
-          <h1>Trạm Thẩm Định Mẫu Website Trước Khi Đẩy Lên Hub</h1>
-          <p>Xem lướt từng mẫu, bấm vào nút bên dưới card để Duyệt hoặc Bỏ qua</p>
+          <h1>Trạm Thẩm Định Mẫu Website Đa Ngành</h1>
+          <p>Lưu trữ các chủ đề nghiên cứu chờ duyệt — Bấm chọn để nạp vào WebVault</p>
         </div>
       </div>
 
       <div class="staging-actions">
         <button class="btn btn-approve-all" id="btnToggleAll" onclick="toggleAll()">
-          Chọn/Bỏ Tất Cả
+          Chọn Tất Cả
         </button>
 
         <button class="btn btn-sync-hub" onclick="saveApprovalSelection()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Xác Nhận & Đồng Bộ (<span id="btnApprovedCount">20</span> Mẫu)
+          Sao Chép Danh Sách Duyệt (<span id="btnApprovedCount">0</span>)
         </button>
 
         <a href="index.html" class="btn btn-view-hub">
@@ -756,13 +772,31 @@
     </div>
   </header>
 
+  <!-- STAGING TABS BAR (CHỦ ĐỀ ĐA NGÀNH) -->
+  <nav class="staging-tabs-bar">
+    <div class="staging-tabs-container">
+      <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">60</span>
+      </button>
+      <button class="staging-tab-btn active" data-industry="ban-dong-ho" onclick="filterStagingTopic('ban-dong-ho')">
+        <span>⌚</span> Bán Đồng Hồ <span class="tab-badge" id="badgeDongHo">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="decor-su-kien" onclick="filterStagingTopic('decor-su-kien')">
+        <span>🎀</span> Decor Sự Kiện <span class="tab-badge" id="badgeDecor">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="tiec-cuoi" onclick="filterStagingTopic('tiec-cuoi')">
+        <span>💍</span> Tiệc Cưới & Wedding <span class="tab-badge" id="badgeWedding">20</span>
+      </button>
+    </div>
+  </nav>
+
   <!-- COUNTER STRIP -->
   <div class="counter-strip">
     <div class="counter-text">
-      Trạng thái phê duyệt: Đang chọn <b id="statApproved">20</b> / 20 mẫu hợp lệ
+      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Bán Đồng Hồ</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
     </div>
-    <div style="font-size: 13px; color: var(--text-dim);">
-      💡 Mẹo: Nhấn nút '+ Thêm Mẫu Này Để Đồng Bộ' trên các mẫu bạn ưng ý để nạp vào kho chính thức
+    <div class="topic-guide-pill">
+      💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
     </div>
   </div>
 
@@ -773,16 +807,14 @@
     </div>
   </main>
 
-
-  <!-- LIGHTBOX MODAL (XEM ẢNH FULL-PAGE NHANH) -->
+  <!-- LIGHTBOX MODAL (XEM ẢNH FULL-PAGE) -->
   <div class="lightbox-modal" id="lightboxModal">
     <div class="lightbox-header">
       <div class="lightbox-title-box">
-        <span class="lightbox-badge-id" id="lbIndex">dc01 (1/20)</span>
+        <span class="lightbox-badge-id" id="lbIndex">DH01</span>
         <h3 id="lbTitle">Tên Website</h3>
       </div>
       <div class="lightbox-actions">
-        <!-- Nút chuyển trước/sau -->
         <button class="lightbox-nav-btn" onclick="prevLightbox()" title="Xem mẫu trước (Phím mũi tên Trái ←)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
           Trước
@@ -792,37 +824,32 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
 
-        <!-- Nút duyệt/bỏ qua trực tiếp trong modal -->
-        <button id="lbToggleBtn" class="lightbox-toggle-btn is-approved" onclick="toggleLightboxApproval()" title="Bấm để Đổi trạng thái Duyệt / Bỏ qua mẫu này (hoặc phím Space)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span id="lbToggleText">Giữ Lại Mẫu Này (Đã Duyệt)</span>
+        <button id="lbToggleBtn" class="lightbox-toggle-btn is-unselected" onclick="toggleLightboxApproval()">
+          <span id="lbToggleText">+ Thêm Mẫu Này Để Đồng Bộ</span>
         </button>
 
-        <!-- Mở website thật -->
-        <a id="lbExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-view-hub" style="padding: 6px 12px; font-size: 12px;" title="Mở website thật trên tab mới">
+        <a id="lbExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-view-hub" style="padding: 6px 12px; font-size: 12px;">
           Mở Web Thật ↗
         </a>
 
-        <!-- Đóng -->
-        <button class="btn btn-view-hub" onclick="closeLightbox()" style="padding: 6px 12px; font-size: 12px;" title="Đóng modal (Phím ESC)">
+        <button class="btn btn-view-hub" onclick="closeLightbox()" style="padding: 6px 12px; font-size: 12px;">
           Đóng (ESC)
         </button>
       </div>
     </div>
 
     <div class="lightbox-body mode-fit" id="lbBody" onclick="handleLightboxBodyClick(event)">
-      <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)" title="Nhấp để chuyển đổi giữa Fit toàn bộ giao diện và Phóng to 100%">
-        <img id="lbImage" src="" alt="Full website preview">
+      <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)">
+        <img id="lbImage" src="" alt="Full preview">
       </div>
 
-      <!-- THANH ĐIỀU KHIỂN ZOOM NỔI -->
       <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
-        <button class="zoom-btn" onclick="zoomStep(-1)" title="Thu nhỏ (Ctrl + Cuộn chuột xuống)">−</button>
+        <button class="zoom-btn" onclick="zoomStep(-1)">−</button>
         <span class="zoom-level-text" id="lbZoomLevel">Fit 100%</span>
-        <button class="zoom-btn" onclick="zoomStep(1)" title="Phóng to (Ctrl + Cuộn chuột lên)">+</button>
+        <button class="zoom-btn" onclick="zoomStep(1)">+</button>
         <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 2px;"></div>
         <button class="zoom-pill-mode-btn active" id="btnModeFit" onclick="setLightboxMode('fit')">
-          ⛶ Toàn bộ (Fit)
+          ⛶ Vừa màn hình
         </button>
         <button class="zoom-pill-mode-btn" id="btnModeFull" onclick="setLightboxMode('full')">
           100% Chi tiết
@@ -837,10 +864,292 @@
   </div>
 
 <script>
-  // Dữ liệu ứng viên (kế thừa từ database.json)
+  // TỔNG HỢP CÁC CHỦ ĐỀ CHỜ DUYỆT (60 MẪU)
   const CANDIDATES = [
   {
+    "id": "dh01",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Gia Bảo Luxury",
+    "short_name": "Gia Bảo Luxury",
+    "url": "https://giabaoluxury.com/",
+    "domain": "giabaoluxury.com",
+    "vibe": "Đẳng cấp & Xa xỉ",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/giabaoluxury_com_thumb.webp",
+    "full": "Kho_Anh_Webp/giabaoluxury_com_full.webp",
+    "desc": "Điểm đến hàng đầu cho giới mộ điệu đồng hồ xa xỉ Thụy Sĩ. Chuyên phân phối, thẩm định và giao dịch các kiệt tác thời gian từ Patek Philippe, Rolex, Audemars Piguet, Richard Mille."
+  },
+  {
+    "id": "dh02",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Boss Luxury Watch",
+    "short_name": "Boss Luxury",
+    "url": "https://bossluxurywatch.vn/",
+    "domain": "bossluxurywatch.vn",
+    "vibe": "Thượng lưu & Quyền lực",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/bossluxurywatch_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/bossluxurywatch_vn_full.webp",
+    "desc": "Không gian mua sắm đồng hồ và trang sức xa xỉ uy tín với bộ sưu tập Rolex, Hublot, Patek Philippe phiên bản giới hạn dành cho giới thượng lưu và doanh nhân thành đạt."
+  },
+  {
+    "id": "dh03",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Empire Luxury",
+    "short_name": "Empire Luxury",
+    "url": "https://empireluxury.vn/",
+    "domain": "empireluxury.vn",
+    "vibe": "Hiện đại & Tinh xảo",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/empireluxury_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/empireluxury_vn_full.webp",
+    "desc": "Showroom phong cách sống thượng lưu tại trung tâm TP.HCM, quy tụ các tuyệt phẩm đồng hồ cơ khí đỉnh cao thế giới cùng dịch vụ tư vấn cá nhân hóa tiêu chuẩn 5 sao."
+  },
+  {
+    "id": "dh04",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Authentic Luxury",
+    "short_name": "Authentic Luxury",
+    "url": "https://authenticluxury.vn/",
+    "domain": "authenticluxury.vn",
+    "vibe": "Sang trọng & Chuẩn mực",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/authenticluxury_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/authenticluxury_vn_full.webp",
+    "desc": "Hệ thống chuyên sâu về đồng hồ Rolex, Hublot, Patek Philippe chính hãng với quy trình kiểm định nghiêm ngặt, minh bạch tình trạng và chính sách bảo hành hậu mãi vượt trội."
+  },
+  {
+    "id": "dh05",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "24Kara Authentic Watches",
+    "short_name": "24Kara",
+    "url": "https://24kara.com/",
+    "domain": "24kara.com",
+    "vibe": "Cổ điển & Giá trị di sản",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/24kara_com_thumb.webp",
+    "full": "Kho_Anh_Webp/24kara_com_full.webp",
+    "desc": "Chuỗi cửa hàng đồng hồ chính hãng và phụ kiện xa xỉ, nổi tiếng với kho sản phẩm đa dạng từ phân khúc cao cấp Thụy Sĩ đến các mẫu vintage sưu tầm hiếm có."
+  },
+  {
+    "id": "dh06",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Kỳ Lân Luxury",
+    "short_name": "Kỳ Lân Luxury",
+    "url": "https://kylanluxury.com/",
+    "domain": "kylanluxury.com",
+    "vibe": "Độc bản & Vàng khối",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/kylanluxury_com_thumb.webp",
+    "full": "Kho_Anh_Webp/kylanluxury_com_full.webp",
+    "desc": "Thương hiệu chế tác và phân phối các dòng đồng hồ siêu sang nạm kim cương, vàng khối nguyên bản, kết hợp điện thoại Vertu và trang sức cao cấp độc bản."
+  },
+  {
+    "id": "dh07",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Tam Sơn Luxury",
+    "short_name": "Tam Sơn Luxury",
+    "url": "https://tamsonvn.com/",
+    "domain": "tamsonvn.com",
+    "vibe": "Quý phái & Di sản quốc tế",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/tamsonvn_com_thumb.webp",
+    "full": "Kho_Anh_Webp/tamsonvn_com_full.webp",
+    "desc": "Thành viên tập đoàn Openasia, đại diện phân phối chính thức các thương hiệu xa xỉ bậc nhất thế giới tại Việt Nam gồm Patek Philippe, Chopard, Hermès và Vacheron Constantin."
+  },
+  {
+    "id": "dh08",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Galle Watch",
+    "short_name": "Galle Watch",
+    "url": "https://galle.vn/",
+    "domain": "galle.vn",
+    "vibe": "Chuyên nghiệp & Minh bạch",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/galle_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/galle_vn_full.webp",
+    "desc": "Hệ thống phân phối đồng hồ chính hãng quy mô hàng đầu Việt Nam với hơn 30 thương hiệu danh tiếng: Frederique Constant, Longines, Rado, Tissot, Certina, Seiko, Orient."
+  },
+  {
+    "id": "dh09",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Đăng Quang Watch",
+    "short_name": "Đăng Quang Watch",
+    "url": "https://www.dangquangwatch.vn/",
+    "domain": "dangquangwatch.vn",
+    "vibe": "Quy mô lớn & Bảo hành 10 năm",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/dangquangwatch_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/dangquangwatch_vn_full.webp",
+    "desc": "Hệ thống bán lẻ đồng hồ và kính mắt quy mô cả nước, phân phối chính hãng Epos Swiss, Atlantic Swiss, Bruno Sohnle, Diamond D, Citizen với chính sách bảo hành lên tới 10 năm."
+  },
+  {
+    "id": "dh10",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Đồng Hồ Duy Anh",
+    "short_name": "Đồng Hồ Duy Anh",
+    "url": "https://donghoduyanh.com/",
+    "domain": "donghoduyanh.com",
+    "vibe": "Cổ điển & Uy tín lâu đời",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/donghoduyanh_com_thumb.webp",
+    "full": "Kho_Anh_Webp/donghoduyanh_com_full.webp",
+    "desc": "Hơn 60 năm kinh nghiệm trong ngành chế tác và phân phối đồng hồ. Đại lý ủy quyền chính thức của Longines, Tissot, Mido, Hamilton, Seiko với trung tâm bảo hành chuẩn Thụy Sĩ."
+  },
+  {
+    "id": "dh11",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Đồng Hồ Tân Tân",
+    "short_name": "Đồng Hồ Tân Tân",
+    "url": "https://donghotantan.vn/",
+    "domain": "donghotantan.vn",
+    "vibe": "Bền bỉ & Chuẩn xác",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/donghotantan_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/donghotantan_vn_full.webp",
+    "desc": "Thành lập từ năm 1985, Tân Tân là biểu tượng bán lẻ đồng hồ uy tín bậc nhất miền Nam và là trung tâm bảo hành ủy quyền chính thức của Citizen và Movado Group tại Việt Nam."
+  },
+  {
+    "id": "dh12",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "WatchStore",
+    "short_name": "WatchStore",
+    "url": "https://www.watchstore.vn/",
+    "domain": "watchstore.vn",
+    "vibe": "Hiện đại & Tối ưu chuyển đổi",
+    "location": "Hà Nội, Đà Nẵng & TP.HCM",
+    "thumb": "Kho_Anh_Webp/watchstore_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/watchstore_vn_full.webp",
+    "desc": "Chuỗi bán lẻ đồng hồ thế hệ mới phát triển thần tốc với trải nghiệm mua sắm đa kênh (Omnichannel), giao diện UI/UX tối ưu chuyển đổi, cam kết chính hãng 100% đền gấp 20 lần."
+  },
+  {
+    "id": "dh13",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Đồng Hồ Chính Hãng",
+    "short_name": "Đồng Hồ Chính Hãng",
+    "url": "https://donghochinhhang.com/",
+    "domain": "donghochinhhang.com",
+    "vibe": "Thanh lịch & Chuẩn mực TTTM",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/donghochinhhang_com_thumb.webp",
+    "full": "Kho_Anh_Webp/donghochinhhang_com_full.webp",
+    "desc": "Hệ thống gian hàng cao cấp đặt tại các trung tâm thương mại sang trọng bậc nhất thủ đô (Tràng Tiền Plaza, Vincom Center Bà Triệu), chuyên phân phối Longines, Tissot, Movado."
+  },
+  {
+    "id": "dh14",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Đồng Hồ Thụy Sỹ",
+    "short_name": "Đồng Hồ Thụy Sỹ",
+    "url": "https://donghothuysy.vn/",
+    "domain": "donghothuysy.vn",
+    "vibe": "Tinh hoa cơ khí Swiss Made",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/donghothuysy_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/donghothuysy_vn_full.webp",
+    "desc": "Chuyên trang độc quyền hội tụ các tuyệt tác Swiss Made đỉnh cao do Galle phân phối, cung cấp kiến thức cơ khí chuyên sâu và không gian tuyển chọn đồng hồ Thụy Sỹ chuẩn mực."
+  },
+  {
+    "id": "dh15",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Đồng Hồ Thành Phát",
+    "short_name": "Đồng Hồ Thành Phát",
+    "url": "https://donghothanhphat.vn/",
+    "domain": "donghothanhphat.vn",
+    "vibe": "Sang trọng & Tinh hoa Thụy Sĩ",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/donghothanhphat_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/donghothanhphat_vn_full.webp",
+    "desc": "Nhà bán lẻ đồng hồ Thụy Sĩ cao cấp lâu năm tại Sài Gòn, sở hữu chuỗi boutique sang trọng tại TTTM Takashimaya Saigon Centre, đại lý ủy quyền Longines, Rado, Hamilton, Tissot."
+  },
+  {
+    "id": "dh16",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Luxshopping",
+    "short_name": "Luxshopping",
+    "url": "https://luxshopping.vn/",
+    "domain": "luxshopping.vn",
+    "vibe": "Thời thượng & Đa dạng",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/luxshopping_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/luxshopping_vn_full.webp",
+    "desc": "Kênh mua sắm đồng hồ và trang sức nhập khẩu chính hãng từ Mỹ và Thụy Sĩ, nổi tiếng với dịch vụ đặt hàng theo yêu cầu các mẫu đồng hồ cao cấp từ Longines, Omega, Tag Heuer."
+  },
+  {
+    "id": "dh17",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Thế Giới Thời Gian",
+    "short_name": "Thế Giới Thời Gian",
+    "url": "https://thegioithoigian.vn/",
+    "domain": "thegioithoigian.vn",
+    "vibe": "Thanh lịch & Dễ tiếp cận",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/thegioithoigian_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/thegioithoigian_vn_full.webp",
+    "desc": "Chuỗi bán lẻ đồng hồ chính hãng tập trung vào các thương hiệu thời trang quốc tế được yêu thích như Casio, Citizen, Daniel Wellington, Claude Bernard với mức giá hợp lý."
+  },
+  {
+    "id": "dh18",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "ViWat Watch",
+    "short_name": "ViWat Watch",
+    "url": "https://viwat.vn/",
+    "domain": "viwat.vn",
+    "vibe": "Tối giản & Văn hóa Việt",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/viwat_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/viwat_vn_full.webp",
+    "desc": "Thương hiệu đồng hồ Việt Nam lấy cảm hứng từ biểu tượng di sản các thành phố (Sài Gòn, Hà Nội, Bến Thành). Thiết kế tối giản, tinh tế, khẳng định niềm tự hào sáng tạo Việt."
+  },
+  {
+    "id": "dh19",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "S&S Group",
+    "short_name": "S&S Group",
+    "url": "https://ssgroup.net/",
+    "domain": "ssgroup.net",
+    "vibe": "Siêu xa xỉ & Đẳng cấp thế giới",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/ssgroup_net_thumb.webp",
+    "full": "Kho_Anh_Webp/ssgroup_net_full.webp",
+    "desc": "Tập đoàn phân phối độc quyền tại Việt Nam các đỉnh cao cơ khí thế giới: Richard Mille, Audemars Piguet, Hublot, MB&F, Bovet và siêu xe Rolls-Royce, McLaren."
+  },
+  {
+    "id": "dh20",
+    "industry": "ban-dong-ho",
+    "industry_name": "Bán Đồng Hồ",
+    "name": "Hodinkee",
+    "short_name": "Hodinkee",
+    "url": "https://www.hodinkee.com/",
+    "domain": "hodinkee.com",
+    "vibe": "Báo chí nghệ thuật & Đẳng cấp toàn cầu",
+    "location": "New York, USA",
+    "thumb": "Kho_Anh_Webp/hodinkee_com_thumb.webp",
+    "full": "Kho_Anh_Webp/hodinkee_com_full.webp",
+    "desc": "Tạp chí và nền tảng thương mại đồng hồ uy tín số 1 thế giới. Mẫu mực về thiết kế UI/UX dạng Editorial, nghệ thuật nhiếp ảnh đồng hồ macro và trải nghiệm mua sắm xa xỉ chuẩn mực."
+  },
+  {
     "id": "dc01",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "7799 Wedding Storyteller",
     "short_name": "7799 Wedding",
     "url": "https://7799wedding.vn/",
@@ -853,6 +1162,8 @@
   },
   {
     "id": "dc02",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Lutèce Wedding & Party Design",
     "short_name": "Lutèce Design",
     "url": "https://lutece.vn/",
@@ -865,6 +1176,8 @@
   },
   {
     "id": "dc03",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Phi Điệp Wedding & Event Decor",
     "short_name": "Phi Điệp Decor",
     "url": "https://phidiepwedding.com/",
@@ -877,6 +1190,8 @@
   },
   {
     "id": "dc04",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "MHs Planner & Event Decoration",
     "short_name": "MHs Planner",
     "url": "https://mhswedding.vn/",
@@ -889,6 +1204,8 @@
   },
   {
     "id": "dc05",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "AZ Party — Tổ Chức & Trang Trí Sự Kiện",
     "short_name": "AZ Party",
     "url": "https://azparty.vn/",
@@ -901,6 +1218,8 @@
   },
   {
     "id": "dc06",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Party Design VN — Thiết Kế Decor Tiệc",
     "short_name": "Party Design",
     "url": "https://partydesign.vn/",
@@ -913,6 +1232,8 @@
   },
   {
     "id": "dc07",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Vua Trang Trí Event",
     "short_name": "Vua Trang Trí",
     "url": "https://vuatrangtri.vn/",
@@ -925,18 +1246,22 @@
   },
   {
     "id": "dc08",
-    "name": "The Planners — Premium Wedding & Event Decor",
-    "short_name": "The Planners",
-    "url": "https://theplannersvn.com/",
-    "domain": "theplannersvn.com",
-    "vibe": "Châu Âu & Xa xỉ",
-    "location": "Hà Nội & Toàn quốc",
-    "thumb": "Kho_Anh_Webp/theplannersvn_com_thumb.webp",
-    "full": "Kho_Anh_Webp/theplannersvn_com_full.webp",
-    "desc": "Agency hàng đầu về tư vấn concept, thiết kế mỹ thuật và dàn dựng không gian tiệc cưới, sự kiện xa xỉ tại Việt Nam. Từng được vinh danh trên các tạp chí quốc tế danh tiếng WedLuxe, Harper's Bazaar và Elle."
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
+    "name": "GU Decorate — Dịch Vụ Trang Trí Tiệc",
+    "short_name": "GU Decorate",
+    "url": "https://gudecorate.com/",
+    "domain": "gudecorate.com",
+    "vibe": "Bắt trend & Tươi sáng",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/gudecorate_com_thumb.webp",
+    "full": "Kho_Anh_Webp/gudecorate_com_full.webp",
+    "desc": "Chuyên setup trọn gói backdrop tiệc sinh nhật người lớn, thôi nôi bé yêu, tiệc kỷ niệm ngày cưới và tiệc công ty. Nổi bật với các mẫu line bóng Chrome ánh kim và hoa tươi phối màu sang trọng."
   },
   {
     "id": "dc09",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Sinh Nhật 5 Sao — Dịch Vụ Decor Cao Cấp",
     "short_name": "Sinh Nhật 5 Sao",
     "url": "https://sinhnhat5sao.com/",
@@ -949,6 +1274,8 @@
   },
   {
     "id": "dc10",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Angeline — Event & Birthday Styling",
     "short_name": "Angeline Event",
     "url": "https://angeline.vn/",
@@ -961,6 +1288,8 @@
   },
   {
     "id": "dc11",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Minh Triều Party — Dịch Vụ Decor Sự Kiện",
     "short_name": "Minh Triều Party",
     "url": "https://minhtrieuparty.com/",
@@ -973,6 +1302,8 @@
   },
   {
     "id": "dc12",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Minh Hi Party — Trang Trí Tiệc Trọn Gói",
     "short_name": "Minh Hi Party",
     "url": "https://minhhiparty.com/",
@@ -985,6 +1316,8 @@
   },
   {
     "id": "dc13",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Hoàng Luân Event — Thi Công Backdrop & Bóng Bay",
     "short_name": "Hoàng Luân Event",
     "url": "https://hoangluanevent.com/",
@@ -997,6 +1330,8 @@
   },
   {
     "id": "dc14",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Lucky Balloons — Nghệ Thuật Bóng Bay Thủ Đô",
     "short_name": "Lucky Balloons",
     "url": "https://bongbaysukien.com/",
@@ -1009,6 +1344,8 @@
   },
   {
     "id": "dc15",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Cát Decor Đà Nẵng — Trang Trí Tiệc Miền Trung",
     "short_name": "Cát Decor",
     "url": "https://trangtrisinhnhatdanang.com/",
@@ -1021,6 +1358,8 @@
   },
   {
     "id": "dc16",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "D2 Events Đà Nẵng — Tổ Chức & Decor Sự Kiện",
     "short_name": "D2 Events",
     "url": "https://d2events.com/",
@@ -1033,6 +1372,8 @@
   },
   {
     "id": "dc17",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Anh Đức Wedding & Event Decor",
     "short_name": "Anh Đức Decor",
     "url": "https://anhducwedding.com/",
@@ -1045,6 +1386,8 @@
   },
   {
     "id": "dc18",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Palamun Event — Thiết Kế Không Gian Gala & Hội Nghị",
     "short_name": "Palamun Event",
     "url": "https://palamunevent.com/",
@@ -1057,6 +1400,8 @@
   },
   {
     "id": "dc19",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Will Event — Thiết Kế Thi Công Không Gian Sự Kiện",
     "short_name": "Will Event",
     "url": "https://willevent.vn/",
@@ -1069,6 +1414,8 @@
   },
   {
     "id": "dc20",
+    "industry": "decor-su-kien",
+    "industry_name": "Decor Sự Kiện",
     "name": "Cyber Show — Sự Kiện & Trình Diễn Không Gian",
     "short_name": "Cyber Show",
     "url": "https://cybershow.vn/",
@@ -1078,22 +1425,350 @@
     "thumb": "Kho_Anh_Webp/cybershow_vn_thumb.webp",
     "full": "Kho_Anh_Webp/cybershow_vn_full.webp",
     "desc": "Thương hiệu hàng đầu về tổ chức sự kiện và thiết kế sân khấu công nghệ cao (Màn hình LED cong, 3D Mapping, ánh sáng biểu diễn) cho các lễ kỷ niệm, khai trương và hội nghị tập đoàn."
+  },
+  {
+    "id": "wd01",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "The Planners",
+    "short_name": "The Planners",
+    "url": "https://theplannersvn.com/",
+    "domain": "theplannersvn.com",
+    "vibe": "Wedding Planner & Trang Trí",
+    "location": "Hà Nội, Đà Nẵng & TP.HCM",
+    "thumb": "Kho_Anh_Webp/theplannersvn_com_thumb.webp",
+    "full": "Kho_Anh_Webp/theplannersvn_com_full.webp",
+    "desc": "Đơn vị Wedding Planner tiên phong hàng đầu Việt Nam. Chuyên tổ chức tiệc cưới độc bản, cá nhân hóa và Destination Wedding tại các resort 5 sao quốc tế."
+  },
+  {
+    "id": "wd02",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Meraki Wedding Planner",
+    "short_name": "Meraki Wedding Planner",
+    "url": "https://merakiweddingplanner.com/",
+    "domain": "merakiweddingplanner.com",
+    "vibe": "Wedding Planner & Trang Trí",
+    "location": "TP.HCM & Miền Trung",
+    "thumb": "Kho_Anh_Webp/merakiweddingplanner_com_thumb.webp",
+    "full": "Kho_Anh_Webp/merakiweddingplanner_com_full.webp",
+    "desc": "Phong cách lãng mạn, nên thơ và ngập tràn cảm xúc. Chuyên gia tiệc cưới ngoài trời, bãi biển và concept nghệ thuật độc đáo tôn vinh tình yêu."
+  },
+  {
+    "id": "wd03",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "K.I.S.S Wedding Planner",
+    "short_name": "K.I.S.S Wedding Planner",
+    "url": "https://kisswe.com/",
+    "domain": "kisswe.com",
+    "vibe": "Wedding Planner & Trang Trí",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/kisswe_com_thumb.webp",
+    "full": "Kho_Anh_Webp/kisswe_com_full.webp",
+    "desc": "Định hướng 'Keep It Special Story', tập trung sâu vào câu chuyện tình yêu của từng cặp đôi để kiến tạo không gian cưới ấm cúng, tinh tế."
+  },
+  {
+    "id": "wd04",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "VOAN Wedding & Event",
+    "short_name": "VOAN Wedding & Event",
+    "url": "https://voan.vn/",
+    "domain": "voan.vn",
+    "vibe": "Wedding Planner & Trang Trí",
+    "location": "Hà Nội & Miền Bắc",
+    "thumb": "Kho_Anh_Webp/voan_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/voan_vn_full.webp",
+    "desc": "Thương hiệu trang trí và tổ chức tiệc cưới kỳ cựu tại Hà Nội. Đối tác chiến lược tại các khách sạn 5 sao lớn (JW Marriott, InterContinental, Daewoo)."
+  },
+  {
+    "id": "wd05",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "TIFF Wedding Planner",
+    "short_name": "TIFF Wedding Planner",
+    "url": "https://tiff.vn/",
+    "domain": "tiff.vn",
+    "vibe": "Wedding Planner & Trang Trí",
+    "location": "TP.HCM & Hà Nội",
+    "thumb": "Kho_Anh_Webp/tiff_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/tiff_vn_full.webp",
+    "desc": "Chuyên sâu lập kế hoạch và điều phối tiệc cưới cao cấp (Luxury Wedding), phong cách hiện đại, chỉn chu đến từng chi tiết nhỏ."
+  },
+  {
+    "id": "wd06",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "White Palace",
+    "short_name": "White Palace",
+    "url": "https://whitepalace.com.vn/",
+    "domain": "whitepalace.com.vn",
+    "vibe": "Trung Tâm Tiệc Cưới & Yến Tiệc",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/whitepalace_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/whitepalace_com_vn_full.webp",
+    "desc": "Biểu tượng trung tâm sự kiện và tiệc cưới đẳng cấp quốc tế tại TP.HCM. Kiến trúc mái vòm tráng lệ, không gian yến tiệc hoàng gia."
+  },
+  {
+    "id": "wd07",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Capella Gallery Hall",
+    "short_name": "Capella Gallery Hall",
+    "url": "https://capellagallery.com/",
+    "domain": "capellagallery.com",
+    "vibe": "Trung Tâm Tiệc Cưới & Yến Tiệc",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/capellagallery_com_thumb.webp",
+    "full": "Kho_Anh_Webp/capellagallery_com_full.webp",
+    "desc": "Không gian yến tiệc đương đại tọa lạc tại trung tâm Quận 10. Sự kết hợp tinh tế giữa ánh sáng nghệ thuật và dịch vụ cưới chuyên nghiệp."
+  },
+  {
+    "id": "wd08",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Riverside Palace",
+    "short_name": "Riverside Palace",
+    "url": "https://riversidepalace.vn/",
+    "domain": "riversidepalace.vn",
+    "vibe": "Trung Tâm Tiệc Cưới & Yến Tiệc",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/riversidepalace_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/riversidepalace_vn_full.webp",
+    "desc": "Trung tâm hội nghị tiệc cưới ven sông Bến Vân Đồn mang phong cách tân cổ điển Châu Âu thanh lịch, lãng mạn."
+  },
+  {
+    "id": "wd09",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Asiana Plaza",
+    "short_name": "Asiana Plaza",
+    "url": "https://asiana-plaza.com/",
+    "domain": "asiana-plaza.com",
+    "vibe": "Trung Tâm Tiệc Cưới & Yến Tiệc",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/asiana-plaza_com_thumb.webp",
+    "full": "Kho_Anh_Webp/asiana-plaza_com_full.webp",
+    "desc": "Cung điện yến tiệc tráng lệ với kiến trúc chiết trung vương giả, ẩm thực phong phú và hệ thống âm thanh ánh sáng hiện đại."
+  },
+  {
+    "id": "wd10",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Trống Đồng Palace",
+    "short_name": "Trống Đồng Palace",
+    "url": "https://trongdongpalace.com/",
+    "domain": "trongdongpalace.com",
+    "vibe": "Trung Tâm Tiệc Cưới & Yến Tiệc",
+    "location": "Hà Nội & Miền Bắc",
+    "thumb": "Kho_Anh_Webp/trongdongpalace_com_thumb.webp",
+    "full": "Kho_Anh_Webp/trongdongpalace_com_full.webp",
+    "desc": "Chuỗi trung tâm tiệc cưới và sự kiện quy mô lớn nhất miền Bắc với hơn 12 chi nhánh sang trọng tại Hà Nội và các tỉnh lân cận."
+  },
+  {
+    "id": "wd11",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "TuArt Wedding",
+    "short_name": "TuArt Wedding",
+    "url": "https://tuarts.net/",
+    "domain": "tuarts.net",
+    "vibe": "Studio Ảnh Cưới & Váy Cưới",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/tuarts_net_thumb.webp",
+    "full": "Kho_Anh_Webp/tuarts_net_full.webp",
+    "desc": "Hệ sinh thái cưới all-in-one lớn nhất Việt Nam: Studio ảnh cưới, học viện đào tạo, xưởng váy cưới Bella Bridal và phim trường độc quyền."
+  },
+  {
+    "id": "wd12",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Nupakachi Wedding",
+    "short_name": "Nupakachi Wedding",
+    "url": "https://nupakachi.com/",
+    "domain": "nupakachi.com",
+    "vibe": "Studio Ảnh Cưới & Váy Cưới",
+    "location": "Hà Nội, TP.HCM & Đà Nẵng",
+    "thumb": "Kho_Anh_Webp/nupakachi_com_thumb.webp",
+    "full": "Kho_Anh_Webp/nupakachi_com_full.webp",
+    "desc": "Nổi tiếng với những bộ ảnh pre-wedding phong cách Châu Âu phóng khoáng, nghệ thuật; có chi nhánh tại cả Việt Nam và nước ngoài (Pháp, Singapore)."
+  },
+  {
+    "id": "wd13",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Rin Wedding",
+    "short_name": "Rin Wedding",
+    "url": "https://rinwedding.vn/",
+    "domain": "rinwedding.vn",
+    "vibe": "Studio Ảnh Cưới & Váy Cưới",
+    "location": "TP.HCM, Đà Nẵng, Đà Lạt",
+    "thumb": "Kho_Anh_Webp/rinwedding_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/rinwedding_vn_full.webp",
+    "desc": "Studio ảnh cưới được giới trẻ yêu thích hàng đầu với phong cách trong trẻo Hàn Quốc, bắt trọn từng khoảnh khắc cảm xúc tự nhiên."
+  },
+  {
+    "id": "wd14",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Nicole Bridal",
+    "short_name": "Nicole Bridal",
+    "url": "https://nicolebridal.vn/",
+    "domain": "nicolebridal.vn",
+    "vibe": "Studio Ảnh Cưới & Váy Cưới",
+    "location": "TP.HCM & Hà Nội",
+    "thumb": "Kho_Anh_Webp/nicolebridal_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/nicolebridal_vn_full.webp",
+    "desc": "Thương hiệu may đo và thiết kế váy cưới tối giản phong cách Châu Âu (Minimalist/Boho), form dáng tinh xảo tôn vinh vẻ đẹp tự nhiên của cô dâu."
+  },
+  {
+    "id": "wd15",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Linh Nga Bridal",
+    "short_name": "Linh Nga Bridal",
+    "url": "https://linhnga.vn/",
+    "domain": "linhnga.vn",
+    "vibe": "Studio Ảnh Cưới & Váy Cưới",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/linhnga_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/linhnga_vn_full.webp",
+    "desc": "Thương hiệu váy cưới thiết kế cao cấp (Haute Couture) được các ngôi sao, người nổi tiếng và dâu hào môn tin tưởng lựa chọn."
+  },
+  {
+    "id": "wd16",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Biihappy (iWedding)",
+    "short_name": "Biihappy (iWedding)",
+    "url": "https://biihappy.com/",
+    "domain": "biihappy.com",
+    "vibe": "Nền Tảng Website Cưới & Thiệp Online",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/biihappy_com_thumb.webp",
+    "full": "Kho_Anh_Webp/biihappy_com_full.webp",
+    "desc": "Nền tảng tạo website đám cưới & thiệp cưới online hàng đầu Việt Nam. Tích hợp album ảnh, video, RSVP xác nhận khách mời và QR mừng cưới thông minh."
+  },
+  {
+    "id": "wd17",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "ZenLove",
+    "short_name": "ZenLove",
+    "url": "https://zenlove.me/",
+    "domain": "zenlove.me",
+    "vibe": "Nền Tảng Website Cưới & Thiệp Online",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/zenlove_me_thumb.webp",
+    "full": "Kho_Anh_Webp/zenlove_me_full.webp",
+    "desc": "Nền tảng tạo thiệp cưới online và website đám cưới nhanh chóng, giao diện hiện đại tối ưu trên mobile, cá nhân hóa tên khách mời."
+  },
+  {
+    "id": "wd18",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Chung Đôi",
+    "short_name": "Chung Đôi",
+    "url": "https://chungdoi.com/",
+    "domain": "chungdoi.com",
+    "vibe": "Nền Tảng Website Cưới & Thiệp Online",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/chungdoi_com_thumb.webp",
+    "full": "Kho_Anh_Webp/chungdoi_com_full.webp",
+    "desc": "Dịch vụ thiệp cưới online và website cưới mang đậm nét đẹp văn hóa truyền thống kết hợp giao diện số hiện đại, chia sẻ dễ dàng qua Zalo."
+  },
+  {
+    "id": "wd19",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "Trao Thiệp",
+    "short_name": "Trao Thiệp",
+    "url": "https://traothiep.vn/",
+    "domain": "traothiep.vn",
+    "vibe": "Nền Tảng Website Cưới & Thiệp Online",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/traothiep_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/traothiep_vn_full.webp",
+    "desc": "Nền tảng gửi thiệp điện tử tiện lợi, theo dõi trạng thái phản hồi RSVP thời gian thực và quản trị danh sách khách mời thông minh."
+  },
+  {
+    "id": "wd20",
+    "industry": "tiec-cuoi",
+    "industry_name": "Tiệc Cưới & Wedding",
+    "name": "CineLove",
+    "short_name": "CineLove",
+    "url": "https://cinelove.me/",
+    "domain": "cinelove.me",
+    "vibe": "Nền Tảng Website Cưới & Thiệp Online",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/cinelove_me_thumb.webp",
+    "full": "Kho_Anh_Webp/cinelove_me_full.webp",
+    "desc": "Nền tảng thiệp cưới trực tuyến với trải nghiệm thị giác điện ảnh (cinematic), âm nhạc du dương và hiệu ứng chuyển động cảm xúc."
   }
 ];
 
-  // Trạng thái phê duyệt: Mặc định chưa chọn mẫu nào (Người dùng nhấn để Thêm vào đồng bộ)
+  // Tải trạng thái phê duyệt từ LocalStorage
   let approvalMap = {};
-  CANDIDATES.forEach(c => approvalMap[c.id] = false);
+  try {
+    const saved = localStorage.getItem('webvault_staging_approval_v2');
+    if (saved) approvalMap = JSON.parse(saved);
+  } catch(e) {
+    approvalMap = {};
+  }
+
+  // Chủ đề đang xem (mặc định ban-dong-ho hoặc đọc từ URL ?industry=...)
+  let currentTopic = 'ban-dong-ho';
+
+  function initTopicFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    const indParam = params.get('industry') || params.get('topic');
+    if (indParam && ['all', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
+      currentTopic = indParam;
+    }
+  }
+
+  function getFilteredCandidates() {
+    if (currentTopic === 'all') return CANDIDATES;
+    return CANDIDATES.filter(c => c.industry === currentTopic);
+  }
+
+  function filterStagingTopic(topic) {
+    currentTopic = topic;
+    
+    // Cập nhật tab active
+    document.querySelectorAll('.staging-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.industry === topic);
+    });
+
+    // Cập nhật URL mà không reload trang
+    const newUrl = new URL(window.location);
+    if (topic === 'all') {
+      newUrl.searchParams.delete('industry');
+      newUrl.searchParams.delete('topic');
+    } else {
+      newUrl.searchParams.set('industry', topic);
+    }
+    window.history.replaceState({}, '', newUrl);
+
+    renderStaging();
+  }
 
   function renderStaging() {
     const grid = document.getElementById('cardsGrid');
     grid.innerHTML = '';
 
-    let approvedCount = 0;
+    const currentList = getFilteredCandidates();
+    let approvedInTopic = 0;
+    let totalApprovedAll = 0;
 
-    CANDIDATES.forEach(item => {
+    CANDIDATES.forEach(c => {
+      if (approvalMap[c.id]) totalApprovedAll++;
+    });
+
+    currentList.forEach(item => {
       const isSelected = !!approvalMap[item.id];
-      if (isSelected) approvedCount++;
+      if (isSelected) approvedInTopic++;
 
       const card = document.createElement('div');
       card.className = `staging-card ${isSelected ? 'is-selected' : ''}`;
@@ -1106,7 +1781,7 @@
         </div>
 
         <div class="card-thumbnail-box" onclick="openLightbox('${item.id}')" title="Nhấp vào để xem ảnh full-page toàn bộ trang">
-          <img src="${item.thumb}" class="card-thumb-img" alt="${item.name}" loading="lazy">
+          <img src="${item.thumb}" class="card-thumb-img" alt="${item.name}" loading="lazy" onerror="this.src='https://placehold.co/600x400/121217/ffffff?text=${encodeURIComponent(item.short_name)}'">
           <div class="thumbnail-zoom-hint">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
             Nhấp xem ảnh Full
@@ -1115,13 +1790,11 @@
 
         <div class="card-body">
           <div class="card-meta-row">
-            <span class="badge-vibe">${item.vibe}</span>
-            <span style="font-size: 11px; color: ${isSelected ? '#4ade80' : 'var(--text-dim)'}; font-weight: 700;">
-              ${isSelected ? '✓ ĐÃ CHỌN ĐỒNG BỘ' : 'Chưa thêm vào kho'}
-            </span>
+            <span class="badge-industry">${item.industry_name || 'Đồng Hồ'}</span>
+            <span class="badge-vibe" title="${item.vibe}">${item.vibe}</span>
           </div>
 
-          <h3 class="card-title">${item.id}. ${item.short_name}</h3>
+          <h3 class="card-title">${item.id.toUpperCase()}. ${item.short_name}</h3>
           <p class="card-desc">${item.desc}</p>
 
           <button class="approval-toggle-btn ${isSelected ? 'btn-selected' : 'btn-unselected'}" onclick="toggleApproval('${item.id}')">
@@ -1135,18 +1808,29 @@
       grid.appendChild(card);
     });
 
-    document.getElementById('statApproved').textContent = approvedCount;
-    document.getElementById('btnApprovedCount').textContent = approvedCount;
+    // Cập nhật thống kê
+    const topicMapName = {
+      'all': 'Tất Cả Nháp Chờ Duyệt',
+      'ban-dong-ho': 'Bán Đồng Hồ Chính Hãng & Xa Xỉ',
+      'decor-su-kien': 'Decor Tiệc & Trang Trí Sự Kiện',
+      'tiec-cuoi': 'Tiệc Cưới & Wedding Planner'
+    };
+    document.getElementById('statTopicName').textContent = topicMapName[currentTopic] || currentTopic;
+    document.getElementById('statApproved').textContent = approvedInTopic;
+    document.getElementById('statTotalTopic').textContent = currentList.length;
+    document.getElementById('btnApprovedCount').textContent = totalApprovedAll;
 
-    // Cập nhật nút Chọn/Bỏ tất cả
+    // Cập nhật nhãn nút Chọn tất cả
     const toggleAllBtn = document.getElementById('btnToggleAll');
     if (toggleAllBtn) {
-      if (approvedCount === CANDIDATES.length) {
-        toggleAllBtn.textContent = 'Bỏ Chọn Tất Cả';
-      } else {
-        toggleAllBtn.textContent = `Chọn Tất Cả (${CANDIDATES.length} Mẫu)`;
-      }
+      const allSelectedInTopic = currentList.length > 0 && currentList.every(c => approvalMap[c.id]);
+      toggleAllBtn.textContent = allSelectedInTopic ? `Bỏ Chọn Chủ Đề Này` : `Chọn Hết ${currentList.length} Mẫu Này`;
     }
+
+    // Lưu LocalStorage
+    try {
+      localStorage.setItem('webvault_staging_approval_v2', JSON.stringify(approvalMap));
+    } catch(e) {}
   }
 
   function toggleApproval(id) {
@@ -1156,7 +1840,7 @@
     const itemName = item ? item.short_name : 'mẫu';
 
     if (isNowSelected) {
-      showToast(`✨ Đã thêm ${itemName} vào danh sách đồng bộ!`);
+      showToast(`✨ Đã thêm ${itemName} vào danh sách duyệt!`);
     } else {
       showToast(`Đã bỏ chọn ${itemName}.`);
     }
@@ -1165,25 +1849,34 @@
   }
 
   function toggleAll() {
-    const values = Object.values(approvalMap);
-    const allSelected = values.length > 0 && values.every(v => v === true);
-    // Nếu đã chọn tất cả -> bỏ chọn hết; ngược lại -> chọn tất cả
-    const nextState = !allSelected;
-    CANDIDATES.forEach(c => approvalMap[c.id] = nextState);
-    showToast(nextState ? `✓ Đã chọn toàn bộ ${CANDIDATES.length} mẫu để đồng bộ!` : 'Đã bỏ chọn tất cả các mẫu.');
+    const currentList = getFilteredCandidates();
+    if (currentList.length === 0) return;
+
+    const allSelectedInTopic = currentList.every(c => approvalMap[c.id]);
+    const nextState = !allSelectedInTopic;
+
+    currentList.forEach(c => {
+      approvalMap[c.id] = nextState;
+    });
+
+    showToast(nextState ? `✓ Đã chọn ${currentList.length} mẫu trong chủ đề!` : `Đã bỏ chọn các mẫu trong chủ đề.`);
     renderStaging();
   }
 
   function saveApprovalSelection() {
     const approvedList = CANDIDATES.filter(c => approvalMap[c.id]);
     if (approvedList.length === 0) {
-      showToast('⚠️ Bạn chưa chọn mẫu nào! Hãy nhấn "+ Thêm Mẫu Này Để Đồng Bộ" trên các mẫu bạn ưng ý.');
+      showToast('⚠️ Bạn chưa chọn mẫu nào! Nhấn "+ Thêm Mẫu Này" để chọn.');
       return;
     }
 
-    const jsonStr = JSON.stringify(approvedList, null, 2);
-    localStorage.setItem('webvault_approved_selection', jsonStr);
-    showToast(`✓ Đã xác nhận đồng bộ (${approvedList.length} mẫu) vào WebVault!`);
+    // Tạo danh sách URL để copy nhanh
+    const urlText = approvedList.map(c => c.url).join('\n');
+    navigator.clipboard.writeText(urlText).then(() => {
+      showToast(`✓ Đã sao chép ${approvedList.length} link đã duyệt vào Clipboard! Bạn có thể dán vào khung chat.`);
+    }).catch(() => {
+      showToast(`✓ Đã lưu ${approvedList.length} mẫu đã duyệt.`);
+    });
   }
 
   let toastTimer = null;
@@ -1200,10 +1893,9 @@
     }, 2800);
   }
 
-
-  // LIGHTBOX MODAL & CHẾ ĐỘ ZOOM THÔNG MINH
+  // LIGHTBOX MODAL
   let currentLbIndex = 0;
-  let currentLbMode = 'fit'; // 'fit' (vừa màn hình) | 'full' (100% chi tiết) | 'custom' (tỷ lệ tùy chỉnh)
+  let currentLbMode = 'fit';
   let currentCustomWidth = 1360;
   const BASE_FULL_WIDTH = 1360;
 
@@ -1245,18 +1937,16 @@
 
   function handleImageClick(e) {
     e.stopPropagation();
-    // Click vào ảnh: chuyển đổi giữa Fit toàn bộ và Full Size 100%
     if (currentLbMode === 'fit') {
       setLightboxMode('full');
-      showToast('🔍 Đã mở Full Size (100%) — Cuộn chuột để xem chi tiết');
+      showToast('🔍 Đã mở Full Size (100%)');
     } else {
       setLightboxMode('fit');
-      showToast('⛶ Đã thu về Vừa Khung Hình (100% Giao diện)');
+      showToast('⛶ Đã thu về Vừa Khung Hình');
     }
   }
 
   function zoomStep(delta) {
-    // delta = +1 (zoom in) hoặc -1 (zoom out)
     if (currentLbMode === 'fit') {
       currentCustomWidth = BASE_FULL_WIDTH;
     }
@@ -1272,7 +1962,8 @@
   }
 
   function openLightbox(id) {
-    const idx = CANDIDATES.findIndex(c => c.id === id);
+    const currentList = getFilteredCandidates();
+    const idx = currentList.findIndex(c => c.id === id);
     if (idx === -1) return;
     currentLbIndex = idx;
     updateLightboxContent();
@@ -1280,33 +1971,29 @@
     const modal = document.getElementById('lightboxModal');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-
-    // Luôn mở ở chế độ Fit toàn bộ giao diện đầu tiên để người dùng nhìn trọn vẹn 100%
     setLightboxMode('fit');
   }
 
   function updateLightboxContent() {
-    const item = CANDIDATES[currentLbIndex];
+    const currentList = getFilteredCandidates();
+    const item = currentList[currentLbIndex];
     if (!item) return;
 
-    const isApproved = approvalMap[item.id];
+    const isApproved = !!approvalMap[item.id];
 
-    document.getElementById('lbIndex').textContent = `${item.id.toUpperCase()} (${currentLbIndex + 1}/${CANDIDATES.length})`;
-    document.getElementById('lbTitle').textContent = item.name;
+    document.getElementById('lbIndex').textContent = `${item.id.toUpperCase()} (${currentLbIndex + 1}/${currentList.length})`;
+    document.getElementById('lbTitle').textContent = `${item.name} (${item.industry_name || ''})`;
     document.getElementById('lbExternalLink').href = item.url;
     document.getElementById('lbImage').src = item.full;
 
-    // Cập nhật trạng thái nút toggle trong modal
     const toggleBtn = document.getElementById('lbToggleBtn');
     if (toggleBtn) {
       if (isApproved) {
         toggleBtn.className = 'lightbox-toggle-btn is-approved';
         toggleBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> <span>✓ Đã Thêm (Nhấn để hủy)</span>`;
-        toggleBtn.title = 'Nhấn để hủy bỏ thêm mẫu này';
       } else {
         toggleBtn.className = 'lightbox-toggle-btn is-unselected';
         toggleBtn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> <span>+ Thêm Mẫu Này Để Đồng Bộ</span>`;
-        toggleBtn.title = 'Nhấn để xác nhận thêm mẫu này và đồng bộ vào kho';
       }
     }
 
@@ -1318,7 +2005,8 @@
   }
 
   function toggleLightboxApproval() {
-    const item = CANDIDATES[currentLbIndex];
+    const currentList = getFilteredCandidates();
+    const item = currentList[currentLbIndex];
     if (!item) return;
     approvalMap[item.id] = !approvalMap[item.id];
     updateLightboxContent();
@@ -1326,20 +2014,22 @@
   }
 
   function nextLightbox() {
-    if (currentLbIndex < CANDIDATES.length - 1) {
+    const currentList = getFilteredCandidates();
+    if (currentLbIndex < currentList.length - 1) {
       currentLbIndex++;
     } else {
-      currentLbIndex = 0; // Vòng lại đầu
+      currentLbIndex = 0;
     }
     updateLightboxContent();
     setLightboxMode('fit');
   }
 
   function prevLightbox() {
+    const currentList = getFilteredCandidates();
     if (currentLbIndex > 0) {
       currentLbIndex--;
     } else {
-      currentLbIndex = CANDIDATES.length - 1; // Vòng về cuối
+      currentLbIndex = currentList.length - 1;
     }
     updateLightboxContent();
     setLightboxMode('fit');
@@ -1352,13 +2042,11 @@
   }
 
   function handleLightboxBodyClick(e) {
-    // Chỉ đóng khi click trực tiếp vào vùng đệm màu đen bên ngoài wrapper
     if (e.target.id === 'lbBody') {
       closeLightbox();
     }
   }
 
-  // PHÍM TẮT TIỆN LỢI: ESC ĐÓNG, MŨI TÊN TRÁI/PHẢI CHUYỂN MẪU, PHÍM SPACE ĐỔI TRẠNG THÁI DUYỆT
   document.addEventListener('keydown', (e) => {
     const modal = document.getElementById('lightboxModal');
     if (!modal || !modal.classList.contains('active')) return;
@@ -1383,7 +2071,6 @@
     }
   });
 
-  // HỖ TRỢ CTRL + CUỘN CHUỘT ĐỂ ZOOM TỶ LỆ GIAO DIỆN
   window.addEventListener('wheel', (e) => {
     const modal = document.getElementById('lightboxModal');
     if (!modal || !modal.classList.contains('active')) return;
@@ -1395,7 +2082,14 @@
     }
   }, { passive: false });
 
-    document.addEventListener('DOMContentLoaded', renderStaging);
+  document.addEventListener('DOMContentLoaded', () => {
+    initTopicFromUrl();
+    // Cập nhật tab active
+    document.querySelectorAll('.staging-tab-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.industry === currentTopic);
+    });
+    renderStaging();
+  });
 </script>
 
 </body>

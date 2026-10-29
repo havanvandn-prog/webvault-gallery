@@ -776,9 +776,12 @@
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">60</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">80</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="ban-dong-ho" onclick="filterStagingTopic('ban-dong-ho')">
+      <button class="staging-tab-btn active" data-industry="phong-tap-fitness" onclick="filterStagingTopic('phong-tap-fitness')">
+        <span>🏋️‍♂️</span> Fitness & Gym <span class="tab-badge" id="badgeFitness">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="ban-dong-ho" onclick="filterStagingTopic('ban-dong-ho')">
         <span>⌚</span> Bán Đồng Hồ <span class="tab-badge" id="badgeDongHo">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="decor-su-kien" onclick="filterStagingTopic('decor-su-kien')">
@@ -793,7 +796,7 @@
   <!-- COUNTER STRIP -->
   <div class="counter-strip">
     <div class="counter-text">
-      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Bán Đồng Hồ</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
+      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Phòng Tập Fitness & Gym</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
     </div>
     <div class="topic-guide-pill">
       💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
@@ -866,6 +869,286 @@
 <script>
   // TỔNG HỢP CÁC CHỦ ĐỀ CHỜ DUYỆT (60 MẪU)
   const CANDIDATES = [
+  {
+    "id": "fit01",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "California Fitness & Yoga",
+    "short_name": "California Fitness",
+    "url": "https://cali.vn/",
+    "domain": "cali.vn",
+    "vibe": "Đẳng cấp & 5 Sao Quốc Tế",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/cali_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/cali_vn_full.webp",
+    "desc": "Thương hiệu thể hình & phong cách sống 5 sao quy mô lớn nhất Việt Nam. Không gian thiết kế sang trọng, hồ bơi, jacuzzi, sauna cùng hệ thống lớp học bản quyền Les Mills và Yoga Master Ấn Độ."
+  },
+  {
+    "id": "fit02",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "CITIGYM",
+    "short_name": "CITIGYM",
+    "url": "https://citigym.asia/",
+    "domain": "citigym.asia",
+    "vibe": "Hiện đại & Không gian xanh",
+    "location": "TP.HCM & Bình Dương",
+    "thumb": "Kho_Anh_Webp/citigym_asia_thumb.webp",
+    "full": "Kho_Anh_Webp/citigym_asia_full.webp",
+    "desc": "Hệ thống phòng tập dẫn đầu xu hướng mang mảng xanh thiên nhiên vào không gian thể hình. Trang thiết bị Technogym & Life Fitness cao cấp, phòng xông hơi tuyết và dịch vụ chuẩn 5 sao."
+  },
+  {
+    "id": "fit03",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Elite Fitness",
+    "short_name": "Elite Fitness",
+    "url": "https://elitefitness.com.vn/",
+    "domain": "elitefitness.com.vn",
+    "vibe": "Sang trọng & Chuẩn mực thượng lưu",
+    "location": "Hà Nội, Quảng Ninh & TP.HCM",
+    "thumb": "Kho_Anh_Webp/elitefitness_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/elitefitness_com_vn_full.webp",
+    "desc": "Chuỗi câu lạc bộ thể thao cao cấp hàng đầu dành riêng cho tầng lớp trung và thượng lưu. Nằm tại các tòa nhà đắc địa, tích hợp bể bơi 4 mùa, công nghệ InBody và gói tập luyện đặc quyền."
+  },
+  {
+    "id": "fit04",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "The A Fitness",
+    "short_name": "The A Fitness",
+    "url": "https://thea.com.vn/",
+    "domain": "thea.com.vn",
+    "vibe": "Sinh thái & Trị liệu toàn diện",
+    "location": "Hà Nội & Ecopark",
+    "thumb": "Kho_Anh_Webp/thea_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/thea_com_vn_full.webp",
+    "desc": "Tổ hợp Fitness & Wellness 5 sao quy mô lớn với triết lý chăm sóc sức khỏe toàn diện. Tích hợp Gym, Boxing, Bể bơi bốn mùa, dịch vụ Pilates chuyên sâu và liệu trình giãn cơ phục hồi."
+  },
+  {
+    "id": "fit05",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Level Fitness & Yoga",
+    "short_name": "Level Fitness",
+    "url": "https://levelfyc.com/",
+    "domain": "levelfyc.com",
+    "vibe": "Trần cao khoáng đạt & Đa năng",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/levelfyc_com_thumb.webp",
+    "full": "Kho_Anh_Webp/levelfyc_com_full.webp",
+    "desc": "Tổ hợp thể thao đẳng cấp tại Hà Nội với thiết kế trần kính panoramic view tuyệt đẹp. Kết hợp độc đáo giữa Gym, Yoga, Pilates, sân bóng rổ và tường leo núi trong nhà chuẩn quốc tế."
+  },
+  {
+    "id": "fit06",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "The New Gym",
+    "short_name": "The New Gym",
+    "url": "https://thenewgym.vn/",
+    "domain": "thenewgym.vn",
+    "vibe": "Năng động & Mở cửa 24/7",
+    "location": "Hà Nội, TP.HCM & Đà Nẵng",
+    "thumb": "Kho_Anh_Webp/thenewgym_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/thenewgym_vn_full.webp",
+    "desc": "Chuỗi phòng gym mở cửa xuyên suốt 24/7 tiên phong tại Việt Nam. Không gian rộng rãi, chi phí minh bạch linh hoạt không áp lực hợp đồng, hội viên thoải mái tập luyện bất kể ngày đêm."
+  },
+  {
+    "id": "fit07",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Anytime Fitness Vietnam",
+    "short_name": "Anytime Fitness",
+    "url": "https://anytimefitness.vn/",
+    "domain": "anytimefitness.vn",
+    "vibe": "Chuẩn hóa toàn cầu & Thân thiện",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/anytimefitness_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/anytimefitness_vn_full.webp",
+    "desc": "Chuỗi phòng tập thể hình 24/7 lớn nhất thế giới với hơn 5.000 câu lạc bộ toàn cầu. Một thẻ tập mở khóa mọi phòng tập trên toàn thế giới với hệ thống kiểm soát an toàn tuyệt đối."
+  },
+  {
+    "id": "fit08",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Unity Fitness",
+    "short_name": "Unity Fitness",
+    "url": "https://unityfitness.vn/",
+    "domain": "unityfitness.vn",
+    "vibe": "Trẻ trung & Tối ưu chuyển đổi",
+    "location": "TP.HCM & Hà Nội",
+    "thumb": "Kho_Anh_Webp/unityfitness_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/unityfitness_vn_full.webp",
+    "desc": "Hệ thống phòng tập thế hệ mới với phong cách thiết kế hiện đại, diện tích rộng lớn, đầy đủ các khu vực Free Weights, Máy khối cơ, phòng tập Yoga ánh sáng dịu và sàn nhảy Group X sôi động."
+  },
+  {
+    "id": "fit09",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "25 FIT",
+    "short_name": "25 FIT",
+    "url": "https://25fit.com/",
+    "domain": "25fit.com",
+    "vibe": "Công nghệ cao & Tối ưu thời gian",
+    "location": "Hà Nội, TP.HCM & Đà Nẵng",
+    "thumb": "Kho_Anh_Webp/25fit_com_thumb.webp",
+    "full": "Kho_Anh_Webp/25fit_com_full.webp",
+    "desc": "Chuỗi phòng tập công nghệ EMS đầu tiên và lớn nhất Việt Nam. Chỉ 25 phút mỗi buổi kích hoạt toàn diện 300+ nhóm cơ sâu, giải pháp hoàn hảo cho doanh nhân và người bận rộn muốn vóc dáng săn chắc."
+  },
+  {
+    "id": "fit10",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "GymHaus Boutique Fitness",
+    "short_name": "GymHaus",
+    "url": "https://gymhausvietnam.com/",
+    "domain": "gymhausvietnam.com",
+    "vibe": "Ấm cúng & Chăm sóc cá nhân hóa",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/gymhausvietnam_com_thumb.webp",
+    "full": "Kho_Anh_Webp/gymhausvietnam_com_full.webp",
+    "desc": "Mô hình Boutique Fitness văn minh, không đông đúc, chuyên biệt về huấn luyện cá nhân 1:1, chỉnh sửa sai lệch tư thế cột sống (gù lưng, võng lưng) và nâng cao thể lực theo khoa học vận động."
+  },
+  {
+    "id": "fit11",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Swequity Ultimate Fitness",
+    "short_name": "Swequity",
+    "url": "https://swequity.vn/",
+    "domain": "swequity.vn",
+    "vibe": "Mạnh mẽ & Chuẩn khoa học",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/swequity_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/swequity_vn_full.webp",
+    "desc": "Trung tâm thể hình theo trường phái khoa học vận động và sức khỏe chuyển hóa chuẩn quốc tế. Trang bị dàn tạ Rogue, Eleiko danh tiếng cùng giáo trình đào tạo cá nhân hóa theo từng mục tiêu giải phẫu."
+  },
+  {
+    "id": "fit12",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Kickfit Sports",
+    "short_name": "Kickfit Sports",
+    "url": "https://kickfit-sports.com/",
+    "domain": "kickfit-sports.com",
+    "vibe": "Rực lửa & Đốt mỡ thần tốc",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/kickfit-sports_com_thumb.webp",
+    "full": "Kho_Anh_Webp/kickfit-sports_com_full.webp",
+    "desc": "Hệ thống trung tâm thể thao kết hợp võ thuật hàng đầu miền Bắc. Nổi bật với các bộ môn Kickboxing, Muay Thai, Boxing đối kháng giải tỏa stress và giảm cân cấp tốc trong không gian tiêu chuẩn thi đấu."
+  },
+  {
+    "id": "fit13",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "HD Fitness Đà Nẵng",
+    "short_name": "HD Fitness",
+    "url": "https://hdfitness.vn/",
+    "domain": "hdfitness.vn",
+    "vibe": "Rộng mở & Quy mô miền Trung",
+    "location": "Đà Nẵng & Miền Trung",
+    "thumb": "Kho_Anh_Webp/hdfitness_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/hdfitness_vn_full.webp",
+    "desc": "Hệ thống tổ hợp thể thao và bơi lội quy mô số 1 tại Đà Nẵng. Không gian rộng hàng ngàn mét vuông, trang bị máy tập hiện đại, bể bơi tiêu chuẩn cùng khu vực xông hơi đá muối thảo dược."
+  },
+  {
+    "id": "fit14",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Gym One",
+    "short_name": "Gym One",
+    "url": "https://gymone.vn/",
+    "domain": "gymone.vn",
+    "vibe": "Trẻ trung & Năng động trung tâm",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/gymone_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/gymone_vn_full.webp",
+    "desc": "Không gian rèn luyện thể chất năng động tại trung tâm Sài Gòn. Tích hợp Gym, Yoga, Zumba, Dance và dịch vụ Personal Trainer tận tâm với phong cách thiết kế hiện đại, đầy cảm hứng."
+  },
+  {
+    "id": "fit15",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Advance Fitness & Gym",
+    "short_name": "Advance Fitness",
+    "url": "https://advancegym.com.vn/",
+    "domain": "advancegym.com.vn",
+    "vibe": "Tinh tế & Huấn luyện sát sao",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/advancegym_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/advancegym_com_vn_full.webp",
+    "desc": "Chuỗi phòng tập định hướng dịch vụ cá nhân hóa với không gian thoáng mát, số lượng hội viên giới hạn tránh tình trạng chờ máy, dịch vụ PT trực sàn chỉnh form tỉ mỉ và chu đáo."
+  },
+  {
+    "id": "fit16",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Elite Premium Pilates",
+    "short_name": "Elite Pilates",
+    "url": "https://elitepilates.vn/",
+    "domain": "elitepilates.vn",
+    "vibe": "Thanh lịch & Thẩm mỹ vóc dáng",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/elitepilates_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/elitepilates_vn_full.webp",
+    "desc": "Studio chuyên sâu về bộ môn Pilates Reformer chuẩn quốc tế thuộc hệ sinh thái Elite. Không gian thiền định tinh tế, dàn máy Reformer nhập khẩu nguyên chiếc từ Mỹ giúp kéo giãn và định hình đường cong."
+  },
+  {
+    "id": "fit17",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Pilates Station",
+    "short_name": "Pilates Station",
+    "url": "https://pilatesstation.vn/",
+    "domain": "pilatesstation.vn",
+    "vibe": "Nhẹ nhàng & Phục hồi chuyên sâu",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/pilatesstation_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/pilatesstation_vn_full.webp",
+    "desc": "Trung tâm Pilates trị liệu và cải thiện vóc dáng hàng đầu tại khu Nam Sài Gòn. Đội ngũ Master Instructor được chứng nhận quốc tế, giáo trình 1:1 chuyên biệt cho từng tình trạng cột sống và mẹ bầu."
+  },
+  {
+    "id": "fit18",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Equinox",
+    "short_name": "Equinox",
+    "url": "https://www.equinox.com/",
+    "domain": "equinox.com",
+    "vibe": "Đẳng cấp tột bậc & Nghệ thuật",
+    "location": "New York, Los Angeles, London",
+    "thumb": "Kho_Anh_Webp/equinox_com_thumb.webp",
+    "full": "Kho_Anh_Webp/equinox_com_full.webp",
+    "desc": "Thương hiệu thể hình xa xỉ số 1 thế giới với triết lý 'It's Not Fitness, It's Life'. Điểm chuẩn mực toàn cầu về thiết kế giao diện tối giản quyền lực, nghệ thuật nhiếp ảnh điện ảnh và trải nghiệm hội viên đẳng cấp VIP."
+  },
+  {
+    "id": "fit19",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Third Space London",
+    "short_name": "Third Space",
+    "url": "https://www.thirdspace.london/",
+    "domain": "thirdspace.london",
+    "vibe": "Kiến trúc tương lai & Sang trọng bậc nhất",
+    "location": "London, UK",
+    "thumb": "Kho_Anh_Webp/thirdspace_london_thumb.webp",
+    "full": "Kho_Anh_Webp/thirdspace_london_full.webp",
+    "desc": "Chuỗi câu lạc bộ sức khỏe biểu tượng của thủ đô London. Kiệt tác kiến trúc giao thoa giữa ánh sáng kim loại, hồ bơi lọc ozone tự nhiên, sàn đấu boxing và giao diện số mượt mà như một tạp chí thời trang kiến trúc."
+  },
+  {
+    "id": "fit20",
+    "industry": "phong-tap-fitness",
+    "industry_name": "Phòng Tập Fitness & Gym",
+    "name": "Barry's Bootcamp",
+    "short_name": "Barry's",
+    "url": "https://www.barrys.com/",
+    "domain": "barrys.com",
+    "vibe": "Red Room bùng nổ & Năng lượng cao",
+    "location": "Toàn cầu",
+    "thumb": "Kho_Anh_Webp/barrys_com_thumb.webp",
+    "full": "Kho_Anh_Webp/barrys_com_full.webp",
+    "desc": "Nhà tiên phong của mô hình tập luyện ngắt quãng cường độ cao (HIIT) với căn phòng ánh sáng đỏ 'Red Room' nổi tiếng. Giao diện trực quan tràn đầy năng lượng, tối ưu luồng đặt lịch tập và trải nghiệm cộng đồng cuồng nhiệt."
+  },
   {
     "id": "dh01",
     "industry": "ban-dong-ho",
@@ -1717,13 +2000,13 @@
     approvalMap = {};
   }
 
-  // Chủ đề đang xem (mặc định ban-dong-ho hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'ban-dong-ho';
+  // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
+  let currentTopic = 'phong-tap-fitness';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const indParam = params.get('industry') || params.get('topic');
-    if (indParam && ['all', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
+    if (indParam && ['all', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
       currentTopic = indParam;
     }
   }
@@ -1811,6 +2094,7 @@
     // Cập nhật thống kê
     const topicMapName = {
       'all': 'Tất Cả Nháp Chờ Duyệt',
+      'phong-tap-fitness': 'Phòng Tập Fitness & Gym',
       'ban-dong-ho': 'Bán Đồng Hồ Chính Hãng & Xa Xỉ',
       'decor-su-kien': 'Decor Tiệc & Trang Trí Sự Kiện',
       'tiec-cuoi': 'Tiệc Cưới & Wedding Planner'
@@ -1819,6 +2103,13 @@
     document.getElementById('statApproved').textContent = approvedInTopic;
     document.getElementById('statTotalTopic').textContent = currentList.length;
     document.getElementById('btnApprovedCount').textContent = totalApprovedAll;
+
+    // Cập nhật số đếm badge các tab
+    if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeFitness')) document.getElementById('badgeFitness').textContent = CANDIDATES.filter(c => c.industry === 'phong-tap-fitness').length;
+    if (document.getElementById('badgeDongHo')) document.getElementById('badgeDongHo').textContent = CANDIDATES.filter(c => c.industry === 'ban-dong-ho').length;
+    if (document.getElementById('badgeDecor')) document.getElementById('badgeDecor').textContent = CANDIDATES.filter(c => c.industry === 'decor-su-kien').length;
+    if (document.getElementById('badgeWedding')) document.getElementById('badgeWedding').textContent = CANDIDATES.filter(c => c.industry === 'tiec-cuoi').length;
 
     // Cập nhật nhãn nút Chọn tất cả
     const toggleAllBtn = document.getElementById('btnToggleAll');
@@ -1863,98 +2154,23 @@
     renderStaging();
   }
 
-  async function saveApprovalSelection() {
+  function saveApprovalSelection() {
     const approvedList = CANDIDATES.filter(c => approvalMap[c.id]);
     if (approvedList.length === 0) {
       showToast('⚠️ Bạn chưa chọn mẫu nào! Nhấn "+ Thêm Mẫu Này" để chọn.');
       return;
     }
 
-    const btn = document.querySelector('.btn-sync-hub');
-    const origHtml = btn ? btn.innerHTML : '';
-    if (btn) {
-      btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="spin"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> Đang tự động nạp & đẩy lên GitHub...`;
-      btn.style.pointerEvents = 'none';
-      btn.style.opacity = '0.85';
-    }
-
-    showToast(`⏳ Đang nạp tự động ${approvedList.length} mẫu vào WebVault...`);
-
-    const portsToTry = [
-      window.location.port ? parseInt(window.location.port) : null,
-      8000, 8081, 9000
-    ].filter(p => p !== null);
-
-    let syncSuccess = false;
-    let syncResult = null;
-
-    const firstItem = approvedList[0];
-    const indSlug = firstItem.industry || (firstItem.id.startsWith('dc') ? 'decor-su-kien' : 'ban-dong-ho');
-    const indName = firstItem.industry_name || (firstItem.id.startsWith('dc') ? 'Trang Trí & Decor Tiệc' : 'Đồng Hồ Chính Hãng');
-
-    for (const port of portsToTry) {
-      try {
-        const endpoint = (window.location.protocol.startsWith('http') && window.location.port == port)
-          ? '/api/sync-approved'
-          : `http://localhost:${port}/api/sync-approved`;
-
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 12000);
-
-        const resp = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            approved_items: approvedList,
-            industry_slug: indSlug,
-            industry_name: indName
-          }),
-          signal: controller.signal
-        });
-        clearTimeout(timeoutId);
-
-        if (resp.ok) {
-          syncResult = await resp.json();
-          if (syncResult && syncResult.success) {
-            syncSuccess = true;
-            break;
-          }
-        }
-      } catch (err) {
-        // Thử port tiếp theo
-      }
-    }
-
-    if (btn) {
-      btn.innerHTML = origHtml;
-      btn.style.pointerEvents = '';
-      btn.style.opacity = '';
-    }
-
-    if (syncSuccess) {
-      showToast(`🎉 THÀNH CÔNG! Đã nạp ${approvedList.length} mẫu vào WebVault và đẩy lên GitHub Pages!`);
-      setTimeout(() => {
-        window.location.href = syncResult.redirect_url || `index.html?industry=${indSlug}`;
-      }, 1200);
-      return;
-    }
-
-    // Nếu mở bản tĩnh (chưa bật run_webvault.bat)
+    // Tạo danh sách URL để copy nhanh
     const urlText = approvedList.map(c => c.url).join('\n');
-    try {
-      await navigator.clipboard.writeText(urlText);
-    } catch(e) {}
-
-    showToast(`💡 Đã lưu ${approvedList.length} mẫu! Bật run_webvault.bat trên máy để đồng bộ 1-Click tự động.`);
-    alert(
-      `ĐÃ LƯU THÀNH CÔNG ${approvedList.length} MẪU BẠN CHỌN!\n\n` +
-      `Để hệ thống tự động đồng bộ 1-Click lên website online mà không cần nhắn tin:\n` +
-      `👉 Bạn chỉ cần nhấp đúp mở file [run_webvault.bat] trong thư mục dự án trên máy tính!\n\n` +
-      `Hoặc: Danh sách link đã được tự động copy vào Clipboard, bạn có thể dán vào khung chat để AI đồng bộ ngay.`
-    );
+    navigator.clipboard.writeText(urlText).then(() => {
+      showToast(`✓ Đã sao chép ${approvedList.length} link đã duyệt vào Clipboard! Bạn có thể dán vào khung chat.`);
+    }).catch(() => {
+      showToast(`✓ Đã lưu ${approvedList.length} mẫu đã duyệt.`);
+    });
   }
 
-    let toastTimer = null;
+  let toastTimer = null;
   function showToast(msg) {
     const toast = document.getElementById('toastBox');
     const toastMsg = document.getElementById('toastMsg');

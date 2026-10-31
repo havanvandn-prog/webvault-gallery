@@ -789,9 +789,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">80</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">100</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="phong-tap-fitness" onclick="filterStagingTopic('phong-tap-fitness')">
+      <button class="staging-tab-btn active" data-industry="du-hoc-dinh-cu-my" onclick="filterStagingTopic('du-hoc-dinh-cu-my')">
+        <span>🎓</span> Du Học & Định Cư Mỹ <span class="tab-badge" id="badgeDuHocDinhCu">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="phong-tap-fitness" onclick="filterStagingTopic('phong-tap-fitness')">
         <span>🏋️‍♂️</span> Fitness & Gym <span class="tab-badge" id="badgeFitness">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="ban-dong-ho" onclick="filterStagingTopic('ban-dong-ho')">
@@ -809,7 +812,7 @@ template = """<!DOCTYPE html>
   <!-- COUNTER STRIP -->
   <div class="counter-strip">
     <div class="counter-text">
-      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Phòng Tập Fitness & Gym</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
+      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Du Học & Định Cư Mỹ (Google Ads & CRO)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
     </div>
     <div class="topic-guide-pill">
       💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
@@ -893,12 +896,12 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'phong-tap-fitness';
+  let currentTopic = 'du-hoc-dinh-cu-my';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const indParam = params.get('industry') || params.get('topic');
-    if (indParam && ['all', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
+    if (indParam && ['all', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
       currentTopic = indParam;
     }
   }
@@ -986,6 +989,7 @@ template = """<!DOCTYPE html>
     // Cập nhật thống kê
     const topicMapName = {
       'all': 'Tất Cả Nháp Chờ Duyệt',
+      'du-hoc-dinh-cu-my': 'Du Học & Định Cư Mỹ (Google Ads & CRO)',
       'phong-tap-fitness': 'Phòng Tập Fitness & Gym',
       'ban-dong-ho': 'Bán Đồng Hồ Chính Hãng & Xa Xỉ',
       'decor-su-kien': 'Decor Tiệc & Trang Trí Sự Kiện',
@@ -998,6 +1002,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeDuHocDinhCu')) document.getElementById('badgeDuHocDinhCu').textContent = CANDIDATES.filter(c => c.industry === 'du-hoc-dinh-cu-my').length;
     if (document.getElementById('badgeFitness')) document.getElementById('badgeFitness').textContent = CANDIDATES.filter(c => c.industry === 'phong-tap-fitness').length;
     if (document.getElementById('badgeDongHo')) document.getElementById('badgeDongHo').textContent = CANDIDATES.filter(c => c.industry === 'ban-dong-ho').length;
     if (document.getElementById('badgeDecor')) document.getElementById('badgeDecor').textContent = CANDIDATES.filter(c => c.industry === 'decor-su-kien').length;

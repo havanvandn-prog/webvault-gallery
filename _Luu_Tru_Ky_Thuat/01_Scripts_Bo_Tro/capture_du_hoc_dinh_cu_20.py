@@ -1,0 +1,444 @@
+# -*- coding: utf-8 -*-
+import os
+import sys
+import time
+import json
+from io import BytesIO
+from PIL import Image
+
+# Ensure UTF-8 output on Windows console
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr.reconfigure(encoding='utf-8')
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+skill_path = r"C:\Users\ADMIN\.gemini\config\skills\tim-mau-website\scripts"
+sys.path.append(skill_path)
+from capture_engine import capture_smart_clean, check_for_blank_spaces, compress_tri_layer, verify_captured_image
+from playwright.sync_api import sync_playwright
+
+output_dir = os.path.join(BASE_DIR, "Anh_Chup_Website")
+kho_webp_dir = os.path.join(BASE_DIR, "Kho_Anh_Webp")
+metadata_file = os.path.join(BASE_DIR, "_Luu_Tru_Ky_Thuat", "03_Du_Lieu_Tam_Va_Test", "du_hoc_dinh_cu_metadata.json")
+
+os.makedirs(output_dir, exist_ok=True)
+os.makedirs(kho_webp_dir, exist_ok=True)
+os.makedirs(os.path.dirname(metadata_file), exist_ok=True)
+
+websites = [
+    # =========================================================================
+    # NHÓM 1: CÁC ÔNG LỚN ĐẦU TƯ ĐỊNH CƯ MỸ (EB-5, L-1, EB-3) & HÃNG LUẬT DI TRÚ
+    # =========================================================================
+    {
+        "id": "dhdc01",
+        "name": "IMM Group",
+        "short_name": "IMM Group",
+        "url": "https://immgroup.com/",
+        "domain": "immgroup.com",
+        "slug": "immgroup_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Pioneer Investment Migration & Wealth Management",
+        "category_vn": "Tập Đoàn Tư Vấn Đầu Tư Định Cư & Quản Lý Tài Sản Quốc Tế",
+        "tag": "dinh-cu-eb5",
+        "vibe": "dark-luxury-corporate",
+        "vibe_name": "Sang trọng, Đẳng cấp & Chuẩn mực Doanh nghiệp",
+        "location": "TP.HCM, Hà Nội & Quốc tế",
+        "desc": "Tập đoàn tiên phong tại Việt Nam trong lĩnh vực đầu tư định cư Mỹ (EB-5, EB-1C) và quốc tế. Giao diện tối ưu tỷ lệ chuyển đổi cho khách hàng thượng lưu: bố cục thẩm định hồ sơ minh bạch, số liệu chứng minh nguồn tiền rõ ràng, không hứa hẹn phi thực tế, tạo dựng niềm tin tuyệt đối cho quảng cáo Google Search từ khóa giá trị cao."
+    },
+    {
+        "id": "dhdc02",
+        "name": "Interimm",
+        "short_name": "Interimm",
+        "url": "https://www.interimm.vn/",
+        "domain": "interimm.vn",
+        "slug": "interimm_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "US Investment & Employment Immigration Specialist",
+        "category_vn": "Chuyên Gia Đầu Tư Định Cư Mỹ EB-5 & Định Cư Việc Làm EB-3",
+        "tag": "dinh-cu-eb5",
+        "vibe": "high-trust-blue",
+        "vibe_name": "Xanh dương Uy tín & Định hướng Chuyển đổi",
+        "location": "TP.HCM & Hà Nội",
+        "desc": "Đơn vị chuyên sâu đầu tư định cư Mỹ EB-5 và diện tay nghề EB-3 với tỷ lệ phê duyệt I-526E và I-829 dẫn đầu thị trường. Bố cục website được tối ưu chuyển đổi trực diện: Form 'Thẩm định hồ sơ miễn phí' xuất hiện ngay màn hình đầu, bảng đối chiếu dự án EB-5 vùng nông thôn TEA ưu tiên xét duyệt, tích hợp hotline và Zalo tư vấn 1-1."
+    },
+    {
+        "id": "dhdc03",
+        "name": "Harvey Law Group Vietnam",
+        "short_name": "Harvey Law Group (HLG)",
+        "url": "https://dautudinhcu.com/",
+        "domain": "dautudinhcu.com",
+        "slug": "dautudinhcu_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "International Immigration Law Firm",
+        "category_vn": "Hãng Luật Di Trú Quốc Tế Đa Quốc Gia",
+        "tag": "dinh-cu-eb5",
+        "vibe": "legal-prestige",
+        "vibe_name": "Chính thống Pháp lý & Đẳng cấp Toàn cầu",
+        "location": "TP.HCM, Hà Nội, Đà Nẵng & 13+ quốc gia",
+        "desc": "Hãng luật di trú quốc tế hàng đầu do luật sư Jean-François Harvey sáng lập. Website xây dựng độ tin cậy tuyệt đối nhờ tư cách pháp lý của tổ chức luật sư quốc tế, minh bạch hóa các đạo luật di trú Mỹ (EB-5 Reform and Integrity Act), rất phù hợp làm mẫu thiết kế landing page cho khách hàng tìm kiếm 'luật sư di trú Mỹ'."
+    },
+    {
+        "id": "dhdc04",
+        "name": "Citizen Pathway",
+        "short_name": "Citizen Pathway",
+        "url": "https://citizenpathway.org/",
+        "domain": "citizenpathway.org",
+        "slug": "citizenpathway_org",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Strategic Investment Immigration Consulting",
+        "category_vn": "Tư Vấn Đầu Tư Định Cư Chiến Lược & An Cư Mỹ",
+        "tag": "dinh-cu-eb5",
+        "vibe": "modern-conversion",
+        "vibe_name": "Hiện đại & Tối ưu Form Lead Phễu Nóng",
+        "location": "TP.HCM & Hà Nội",
+        "desc": "Đơn vị tư vấn định cư nổi bật với tốc độ tăng trưởng mạnh và tỷ lệ chấp thuận hồ sơ cao. Giao diện là chuẩn mực cho chiến dịch Google Ads: Call-to-Action rõ ràng, form khảo sát điều kiện hồ sơ đa tầng (chọn mức ngân sách, diện visa), thư viện câu chuyện khách hàng nhận thẻ xanh thực tế và đối tác Trung tâm Vùng hàng đầu."
+    },
+    {
+        "id": "dhdc05",
+        "name": "Kornova Vietnam",
+        "short_name": "Kornova",
+        "url": "https://kornova-viet.com/",
+        "domain": "kornova-viet.com",
+        "slug": "kornova-viet_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Veteran Global Migration Advisory",
+        "category_vn": "Tập Đoàn Tư Vấn Định Cư Đa Quốc Gia Thâm Niên",
+        "tag": "dinh-cu-eb5",
+        "vibe": "heritage-corporate",
+        "vibe_name": "Thâm niên, Điềm đạm & An tâm Đầu tư",
+        "location": "TP.HCM, Hà Nội & Bắc Mỹ",
+        "desc": "Thương hiệu tư vấn di trú quốc tế với hơn 15 năm tại Việt Nam. Điểm mạnh chuyển đổi của Kornova nằm ở minh chứng hoàn vốn EB-5 100% cho các nhà đầu tư và tỷ lệ nhận thẻ xanh vĩnh viễn. Bố cục website sắp xếp khoa học, các bài phân tích chính sách visa Mỹ chi tiết, tạo uy tín sâu sắc đối với phân khúc khách hàng lớn tuổi."
+    },
+    {
+        "id": "dhdc06",
+        "name": "First Consulting Group (FCG)",
+        "short_name": "FCG Di Trú Mỹ",
+        "url": "https://ditrumy.com/",
+        "domain": "ditrumy.com",
+        "slug": "ditrumy_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "US Immigration Law & Visa Consultation Group",
+        "category_vn": "Tổ Hợp Luật Sư Di Trú Mỹ & Xử Lý Hồ Sơ Khó",
+        "tag": "dinh-cu-eb5",
+        "vibe": "expert-consulting",
+        "vibe_name": "Chuyên gia Thực chiến & Thân thiện Người dùng",
+        "location": "California, Texas (Mỹ) & TP.HCM, Hà Nội",
+        "desc": "Tổ hợp luật sư di trú hoạt động từ năm 2002 với văn phòng tại cả Mỹ và Việt Nam. Website tập trung tối đa vào giải quyết nỗi đau của khách hàng: hồ sơ bị từ chối, gỡ rối phỏng vấn, bảo lãnh gia đình và diện đầu tư/việc làm. Hệ thống hotline hiển thị cố định và nút gửi câu hỏi nhanh giúp tỷ lệ giữ chân khách truy cập cực tốt."
+    },
+    {
+        "id": "dhdc07",
+        "name": "Khai Phú Investments",
+        "short_name": "Khai Phú",
+        "url": "https://tuvanditru.com/",
+        "domain": "tuvanditru.com",
+        "slug": "tuvanditru_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Top Migration & Investment Consultancy",
+        "category_vn": "Đơn Vị Tư Vấn Đầu Tư Định Cư Hàng Đầu Việt Nam",
+        "tag": "dinh-cu-eb5",
+        "vibe": "active-commercial",
+        "vibe_name": "Thương mại Thực chiến & Phễu Sự kiện",
+        "location": "TP.HCM, Hà Nội & Quốc tế",
+        "desc": "Khai Phú là một trong những đơn vị tư vấn định cư kỳ cựu tại Việt Nam với hơn 10 năm kinh nghiệm. Website được xây dựng như một cỗ máy bán hàng: liên tục cập nhật lịch sự kiện hội thảo trực tiếp, video chia sẻ từ luật sư Mỹ, và form đăng ký thẩm định nhanh tạo dòng lead chất lượng cao hàng ngày."
+    },
+    {
+        "id": "dhdc08",
+        "name": "Maple Leaf Vietnam",
+        "short_name": "Maple Leaf Vietnam",
+        "url": "https://mapleleafvn.com/",
+        "domain": "mapleleafvn.com",
+        "slug": "mapleleafvn_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "North America Investment Migration Specialist",
+        "category_vn": "Chuyên Gia Đầu Tư Định Cư Bắc Mỹ (Mỹ & Canada)",
+        "tag": "dinh-cu-eb5",
+        "vibe": "modern-minimalist",
+        "vibe_name": "Tinh tế, Tối giản & Trực quan Số liệu",
+        "location": "TP.HCM & Hà Nội",
+        "desc": "Đơn vị tư vấn định cư Bắc Mỹ có phong cách thiết kế hiện đại, thoáng đãng. Website ghi điểm lớn nhờ cấu trúc so sánh các diện định cư Mỹ (EB-5, L-1, EB-3) rất dễ hiểu cho người mới tìm hiểu, kèm bộ tài liệu cẩm nang tải về miễn phí - một nam châm hút lead (Lead Magnet) cực kỳ hiệu quả cho quảng cáo Google Ads."
+    },
+
+    # =========================================================================
+    # NHÓM 2: CÁC ĐƠN VỊ DU HỌC & SĂN HỌC BỔNG MỸ (TOP CHUYỂN ĐỔI GOOGLE SEARCH ADS)
+    # =========================================================================
+    {
+        "id": "dhdc09",
+        "name": "American Study",
+        "short_name": "American Study",
+        "url": "https://americanstudy.edu.vn/",
+        "domain": "americanstudy.edu.vn",
+        "slug": "americanstudy_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Ivy League & Top US Universities Admissions",
+        "category_vn": "Tổ Chức Tư Vấn Du Học & Săn Học Bổng Mỹ Top 10 - 20 - 50",
+        "tag": "du-hoc-my",
+        "vibe": "academic-excellence",
+        "vibe_name": "Học thuật Đỉnh cao & Bằng chứng Kết quả Vượt trội",
+        "location": "Hà Nội, TP.HCM & Đà Nẵng",
+        "desc": "Đơn vị dẫn đầu tại Việt Nam về tư vấn nộp hồ sơ săn học bổng vào các trường Đại học Top đầu Mỹ và Ivy League. Thiết kế chuyển đổi siêu mạnh: Trưng bày gương mặt học sinh đạt học bổng triệu đô ngay trang chủ, bảng điểm SAT/IELTS thực tế, form 'Đăng ký đánh giá hồ sơ & Test thử', tỷ lệ chốt phụ huynh có học lực khá giỏi rất cao."
+    },
+    {
+        "id": "dhdc10",
+        "name": "Nam Anh Scholarship",
+        "short_name": "Nam Anh Scholarship",
+        "url": "https://hocbongnamanh.edu.vn/",
+        "domain": "hocbongnamanh.edu.vn",
+        "slug": "hocbongnamanh_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "US Scholarships Hunter & High Conversion Funnel",
+        "category_vn": "Chuyên Gia Săn Học Bổng Mỹ 50% - 100% & Phễu Chuyển Đổi Cao",
+        "tag": "du-hoc-my",
+        "vibe": "funnel-driven",
+        "vibe_name": "Phễu Chuyển đổi Trực diện & Đánh trúng Nỗi đau Học phí",
+        "location": "Hà Nội, TP.HCM & Đà Nẵng",
+        "desc": "Website là case study mẫu mực về xây dựng Landing Page chuyển đổi cao cho ngành du học Mỹ: Đánh thẳng vào thông điệp 'Học bổng du học Mỹ tới 100%', form đăng ký phỏng vấn học bổng trực tiếp với đại diện trường đặt nổi bật trên hero banner, danh sách học sinh nhận học bổng cập nhật theo tuần."
+    },
+    {
+        "id": "dhdc11",
+        "name": "Anh Ngữ Du Học ETEST",
+        "short_name": "ETEST Education",
+        "url": "https://etest.edu.vn/",
+        "domain": "etest.edu.vn",
+        "slug": "etest_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Standardized Test Prep & US College Admissions",
+        "category_vn": "Tổ Hợp Luyện Thi Chuẩn Hóa & Chiến Lược Học Bổng Mỹ",
+        "tag": "du-hoc-my",
+        "vibe": "clean-professional",
+        "vibe_name": "Chuyên nghiệp, Rõ ràng & Tối ưu Trải nghiệm Mobile",
+        "location": "TP.HCM & Đà Nẵng",
+        "desc": "ETEST nổi tiếng với mô hình tích hợp: luyện thi chứng chỉ (SAT, ACT, IELTS) đi kèm chiến lược làm đẹp hồ sơ du học Mỹ. Bố cục website sạch sẽ, phân chia lộ trình rõ ràng từ cấp 2, cấp 3 đến Đại học, có form nhận lộ trình cá nhân hóa và nút gọi tư vấn cố định trên điện thoại."
+    },
+    {
+        "id": "dhdc12",
+        "name": "Summit Education Services",
+        "short_name": "Summit Education",
+        "url": "https://summit.edu.vn/",
+        "domain": "summit.edu.vn",
+        "slug": "summit_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Top US College Application Consulting",
+        "category_vn": "Tổ Chức Tư Vấn Du Học & Luyện Thi Đỉnh Cao Top US",
+        "tag": "du-hoc-my",
+        "vibe": "intellectual-academic",
+        "vibe_name": "Trí tuệ, Học thuật & Uy tín Lâu năm",
+        "location": "Hà Nội & TP.HCM",
+        "desc": "Tổ chức tư vấn du học và luyện thi học thuật có bề dày thành tích nộp đơn vào các trường đại học Mỹ danh tiếng nhất (Harvard, MIT, Princeton, Columbia). Website xây dựng niềm tin nhờ bảng vàng thành tích khổng lồ, hồ sơ năng lực của đội ngũ cố vấn tốt nghiệp đại học Mỹ, tạo độ tin cậy tuyệt đối khi chạy từ khóa thương hiệu và từ khóa top đầu."
+    },
+    {
+        "id": "dhdc13",
+        "name": "Du Học Á - Âu",
+        "short_name": "Du Học Á - Âu",
+        "url": "https://duhocaau.vn/",
+        "domain": "duhocaau.vn",
+        "slug": "duhocaau_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Pioneer Study Abroad Consultancy Vietnam",
+        "category_vn": "Công Ty Tư Vấn Du Học Tiên Phong Hơn 25 Năm Kinh Nghiệm",
+        "tag": "du-hoc-my",
+        "vibe": "trust-established",
+        "vibe_name": "Thâm niên 25 năm & Đảm bảo Giấy phép Bộ GD&ĐT",
+        "location": "TP.HCM & Toàn quốc",
+        "desc": "Một trong những công ty tư vấn du học đầu tiên và lâu năm nhất Việt Nam (thành lập 1999). Dù giao diện mang phong cách truyền thống nhưng lại có tỷ lệ chuyển đổi cực kỳ ổn định với các bậc phụ huynh lớn tuổi: nhấn mạnh giấy phép hoạt động hợp pháp, chuẩn ISO 9001:2008, và cam kết minh bạch chi phí trọn gói."
+    },
+    {
+        "id": "dhdc14",
+        "name": "Du Học VNPC",
+        "short_name": "VNPC",
+        "url": "https://vnpc.vn/",
+        "domain": "vnpc.vn",
+        "slug": "vnpc_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Multi-Destination Study Abroad Agency",
+        "category_vn": "Tập Đoàn Tư Vấn Du Học Đa Quốc Gia & Hỗ Trợ Visa F-1",
+        "tag": "du-hoc-my",
+        "vibe": "friendly-accessible",
+        "vibe_name": "Thân thiện, Năng động & Đa dạng Ngành học",
+        "location": "Hà Nội, TP.HCM & Hải Phòng",
+        "desc": "Tổ chức tư vấn du học uy tín với hơn 18 năm đồng hành cùng học sinh Việt Nam. Website chuyển đổi tốt nhờ tích hợp công cụ tìm kiếm trường học theo mức học phí và bang tại Mỹ, các bài viết cẩm nang hướng dẫn chứng minh tài chính và luyện phỏng vấn visa F-1 tỷ lệ đậu cao."
+    },
+    {
+        "id": "dhdc15",
+        "name": "Du Học BlueSea",
+        "short_name": "BlueSea Education",
+        "url": "https://duhocbluesea.edu.vn/",
+        "domain": "duhocbluesea.edu.vn",
+        "slug": "duhocbluesea_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "US Visa & Scholarship Practical Consultant",
+        "category_vn": "Tư Vấn Du Học Mỹ Thực Chiến & Chuyên Gia Giải Quyết Visa F-1",
+        "tag": "du-hoc-my",
+        "vibe": "direct-leadgen",
+        "vibe_name": "Tối ưu LeadGen & Đón đầu Tìm kiếm Google Ads",
+        "location": "Hà Nội, TP.HCM, Đà Nẵng, Cần Thơ & Hải Phòng",
+        "desc": "Đơn vị vận hành các chiến dịch quảng cáo Google Ads và SEO rất mạnh mẽ tại thị trường Việt Nam. Website được bố trí chuẩn SEO và CRO: hệ thống văn phòng phủ khắp các thành phố lớn, form liên hệ nhanh nhận cẩm nang du học Mỹ, giải đáp cặn kẽ các vấn đề rớt visa trước đó được xử lý lại thành công."
+    },
+    {
+        "id": "dhdc16",
+        "name": "Du Học New Ocean",
+        "short_name": "New Ocean",
+        "url": "https://newocean.edu.vn/",
+        "domain": "newocean.edu.vn",
+        "slug": "newocean_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Comprehensive Study Abroad & Career Orientation",
+        "category_vn": "Tư Vấn Du Học Toàn Diện & Định Hướng Nghề Nghiệp Mỹ",
+        "tag": "du-hoc-my",
+        "vibe": "modern-educational",
+        "vibe_name": "Trẻ trung, Hiện đại & Minh bạch Thông tin",
+        "location": "Hà Nội, TP.HCM & Hải Dương",
+        "desc": "Trung tâm tư vấn du học với gần 20 năm kinh nghiệm. Bố cục website sắp xếp khoa học, các chương trình du học Mỹ được phân loại rõ theo bậc học (Trung học, Cao đẳng cộng đồng, Đại học, Sau đại học), có bảng chi phí dự toán chi tiết giúp người truy cập nhanh chóng hình dung ngân sách và kích thích gửi form tư vấn."
+    },
+
+    # =========================================================================
+    # NHÓM 3: TỔ HỢP TƯ VẤN DU HỌC LIÊN THÔNG ĐỊNH CƯ & VISA MỸ THỰC CHIẾN
+    # =========================================================================
+    {
+        "id": "dhdc17",
+        "name": "New World Education",
+        "short_name": "New World",
+        "url": "https://newworldedu.vn/",
+        "domain": "newworldedu.vn",
+        "slug": "newworldedu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Study Abroad & Pathway to Permanent Residency",
+        "category_vn": "Tư Vấn Du Học & Lộ Trình Chuyển Đổi Định Cư Tay Nghề",
+        "tag": "du-hoc-dinh-cu",
+        "vibe": "practical-career",
+        "vibe_name": "Thực tế, Hướng nghiệp & Lộ trình Thẻ xanh",
+        "location": "TP.HCM & Đồng Nai",
+        "desc": "Đơn vị có thế mạnh vượt trội trong việc tư vấn lộ trình kép: Du học Mỹ kết hợp định hướng định cư (chọn ngành STEM để được ở lại làm việc 3 năm diện OPT, hỗ trợ xin thẻ xanh việc làm EB-2/EB-3). Đây là thông điệp chuyển đổi cực kỳ hấp dẫn phụ huynh và sinh viên tìm kiếm cơ hội ở lại Mỹ sau tốt nghiệp."
+    },
+    {
+        "id": "dhdc18",
+        "name": "Du Học GSE",
+        "short_name": "GSE Education",
+        "url": "https://gse.edu.vn/",
+        "domain": "gse.edu.vn",
+        "slug": "gse_edu_vn",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Global Study & Scholarship Events Platform",
+        "category_vn": "Nền Tảng Tư Vấn Giáo Dục & Sự Kiện Du Học Quốc Tế",
+        "tag": "du-hoc-my",
+        "vibe": "event-marketing",
+        "vibe_name": "Tiếp thị Sự kiện, Năng động & Chuẩn Quốc tế",
+        "location": "Hà Nội & TP.HCM",
+        "desc": "GSE sở hữu mô hình chuyển đổi dựa trên sự kiện (Event-driven Conversion): Đẩy mạnh đăng ký tham dự Ngày hội Du học Mỹ và phỏng vấn học bổng trực tiếp với đại diện trường. Landing page sự kiện của GSE được thiết kế đồng bộ với chiến dịch quảng cáo tìm kiếm và mạng hiển thị của Google."
+    },
+    {
+        "id": "dhdc19",
+        "name": "Vietint Education",
+        "short_name": "Vietint",
+        "url": "https://vietint.net/",
+        "domain": "vietint.net",
+        "slug": "vietint_net",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Premier Study Abroad & Career Pathway Agency",
+        "category_vn": "Tổ Chức Tư Vấn Du Học & Định Hướng Nghề Nghiệp Quốc Tế",
+        "tag": "du-hoc-my",
+        "vibe": "warm-professional",
+        "vibe_name": "Tận tâm, Chuyên nghiệp & Tỷ lệ Visa Cao",
+        "location": "Hà Nội, TP.HCM & Đà Nẵng",
+        "desc": "Tổ chức du học với gần 20 năm phát triển, được sáng lập bởi các cựu du học sinh. Website tập trung vào tư vấn ngành nghề khát nhân lực tại Mỹ, các suất học bổng bán phần và toàn phần, cùng tỷ lệ thành công visa lên tới 99%, mang lại sự an tâm tuyệt đối cho các lượt nhấp chuột từ Google Ads."
+    },
+    {
+        "id": "dhdc20",
+        "name": "Du Học Toàn Cầu ASCI",
+        "short_name": "Du Học Toàn Cầu (ASCI)",
+        "url": "https://duhoctoancau.com/",
+        "domain": "duhoctoancau.com",
+        "slug": "duhoctoancau_com",
+        "industry": "du-hoc-dinh-cu-my",
+        "industry_name": "Du Học & Định Cư Mỹ",
+        "category": "Dedicated Study Abroad Advisory & Fast Lead Capture",
+        "category_vn": "Đơn Vị Tư Vấn Du Học Chuyên Nghiệp & Thu Thập Lead Nhanh",
+        "tag": "du-hoc-my",
+        "vibe": "high-converting-portal",
+        "vibe_name": "Cổng Thông tin Chuyển đổi Nhanh & Rõ ràng",
+        "location": "Hà Nội & TP.HCM",
+        "desc": "Duhoctoancau.com tiên phong áp dụng văn hóa 'Tư vấn tận tâm - Cam kết minh bạch'. Website có form 'Khảo sát cơ hội du học & học bổng Mỹ trong 30 giây', thiết kế chia tách rõ theo từng nhóm nhu cầu (du học hè, THPT nội trú, Đại học công lập) giúp phân loại lead chuẩn xác ngay từ khâu tiếp nhận."
+    }
+]
+
+print(f"=== BẮT ĐẦU CHỤP VÀ NÉN ẢNH CHO {len(websites)} WEBSITE DU HỌC & ĐỊNH CƯ MỸ ===")
+
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=True)
+    
+    for idx, site in enumerate(websites, 1):
+        print(f"\n[{idx:02d}/{len(websites)}] Đang xử lý: {site['name']} ({site['url']})...")
+        
+        raw_png = os.path.join(output_dir, f"{site['domain']}.png")
+        full_webp = os.path.join(kho_webp_dir, f"{site['slug']}_full.webp")
+        thumb_webp = os.path.join(kho_webp_dir, f"{site['slug']}_thumb.webp")
+        fb_png = os.path.join(kho_webp_dir, f"{site['slug']}_fb.png")
+        
+        # Kiểm tra nếu đã có ảnh đầy đủ và đạt chuẩn thì có thể tái sử dụng
+        if os.path.exists(full_webp) and os.path.exists(thumb_webp) and os.path.exists(fb_png):
+            valid, msg = verify_captured_image(full_webp)
+            if valid:
+                print(f"  -> Đã có ảnh đạt chuẩn: {full_webp} ({msg}). Bỏ qua chụp lại.")
+                continue
+        
+        page = browser.new_page(viewport={"width": 1440, "height": 900})
+        
+        try:
+            # Điều hướng với timeout 25s
+            page.goto(site['url'], timeout=25000, wait_until="domcontentloaded")
+            time.sleep(1.0)
+            
+            # Chụp clean không viền thừa bằng capture_smart_clean
+            capture_smart_clean(page, raw_png, viewport_height=900, scroll_delay=0.15)
+            
+            if not os.path.exists(raw_png) or os.path.getsize(raw_png) == 0:
+                print(f"  [-] Lỗi: Không thể chụp ảnh cho {site['domain']}")
+                continue
+                
+            # Nén 3 tầng WebP
+            thumb_name, full_name, fb_name, thumb_kb, full_kb, fb_kb = compress_tri_layer(raw_png, site['slug'], kho_webp_dir)
+            
+            # Cổng tự động kiểm định chất lượng (Post-Capture QA)
+            valid, msg = verify_captured_image(full_webp)
+            print(f"  [+] QA Audit {site['domain']}: {'PASS' if valid else 'FAIL'} - {msg}")
+            
+            if not valid:
+                print(f"  [!] Cảnh báo: Tự động chụp lại với độ trễ cao hơn...")
+                time.sleep(2.0)
+                capture_smart_clean(page, raw_png, viewport_height=900, scroll_delay=0.25)
+                compress_tri_layer(raw_png, site['slug'], kho_webp_dir)
+                valid2, msg2 = verify_captured_image(full_webp)
+                print(f"  [+] QA Audit Vòng 2 {site['domain']}: {'PASS' if valid2 else 'FAIL'} - {msg2}")
+                
+        except Exception as e:
+            print(f"  [-] Lỗi trong quá trình chụp {site['domain']}: {e}")
+        finally:
+            page.close()
+            
+    browser.close()
+
+# Lưu metadata JSON
+with open(metadata_file, "w", encoding="utf-8") as f:
+    json.dump(websites, f, ensure_ascii=False, indent=2)
+
+print(f"\n[+] Đã lưu {len(websites)} metadata website vào: {metadata_file}")
+print("[+] Hoàn tất toàn bộ quy trình chụp và nén ảnh!")

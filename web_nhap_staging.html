@@ -607,7 +607,7 @@
     .lightbox-body.mode-full .lightbox-img-wrapper {
       max-width: 1360px;
       width: 100%;
-      margin: 0 auto;
+      margin: 0 auto 80px auto;
     }
     .lightbox-body.mode-full .lightbox-img-wrapper img {
       width: 100%;
@@ -618,7 +618,8 @@
 
     .lightbox-body.mode-custom .lightbox-img-wrapper {
       max-width: none;
-      margin: 0 auto;
+      margin: 0 auto 80px auto;
+      transition: width 0.08s ease-out;
     }
     .lightbox-body.mode-custom .lightbox-img-wrapper img {
       width: 100%;
@@ -2755,11 +2756,14 @@
 
   // LIGHTBOX MODAL
   let currentLbIndex = 0;
+  // Thang đo zoom chuẩn xác: 100 - 85 - 70 - 55 - 40 - 25 - 10%
+  const ZOOM_LEVELS = [10, 25, 40, 55, 70, 85, 100];
   let currentLbMode = 'fit';
+  let currentZoomPct = 100;
   let currentCustomWidth = 1360;
   const BASE_FULL_WIDTH = 1360;
 
-  function setLightboxMode(mode) {
+  function setLightboxMode(mode, targetPct) {
     const lbBody = document.getElementById('lbBody');
     const wrapper = document.getElementById('lbImgWrapper');
     const levelText = document.getElementById('lbZoomLevel');
@@ -2771,6 +2775,8 @@
     lbBody.className = `lightbox-body mode-${mode}`;
 
     if (mode === 'fit') {
+      currentZoomPct = 100;
+      currentCustomWidth = BASE_FULL_WIDTH;
       wrapper.style.width = '';
       wrapper.style.maxWidth = '';
       if (levelText) levelText.textContent = 'Fit 100%';
@@ -2779,6 +2785,7 @@
       lbBody.scrollTop = 0;
       lbBody.scrollLeft = 0;
     } else if (mode === 'full') {
+      currentZoomPct = 100;
       currentCustomWidth = BASE_FULL_WIDTH;
       wrapper.style.width = '100%';
       wrapper.style.maxWidth = '1360px';
@@ -2786,12 +2793,18 @@
       if (fitBtn) fitBtn.classList.remove('active');
       if (fullBtn) fullBtn.classList.add('active');
     } else if (mode === 'custom') {
+      if (targetPct !== undefined) {
+        currentZoomPct = targetPct;
+      }
+      currentCustomWidth = Math.round(BASE_FULL_WIDTH * (currentZoomPct / 100));
       wrapper.style.maxWidth = 'none';
       wrapper.style.width = `${currentCustomWidth}px`;
-      const pct = Math.round((currentCustomWidth / BASE_FULL_WIDTH) * 100);
-      if (levelText) levelText.textContent = `${pct}%`;
+      if (levelText) levelText.textContent = `${currentZoomPct}%`;
       if (fitBtn) fitBtn.classList.remove('active');
-      if (fullBtn) fullBtn.classList.remove('active');
+      if (fullBtn) {
+        if (currentZoomPct === 100) fullBtn.classList.add('active');
+        else fullBtn.classList.remove('active');
+      }
     }
   }
 
@@ -2807,18 +2820,48 @@
   }
 
   function zoomStep(delta) {
+    let currentIndex;
     if (currentLbMode === 'fit') {
-      currentCustomWidth = BASE_FULL_WIDTH;
+      // Khi đang ở chế độ Fit (hiển thị Fit 100%):
+      // - Nếu bấm [-]: bắt đầu thu nhỏ từ 100% xuống bậc 85%
+      // - Nếu bấm [+]: mở Full Size 100% chi tiết
+      if (delta < 0) {
+        setLightboxMode('custom', 85);
+        return;
+      } else {
+        setLightboxMode('full');
+        return;
+      }
+    } else if (currentLbMode === 'full') {
+      currentIndex = ZOOM_LEVELS.indexOf(100);
+    } else {
+      currentIndex = ZOOM_LEVELS.indexOf(currentZoomPct);
+      if (currentIndex === -1) {
+        if (delta > 0) {
+          currentIndex = ZOOM_LEVELS.findIndex(lvl => lvl > currentZoomPct);
+          if (currentIndex === -1) currentIndex = ZOOM_LEVELS.length - 1;
+        } else {
+          for (let i = ZOOM_LEVELS.length - 1; i >= 0; i--) {
+            if (ZOOM_LEVELS[i] < currentZoomPct) {
+              currentIndex = i;
+              break;
+            }
+          }
+          if (currentIndex === -1) currentIndex = 0;
+        }
+      }
     }
-    const step = 200;
-    let newWidth = currentCustomWidth + (delta * step);
-    if (newWidth < 450) {
-      setLightboxMode('fit');
+
+    let newIndex = currentIndex + delta;
+    if (newIndex < 0) {
+      newIndex = 0; // Chặn ở mức tối thiểu 10%
+    }
+    if (newIndex >= ZOOM_LEVELS.length - 1) {
+      setLightboxMode('full');
       return;
     }
-    if (newWidth > 3600) newWidth = 3600;
-    currentCustomWidth = newWidth;
-    setLightboxMode('custom');
+
+    setLightboxMode('custom', ZOOM_LEVELS[newIndex]);
   }
 
   function openLightbox(id) {

@@ -789,7 +789,10 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">120</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">121</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="ban-may-anh" onclick="filterStagingTopic('ban-may-anh')">
+        <span>📷</span> Máy Chụp Ảnh <span class="tab-badge" id="badgeMayAnh">1</span>
       </button>
       <button class="staging-tab-btn active" data-industry="mua-ban-oto-cu" onclick="filterStagingTopic('mua-ban-oto-cu')">
         <span>🚗</span> Mua Bán Xe Ô Tô Cũ <span class="tab-badge" id="badgeOtoCu">20</span>
@@ -904,7 +907,7 @@ template = """<!DOCTYPE html>
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const indParam = params.get('industry') || params.get('topic');
-    if (indParam && ['all', 'mua-ban-oto-cu', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
+    if (indParam && ['all', 'ban-may-anh', 'mua-ban-oto-cu', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
       currentTopic = indParam;
     }
   }
@@ -992,6 +995,7 @@ template = """<!DOCTYPE html>
     // Cập nhật thống kê
     const topicMapName = {
       'all': 'Tất Cả Nháp Chờ Duyệt',
+      'ban-may-anh': 'Máy Chụp Ảnh & Thiết Bị Nhiếp Ảnh (Google Ads & CRO)',
       'du-hoc-dinh-cu-my': 'Du Học & Định Cư Mỹ (Google Ads & CRO)',
       'phong-tap-fitness': 'Phòng Tập Fitness & Gym',
       'ban-dong-ho': 'Bán Đồng Hồ Chính Hãng & Xa Xỉ',

@@ -776,9 +776,12 @@
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">100</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">120</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="du-hoc-dinh-cu-my" onclick="filterStagingTopic('du-hoc-dinh-cu-my')">
+      <button class="staging-tab-btn active" data-industry="mua-ban-oto-cu" onclick="filterStagingTopic('mua-ban-oto-cu')">
+        <span>🚗</span> Mua Bán Xe Ô Tô Cũ <span class="tab-badge" id="badgeOtoCu">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="du-hoc-dinh-cu-my" onclick="filterStagingTopic('du-hoc-dinh-cu-my')">
         <span>🎓</span> Du Học & Định Cư Mỹ <span class="tab-badge" id="badgeDuHocDinhCu">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="phong-tap-fitness" onclick="filterStagingTopic('phong-tap-fitness')">
@@ -799,7 +802,7 @@
   <!-- COUNTER STRIP -->
   <div class="counter-strip">
     <div class="counter-text">
-      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Du Học & Định Cư Mỹ (Google Ads & CRO)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
+      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Mua Bán Xe Ô Tô Cũ (Google Ads & CRO)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
     </div>
     <div class="topic-guide-pill">
       💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
@@ -872,6 +875,286 @@
 <script>
   // TỔNG HỢP CÁC CHỦ ĐỀ CHỜ DUYỆT (60 MẪU)
   const CANDIDATES = [
+  {
+    "id": "otocu01",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Carpla",
+    "short_name": "Carpla",
+    "url": "https://carpla.vn/",
+    "domain": "carpla.vn",
+    "vibe": "Hiện đại, Đa năng & Công nghệ",
+    "location": "Toàn quốc (Hà Nội, TP.HCM, Đà Nẵng)",
+    "thumb": "Kho_Anh_Webp/carpla_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/carpla_vn_full.webp",
+    "desc": "Hệ sinh thái dịch vụ ô tô toàn diện của Tasco Auto với mạng lưới Automall quy mô lớn. Tích hợp bộ lọc tìm xe 360 độ, kiểm định 160 chi tiết chuẩn hãng, chính sách bảo hành 1 năm và định giá xe tự động."
+  },
+  {
+    "id": "otocu02",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Vucar",
+    "short_name": "Vucar",
+    "url": "https://vucar.vn/",
+    "domain": "vucar.vn",
+    "vibe": "Tinh gọn, Trực diện & Đậm chất Fintech",
+    "location": "Toàn quốc (TP.HCM & Hà Nội)",
+    "thumb": "Kho_Anh_Webp/vucar_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/vucar_vn_full.webp",
+    "desc": "Nền tảng bán ô tô cũ C2B tiên phong áp dụng đấu giá minh bạch: người bán nhận hàng chục báo giá cạnh tranh từ mạng lưới salon uy tín trong 24h. Giao diện tối ưu tỷ lệ chuyển đổi với form định giá xe nhanh chỉ trong 3 bước."
+  },
+  {
+    "id": "otocu03",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Chợ Tốt Xe",
+    "short_name": "Chợ Tốt Xe",
+    "url": "https://xe.chotot.com/",
+    "domain": "xe.chotot.com",
+    "vibe": "Năng động, Thân thiện & Lưu lượng khổng lồ",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/xe_chotot_com_thumb.webp",
+    "full": "Kho_Anh_Webp/xe_chotot_com_full.webp",
+    "desc": "Nền tảng mua bán xe cũ có lưu lượng truy cập lớn nhất Việt Nam. Giao diện tối ưu trải nghiệm người dùng với huy hiệu 'Xe Đã Kiểm Định', tính năng bảo vệ người mua, bộ lọc vị trí địa lý thông minh và hệ thống chat trực tiếp giữa người mua và người bán."
+  },
+  {
+    "id": "otocu04",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Oto.com.vn",
+    "short_name": "Oto.com.vn",
+    "url": "https://oto.com.vn/",
+    "domain": "oto.com.vn",
+    "vibe": "Báo chí Chuyên sâu & Sàn giao dịch",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/oto_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/oto_com_vn_full.webp",
+    "desc": "Cổng thông tin ô tô hàng đầu Việt Nam thuộc hệ sinh thái Đại Việt Group. Kết hợp hoàn hảo giữa các bài viết đánh giá xe chuyên sâu, bảng giá niêm yết cập nhật theo ngày và sàn mua bán xe cũ với hàng vạn tin rao đã xác thực."
+  },
+  {
+    "id": "otocu05",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Bonbanh.com",
+    "short_name": "Bonbanh",
+    "url": "https://www.bonbanh.com/",
+    "domain": "bonbanh.com",
+    "vibe": "Tinh gọn, Tốc độ cao & Mật độ thông tin tối đa",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/bonbanh_com_thumb.webp",
+    "full": "Kho_Anh_Webp/bonbanh_com_full.webp",
+    "desc": "Website mua bán ô tô kỳ cựu hoạt động từ 2006, là 'trạm giao dịch' của hầu hết các salon xe cũ trên cả nước. Tốc độ tải trang cực nhanh, bộ lọc xe chi tiết đến từng biến thể và năm sản xuất giúp người mua tra cứu tức thì."
+  },
+  {
+    "id": "otocu06",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Carmudi Việt Nam",
+    "short_name": "Carmudi",
+    "url": "https://www.carmudi.vn/",
+    "domain": "carmudi.vn",
+    "vibe": "Sạch sẽ, Hiện đại & Trực quan",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/carmudi_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/carmudi_vn_full.webp",
+    "desc": "Nền tảng giao dịch xe hơi với công cụ tìm kiếm và đối chiếu thông số xe trực quan. Tích hợp tính năng ước tính chi phí lăn bánh, tính toán lãi suất vay mua xe trả góp và hỗ trợ người dùng kết nối nhanh với người bán xe cũ uy tín."
+  },
+  {
+    "id": "otocu07",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Toyota Sure Việt Nam",
+    "short_name": "Toyota Sure",
+    "url": "https://toyotasure.vn/",
+    "domain": "toyotasure.vn",
+    "vibe": "Uy tín Chính hãng & Tiêu chuẩn Quốc tế",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/toyotasure_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/toyotasure_vn_full.webp",
+    "desc": "Thương hiệu xe cũ chính hãng uy tín nhất thị trường ô tô Việt Nam. Quy trình kiểm định độc quyền 176 hạng mục kỹ thuật bởi chuyên gia Toyota, cấp chứng chỉ chất lượng chính hãng, bảo hành động cơ hộp số 1 năm/20.000km và cam kết không đâm đụng, thủy kích."
+  },
+  {
+    "id": "otocu08",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Bến Thành Ford",
+    "short_name": "Bến Thành Ford",
+    "url": "https://benthanhford.com.vn/",
+    "domain": "benthanhford.com.vn",
+    "vibe": "Mạnh mẽ, Đẳng cấp & Chuẩn mực Ford toàn cầu",
+    "location": "TP.HCM & Miền Nam",
+    "thumb": "Kho_Anh_Webp/benthanhford_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/benthanhford_com_vn_full.webp",
+    "desc": "Đại lý Ford Signature quy mô lớn tại TP.HCM với trung tâm xe đã qua sử dụng Ford Assured. Bố cục chuyên nghiệp thể hiện rõ quy trình thu cũ đổi mới, hỗ trợ sang tên trọn gói và bảo hành chính hãng cho các dòng Ranger, Everest, Explorer lướt."
+  },
+  {
+    "id": "otocu09",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Sài Gòn Ford",
+    "short_name": "Sài Gòn Ford",
+    "url": "https://saigonford.com.vn/",
+    "domain": "saigonford.com.vn",
+    "vibe": "Uy tín Lâu năm & Minh bạch",
+    "location": "TP.HCM",
+    "thumb": "Kho_Anh_Webp/saigonford_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/saigonford_com_vn_full.webp",
+    "desc": "Đại lý Ford đầu tiên và lớn nhất khu vực phía Nam với dịch vụ xe đã qua sử dụng chính hãng. Website thiết kế chỉn chu với khu vực duyệt xe cũ chi tiết, kiểm tra lịch sử bảo dưỡng và cam kết bảo hành như xe mới."
+  },
+  {
+    "id": "otocu10",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Hà Nội Car",
+    "short_name": "Hà Nội Car",
+    "url": "https://hanoicars.vn/",
+    "domain": "hanoicars.vn",
+    "vibe": "Sang trọng, Đẳng cấp & Tinh tế",
+    "location": "Hà Nội (Cầu Giấy & Mỹ Đình)",
+    "thumb": "Kho_Anh_Webp/hanoicars_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/hanoicars_vn_full.webp",
+    "desc": "Đơn vị dẫn đầu phân khúc xe sang lướt tại thủ đô, đặc biệt nổi tiếng với bộ sưu tập Lexus, Mercedes-Benz, Land Rover và BMW đời cao. Bố cục website toát lên vẻ thượng lưu với hình ảnh xe sắc nét 4K, video review thực tế và cam kết check test tại hãng."
+  },
+  {
+    "id": "otocu11",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Thế Giới Xe Đức",
+    "short_name": "Thế Giới Xe Đức",
+    "url": "https://thegioixeduc.vn/",
+    "domain": "thegioixeduc.vn",
+    "vibe": "Tối giản, Đẳng cấp & Kỹ thuật Đức",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/thegioixeduc_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/thegioixeduc_vn_full.webp",
+    "desc": "Showroom chuyên sâu 100% các dòng xe châu Âu và xe Đức lướt cao cấp. Website tập trung làm nổi bật chất lượng xe nguyên bản, cam kết không tua công tơ mét, bảo hành khoang máy và hỗ trợ kiểm tra xe tại garage chuyên nghiệp."
+  },
+  {
+    "id": "otocu12",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Auto 568",
+    "short_name": "Auto 568",
+    "url": "https://auto568.com/",
+    "domain": "auto568.com",
+    "vibe": "Mạnh mẽ, Khác biệt & Thượng lưu",
+    "location": "Hà Nội & Toàn quốc",
+    "thumb": "Kho_Anh_Webp/auto568_com_thumb.webp",
+    "full": "Kho_Anh_Webp/auto568_com_full.webp",
+    "desc": "Salon chuyên nhập khẩu và phân phối xe siêu sang, xe cơ bắp Mỹ và SUV cỡ lớn (Cadillac Escalade, Lincoln Navigator, Rolls-Royce, Bentley, Maybach). Thiết kế website mang phong cách tinh tế, làm nổi bật các phiên bản xe độc bản hiếm có trên thị trường."
+  },
+  {
+    "id": "otocu13",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Sơn Tùng Auto",
+    "short_name": "Sơn Tùng Auto",
+    "url": "https://sontungauto.vn/",
+    "domain": "sontungauto.vn",
+    "vibe": "Danh giá, Đẳng cấp & Uy tín lâu đời",
+    "location": "Hà Nội (Mỹ Đình)",
+    "thumb": "Kho_Anh_Webp/sontungauto_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/sontungauto_vn_full.webp",
+    "desc": "Một trong những salon xe hơi hạng sang có quy mô và tiếng tăm lớn nhất miền Bắc. Nơi quy tụ những mẫu xe lướt triệu đô từ Porsche, Mercedes-Maybach, Bentley đến Range Rover với chính sách bảo hành, bảo dưỡng hậu mãi chuẩn 5 sao."
+  },
+  {
+    "id": "otocu14",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Thái Công Auto",
+    "short_name": "Thái Công Auto",
+    "url": "https://thaicongauto.com/",
+    "domain": "thaicongauto.com",
+    "vibe": "Thể thao, Trẻ trung & Sang trọng",
+    "location": "Hà Nội & TP.HCM",
+    "thumb": "Kho_Anh_Webp/thaicongauto_com_thumb.webp",
+    "full": "Kho_Anh_Webp/thaicongauto_com_full.webp",
+    "desc": "Hệ thống showroom xe siêu lướt phủ sóng cả hai miền Nam - Bắc. Bố cục website hiện đại, tập trung vào kho hình ảnh trực quan của các dòng xe sedan thể thao, SUV hạng sang và xe sang gia đình lướt chỉ vài ngàn kilomet."
+  },
+  {
+    "id": "otocu15",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Siêu Thị Ô Tô Sài Gòn",
+    "short_name": "Siêu Thị Ô Tô Sài Gòn",
+    "url": "https://sieuthiotosaigon.vn/",
+    "domain": "sieuthiotosaigon.vn",
+    "vibe": "Trực diện, Đa dạng & Tối ưu chuyển đổi",
+    "location": "TP.HCM (Thủ Đức & Tân Bình)",
+    "thumb": "Kho_Anh_Webp/sieuthiotosaigon_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/sieuthiotosaigon_vn_full.webp",
+    "desc": "Siêu thị ô tô cũ lớn tại khu vực phía Nam với kho xe hàng trăm chiếc phong phú các phân khúc sedan, SUV 7 chỗ và bán tải. Giao diện trực diện với bảng thông tin chi tiết về đời xe, giá bán, bảo hiểm và chính sách trả góp ngân hàng lãi suất ưu đãi."
+  },
+  {
+    "id": "otocu16",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Chợ Ô Tô Số 1 Hà Nội",
+    "short_name": "Chợ Ô Tô Số 1 Hà Nội",
+    "url": "https://chootoso1hanoi.com/",
+    "domain": "chootoso1hanoi.com",
+    "vibe": "Thân thuộc, Thực tế & Đa dạng phân khúc",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/chootoso1hanoi_com_thumb.webp",
+    "full": "Kho_Anh_Webp/chootoso1hanoi_com_full.webp",
+    "desc": "Điểm đến mua bán xe cũ quen thuộc của người dân thủ đô trong nhiều năm. Website cung cấp đầy đủ thông tin về các dòng xe phổ thông giá tốt từ Hyundai, Kia, Toyota, Honda với cam kết pháp lý minh bạch và sang tên trong ngày."
+  },
+  {
+    "id": "otocu17",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Ô Tô Toàn Trung",
+    "short_name": "Ô Tô Toàn Trung",
+    "url": "https://xeluottoantrung.com/",
+    "domain": "xeluottoantrung.com",
+    "vibe": "Trực quan, Rõ ràng & Dịch vụ tận tâm",
+    "location": "TP.HCM & Gia Lai",
+    "thumb": "Kho_Anh_Webp/xeluottoantrung_com_thumb.webp",
+    "full": "Kho_Anh_Webp/xeluottoantrung_com_full.webp",
+    "desc": "Chuỗi showroom xe lướt uy tín được cộng đồng người yêu xe miền Nam và Tây Nguyên đánh giá cao. Bố cục website thân thiện với người dùng di động, cập nhật hình ảnh xe mới về liên tục và hỗ trợ xem xe, giao xe tận nhà."
+  },
+  {
+    "id": "otocu18",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Siêu Thị Ô Tô Lướt",
+    "short_name": "Siêu Thị Ô Tô Lướt",
+    "url": "https://sieuthiotoluot.vn/",
+    "domain": "sieuthiotoluot.vn",
+    "vibe": "Chuyên nghiệp, Kết nối & Minh bạch",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/sieuthiotoluot_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/sieuthiotoluot_vn_full.webp",
+    "desc": "Nền tảng chuyên tập hợp và kiểm định các dòng xe ô tô lướt từ các showroom đối tác uy tín trên toàn quốc. Giao diện hiển thị trực quan thông số ODO, năm đăng ký và chính sách bảo hành riêng biệt cho từng chiếc xe."
+  },
+  {
+    "id": "otocu19",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "Caraz Auto",
+    "short_name": "Caraz Auto",
+    "url": "https://caraz.vn/",
+    "domain": "caraz.vn",
+    "vibe": "Hiện đại, Minh bạch & Đề cao Uy tín",
+    "location": "Hà Nội (Cầu Giấy)",
+    "thumb": "Kho_Anh_Webp/caraz_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/caraz_vn_full.webp",
+    "desc": "Thương hiệu salon xe lướt trẻ trung được xây dựng trên triết lý 'An tâm tìm xế tốt'. Nổi bật với dịch vụ kiểm tra xe đa chiều, video quay cận cảnh từng vết xước và giấy cam kết hoàn tiền 100% nếu phát hiện lỗi khung gầm hay tua ODO."
+  },
+  {
+    "id": "otocu20",
+    "industry": "mua-ban-oto-cu",
+    "industry_name": "Mua Bán Xe Ô Tô Cũ",
+    "name": "WinAuto",
+    "short_name": "WinAuto",
+    "url": "https://winauto.vn/",
+    "domain": "winauto.vn",
+    "vibe": "Năng động, Chi tiết & Hữu ích",
+    "location": "Toàn quốc (TP.HCM & Hà Nội)",
+    "thumb": "Kho_Anh_Webp/winauto_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/winauto_vn_full.webp",
+    "desc": "Kênh thông tin và mua bán ô tô trực tuyến với giao diện tối ưu trải nghiệm đọc và tìm xe. Hệ thống tổng hợp đầy đủ các dòng xe cũ đang mở bán, phân tích ưu nhược điểm từng đời xe và cung cấp bảng dự toán chi phí lăn bánh chính xác."
+  },
   {
     "id": "dhdc01",
     "industry": "du-hoc-dinh-cu-my",
@@ -2284,12 +2567,12 @@
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'du-hoc-dinh-cu-my';
+  let currentTopic = 'mua-ban-oto-cu';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
     const indParam = params.get('industry') || params.get('topic');
-    if (indParam && ['all', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
+    if (indParam && ['all', 'mua-ban-oto-cu', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
       currentTopic = indParam;
     }
   }
@@ -2390,6 +2673,7 @@
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeOtoCu')) document.getElementById('badgeOtoCu').textContent = CANDIDATES.filter(c => c.industry === 'mua-ban-oto-cu').length;
     if (document.getElementById('badgeDuHocDinhCu')) document.getElementById('badgeDuHocDinhCu').textContent = CANDIDATES.filter(c => c.industry === 'du-hoc-dinh-cu-my').length;
     if (document.getElementById('badgeFitness')) document.getElementById('badgeFitness').textContent = CANDIDATES.filter(c => c.industry === 'phong-tap-fitness').length;
     if (document.getElementById('badgeDongHo')) document.getElementById('badgeDongHo').textContent = CANDIDATES.filter(c => c.industry === 'ban-dong-ho').length;

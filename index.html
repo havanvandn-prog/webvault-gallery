@@ -772,8 +772,14 @@
       overflow-y: auto;
       overflow-x: auto;
     }
+    .lightbox-body.mode-full {
+      align-items: flex-start;
+      overflow-y: auto;
+      overflow-x: auto;
+      padding: 16px 20px 90px;
+    }
     .lightbox-body.mode-full .lightbox-img-wrapper {
-      max-width: 1360px;
+      max-width: min(1400px, 96vw);
       width: 100% !important;
       height: auto !important;
       background: #000;
@@ -781,7 +787,7 @@
       border: 1px solid var(--border);
       border-radius: 8px;
       overflow: hidden;
-      margin: 0 auto 80px auto;
+      margin: 0 auto;
       cursor: zoom-out;
     }
     .lightbox-body.mode-full .lightbox-img-wrapper img {
@@ -1243,7 +1249,7 @@
       <button class="btn btn-secondary" onclick="closeLightbox()">Đóng (ESC)</button>
     </div>
   </div>
-  <div class="lightbox-body mode-fit" id="lbBody" onclick="handleLightboxBodyClick(event)">
+  <div class="lightbox-body mode-full" id="lbBody" onclick="handleLightboxBodyClick(event)">
     <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)" title="Nhấp để chuyển đổi giữa Fit toàn bộ giao diện và Phóng to 100%">
       <img id="lbImage" src="" alt="Full website preview">
     </div>
@@ -1251,16 +1257,16 @@
     <!-- THANH ĐIỀU KHIỂN ZOOM NỔI -->
     <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
       <button class="zoom-btn" onclick="zoomStep(-1)" title="Thu nhỏ (Ctrl + Cuộn chuột xuống)">−</button>
-      <span class="zoom-level-text" id="lbZoomLevel">Fit 100%</span>
+      <span class="zoom-level-text" id="lbZoomLevel">100%</span>
       <button class="zoom-btn" onclick="zoomStep(1)" title="Phóng to (Ctrl + Cuộn chuột lên)">+</button>
       <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 2px;"></div>
-      <button class="zoom-pill-mode-btn active" id="btnModeFit" onclick="setLightboxMode('fit')">
-        ⛶ Toàn bộ (Fit)
+      <button class="zoom-pill-mode-btn active" id="btnModeFull" onclick="setLightboxMode('full')">
+        ⛶ Chuẩn Web 100%
       </button>
-      <button class="zoom-pill-mode-btn" id="btnModeFull" onclick="setLightboxMode('full')">
-        100% Chi tiết
+      <button class="zoom-pill-mode-btn" id="btnModeFit" onclick="setLightboxMode('fit')">
+        📄 Toàn bộ (Fit)
       </button>
-      <span class="zoom-hint-text">💡 Ctrl + Cuộn chuột để zoom</span>
+      <span class="zoom-hint-text">💡 Cuộn chuột xem chi tiết • Ctrl + Cuộn để zoom</span>
     </div>
   </div>
 </div>
@@ -2527,24 +2533,26 @@
     currentLbMode = mode;
     lbBody.className = `lightbox-body mode-${mode}`;
 
-    if (mode === 'fit') {
+    if (mode === 'full') {
+      currentZoomPct = 100;
+      currentCustomWidth = BASE_FULL_WIDTH;
+      wrapper.style.width = '100%';
+      wrapper.style.maxWidth = 'min(1400px, 96vw)';
+      if (levelText) levelText.textContent = '100%';
+      if (fitBtn) fitBtn.classList.remove('active');
+      if (fullBtn) fullBtn.classList.add('active');
+      lbBody.scrollTop = 0;
+      lbBody.scrollLeft = 0;
+    } else if (mode === 'fit') {
       currentZoomPct = 100;
       currentCustomWidth = BASE_FULL_WIDTH;
       wrapper.style.width = '';
       wrapper.style.maxWidth = '';
-      if (levelText) levelText.textContent = 'Fit 100%';
+      if (levelText) levelText.textContent = 'Toàn bộ';
       if (fitBtn) fitBtn.classList.add('active');
       if (fullBtn) fullBtn.classList.remove('active');
       lbBody.scrollTop = 0;
       lbBody.scrollLeft = 0;
-    } else if (mode === 'full') {
-      currentZoomPct = 100;
-      currentCustomWidth = BASE_FULL_WIDTH;
-      wrapper.style.width = '100%';
-      wrapper.style.maxWidth = '1360px';
-      if (levelText) levelText.textContent = '100%';
-      if (fitBtn) fitBtn.classList.remove('active');
-      if (fullBtn) fullBtn.classList.add('active');
     } else if (mode === 'custom') {
       if (targetPct !== undefined) {
         currentZoomPct = targetPct;
@@ -2563,13 +2571,13 @@
 
   function handleImageClick(e) {
     e.stopPropagation();
-    // Click vào ảnh: chuyển đổi giữa Fit toàn bộ và Full Size 100%
-    if (currentLbMode === 'fit') {
-      setLightboxMode('full');
-      showToast('🔍 Đã mở Full Size (100%) — Cuộn chuột để xem chi tiết');
-    } else {
+    // Click vào ảnh: chuyển đổi giữa Chuẩn Web 100% và Fit toàn bộ
+    if (currentLbMode === 'full') {
       setLightboxMode('fit');
-      showToast('⛶ Đã thu về Vừa Khung Hình (100% Giao diện)');
+      showToast('📄 Đã thu về xem Toàn bộ (Fit toàn trang)');
+    } else {
+      setLightboxMode('full');
+      showToast('⛶ Đã mở Chuẩn Web 100% — Cuộn chuột để xem chi tiết');
     }
   }
 
@@ -2631,8 +2639,8 @@
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Mặc định luôn mở ở chế độ Fit toàn bộ giao diện 100%
-    setLightboxMode('fit');
+    // Mặc định mở ở chế độ Chuẩn Web 100% (Phóng to fit chiều cao màn đầu tiên, cuộn mượt mà)
+    setLightboxMode('full');
   }
 
   function closeLightbox() {

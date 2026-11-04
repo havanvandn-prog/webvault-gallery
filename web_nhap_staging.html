@@ -615,8 +615,13 @@
       cursor: zoom-in;
     }
 
+    .lightbox-body.mode-full {
+      overflow-y: auto;
+      overflow-x: auto;
+      padding: 16px 20px 90px;
+    }
     .lightbox-body.mode-full .lightbox-img-wrapper {
-      max-width: 1360px;
+      max-width: min(1400px, 96vw);
       width: 100%;
       margin: 0 auto;
     }
@@ -866,7 +871,7 @@
       </div>
     </div>
 
-    <div class="lightbox-body mode-fit" id="lbBody" onclick="handleLightboxBodyClick(event)">
+    <div class="lightbox-body mode-full" id="lbBody" onclick="handleLightboxBodyClick(event)">
       <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)">
         <img id="lbImage" src="" alt="Full preview">
       </div>
@@ -2864,21 +2869,23 @@
     currentLbMode = mode;
     lbBody.className = `lightbox-body mode-${mode}`;
 
-    if (mode === 'fit') {
+    if (mode === 'full') {
+      currentCustomWidth = BASE_FULL_WIDTH;
+      wrapper.style.width = '100%';
+      wrapper.style.maxWidth = 'min(1400px, 96vw)';
+      if (levelText) levelText.textContent = '100%';
+      if (fitBtn) fitBtn.classList.remove('active');
+      if (fullBtn) fullBtn.classList.add('active');
+      lbBody.scrollTop = 0;
+      lbBody.scrollLeft = 0;
+    } else if (mode === 'fit') {
       wrapper.style.width = '';
       wrapper.style.maxWidth = '';
-      if (levelText) levelText.textContent = 'Fit 100%';
+      if (levelText) levelText.textContent = 'Toàn bộ';
       if (fitBtn) fitBtn.classList.add('active');
       if (fullBtn) fullBtn.classList.remove('active');
       lbBody.scrollTop = 0;
       lbBody.scrollLeft = 0;
-    } else if (mode === 'full') {
-      currentCustomWidth = BASE_FULL_WIDTH;
-      wrapper.style.width = '100%';
-      wrapper.style.maxWidth = '1360px';
-      if (levelText) levelText.textContent = '100%';
-      if (fitBtn) fitBtn.classList.remove('active');
-      if (fullBtn) fullBtn.classList.add('active');
     } else if (mode === 'custom') {
       wrapper.style.maxWidth = 'none';
       wrapper.style.width = `${currentCustomWidth}px`;
@@ -2925,7 +2932,7 @@
     const modal = document.getElementById('lightboxModal');
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    setLightboxMode('fit');
+    setLightboxMode('full');
   }
 
   function updateLightboxContent() {

@@ -618,7 +618,7 @@
     .lightbox-body.mode-full {
       overflow-y: auto;
       overflow-x: auto;
-      padding: 16px 20px 90px;
+      padding: 16px 20px 30px;
     }
     .lightbox-body.mode-full .lightbox-img-wrapper {
       max-width: min(1400px, 96vw);
@@ -643,39 +643,44 @@
     }
 
     .lightbox-zoom-bar {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(18, 18, 24, 0.94);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 30px;
-      padding: 6px 14px;
+      padding: 4px 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
-      z-index: 100;
+      gap: 5px;
       font-size: 12px;
       color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
     }
-
+    .zoom-bar-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 3px;
+    }
     .zoom-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #fff;
-      width: 26px;
-      height: 26px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-weight: 700;
+      font-size: 13px;
+      transition: all 0.15s ease;
+      line-height: 1;
     }
     .zoom-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.22);
+      transform: scale(1.08);
     }
 
     .zoom-pill-mode-btn {
@@ -688,25 +693,38 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .zoom-pill-mode-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
     }
     .zoom-pill-mode-btn.active {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(255, 59, 48, 0.35);
     }
 
     .zoom-level-text {
       font-weight: 700;
       color: #4ade80;
-      min-width: 50px;
+      min-width: 44px;
       text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-size: 12px;
     }
 
     .zoom-hint-text {
       font-size: 11px;
       color: var(--text-dim);
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
-      padding-left: 8px;
+      white-space: nowrap;
+      padding-left: 2px;
+    }
+    @media (max-width: 1280px) {
+      .zoom-hint-text, .zoom-hint-divider {
+        display: none !important;
+      }
     }
 
     /* TOAST */
@@ -847,6 +865,23 @@
         <span class="lightbox-badge-id" id="lbIndex">DH01</span>
         <h3 id="lbTitle">Tên Website</h3>
       </div>
+
+      <!-- CỤM ĐIỀU KHIỂN ZOOM TRÊN HEADER -->
+      <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
+        <button class="zoom-btn" onclick="zoomStep(-1)" title="Thu nhỏ (Ctrl + Cuộn chuột xuống)">−</button>
+        <span class="zoom-level-text" id="lbZoomLevel">100%</span>
+        <button class="zoom-btn" onclick="zoomStep(1)" title="Phóng to (Ctrl + Cuộn chuột lên)">+</button>
+        <div class="zoom-bar-divider"></div>
+        <button class="zoom-pill-mode-btn active" id="btnModeFull" onclick="setLightboxMode('full')">
+          ⛶ Chuẩn Web 100%
+        </button>
+        <button class="zoom-pill-mode-btn" id="btnModeFit" onclick="setLightboxMode('fit')">
+          📄 Toàn bộ (Fit)
+        </button>
+        <div class="zoom-bar-divider zoom-hint-divider"></div>
+        <span class="zoom-hint-text">💡 Cuộn chuột xem chi tiết • Ctrl + Cuộn để zoom</span>
+      </div>
+
       <div class="lightbox-actions">
         <button class="lightbox-nav-btn" onclick="prevLightbox()" title="Xem mẫu trước (Phím mũi tên Trái ←)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
@@ -874,20 +909,6 @@
     <div class="lightbox-body mode-full" id="lbBody" onclick="handleLightboxBodyClick(event)">
       <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)">
         <img id="lbImage" src="" alt="Full preview">
-      </div>
-
-      <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
-        <button class="zoom-btn" onclick="zoomStep(-1)">−</button>
-        <span class="zoom-level-text" id="lbZoomLevel">Fit 100%</span>
-        <button class="zoom-btn" onclick="zoomStep(1)">+</button>
-        <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 2px;"></div>
-        <button class="zoom-pill-mode-btn active" id="btnModeFit" onclick="setLightboxMode('fit')">
-          ⛶ Vừa màn hình
-        </button>
-        <button class="zoom-pill-mode-btn" id="btnModeFull" onclick="setLightboxMode('full')">
-          100% Chi tiết
-        </button>
-        <span class="zoom-hint-text">💡 Ctrl + Cuộn chuột để zoom</span>
       </div>
     </div>
   </div>

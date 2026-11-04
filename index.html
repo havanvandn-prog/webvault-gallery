@@ -688,26 +688,40 @@
     }
 
     .lightbox-header {
-      padding: 10px 24px;
+      padding: 8px 24px;
+      min-height: 54px;
       background: #111116;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       color: #fff;
       z-index: 10;
+      box-sizing: border-box;
     }
 
     .lightbox-title-box {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
+      min-width: 0;
+      flex-shrink: 1;
     }
     .lightbox-title-box h3 {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 700;
       color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 320px;
+    }
+    .lightbox-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
     }
 
     /* LIGHTBOX BODY CÁC CHẾ ĐỘ HIỂN THỊ */
@@ -771,12 +785,7 @@
       align-items: flex-start;
       overflow-y: auto;
       overflow-x: auto;
-    }
-    .lightbox-body.mode-full {
-      align-items: flex-start;
-      overflow-y: auto;
-      overflow-x: auto;
-      padding: 16px 20px 90px;
+      padding: 16px 20px 30px;
     }
     .lightbox-body.mode-full .lightbox-img-wrapper {
       max-width: min(1400px, 96vw);
@@ -823,42 +832,45 @@
       pointer-events: none;
     }
 
-    /* THANH ĐIỀU KHIỂN ZOOM NỔI (FLOATING ZOOM BAR) */
+    /* THANH ĐIỀU KHIỂN ZOOM TRÊN HEADER */
     .lightbox-zoom-bar {
-      position: absolute;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(18, 18, 24, 0.92);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      position: relative;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 30px;
-      padding: 6px 14px;
+      padding: 4px 10px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7);
-      z-index: 100;
+      gap: 5px;
       font-size: 12px;
       color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    }
+    .zoom-bar-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.15);
+      margin: 0 3px;
     }
     .zoom-btn {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: #fff;
-      width: 26px;
-      height: 26px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
       transition: all 0.15s ease;
+      line-height: 1;
     }
     .zoom-btn:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.22);
       transform: scale(1.08);
     }
     .zoom-pill-mode-btn {
@@ -874,16 +886,22 @@
       display: flex;
       align-items: center;
       gap: 4px;
+      white-space: nowrap;
     }
-    .zoom-pill-mode-btn:hover, .zoom-pill-mode-btn.active {
+    .zoom-pill-mode-btn:hover {
+      background: rgba(255, 255, 255, 0.18);
+      color: #fff;
+    }
+    .zoom-pill-mode-btn.active {
       background: var(--accent);
       color: #fff;
       border-color: var(--accent);
+      box-shadow: 0 2px 8px rgba(255, 59, 48, 0.35);
     }
     .zoom-level-text {
       font-weight: 700;
       color: #4ade80;
-      min-width: 50px;
+      min-width: 44px;
       text-align: center;
       font-variant-numeric: tabular-nums;
       font-size: 12px;
@@ -891,13 +909,12 @@
     .zoom-hint-text {
       font-size: 11px;
       color: var(--text-dim);
-      margin-left: 4px;
-      padding-left: 8px;
-      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      white-space: nowrap;
+      padding-left: 2px;
     }
-    @media (max-width: 768px) {
-      .zoom-hint-text {
-        display: none;
+    @media (max-width: 1200px) {
+      .zoom-hint-text, .zoom-hint-divider {
+        display: none !important;
       }
     }
 
@@ -1055,13 +1072,34 @@
         font-size: 11px !important;
       }
       .lightbox-header {
-        padding: 10px 14px !important;
-        flex-direction: column !important;
-        align-items: flex-start !important;
+        padding: 8px 12px !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        align-items: center !important;
+        justify-content: space-between !important;
         gap: 8px !important;
       }
+      .lightbox-title-box {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
       .lightbox-title-box h3 {
-        font-size: 13.5px !important;
+        font-size: 13px !important;
+        max-width: 200px;
+      }
+      .lightbox-header-actions {
+        flex-shrink: 0;
+      }
+      .lightbox-header-actions .btn {
+        padding: 5px 8px !important;
+        font-size: 11.5px !important;
+      }
+      .lightbox-zoom-bar {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        padding: 3px 6px;
+        margin-top: 2px;
       }
       .lightbox-body {
         padding: 8px !important;
@@ -1242,7 +1280,24 @@
       <span id="lbIndex" style="color: var(--accent); font-weight: 800; font-size: 13px;">01</span>
       <h3 id="lbTitle">Square Experiential Communications</h3>
     </div>
-    <div style="display: flex; gap: 10px;">
+
+    <!-- CỤM ĐIỀU KHIỂN ZOOM & CHẾ ĐỘ XEM TRÊN HEADER -->
+    <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
+      <button class="zoom-btn" onclick="zoomStep(-1)" title="Thu nhỏ (Ctrl + Cuộn chuột xuống)">−</button>
+      <span class="zoom-level-text" id="lbZoomLevel">100%</span>
+      <button class="zoom-btn" onclick="zoomStep(1)" title="Phóng to (Ctrl + Cuộn chuột lên)">+</button>
+      <div class="zoom-bar-divider"></div>
+      <button class="zoom-pill-mode-btn active" id="btnModeFull" onclick="setLightboxMode('full')">
+        ⛶ Chuẩn Web 100%
+      </button>
+      <button class="zoom-pill-mode-btn" id="btnModeFit" onclick="setLightboxMode('fit')">
+        📄 Toàn bộ (Fit)
+      </button>
+      <div class="zoom-bar-divider zoom-hint-divider"></div>
+      <span class="zoom-hint-text">💡 Cuộn chuột xem chi tiết • Ctrl + Cuộn để zoom</span>
+    </div>
+
+    <div class="lightbox-header-actions">
       <a id="lbExternalLink" href="#" target="_blank" class="btn btn-secondary">
         Mở Website Thật ↗
       </a>
@@ -1252,21 +1307,6 @@
   <div class="lightbox-body mode-full" id="lbBody" onclick="handleLightboxBodyClick(event)">
     <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)" title="Nhấp để chuyển đổi giữa Fit toàn bộ giao diện và Phóng to 100%">
       <img id="lbImage" src="" alt="Full website preview">
-    </div>
-
-    <!-- THANH ĐIỀU KHIỂN ZOOM NỔI -->
-    <div class="lightbox-zoom-bar" onclick="event.stopPropagation()">
-      <button class="zoom-btn" onclick="zoomStep(-1)" title="Thu nhỏ (Ctrl + Cuộn chuột xuống)">−</button>
-      <span class="zoom-level-text" id="lbZoomLevel">100%</span>
-      <button class="zoom-btn" onclick="zoomStep(1)" title="Phóng to (Ctrl + Cuộn chuột lên)">+</button>
-      <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15); margin: 0 2px;"></div>
-      <button class="zoom-pill-mode-btn active" id="btnModeFull" onclick="setLightboxMode('full')">
-        ⛶ Chuẩn Web 100%
-      </button>
-      <button class="zoom-pill-mode-btn" id="btnModeFit" onclick="setLightboxMode('fit')">
-        📄 Toàn bộ (Fit)
-      </button>
-      <span class="zoom-hint-text">💡 Cuộn chuột xem chi tiết • Ctrl + Cuộn để zoom</span>
     </div>
   </div>
 </div>

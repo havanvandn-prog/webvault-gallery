@@ -161,6 +161,17 @@
       transform: translateY(-1px);
       box-shadow: 0 6px 18px rgba(1, 169, 21, 0.4);
     }
+    .btn-copy-all-staging {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #60a5fa;
+    }
+    .btn-copy-all-staging:hover {
+      background: rgba(59, 130, 246, 0.28);
+      border-color: #3b82f6;
+      color: #93c5fd;
+      transform: translateY(-1px);
+    }
 
     .btn-view-hub {
       background: rgba(255, 255, 255, 0.05);
@@ -756,6 +767,11 @@
       </div>
 
       <div class="staging-actions">
+        <button class="btn btn-copy-all-staging" id="btnCopyAllStaging" onclick="copyAllStagingDisplayedLinks()" title="Copy link tất cả website trong danh mục đang xem (chỉ link thuần, mỗi dòng 1 URL)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span>Copy All Link (<span id="copyStagingCount">20</span>)</span>
+        </button>
+
         <button class="btn btn-approve-all" id="btnToggleAll" onclick="toggleAll()">
           Chọn Tất Cả
         </button>
@@ -2688,6 +2704,7 @@
     document.getElementById('statApproved').textContent = approvedInTopic;
     document.getElementById('statTotalTopic').textContent = currentList.length;
     document.getElementById('btnApprovedCount').textContent = totalApprovedAll;
+    updateStagingCopyCounter();
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
@@ -2739,6 +2756,65 @@
 
     showToast(nextState ? `✓ Đã chọn ${currentList.length} mẫu trong chủ đề!` : `Đã bỏ chọn các mẫu trong chủ đề.`);
     renderStaging();
+  }
+
+  // SAO CHÉP TOÀN BỘ LINK WEBSITE TRONG DANH MỤC ĐANG XEM (CHỈ LINK THUẦN, MỖI DÒNG 1 URL)
+  function copyAllStagingDisplayedLinks() {
+    const list = getFilteredCandidates();
+    if (!list || list.length === 0) {
+      showToast("⚠️ Không có website nào trong danh mục này!");
+      return;
+    }
+
+    const linksOnly = list.map(c => c.url).join('\n');
+    const btn = document.getElementById('btnCopyAllStaging');
+
+    function notifySuccess() {
+      showToast(`✓ Đã sao chép ${list.length} link website trong danh mục vào Clipboard!`);
+      if (btn) {
+        const orig = btn.innerHTML;
+        btn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span>✓ Đã Copy!</span>
+        `;
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          updateStagingCopyCounter();
+        }, 1800);
+      }
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(linksOnly).then(notifySuccess).catch(() => {
+        fallbackCopyStaging(linksOnly, notifySuccess);
+      });
+    } else {
+      fallbackCopyStaging(linksOnly, notifySuccess);
+    }
+  }
+
+  function fallbackCopyStaging(text, onSuccess) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    document.body.appendChild(textarea);
+    textarea.focus();
+    textarea.select();
+    try {
+      const ok = document.execCommand('copy');
+      if (ok) onSuccess();
+      else showToast("⚠️ Không thể sao chép, vui lòng thử lại.");
+    } catch (e) {
+      showToast("⚠️ Trình duyệt chặn quyền Clipboard.");
+    }
+    document.body.removeChild(textarea);
+  }
+
+  function updateStagingCopyCounter() {
+    const list = getFilteredCandidates();
+    const countEl = document.getElementById('copyStagingCount');
+    if (countEl) countEl.textContent = list.length;
   }
 
   function saveApprovalSelection() {

@@ -791,7 +791,10 @@ template = """<!DOCTYPE html>
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
         <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">121</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="trung-tam-anh-ngu" onclick="filterStagingTopic('trung-tam-anh-ngu')">
+      <button class="staging-tab-btn active" data-industry="cafe-va-banh-mi" onclick="filterStagingTopic('cafe-va-banh-mi')">
+        <span>☕</span> Cafe & Bánh Mì <span class="tab-badge" id="badgeCafeBanhMi">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="trung-tam-anh-ngu" onclick="filterStagingTopic('trung-tam-anh-ngu')">
         <span>🎓</span> Trung Tâm Anh Ngữ <span class="tab-badge" id="badgeAnhNgu">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="ban-may-anh" onclick="filterStagingTopic('ban-may-anh')">
@@ -821,7 +824,7 @@ template = """<!DOCTYPE html>
   <!-- COUNTER STRIP -->
   <div class="counter-strip">
     <div class="counter-text">
-      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Trung Tâm Anh Ngữ (Chuẩn Quốc Tế & CRO)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
+      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Cafe & Bánh Mì (Menu & Quán F&B Chuẩn Hà Nội)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
     </div>
     <div class="topic-guide-pill">
       💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
@@ -905,7 +908,7 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'trung-tam-anh-ngu';
+  let currentTopic = 'cafe-va-banh-mi';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -997,6 +1000,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'cafe-va-banh-mi': 'Cafe & Bánh Mì (Menu & Quán F&B Chuẩn Hà Nội)',
       'trung-tam-anh-ngu': 'Trung Tâm Anh Ngữ (Top Chuỗi & Luyện Thi)',
       'all': 'Tất Cả Nháp Chờ Duyệt',
       'ban-may-anh': 'Máy Chụp Ảnh & Thiết Bị Nhiếp Ảnh (Google Ads & CRO)',

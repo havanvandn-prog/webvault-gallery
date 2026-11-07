@@ -778,7 +778,10 @@
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
         <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">121</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="cafe-va-banh-mi" onclick="filterStagingTopic('cafe-va-banh-mi')">
+      <button class="staging-tab-btn active" data-industry="lap-mang-fpt" onclick="filterStagingTopic('lap-mang-fpt')">
+        <span>🌐</span> Lắp Mạng FPT <span class="tab-badge" id="badgeFpt">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="cafe-va-banh-mi" onclick="filterStagingTopic('cafe-va-banh-mi')">
         <span>☕</span> Cafe & Bánh Mì <span class="tab-badge" id="badgeCafeBanhMi">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="trung-tam-anh-ngu" onclick="filterStagingTopic('trung-tam-anh-ngu')">
@@ -884,6 +887,286 @@
 <script>
   // TỔNG HỢP CÁC CHỦ ĐỀ CHỜ DUYỆT (60 MẪU)
   const CANDIDATES = [
+  {
+    "id": "fpt01",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Telecom (Trang Chủ Tập Đoàn)",
+    "short_name": "FPT Telecom Portal",
+    "url": "https://fpt.vn/",
+    "domain": "fpt.vn",
+    "vibe": "Chính Thống & Đẳng Cấp Tập Đoàn",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fpt_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fpt_vn_full.webp",
+    "desc": "Cổng thông tin chính thức của FPT Telecom. Thiết kế hiện đại chuẩn tập đoàn công nghệ hàng đầu, trình bày toàn diện hệ sinh thái: Cáp quang WiFi 6/7, Truyền hình FPT Play, FPT Camera AI và FPT Smart Home với tính thẩm mỹ và độ tin cậy tuyệt đối."
+  },
+  {
+    "id": "fpt02",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Mạng FPT Toàn Quốc",
+    "short_name": "Mạng FPT",
+    "url": "https://mangfpt.vn/",
+    "domain": "mangfpt.vn",
+    "vibe": "Trực Quan & Đầy Đủ Bảng Cước",
+    "location": "Toàn quốc (Hà Nội, TP.HCM, 63 tỉnh)",
+    "thumb": "Kho_Anh_Webp/mangfpt_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/mangfpt_vn_full.webp",
+    "desc": "Kênh bán hàng đại lý có lưu lượng truy cập hàng đầu ngành viễn thông. Cấu trúc Hero chào giá rõ ràng, bảng giá các gói cước Giga, Sky, Meta phân cấp chuẩn xác, tích hợp form tư vấn lắp đặt và danh sách khuyến mãi tặng modem Wi-Fi 6."
+  },
+  {
+    "id": "fpt03",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Cổng Đăng Ký FPT Telecom",
+    "short_name": "FPT Telecom VN",
+    "url": "https://fpt-vn.vn/",
+    "domain": "fpt-vn.vn",
+    "vibe": "Rõ Ràng & Chuẩn Chuyển Đổi",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fpt_vn_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fpt_vn_vn_full.webp",
+    "desc": "Trang thông tin tổng hợp với cấu trúc phân nhóm gói cước kinh điển: Internet cá nhân, Combo Internet + Truyền hình cáp FPT Play, và Gói Doanh nghiệp băng thông lớn. Hotline và nút Zalo tư vấn được neo cố định giúp khách gọi ngay."
+  },
+  {
+    "id": "fpt04",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Telecom Net VN",
+    "short_name": "FPT Telecom Net",
+    "url": "https://fpttelecom.net.vn/",
+    "domain": "fpttelecom.net.vn",
+    "vibe": "Tin Cậy & Đa Dạng Gói Cước",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fpttelecom_net_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fpttelecom_net_vn_full.webp",
+    "desc": "Trang phân phối dịch vụ FPT kỳ cựu với hệ thống phân chia giá cước theo khu vực nội thành, ngoại thành và các tỉnh rõ rệt. Cung cấp chi tiết các chính sách tặng tháng cước khi thanh toán trước 6 tháng hoặc 12 tháng."
+  },
+  {
+    "id": "fpt05",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Lắp Mạng FPT VIP",
+    "short_name": "Lắp Mạng FPT VIP",
+    "url": "https://lapmangfpt.vip/",
+    "domain": "lapmangfpt.vip",
+    "vibe": "Kích Thích Mua Hàng & Khuyến Mãi Nổi Bật",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/lapmangfpt_vip_thumb.webp",
+    "full": "Kho_Anh_Webp/lapmangfpt_vip_full.webp",
+    "desc": "Bản mẫu Landing Page chạy Google Search Ads đạt tỷ lệ chuyển đổi xuất sắc. Thiết kế tiêu đề gắn nhãn khuyến mãi theo tháng, nút CTA gọi hotline nhấp nháy thu hút sự chú ý, bảng so sánh tốc độ nổi bật và cam kết lắp đặt thần tốc trong 24h."
+  },
+  {
+    "id": "fpt06",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Lắp Đặt Mạng FPT",
+    "short_name": "Lắp Đặt Mạng FPT",
+    "url": "https://lapdatmangfpt.vn/",
+    "domain": "lapdatmangfpt.vn",
+    "vibe": "Tinh Gọn & Trực Diện Bảng Giá",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/lapdatmangfpt_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/lapdatmangfpt_vn_full.webp",
+    "desc": "Landing page có bố cục tập trung 100% vào việc chốt lead: Hero đập ngay vào mắt bảng giá cước chỉ từ 180k-195k/tháng, form điền thông tin đăng ký lắp đặt chỉ 2 trường tối giản và ưu đãi tặng modem Wi-Fi 6 hai băng tần."
+  },
+  {
+    "id": "fpt07",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Đăng Ký WiFi FPT",
+    "short_name": "Đăng Ký WiFi FPT",
+    "url": "https://dangkywifi.com.vn/",
+    "domain": "dangkywifi.com.vn",
+    "vibe": "Thôi Thúc Hành Động & Ưu Đãi Giới Hạn",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/dangkywifi_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/dangkywifi_com_vn_full.webp",
+    "desc": "Cực kỳ thích hợp cho các chiến dịch Google Ads nhắm vào cụm từ tìm kiếm 'đăng ký wifi', 'lắp đặt wifi fpt'. Giao diện tập trung vào đòn bẩy tâm lý: Tặng tháng cước thứ 7, miễn phí hòa mạng khi trả trước, hỗ trợ khảo sát tận nhà."
+  },
+  {
+    "id": "fpt08",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Connect",
+    "short_name": "FPT Connect",
+    "url": "https://fptconnect.vn/",
+    "domain": "fptconnect.vn",
+    "vibe": "Hiện Đại & Chuẩn Trải Nghiệm Trang Đích",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fptconnect_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fptconnect_vn_full.webp",
+    "desc": "Website có thiết kế chuẩn UI/UX hiện đại, tốc độ tải trang cực nhanh giúp tối ưu Điểm chất lượng (Quality Score) khi chạy Google Ads. Trình bày gói cước sạch sẽ, typography sắc nét, tối ưu hiển thị mượt mà trên điện thoại di động."
+  },
+  {
+    "id": "fpt09",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Telecom Hà Nội",
+    "short_name": "FPT Hà Nội",
+    "url": "https://fpthanoi.com.vn/",
+    "domain": "fpthanoi.com.vn",
+    "vibe": "Chuyên Nghiệp & Địa Phương Hóa Thủ Đô",
+    "location": "Hà Nội & Miền Bắc",
+    "thumb": "Kho_Anh_Webp/fpthanoi_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fpthanoi_com_vn_full.webp",
+    "desc": "Đại diện tiêu biểu cho chiến dịch Google Ads Local SEO nhắm thẳng vào khách hàng tại các quận Đống Đa, Cầu Giấy, Nam Từ Liêm, Hoàng Mai... Cung cấp chi tiết bảng giá khu vực nội/ngoại thành Hà Nội và danh bạ hỗ trợ kỹ thuật tại chỗ."
+  },
+  {
+    "id": "fpt10",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Telecom TP.HCM",
+    "short_name": "FPT Sài Gòn",
+    "url": "https://hcmfpt.vn/",
+    "domain": "hcmfpt.vn",
+    "vibe": "Năng Động & Ưu Đãi Ngoại Thành Sài Gòn",
+    "location": "TP.HCM & Nam Bộ",
+    "thumb": "Kho_Anh_Webp/hcmfpt_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/hcmfpt_vn_full.webp",
+    "desc": "Kênh kinh doanh trọng điểm tại thị trường miền Nam. Nắm bắt tâm lý khách hàng tại TP.HCM với các gói ưu đãi giá rẻ cho khu vực ngoại thành (Bình Chánh, Hóc Môn, Củ Chi) và các gói cáp quang siêu tốc cho căn hộ chung cư cao cấp."
+  },
+  {
+    "id": "fpt11",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Hà Nội FPT VN",
+    "short_name": "Hà Nội FPT",
+    "url": "https://hanoifpt.vn/",
+    "domain": "hanoifpt.vn",
+    "vibe": "Nhanh Gọn & Cam Kết Triển Khai Trong Ngày",
+    "location": "Hà Nội",
+    "thumb": "Kho_Anh_Webp/hanoifpt_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/hanoifpt_vn_full.webp",
+    "desc": "Trang web vệ tinh chuyên chạy từ khóa địa phương tại Hà Nội. Nổi bật với cam kết có mặt khảo sát tận nhà sau 30 phút liên hệ, hỗ trợ làm thủ tục hợp đồng điện tử tiện lợi chỉ với ảnh chụp CCCD."
+  },
+  {
+    "id": "fpt12",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Lắp Mạng FPT Đà Nẵng",
+    "short_name": "FPT Đà Nẵng",
+    "url": "https://lapmangfptdanang.com.vn/",
+    "domain": "lapmangfptdanang.com.vn",
+    "vibe": "Thân Thiện & Báo Giá Miền Trung Chuẩn Xác",
+    "location": "Đà Nẵng & Quảng Nam",
+    "thumb": "Kho_Anh_Webp/lapmangfptdanang_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/lapmangfptdanang_com_vn_full.webp",
+    "desc": "Website đại diện thị trường Đà Nẵng và các tỉnh miền Trung. Bảng giá cập nhật theo chính sách vùng 3 với mức cước vô cùng cạnh tranh, hỗ trợ lắp đặt nhanh tại các quận Hải Châu, Thanh Khê, Sơn Trà, Ngũ Hành Sơn."
+  },
+  {
+    "id": "fpt13",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Telecom Biên Hòa - Đồng Nai",
+    "short_name": "FPT Biên Hòa",
+    "url": "https://fptbienhoa.vn/",
+    "domain": "fptbienhoa.vn",
+    "vibe": "Thực Tế & Đáp Ứng Nhà Trọ, Doanh Nghiệp",
+    "location": "Đồng Nai & Bình Dương",
+    "thumb": "Kho_Anh_Webp/fptbienhoa_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fptbienhoa_vn_full.webp",
+    "desc": "Tập trung khai thác khách hàng tại các thủ phủ công nghiệp Biên Hòa, Nhơn Trạch, Long Thành. Bố cục thực chiến giải quyết bài toán lắp mạng cho phòng trọ công nhân, nhà riêng và các doanh nghiệp trong khu công nghiệp."
+  },
+  {
+    "id": "fpt14",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Internet & Truyền Hình",
+    "short_name": "FPT Internet",
+    "url": "https://fptinternet.vn/",
+    "domain": "fptinternet.vn",
+    "vibe": "Khoa Học & Dễ So Sánh Tốc Độ",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fptinternet_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fptinternet_vn_full.webp",
+    "desc": "Điểm mạnh nổi bật là giao diện dạng lưới thẻ card (pricing cards) so sánh trực quan các gói Giga (300Mbps), Sky (1Gbps/300Mbps), Meta (1Gbps Full) kèm icon thiết bị modem WiFi 6 rõ ràng, giúp khách hàng chọn gói chỉ sau 5 giây."
+  },
+  {
+    "id": "fpt15",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Bảng Giá Cước WiFi FPT",
+    "short_name": "FPT WiFi",
+    "url": "https://fptwifi.com.vn/",
+    "domain": "fptwifi.com.vn",
+    "vibe": "Rõ Ràng & Minh Bạch Cước Phí",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fptwifi_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/fptwifi_com_vn_full.webp",
+    "desc": "Tối ưu cho khách hàng có nhu cầu phủ sóng nhà nhiều tầng, biệt thự hoặc căn hộ rộng với các giải pháp Mesh WiFi hiện đại. Bảng tính cước phí minh bạch, không phí ẩn, hỗ trợ tư vấn phương án kéo dây tối ưu thẩm mỹ."
+  },
+  {
+    "id": "fpt16",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Cáp Quang FPT Tốc Độ Cao",
+    "short_name": "Cáp Quang FPT Net",
+    "url": "https://capquangfpt.net.vn/",
+    "domain": "capquangfpt.net.vn",
+    "vibe": "Mạnh Mẽ & Cam Kết Băng Thông Quốc Tế",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/capquangfpt_net_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/capquangfpt_net_vn_full.webp",
+    "desc": "Website chuyên sâu các gói cáp quang FPT băng thông lớn cho doanh nghiệp và phòng máy: Super 250, Super 400, Lux 500, Lux 800. Đầy đủ thông số cam kết tốc độ quốc tế, địa chỉ IP tĩnh và thiết bị cân bằng tải Vigor chuyên dụng."
+  },
+  {
+    "id": "fpt17",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Telecom Toàn Quốc (Lapmangfpt.vn)",
+    "short_name": "Lắp Mạng FPT Official",
+    "url": "https://lapmangfpt.vn/",
+    "domain": "lapmangfpt.vn",
+    "vibe": "Đầy Đủ Tiện Ích & Bảng Giá Khuyến Mãi 2026",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/lapmangfpt_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/lapmangfpt_vn_full.webp",
+    "desc": "Kênh đăng ký trực tuyến toàn quốc với hàng chục ngàn lượt truy cập mỗi tháng. Bố cục bảng giá WiFi 6/WiFi 7 đối xứng, ưu đãi tặng tháng cước thứ 7, miễn phí modem 2 băng tần và danh mục giải pháp Camera an ninh FPT."
+  },
+  {
+    "id": "fpt18",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Tổng Đài Lắp Mạng FPT",
+    "short_name": "Tổng Đài FPT",
+    "url": "https://tongdaifpt.com.vn/",
+    "domain": "tongdaifpt.com.vn",
+    "vibe": "Kêu Gọi Gọi Điện & Tiếp Nhận Tức Thì",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/tongdaifpt_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/tongdaifpt_com_vn_full.webp",
+    "desc": "Mẫu website sinh ra để chạy chiến dịch Google Ads Cuộc gọi (Call-Only Ads) hoặc Quảng cáo tìm kiếm ưu tiên nhấp vào số điện thoại. Hotline và nút Zalo rung lắc liên tục, kích thích khách hàng bấm máy nghe tư vấn ngay trong 30 giây."
+  },
+  {
+    "id": "fpt19",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "FPT Việt Nam Telecom",
+    "short_name": "FPT Vietnam",
+    "url": "https://fpt-vietnam.com/",
+    "domain": "fpt-vietnam.com",
+    "vibe": "Đầy Đủ & Quy Trình Lắp Đặt Minh Bạch",
+    "location": "Toàn quốc",
+    "thumb": "Kho_Anh_Webp/fpt_vietnam_com_thumb.webp",
+    "full": "Kho_Anh_Webp/fpt_vietnam_com_full.webp",
+    "desc": "Giao diện bài bản theo phong cách thương mại điện tử dịch vụ. Trình bày quy trình 4 bước lắp đặt tại nhà rõ ràng, bảng giải đáp câu hỏi thường gặp (FAQ) chi tiết và các đánh giá hài lòng từ khách hàng thực tế."
+  },
+  {
+    "id": "fpt20",
+    "industry": "lap-mang-fpt",
+    "industry_name": "Lắp Mạng FPT (Google Ads)",
+    "name": "Lắp Mạng FPT Toàn Quốc",
+    "short_name": "FPT Toàn Quốc",
+    "url": "https://lapmangfpt-toanquoc.com.vn/",
+    "domain": "lapmangfpt-toanquoc.com.vn",
+    "vibe": "Tiện Ích & Tra Cứu Giá Theo Tỉnh Thành",
+    "location": "63 Tỉnh Thành Toàn Quốc",
+    "thumb": "Kho_Anh_Webp/lapmangfpt_toanquoc_com_vn_thumb.webp",
+    "full": "Kho_Anh_Webp/lapmangfpt_toanquoc_com_vn_full.webp",
+    "desc": "Kênh thông tin toàn diện có bộ lọc bảng giá theo từng tỉnh thành, hỗ trợ khách hàng ngoại tỉnh tra cứu giá cước chính xác tại địa phương mình đang sinh sống mà không sợ bị nhầm lẫn với giá khu vực nội thành."
+  },
   {
     "id": "cafebanhmi01",
     "industry": "cafe-va-banh-mi",
@@ -3150,11 +3433,11 @@
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'cafe-va-banh-mi';
+  let currentTopic = 'lap-mang-fpt';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic');
+    const indParam = params.get('industry') || params.get('topic') || 'lap-mang-fpt';
     if (indParam && ['all', 'ban-may-anh', 'mua-ban-oto-cu', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
       currentTopic = indParam;
     }
@@ -3242,6 +3525,7 @@
 
     // Cập nhật thống kê
     const topicMapName = {
+      'lap-mang-fpt': 'Lắp Đặt Mạng Cáp Quang FPT Telecom (Mẫu Tối Ưu Google Ads & Chuyển Đổi Cao)',
       'cafe-va-banh-mi': 'Cafe & Bánh Mì (Menu & Quán F&B Chuẩn Hà Nội)',
       'trung-tam-anh-ngu': 'Trung Tâm Anh Ngữ (Top Chuỗi & Luyện Thi)',
       'all': 'Tất Cả Nháp Chờ Duyệt',

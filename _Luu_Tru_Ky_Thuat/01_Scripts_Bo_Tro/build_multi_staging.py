@@ -791,7 +791,10 @@ template = """<!DOCTYPE html>
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
         <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">121</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="cafe-va-banh-mi" onclick="filterStagingTopic('cafe-va-banh-mi')">
+      <button class="staging-tab-btn active" data-industry="lap-mang-fpt" onclick="filterStagingTopic('lap-mang-fpt')">
+        <span>🌐</span> Lắp Mạng FPT <span class="tab-badge" id="badgeFpt">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="cafe-va-banh-mi" onclick="filterStagingTopic('cafe-va-banh-mi')">
         <span>☕</span> Cafe & Bánh Mì <span class="tab-badge" id="badgeCafeBanhMi">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="trung-tam-anh-ngu" onclick="filterStagingTopic('trung-tam-anh-ngu')">
@@ -908,11 +911,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'cafe-va-banh-mi';
+  let currentTopic = 'lap-mang-fpt';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic');
+    const indParam = params.get('industry') || params.get('topic') || 'lap-mang-fpt';
     if (indParam && ['all', 'ban-may-anh', 'mua-ban-oto-cu', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
       currentTopic = indParam;
     }
@@ -1000,6 +1003,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'lap-mang-fpt': 'Lắp Đặt Mạng Cáp Quang FPT Telecom (Mẫu Tối Ưu Google Ads & Chuyển Đổi Cao)',
       'cafe-va-banh-mi': 'Cafe & Bánh Mì (Menu & Quán F&B Chuẩn Hà Nội)',
       'trung-tam-anh-ngu': 'Trung Tâm Anh Ngữ (Top Chuỗi & Luyện Thi)',
       'all': 'Tất Cả Nháp Chờ Duyệt',

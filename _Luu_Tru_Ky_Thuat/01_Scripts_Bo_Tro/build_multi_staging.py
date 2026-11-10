@@ -789,9 +789,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">121</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">201</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="lap-mang-fpt" onclick="filterStagingTopic('lap-mang-fpt')">
+      <button class="staging-tab-btn active" data-industry="landing-page-lap-mang" onclick="filterStagingTopic('landing-page-lap-mang')">
+        <span>🎯</span> Landing Page Lắp Mạng <span class="tab-badge" id="badgeLpLapMang">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="lap-mang-fpt" onclick="filterStagingTopic('lap-mang-fpt')">
         <span>🌐</span> Lắp Mạng FPT <span class="tab-badge" id="badgeFpt">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="cafe-va-banh-mi" onclick="filterStagingTopic('cafe-va-banh-mi')">
@@ -827,7 +830,7 @@ template = """<!DOCTYPE html>
   <!-- COUNTER STRIP -->
   <div class="counter-strip">
     <div class="counter-text">
-      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Cafe & Bánh Mì (Menu & Quán F&B Chuẩn Hà Nội)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
+      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Landing Page Lắp Đặt Mạng Internet & FPT (1-Page Chuẩn Chuyển Đổi Google Ads)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
     </div>
     <div class="topic-guide-pill">
       💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
@@ -911,12 +914,13 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'lap-mang-fpt';
+  let currentTopic = 'landing-page-lap-mang';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'lap-mang-fpt';
-    if (indParam && ['all', 'ban-may-anh', 'mua-ban-oto-cu', 'du-hoc-dinh-cu-my', 'phong-tap-fitness', 'ban-dong-ho', 'decor-su-kien', 'tiec-cuoi'].includes(indParam)) {
+    const indParam = params.get('industry') || params.get('topic') || 'landing-page-lap-mang';
+    const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
+    if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
     }
   }
@@ -969,7 +973,7 @@ template = """<!DOCTYPE html>
 
       card.innerHTML = `
         <div class="card-browser-bar">
-          <a href="${item.url}" target="_blank" class="browser-url-pill">https://${item.domain}/</a>
+          <a href="${item.url}" target="_blank" class="browser-url-pill" title="${item.url}">${(item.url || '').replace(/^https?:\/\//, '') || item.domain}</a>
           <span style="font-size: 11px; color: var(--text-dim);">${item.location}</span>
         </div>
 
@@ -983,7 +987,7 @@ template = """<!DOCTYPE html>
 
         <div class="card-body">
           <div class="card-meta-row">
-            <span class="badge-industry">${item.industry_name || 'Đồng Hồ'}</span>
+            <span class="badge-industry">${item.industry_name || 'Mẫu Web'}</span>
             <span class="badge-vibe" title="${item.vibe}">${item.vibe}</span>
           </div>
 
@@ -1003,7 +1007,9 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'landing-page-lap-mang': 'Landing Page Lắp Đặt Mạng Internet & FPT (1-Page Chuẩn Chuyển Đổi Google Ads)',
       'lap-mang-fpt': 'Lắp Đặt Mạng Cáp Quang FPT Telecom (Mẫu Tối Ưu Google Ads & Chuyển Đổi Cao)',
+      'mua-ban-oto-cu': 'Mua Bán Xe Ô Tô Cũ',
       'cafe-va-banh-mi': 'Cafe & Bánh Mì (Menu & Quán F&B Chuẩn Hà Nội)',
       'trung-tam-anh-ngu': 'Trung Tâm Anh Ngữ (Top Chuỗi & Luyện Thi)',
       'all': 'Tất Cả Nháp Chờ Duyệt',
@@ -1021,6 +1027,11 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeLpLapMang')) document.getElementById('badgeLpLapMang').textContent = CANDIDATES.filter(c => c.industry === 'landing-page-lap-mang').length;
+    if (document.getElementById('badgeFpt')) document.getElementById('badgeFpt').textContent = CANDIDATES.filter(c => c.industry === 'lap-mang-fpt').length;
+    if (document.getElementById('badgeCafeBanhMi')) document.getElementById('badgeCafeBanhMi').textContent = CANDIDATES.filter(c => c.industry === 'cafe-va-banh-mi').length;
+    if (document.getElementById('badgeAnhNgu')) document.getElementById('badgeAnhNgu').textContent = CANDIDATES.filter(c => c.industry === 'trung-tam-anh-ngu').length;
+    if (document.getElementById('badgeMayAnh')) document.getElementById('badgeMayAnh').textContent = CANDIDATES.filter(c => c.industry === 'ban-may-anh').length;
     if (document.getElementById('badgeOtoCu')) document.getElementById('badgeOtoCu').textContent = CANDIDATES.filter(c => c.industry === 'mua-ban-oto-cu').length;
     if (document.getElementById('badgeDuHocDinhCu')) document.getElementById('badgeDuHocDinhCu').textContent = CANDIDATES.filter(c => c.industry === 'du-hoc-dinh-cu-my').length;
     if (document.getElementById('badgeFitness')) document.getElementById('badgeFitness').textContent = CANDIDATES.filter(c => c.industry === 'phong-tap-fitness').length;

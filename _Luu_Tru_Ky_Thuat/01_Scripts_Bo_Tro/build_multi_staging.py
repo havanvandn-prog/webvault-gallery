@@ -789,9 +789,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">201</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">221</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="landing-page-lap-mang" onclick="filterStagingTopic('landing-page-lap-mang')">
+      <button class="staging-tab-btn active" data-industry="website-coupon-ma-giam-gia" onclick="filterStagingTopic('website-coupon-ma-giam-gia')">
+        <span>🎟️</span> Coupon & Săn Deal <span class="tab-badge" id="badgeCoupon">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="landing-page-lap-mang" onclick="filterStagingTopic('landing-page-lap-mang')">
         <span>🎯</span> Landing Page Lắp Mạng <span class="tab-badge" id="badgeLpLapMang">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="lap-mang-fpt" onclick="filterStagingTopic('lap-mang-fpt')">
@@ -914,11 +917,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'landing-page-lap-mang';
+  let currentTopic = 'website-coupon-ma-giam-gia';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'landing-page-lap-mang';
+    const indParam = params.get('industry') || params.get('topic') || 'website-coupon-ma-giam-gia';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1007,6 +1010,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'website-coupon-ma-giam-gia': 'Website Dạng Coupon, Mã Giảm Giá & Săn Deal (WordPress & Affiliate)',
       'landing-page-lap-mang': 'Landing Page Lắp Đặt Mạng Internet & FPT (1-Page Chuẩn Chuyển Đổi Google Ads)',
       'lap-mang-fpt': 'Lắp Đặt Mạng Cáp Quang FPT Telecom (Mẫu Tối Ưu Google Ads & Chuyển Đổi Cao)',
       'mua-ban-oto-cu': 'Mua Bán Xe Ô Tô Cũ',
@@ -1027,6 +1031,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeCoupon')) document.getElementById('badgeCoupon').textContent = CANDIDATES.filter(c => c.industry === 'website-coupon-ma-giam-gia').length;
     if (document.getElementById('badgeLpLapMang')) document.getElementById('badgeLpLapMang').textContent = CANDIDATES.filter(c => c.industry === 'landing-page-lap-mang').length;
     if (document.getElementById('badgeFpt')) document.getElementById('badgeFpt').textContent = CANDIDATES.filter(c => c.industry === 'lap-mang-fpt').length;
     if (document.getElementById('badgeCafeBanhMi')) document.getElementById('badgeCafeBanhMi').textContent = CANDIDATES.filter(c => c.industry === 'cafe-va-banh-mi').length;

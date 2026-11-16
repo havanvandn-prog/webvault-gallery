@@ -1,0 +1,247 @@
+[
+  {
+    "url": "https://www.dearmodern.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.dearmodern.com/",
+    "title": "Dear Modern | Feng Shui | Architecture | Space Planning"
+  },
+  {
+    "url": "https://www.fengshuiconcepts.com.au/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.fengshuiconcepts.com.au/",
+    "title": "Feng Shui Concepts ~ Award-winning Feng Shui Master Jane Langof ~ Sydney NSW, Australia"
+  },
+  {
+    "url": "https://www.joeyyap.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://home.joeyyap.com/",
+    "title": "Home - Joey Yap"
+  },
+  {
+    "url": "https://www.wayfengshui.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.wayfengshui.com/",
+    "title": "Fengshui Master Singapore | Bazi Reading | Way Fengshui Group"
+  },
+  {
+    "url": "https://www.masterseanchan.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.masterseanchan.com/",
+    "title": "Sean Chan | Asia&#039;s Leading Bazi Master &amp; Feng Shui Consultant"
+  },
+  {
+    "url": "https://luminousspaces.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://luminousspaces.com/",
+    "title": ""
+  },
+  {
+    "url": "https://fengshuidana.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://fengshuidana.com/",
+    "title": "Feng Shui To Change Your Life | The Tao of Dana"
+  },
+  {
+    "url": "https://fengshuiagency.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.fengshuiagency.com/",
+    "title": "Feng Shui Consultants London"
+  },
+  {
+    "url": "https://energymuse.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://energymuse.com/",
+    "title": "Online Crystal Shop and Healing Jewelry Store\n &ndash; Energy Muse"
+  },
+  {
+    "url": "https://www.wofs.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.wofs.com/",
+    "title": "Online Feng Shui Magazine - WOFS.com"
+  },
+  {
+    "url": "https://redlotusletter.com/",
+    "ok": false,
+    "reason": "Lỗi kết nối website: ('Connection aborted.', RemoteDisconnected('Remote end close",
+    "final_url": "https://redlotusletter.com/",
+    "title": ""
+  },
+  {
+    "url": "https://www.fengshuiweb.co.uk/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.fengshuiweb.co.uk/",
+    "title": "Feng Shui store, transform your life and fortunes immediately"
+  },
+  {
+    "url": "https://thefengshuiinstitute.com/",
+    "ok": false,
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='thefengshuiinstitute.com', port=44",
+    "final_url": "https://thefengshuiinstitute.com/",
+    "title": ""
+  },
+  {
+    "url": "https://phongthuyphunggia.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuyphunggia.com/",
+    "title": "Phong thuỷ Phùng Gia - Master Phùng Phương | Gieo chính đạo – Đắc tâm an"
+  },
+  {
+    "url": "https://phongthuydainam.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuydainam.vn/vi",
+    "title": "Phong Thủy Đại Nam"
+  },
+  {
+    "url": "https://phongthuytamnguyen.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuytamnguyen.com/",
+    "title": "Phong Thuỷ Tam Nguyên - Thuận Khởi Vạn Sự Hưng"
+  },
+  {
+    "url": "https://phongthuyvuong.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuyvuong.com/",
+    "title": "Dịch Vụ Tư Vấn Phong Thủy Tam Nguyên"
+  },
+  {
+    "url": "https://phongthuytuongminh.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuytuongminh.com/",
+    "title": "Phong Thủy Tường Minh - Dạy và tư vấn phong thuỷ |"
+  },
+  {
+    "url": "https://phongthuyhoangtra.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuyhoangtra.vn/",
+    "title": "PhongThuỷHoàngTrà"
+  },
+  {
+    "url": "https://phongthuytagia.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuytagia.com/",
+    "title": "Phong Thủy Tạ Gia"
+  },
+  {
+    "url": "https://chuyengianguyenngoan.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://chuyengianguyenngoan.com/",
+    "title": "Chuyên Gia Phong Thủy nổi tiếng tại Việt Nam - Nguyễn Ngoan"
+  },
+  {
+    "url": "https://thuatphongthuy.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://thuatphongthuy.vn/",
+    "title": ""
+  },
+  {
+    "url": "https://nhaxuan.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://nhaxuan.vn/",
+    "title": "Tư vấn Phong thuỷ Nhà Ở, Xem Phong thủy, biệt thự VIP - Đẹp nhà, thêm &quot;xuân&quot;"
+  },
+  {
+    "url": "https://lichngaytot.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://lichngaytot.com/",
+    "title": "Lịch ngày TỐT - Tra cứu Lịch Vạn Niên, Xem Ngày Tốt Xấu, Tử Vi"
+  },
+  {
+    "url": "https://phongthuyso.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://phongthuyso.vn/",
+    "title": "Trang tư vấn xem phong thủy, xem tử vi trực tuyến"
+  },
+  {
+    "url": "https://tuvi.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://tuvi.vn/",
+    "title": "Tử Vi Cổ Học Hàng Đầu Việt Nam - TuVi.vn"
+  },
+  {
+    "url": "https://thienmochuong.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://thienmochuong.com/",
+    "title": "ThiÃªn Má»c HÆ°Æ¡ng - Tinh Hoa Tráº§m Viá»t - Di sáº£n Ã ÄÃ´ng"
+  },
+  {
+    "url": "https://ancarat.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://ancarat.com/",
+    "title": ""
+  },
+  {
+    "url": "https://mixi.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://mixi.vn/",
+    "title": "MIXI.VN- Trang sức đá phong thủy Mixi - Trang sức đá quý tự nhiên"
+  },
+  {
+    "url": "https://liu.com.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://liu.com.vn/",
+    "title": "Kiến thức đá phong thủy, ngũ hành &amp; trang sức đá tự nhiên | LIUGEMS"
+  },
+  {
+    "url": "https://kaigold.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://kaigold.vn/",
+    "title": "Trang Sức Vàng Phong Thủy KAIGOLD - Kim Cương Ngọc Cẩm Thạch"
+  },
+  {
+    "url": "https://joca.vn/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://joca.vn/",
+    "title": "Joca - Siêu Thị Phong Thuỷ - Joca"
+  },
+  {
+    "url": "https://ngoctramhuong.vn/",
+    "ok": false,
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='ngoctramhuong.vn', port=443): Max ",
+    "final_url": "https://ngoctramhuong.vn/",
+    "title": ""
+  },
+  {
+    "url": "https://vanhoatramhuong.com/",
+    "ok": true,
+    "reason": "URL hợp lệ",
+    "final_url": "https://www.vanhoatramhuong.com/",
+    "title": "Văn Hóa Trầm Hương - Cung cấp sỉ, lẻ các sản phẩm về Trầm Hương"
+  },
+  {
+    "url": "https://phongthuyankhang.com/",
+    "ok": false,
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='phongthuyankhang.com', port=443): ",
+    "final_url": "https://phongthuyankhang.com/",
+    "title": ""
+  }
+]

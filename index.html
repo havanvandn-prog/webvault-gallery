@@ -464,6 +464,7 @@
     .browser-dots {
       display: flex;
       gap: 5px;
+      flex-shrink: 0;
     }
     .b-dot {
       width: 8px;
@@ -476,6 +477,7 @@
 
     .browser-url-pill {
       flex: 1;
+      min-width: 0;
       margin-left: 6px;
       background: #0d0d12;
       border: 1px solid rgba(255, 255, 255, 0.05);
@@ -493,12 +495,37 @@
       color: #fff;
     }
 
+    .copied-tag-bar {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+      background: rgba(1, 169, 21, 0.16);
+      border: 1px solid rgba(74, 222, 128, 0.35);
+      color: #4ade80;
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+    .website-card.is-fb-copied .copied-tag-bar {
+      display: inline-flex;
+    }
+    .copied-tag-bar:hover {
+      background: rgba(1, 169, 21, 0.28);
+      border-color: rgba(74, 222, 128, 0.55);
+    }
+
     /* PITCH SELECT CHECKBOX */
     .pitch-checkbox-label {
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       padding: 2px;
+      flex-shrink: 0;
     }
     .pitch-checkbox {
       accent-color: var(--success);
@@ -2243,6 +2270,43 @@
   let currentSearch = '';
   let selectedPitchIds = new Set();
   let isPitchMode = false;
+  const FB_COPIED_STORAGE_KEY = 'webvault_fb_copied_ids';
+  let copiedFbIds = loadCopiedFbIds();
+
+  function loadCopiedFbIds() {
+    try {
+      const raw = localStorage.getItem(FB_COPIED_STORAGE_KEY);
+      if (!raw) return new Set();
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? new Set(parsed.map(String)) : new Set();
+    } catch (e) {
+      return new Set();
+    }
+  }
+
+  function saveCopiedFbIds() {
+    try {
+      localStorage.setItem(FB_COPIED_STORAGE_KEY, JSON.stringify(Array.from(copiedFbIds)));
+    } catch (e) {}
+  }
+
+  function markFbCopied(id) {
+    const key = String(id);
+    copiedFbIds.add(key);
+    saveCopiedFbIds();
+    const card = document.getElementById(`card-${key}`);
+    if (card) card.classList.add('is-fb-copied');
+  }
+
+  function unmarkFbCopied(id, event) {
+    if (event) event.stopPropagation();
+    const key = String(id);
+    copiedFbIds.delete(key);
+    saveCopiedFbIds();
+    const card = document.getElementById(`card-${key}`);
+    if (card) card.classList.remove('is-fb-copied');
+    showToast(`Đã bỏ nhãn "Đã copy" cho mẫu #${key}`);
+  }
 
   // INITIALIZATION
   document.addEventListener("DOMContentLoaded", () => {
@@ -2523,8 +2587,9 @@
 
     filtered.forEach(item => {
       const isSelected = selectedPitchIds.has(item.id);
+      const isCopied = copiedFbIds.has(String(item.id));
       const card = document.createElement('div');
-      card.className = `website-card ${isSelected ? 'selected-for-pitch' : ''}`;
+      card.className = `website-card ${isSelected ? 'selected-for-pitch' : ''} ${isCopied ? 'is-fb-copied' : ''}`;
       card.id = `card-${item.id}`;
 
       card.innerHTML = `
@@ -2541,6 +2606,7 @@
           <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="browser-url-pill" title="Mở ${item.url}">
             https://${item.domain}/
           </a>
+          <span class="copied-tag-bar" onclick="unmarkFbCopied('${item.id}', event)" title="Đã từng copy ảnh FB — Nhấp để bỏ đánh dấu">✓ Đã copy</span>
         </div>
 
         <!-- THUMBNAIL WITH HOVER SCROLL -->
@@ -2643,6 +2709,7 @@
         new ClipboardItem({ "image/png": pngBlob })
       ]);
 
+      markFbCopied(targetId);
       showToast(`✨ Đã nạp ảnh 1080x1920 của ${item.short_name} vào Clipboard! Bấm Ctrl + V trên Facebook/Zalo để dán ngay.`);
       btn.innerHTML = `✓ Đã Copy Ảnh!`;
       setTimeout(() => { btn.innerHTML = origHtml; }, 2500);

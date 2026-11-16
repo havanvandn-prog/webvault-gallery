@@ -2779,8 +2779,13 @@
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Mặc định mở ở chế độ Chuẩn Web 100% (Phóng to fit chiều cao màn đầu tiên, cuộn mượt mà)
-    setLightboxMode('full');
+    // Mặc định mở ở chế độ zoom 40% khi click vào ảnh
+    setLightboxMode('custom', 40);
+    const lbBody = document.getElementById('lbBody');
+    if (lbBody) {
+      lbBody.scrollTop = 0;
+      lbBody.scrollLeft = 0;
+    }
   }
 
   function closeLightbox() {

@@ -789,9 +789,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">261</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">281</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="phong-thuy" onclick="filterStagingTopic('phong-thuy')">
+      <button class="staging-tab-btn active" data-industry="noi-that" onclick="filterStagingTopic('noi-that')">
+        <span>🛋️</span> Nội Thất <span class="tab-badge" id="badgeNoiThat">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="phong-thuy" onclick="filterStagingTopic('phong-thuy')">
         <span>☯️</span> Phong Thủy <span class="tab-badge" id="badgePhongThuy">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="phong-kham-thu-y" onclick="filterStagingTopic('phong-kham-thu-y')">
@@ -923,11 +926,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'phong-thuy';
+  let currentTopic = 'noi-that';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'phong-thuy';
+    const indParam = params.get('industry') || params.get('topic') || 'noi-that';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1016,6 +1019,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'noi-that': 'Nội Thất & Kiến Trúc Không Gian (Studio Luxury, Thi Công Trọn Gói & Showroom E-Commerce)',
       'phong-thuy': 'Phong Thủy, Kiến Trúc Tâm Linh & Vật Phẩm Đá Quý (Quốc Tế & Top SEO Việt Nam)',
       'phong-kham-thu-y': 'Phòng Khám & Bệnh Viện Thú Y (Chuỗi Quốc Tế & Top Bệnh Viện Việt Nam)',
       'website-coupon-ma-giam-gia': 'Website Dạng Coupon, Mã Giảm Giá & Săn Deal (WordPress & Affiliate)',
@@ -1039,6 +1043,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeNoiThat')) document.getElementById('badgeNoiThat').textContent = CANDIDATES.filter(c => c.industry === 'noi-that').length;
     if (document.getElementById('badgePhongThuy')) document.getElementById('badgePhongThuy').textContent = CANDIDATES.filter(c => c.industry === 'phong-thuy').length;
     if (document.getElementById('badgeThuY')) document.getElementById('badgeThuY').textContent = CANDIDATES.filter(c => c.industry === 'phong-kham-thu-y').length;
     if (document.getElementById('badgeCoupon')) document.getElementById('badgeCoupon').textContent = CANDIDATES.filter(c => c.industry === 'website-coupon-ma-giam-gia').length;

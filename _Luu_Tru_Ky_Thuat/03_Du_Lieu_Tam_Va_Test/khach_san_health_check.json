@@ -1,0 +1,281 @@
+[
+  {
+    "id": "ks01",
+    "name": "Mia Saigon",
+    "url": "https://www.miasaigon.com/",
+    "ok": false,
+    "final_url": "https://www.miasaigon.com/",
+    "reason": "Lỗi kết nối website: ('Connection aborted.', RemoteDisconnected('Remote end close",
+    "title": ""
+  },
+  {
+    "id": "ks02",
+    "name": "Peridot Grand Hanoi",
+    "url": "https://peridotgrandhotel.com/",
+    "ok": true,
+    "final_url": "https://peridotgrandhotel.com/",
+    "reason": "URL hợp lệ",
+    "title": "Home - Peridot Grand Luxury Boutique Hotel"
+  },
+  {
+    "id": "ks03",
+    "name": "Sofitel Metropole Hanoi",
+    "url": "https://www.sofitel-legend-metropole-hanoi.com/",
+    "ok": true,
+    "final_url": "https://www.sofitel-legend-metropole-hanoi.com/",
+    "reason": "URL hợp lệ",
+    "title": "Iconic Luxury Hotel in Hanoi | Sofitel Legend Metropole Hanoi"
+  },
+  {
+    "id": "ks04",
+    "name": "Caravelle Saigon",
+    "url": "https://www.caravellesaigon.com/",
+    "ok": false,
+    "final_url": "https://www.caravellesaigon.com/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='www.caravellesaigon.com', port=443",
+    "title": ""
+  },
+  {
+    "id": "ks05",
+    "name": "The Reverie Saigon",
+    "url": "https://www.thereveriesaigon.com/",
+    "ok": true,
+    "final_url": "https://www.thereveriesaigon.com/",
+    "reason": "URL hợp lệ",
+    "title": "The Reverie Saigon | Ho Chi Minh City | Luxury Hotel Vietnam"
+  },
+  {
+    "id": "ks06",
+    "name": "Hotel des Arts Saigon",
+    "url": "https://www.hoteldesartssaigon.com/",
+    "ok": true,
+    "final_url": "https://www.hoteldesartssaigon.com/",
+    "reason": "URL hợp lệ",
+    "title": "Hotel Des Arts Saigon - MGallery | 5-Star Luxury Boutique Hotel"
+  },
+  {
+    "id": "ks07",
+    "name": "Hotel de la Coupole Sapa",
+    "url": "https://hoteldelacoupole.com/",
+    "ok": true,
+    "final_url": "https://www.hoteldelacoupole.com/",
+    "reason": "URL hợp lệ",
+    "title": "Hotel de la Coupole, MGallery Sapa Vietnam"
+  },
+  {
+    "id": "ks08",
+    "name": "Mai House Saigon",
+    "url": "https://maihouse.com/saigon/",
+    "ok": false,
+    "final_url": "https://maihouse.com/saigon/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='maihouse.com', port=443): Max retr",
+    "title": ""
+  },
+  {
+    "id": "ks09",
+    "name": "Silverland Hotels",
+    "url": "https://silverlandhotels.com/",
+    "ok": true,
+    "final_url": "https://silverlandhotels.com/",
+    "reason": "URL hợp lệ",
+    "title": "Silverland Hotels | Luxury Boutique Hotel Saigon"
+  },
+  {
+    "id": "ks10",
+    "name": "Capella Hanoi",
+    "url": "https://capellahotels.com/en/capella-hanoi",
+    "ok": false,
+    "final_url": "https://capellahotels.com/en/capella-hanoi",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='capellahotels.com', port=443): Rea",
+    "title": ""
+  },
+  {
+    "id": "ks11",
+    "name": "Zannier Bai San Ho",
+    "url": "https://www.zannierhotels.com/baisanho/en/",
+    "ok": false,
+    "final_url": "https://www.zannierhotels.com/baisanho/en/",
+    "reason": "HTTP Error 404",
+    "title": ""
+  },
+  {
+    "id": "ks12",
+    "name": "Regent Phu Quoc",
+    "url": "https://phuquoc.regenthotels.com/",
+    "ok": true,
+    "final_url": "https://phuquoc.regenthotels.com/",
+    "reason": "URL hợp lệ",
+    "title": "Homepage | Regent Phu Quoc"
+  },
+  {
+    "id": "ks13",
+    "name": "Azerai Resorts",
+    "url": "https://azerai.com/",
+    "ok": true,
+    "final_url": "https://azerai.com/",
+    "reason": "URL hợp lệ",
+    "title": "Azerai Resorts - The Destination Is Just Beginning"
+  },
+  {
+    "id": "ks14",
+    "name": "An Lam Retreats",
+    "url": "https://anlam.com/",
+    "ok": true,
+    "final_url": "https://anlam.com/",
+    "reason": "URL hợp lệ",
+    "title": "Brand - An Lam Retreats"
+  },
+  {
+    "id": "ks15",
+    "name": "The Anam",
+    "url": "https://theanam.com/",
+    "ok": false,
+    "final_url": "https://theanam.com/",
+    "reason": "Lỗi kết nối website: ('Connection aborted.', RemoteDisconnected('Remote end close",
+    "title": ""
+  },
+  {
+    "id": "ks16",
+    "name": "Wink Hotels",
+    "url": "https://wink-hotels.com/",
+    "ok": true,
+    "final_url": "https://wink-hotels.com/",
+    "reason": "URL hợp lệ",
+    "title": "Wink Hotels: Lifestyle &amp; Boutique Hotels in Top Cities, Vietnam"
+  },
+  {
+    "id": "ks17",
+    "name": "Fusion Hotel Group",
+    "url": "https://fusionhotelgroup.com/",
+    "ok": true,
+    "final_url": "https://fusionhotelgroup.com/",
+    "reason": "URL hợp lệ",
+    "title": "Fusion Hotel Group"
+  },
+  {
+    "id": "ks18",
+    "name": "Silk Path Hotels",
+    "url": "https://silkpathhotel.com/",
+    "ok": true,
+    "final_url": "https://silkpathhotel.com/",
+    "reason": "URL hợp lệ",
+    "title": "Silk Path Hotels &amp; Resorts | Top Hotels in Vietnam’s Heritage Destinations"
+  },
+  {
+    "id": "ks19",
+    "name": "La Siesta Hotels",
+    "url": "https://lasiestahotels.com/",
+    "ok": true,
+    "final_url": "https://lasiestahotels.com/",
+    "reason": "URL hợp lệ",
+    "title": "Luxury Boutique Hotel in Hanoi, Vietnam | La Siesta Classic Ma May"
+  },
+  {
+    "id": "ks20",
+    "name": "P'apiu Resort",
+    "url": "https://papiu.vn/",
+    "ok": true,
+    "final_url": "https://papiu.vn/",
+    "reason": "URL hợp lệ",
+    "title": "papiu.vn"
+  },
+  {
+    "id": "ks21",
+    "name": "Topas Ecolodge",
+    "url": "https://topasecolodge.com/",
+    "ok": true,
+    "final_url": "https://topasecolodge.com/",
+    "reason": "URL hợp lệ",
+    "title": "Welcome to Topas Ecolodge - Mountaintop Resort in Sapa Vietnam"
+  },
+  {
+    "id": "ks22",
+    "name": "Aman Resorts",
+    "url": "https://www.aman.com/",
+    "ok": true,
+    "final_url": "https://www.aman.com/",
+    "reason": "URL hợp lệ",
+    "title": "Aman Resorts, Hotels &amp; Residences - Explore Luxury Destinations"
+  },
+  {
+    "id": "ks23",
+    "name": "Six Senses",
+    "url": "https://www.sixsenses.com/",
+    "ok": false,
+    "final_url": "https://www.sixsenses.com/",
+    "reason": "HTTP Error 403",
+    "title": ""
+  },
+  {
+    "id": "ks24",
+    "name": "Rosewood Hotels",
+    "url": "https://www.rosewoodhotels.com/",
+    "ok": true,
+    "final_url": "https://www.rosewoodhotels.com/en/default",
+    "reason": "URL hợp lệ",
+    "title": "Luxury Hotels | Luxury Resorts | Rosewood 5-Star Hotels"
+  },
+  {
+    "id": "ks25",
+    "name": "Ett Hem Stockholm",
+    "url": "https://www.etthem.se/",
+    "ok": true,
+    "final_url": "https://www.etthem.se/",
+    "reason": "URL hợp lệ",
+    "title": "Ett Hem Stockholm"
+  },
+  {
+    "id": "ks26",
+    "name": "Our Habitas",
+    "url": "https://www.ourhabitas.com/",
+    "ok": true,
+    "final_url": "https://www.ourhabitas.com/",
+    "reason": "URL hợp lệ",
+    "title": "Our Habitas - Luxury for the Soul - Award Winning Hotels &amp; Resorts"
+  },
+  {
+    "id": "ks27",
+    "name": "Constance Hotels",
+    "url": "https://www.constancehotels.com/en/",
+    "ok": true,
+    "final_url": "https://www.constancehotels.com/en/",
+    "reason": "URL hợp lệ",
+    "title": "Constance Hotels &amp; Resorts: True Indian Ocean Holidays"
+  },
+  {
+    "id": "ks28",
+    "name": "7132 Hotel",
+    "url": "https://7132.com/en",
+    "ok": true,
+    "final_url": "https://7132.com/en",
+    "reason": "URL hợp lệ",
+    "title": "7132 Hotels: Authentic Swiss Tranquility in Vals"
+  },
+  {
+    "id": "ks29",
+    "name": "Badrutt's Palace",
+    "url": "https://badruttspalace.com/",
+    "ok": true,
+    "final_url": "https://badruttspalace.com/en/winter/",
+    "reason": "URL hợp lệ",
+    "title": "Luxury Winter Hotel Swiss Alps | Badrutt&#x27;s Palace Hotel"
+  },
+  {
+    "id": "ks30",
+    "name": "Ace Hotel",
+    "url": "https://www.acehotel.com/",
+    "ok": false,
+    "final_url": "https://www.acehotel.com/",
+    "reason": "HTTP Error 403",
+    "title": ""
+  },
+  {
+    "id": "ks31",
+    "name": "Le Barn Hotel",
+    "url": "https://lebarnhotel.com/en/",
+    "ok": true,
+    "final_url": "https://lebarnhotel.com/fr/",
+    "reason": "URL hợp lệ",
+    "title": "→ Le Barn · Hôtel nature proche de Paris &amp; Rambouillet"
+  }
+]

@@ -789,9 +789,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">311</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">331</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="landing-page-oto-mercedes" onclick="filterStagingTopic('landing-page-oto-mercedes')">
+      <button class="staging-tab-btn active" data-industry="khach-san" onclick="filterStagingTopic('khach-san')">
+        <span>🏨</span> Khách Sạn & Resort <span class="tab-badge" id="badgeKhachSan">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="landing-page-oto-mercedes" onclick="filterStagingTopic('landing-page-oto-mercedes')">
         <span>🚗</span> LP Mercedes & Ô Tô <span class="tab-badge" id="badgeAutoMercedesLP">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="noi-that-sang-trong" onclick="filterStagingTopic('noi-that-sang-trong')">
@@ -932,11 +935,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'landing-page-oto-mercedes';
+  let currentTopic = 'khach-san';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'landing-page-oto-mercedes';
+    const indParam = params.get('industry') || params.get('topic') || 'khach-san';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1025,6 +1028,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'khach-san': 'Khách Sạn & Khu Nghỉ Dưỡng (Boutique Luxury, Di Sản 5 Sao & Chuỗi Quốc Tế)',
       'landing-page-oto-mercedes': 'Landing Page Bán Xe Mercedes-Benz Mới & Ô Tô Việt Nam (Cấu Trúc Chuyển Đổi Google Ads)',
       'noi-that-sang-trong': 'Nội Thất Phong Cách Sang Trọng (Luxury Editorial, Quiet Luxury & Biệt Thự Thượng Lưu)',
       'noi-that': 'Nội Thất & Kiến Trúc Không Gian (Studio Luxury, Thi Công Trọn Gói & Showroom E-Commerce)',
@@ -1051,6 +1055,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeKhachSan')) document.getElementById('badgeKhachSan').textContent = CANDIDATES.filter(c => c.industry === 'khach-san').length;
     if (document.getElementById('badgeAutoMercedesLP')) document.getElementById('badgeAutoMercedesLP').textContent = CANDIDATES.filter(c => c.industry === 'landing-page-oto-mercedes').length;
     if (document.getElementById('badgeNoiThatLux')) document.getElementById('badgeNoiThatLux').textContent = CANDIDATES.filter(c => c.industry === 'noi-that-sang-trong').length;
     if (document.getElementById('badgeNoiThat')) document.getElementById('badgeNoiThat').textContent = CANDIDATES.filter(c => c.industry === 'noi-that').length;

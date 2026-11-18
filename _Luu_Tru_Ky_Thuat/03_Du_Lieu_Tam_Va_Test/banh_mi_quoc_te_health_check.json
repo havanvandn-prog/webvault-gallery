@@ -1,0 +1,380 @@
+[
+  {
+    "id": "bm01",
+    "name": "Bánh Mì Kêu (London)",
+    "url": "https://banhmikeu.co.uk/",
+    "ok": false,
+    "final_url": "https://banhmikeu.co.uk/",
+    "reason": "Lỗi kết nối website: ('Connection aborted.', RemoteDisconnected('Remote end close",
+    "title": ""
+  },
+  {
+    "id": "bm02",
+    "name": "Bánh NYC",
+    "url": "https://www.banhny.com/",
+    "ok": true,
+    "final_url": "https://www.banhny.com/",
+    "reason": "URL hợp lệ",
+    "title": "Order Online | Bánh Shop House"
+  },
+  {
+    "id": "bm03",
+    "name": "Bánh Shop House (NYC)",
+    "url": "https://www.banhshophouse.com/",
+    "ok": false,
+    "final_url": "https://www.banhshophouse.com/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='www.banhshophouse.com', port=443):",
+    "title": ""
+  },
+  {
+    "id": "bm04",
+    "name": "Bun Mee (SF & NYC)",
+    "url": "https://bunmee.co/",
+    "ok": true,
+    "final_url": "https://bunmee.co/",
+    "reason": "URL hợp lệ",
+    "title": "Bun Mee Vietnamese Sandwiches"
+  },
+  {
+    "id": "bm05",
+    "name": "Bánh Anh Em (Seattle)",
+    "url": "https://www.banhanhem.com/",
+    "ok": true,
+    "final_url": "https://www.banhanhem.com/",
+    "reason": "URL hợp lệ",
+    "title": "Official Online Shop | Bánh Anh Em"
+  },
+  {
+    "id": "bm06",
+    "name": "BAMMI (Melbourne)",
+    "url": "https://bammivietnam.com.au/",
+    "ok": true,
+    "final_url": "https://bammivietnam.com.au/",
+    "reason": "URL hợp lệ",
+    "title": "BAMMI: Freshly Baked BÃNH MÃ"
+  },
+  {
+    "id": "bm07",
+    "name": "Banh Mi Bao (Sydney)",
+    "url": "https://banhmibao.com.au/",
+    "ok": true,
+    "final_url": "https://www.banhmibao.com.au/",
+    "reason": "URL hợp lệ",
+    "title": "Banh Mi Bao"
+  },
+  {
+    "id": "bm08",
+    "name": "The Banh Mi House (AU)",
+    "url": "https://thebanhmihouse.com.au/",
+    "ok": true,
+    "final_url": "https://www.thebanhmihouse.com.au/",
+    "reason": "URL hợp lệ",
+    "title": "Home | The Little Banh Mi H"
+  },
+  {
+    "id": "bm09",
+    "name": "Roll'd Vietnamese (AU)",
+    "url": "https://rolld.com.au/",
+    "ok": true,
+    "final_url": "https://rolld.com.au/",
+    "reason": "URL hợp lệ",
+    "title": "Roll&#39;d Vietnamese - Banh Mi, Rice Paper Rolls, Pho &amp; More &ndash; Roll&#39;d Vietnamese Australia"
+  },
+  {
+    "id": "bm10",
+    "name": "Luke's Bánh Mì (Melbourne)",
+    "url": "https://www.lukesbanhmi.au/",
+    "ok": true,
+    "final_url": "https://www.lukesbanhmi.au/",
+    "reason": "URL hợp lệ",
+    "title": "Luke&#039;s Bánh Mì - Luke&#039;s Bánh Mì"
+  },
+  {
+    "id": "bm11",
+    "name": "Banh Mi Factory (Brisbane)",
+    "url": "https://banhmifactory.com.au/",
+    "ok": false,
+    "final_url": "https://banhmifactory.com.au/",
+    "reason": "Lỗi kết nối website: ('Connection aborted.', RemoteDisconnected('Remote end close",
+    "title": ""
+  },
+  {
+    "id": "bm12",
+    "name": "Bun Banh Mi (Perth)",
+    "url": "https://bunbanhmi.com.au/",
+    "ok": true,
+    "final_url": "https://bunbanhmi.com.au/",
+    "reason": "URL hợp lệ",
+    "title": "Bun Banh Mi"
+  },
+  {
+    "id": "bm13",
+    "name": "Mister Banh Mi (Perth)",
+    "url": "https://misterbanhmi.com.au/",
+    "ok": true,
+    "final_url": "https://misterbanhmi.com.au/",
+    "reason": "URL hợp lệ",
+    "title": "Mister Banh Mi &#8211; The Best Vietnamese Sandwich"
+  },
+  {
+    "id": "bm14",
+    "name": "Bánh Mì Oï! (Paris)",
+    "url": "https://www.banhmioi.fr/",
+    "ok": false,
+    "final_url": "https://www.banhmioi.fr/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='www.banhmioi.fr', port=443): Max r",
+    "title": ""
+  },
+  {
+    "id": "bm15",
+    "name": "Banemi (Paris)",
+    "url": "https://www.banemi.fr/",
+    "ok": true,
+    "final_url": "https://www.banemi.fr/",
+    "reason": "URL hợp lệ",
+    "title": "Banemi - Restaurant vietnamien &amp; Banh mi à Paris - 10e arrondissement"
+  },
+  {
+    "id": "bm16",
+    "name": "An Banh Mi (Berlin)",
+    "url": "https://anbanhmi.de/",
+    "ok": true,
+    "final_url": "https://www.anbanhmi.de/",
+    "reason": "URL hợp lệ",
+    "title": "AN BANH MI - vietnamese Streetfood"
+  },
+  {
+    "id": "bm17",
+    "name": "Banh Mi 73 (Berlin)",
+    "url": "https://www.banhmi73.de/",
+    "ok": true,
+    "final_url": "https://www.banhmi73.de/",
+    "reason": "URL hợp lệ",
+    "title": "Banh Mi 73 Berlin | Vietnamesische Restaurant in Charlottenburg Berlin | Kaiser-Friedrich-Straße 46, 10627 Berlin-Charlottenburg-Wilmersdorf, Germany"
+  },
+  {
+    "id": "bm18",
+    "name": "Banh Mi Boys (Toronto)",
+    "url": "https://banhmiboys.com/",
+    "ok": false,
+    "final_url": "https://banhmiboys.com/",
+    "reason": "Lỗi kết nối website: ('Connection aborted.', RemoteDisconnected('Remote end close",
+    "title": ""
+  },
+  {
+    "id": "bm19",
+    "name": "Lamhan Banh Mi (Toronto)",
+    "url": "https://www.lamhanbanhmi.com/",
+    "ok": false,
+    "final_url": "https://www.lamhanbanhmi.com/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='www.lamhanbanhmi.com', port=443): ",
+    "title": ""
+  },
+  {
+    "id": "bm20",
+    "name": "Bánh Mì Xin Chào (Tokyo)",
+    "url": "https://banhmixinchao.co.jp/",
+    "ok": true,
+    "final_url": "https://banhmixinchao.co.jp/ja",
+    "reason": "URL hợp lệ",
+    "title": "バインミーシンチャオ - Taste Banh mi, Taste Vietnam"
+  },
+  {
+    "id": "bm21",
+    "name": "Nonette Banh Mi (Paris)",
+    "url": "https://nonettebanhmi.com/",
+    "ok": true,
+    "final_url": "https://www.nonettebanhmi.com/",
+    "reason": "URL hợp lệ",
+    "title": "Nonette Banh Mi &amp; Donuts in Paris"
+  },
+  {
+    "id": "bm22",
+    "name": "Joo Chiat Caphe (Singapore)",
+    "url": "https://joochiatcaphe.com/",
+    "ok": true,
+    "final_url": "https://joochiatcaphe.com/",
+    "reason": "URL hợp lệ",
+    "title": "Home"
+  },
+  {
+    "id": "bm23",
+    "name": "The Viet Roti (Singapore)",
+    "url": "https://thevietroti.com/",
+    "ok": true,
+    "final_url": "https://www.thevietroti.com/",
+    "reason": "URL hợp lệ",
+    "title": "The VietRoti | Banh Mi &amp; Coffee in Joo Chiat &amp; Tai Seng"
+  },
+  {
+    "id": "bm24",
+    "name": "Paris Banh Mi (USA)",
+    "url": "https://www.parisbanhmi.com/",
+    "ok": true,
+    "final_url": "https://www.parisbanhmi.com/",
+    "reason": "URL hợp lệ",
+    "title": "Paris banh mi"
+  },
+  {
+    "id": "bm25",
+    "name": "Banh Mi Kitchen",
+    "url": "https://banhmikitchen.ph/",
+    "ok": true,
+    "final_url": "https://banhmikitchen.ph/",
+    "reason": "URL hợp lệ",
+    "title": "Banh Mi Kitchen | Order Online"
+  },
+  {
+    "id": "bm26",
+    "name": "Lee's Sandwiches (USA)",
+    "url": "https://leesandwiches.com/",
+    "ok": false,
+    "final_url": "https://leesandwiches.com/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='leesandwiches.com', port=443): Max",
+    "title": ""
+  },
+  {
+    "id": "bm27",
+    "name": "Banh Mi & Ti (USA)",
+    "url": "https://www.banhmiandti.com/",
+    "ok": true,
+    "final_url": "https://www.banhmiandti.com/",
+    "reason": "URL hợp lệ",
+    "title": "Banh Mi &amp; Ti"
+  },
+  {
+    "id": "bm28",
+    "name": "Num Pang (NYC)",
+    "url": "https://eatnumpang.com/",
+    "ok": true,
+    "final_url": "https://www.eatnumpang.com",
+    "reason": "URL hợp lệ",
+    "title": "Fresh Baked Sandwiches | Num Pang"
+  },
+  {
+    "id": "bm29",
+    "name": "Saigon Sisters (Chicago)",
+    "url": "https://www.saigonsisters.com/",
+    "ok": false,
+    "final_url": "https://www.saigonsisters.com/",
+    "reason": "HTTP Error 403",
+    "title": ""
+  },
+  {
+    "id": "bm30",
+    "name": "Cafe Bunn Mi (SF)",
+    "url": "https://bunnmi.com/",
+    "ok": false,
+    "final_url": "https://bunnmi.com/",
+    "reason": "HTTP Error 202",
+    "title": ""
+  },
+  {
+    "id": "bm31",
+    "name": "Mr. Banh Mi (Brooklyn)",
+    "url": "https://mrbanhminyc.com/",
+    "ok": true,
+    "final_url": "https://mrbanhminyc.com/",
+    "reason": "URL hợp lệ",
+    "title": "Mr Banh Mi"
+  },
+  {
+    "id": "bm32",
+    "name": "Ba Le Sandwiches (Chicago)",
+    "url": "https://www.balesandwiches.com/",
+    "ok": true,
+    "final_url": "https://www.balesandwich.com/",
+    "reason": "URL hợp lệ",
+    "title": "Ba Le Sandwiches"
+  },
+  {
+    "id": "bm33",
+    "name": "Bánh Mì Ông Mười (Chicago)",
+    "url": "https://banhmiongmuoi.com/",
+    "ok": true,
+    "final_url": "https://banhmiongmuoi.com/",
+    "reason": "URL hợp lệ",
+    "title": "Best Vietnamese Food in North Park, Chicago | BÃ¡nh MÃ¬ Ãng MÆ°á»i | Vietnamese Food near me"
+  },
+  {
+    "id": "bm34",
+    "name": "Lotus Banh Mi (Chicago)",
+    "url": "https://lotusbanhmi.com/",
+    "ok": true,
+    "final_url": "https://lotusbanhmi.com/",
+    "reason": "URL hợp lệ",
+    "title": "Pho &amp; Modern Vietnamese in Chicago | Lotus Banh Mi"
+  },
+  {
+    "id": "bm35",
+    "name": "The Best Baguette (Portland)",
+    "url": "https://www.thebestbaguette.com/",
+    "ok": true,
+    "final_url": "https://www.thebestbaguette.com/",
+    "reason": "URL hợp lệ",
+    "title": "Home - Best Baguette"
+  },
+  {
+    "id": "bm36",
+    "name": "Bánh Mì & Bottles (Denver)",
+    "url": "https://www.banhmibottles.com/",
+    "ok": false,
+    "final_url": "https://www.banhmibottles.com/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='www.banhmibottles.com', port=443):",
+    "title": ""
+  },
+  {
+    "id": "bm37",
+    "name": "Bánh Mì Mẹ Ỉn (Saigon)",
+    "url": "https://banhmi.mein.vn/",
+    "ok": true,
+    "final_url": "https://banhmi.mein.vn/",
+    "reason": "URL hợp lệ",
+    "title": "Home - Bánh Mì Mẹ Ỉn"
+  },
+  {
+    "id": "bm38",
+    "name": "Vietnom Local Eatery (DN/HA)",
+    "url": "https://vietnom.kitchen/",
+    "ok": true,
+    "final_url": "https://vietnom.kitchen/en",
+    "reason": "URL hợp lệ",
+    "title": "Vietnom Local Eatery: Big flavours of Central Vietnam"
+  },
+  {
+    "id": "bm39",
+    "name": "Bami Bread (VN)",
+    "url": "https://bamibread.com/",
+    "ok": false,
+    "final_url": "https://bamibread.com/",
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='bamibread.com', port=443): Max ret",
+    "title": ""
+  },
+  {
+    "id": "bm40",
+    "name": "Anan Saigon (VN)",
+    "url": "https://www.anansaigon.com/",
+    "ok": true,
+    "final_url": "https://anansaigon.com/",
+    "reason": "URL hợp lệ",
+    "title": "ANAN SAIGON"
+  },
+  {
+    "id": "bm41",
+    "name": "Banh Mi King (Amsterdam)",
+    "url": "https://banhmiking.nl/",
+    "ok": true,
+    "final_url": "https://banhmiking.nl/",
+    "reason": "URL hợp lệ",
+    "title": "Experience the best Banh mi in Amsterdam | Banh mi king"
+  },
+  {
+    "id": "bm42",
+    "name": "Destination Roll (AU)",
+    "url": "https://destinationroll.co/",
+    "ok": true,
+    "final_url": "https://destinationroll.co/",
+    "reason": "URL hợp lệ",
+    "title": "Destination Roll — Australia's #1 Vietnamese Bánh Mì Bakery | 17+ Locations Sydney &amp; Perth"
+  }
+]

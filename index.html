@@ -564,20 +564,6 @@
       display: none !important;
     }
 
-    .file-size-tag {
-      position: absolute;
-      bottom: 8px;
-      right: 8px;
-      background: rgba(16, 16, 20, 0.85);
-      backdrop-filter: blur(4px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #4ade80;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-
     /* CARD BODY */
     .card-body {
       padding: 16px;
@@ -619,7 +605,7 @@
       font-weight: 700;
       color: #fff;
       line-height: 1.3;
-      margin-bottom: 8px;
+      margin-bottom: 14px;
     }
 
     .card-desc {
@@ -632,6 +618,8 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      /* TẠM ẨN CỤM GIỚI THIỆU WEBSITE: xóa dòng display: none bên dưới để mở lại */
+      display: none !important;
     }
 
     /* CARD ACTION BUTTONS */
@@ -639,6 +627,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 8px;
+      margin-top: auto;
       margin-bottom: 8px;
     }
 
@@ -2546,12 +2535,23 @@
     } catch (e) {}
   }
 
+  function reorderCardsInDom() {
+    const grid = document.getElementById('cardsGrid');
+    if (!grid) return;
+    const ordered = getFilteredWebsites();
+    ordered.forEach(item => {
+      const el = document.getElementById(`card-${item.id}`);
+      if (el) grid.appendChild(el);
+    });
+  }
+
   function markFbCopied(id) {
     const key = String(id);
     copiedFbIds.add(key);
     saveCopiedFbIds();
     const card = document.getElementById(`card-${key}`);
     if (card) card.classList.add('is-fb-copied');
+    reorderCardsInDom();
   }
 
   function unmarkFbCopied(id, event) {
@@ -2561,6 +2561,7 @@
     saveCopiedFbIds();
     const card = document.getElementById(`card-${key}`);
     if (card) card.classList.remove('is-fb-copied');
+    reorderCardsInDom();
     showToast(`Đã bỏ nhãn "Đã copy" cho mẫu #${key}`);
   }
 
@@ -2732,8 +2733,9 @@
   }
 
   // LẤY DANH SÁCH WEBSITE ĐANG HIỂN THỊ (THEO BỘ LỌC DANH MỤC, TÌM KIẾM HOẶC PITCH MODE)
+  // Tự động đẩy các mẫu đã có nhãn "Đã copy" lên đầu danh sách
   function getFilteredWebsites() {
-    return WEBSITES_DATA.filter(item => {
+    const filtered = WEBSITES_DATA.filter(item => {
       if (isPitchMode && !selectedPitchIds.has(item.id)) return false;
       if (currentIndustry !== 'all' && item.industry !== currentIndustry) return false;
 
@@ -2742,6 +2744,12 @@
         if (!text.includes(currentSearch)) return false;
       }
       return true;
+    });
+
+    return filtered.sort((a, b) => {
+      const aCopied = copiedFbIds.has(String(a.id)) ? 1 : 0;
+      const bCopied = copiedFbIds.has(String(b.id)) ? 1 : 0;
+      return bCopied - aCopied;
     });
   }
 
@@ -2877,7 +2885,6 @@
               Xem Chi Tiết Full-Page
             </div>
           </div>
-          <span class="file-size-tag">${item.thumb_kb} KB WebP</span>
         </div>
 
         <!-- BODY -->

@@ -706,6 +706,32 @@ template = """<!DOCTYPE html>
       padding-left: 8px;
     }
 
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      background: linear-gradient(135deg, #10b981, #059669);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-download:hover {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      transform: translateY(-1px);
+    }
+    .btn-download:disabled {
+      opacity: 0.7;
+      cursor: wait;
+      transform: none;
+    }
+
     /* TOAST */
     .toast {
       position: fixed;
@@ -893,6 +919,11 @@ template = """<!DOCTYPE html>
 
         <button id="lbToggleBtn" class="lightbox-toggle-btn is-unselected" onclick="toggleLightboxApproval()">
           <span id="lbToggleText">+ Thêm Mẫu Này Để Đồng Bộ</span>
+        </button>
+
+        <button type="button" id="lbDownloadBtn" class="btn-download" onclick="downloadLightboxImage()" title="Tải nhanh ảnh giao diện full-page xuống máy (Phím D)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span id="lbDownloadText">Tải ảnh</span>
         </button>
 
         <a id="lbExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-view-hub" style="padding: 6px 12px; font-size: 12px;">
@@ -1266,10 +1297,110 @@ template = """<!DOCTYPE html>
       }
     }
 
+    const dlLabel = document.getElementById('lbDownloadText');
+    const dlBtn = document.getElementById('lbDownloadBtn');
+    if (dlLabel) dlLabel.textContent = 'Tải ảnh';
+    if (dlBtn) dlBtn.disabled = false;
+
     const lbBody = document.getElementById('lbBody');
     if (lbBody) {
       lbBody.scrollTop = 0;
       lbBody.scrollLeft = 0;
+    }
+  }
+
+  function buildDownloadSlug(item) {
+    const raw = (item && (item.short_name || item.domain || item.id)) || 'website';
+    return raw
+      .normalize('NFD')
+      .replace(/[\\u0300-\\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/Đ/g, 'D')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'website';
+  }
+
+  function triggerDownloadHref(href, fileName, revokeAfter) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    if (revokeAfter) {
+      setTimeout(() => URL.revokeObjectURL(href), 5000);
+    }
+  }
+
+  async function downloadLightboxImage() {
+    const currentList = getFilteredCandidates();
+    const item = currentList[currentLbIndex];
+    if (!item) return;
+
+    const img = document.getElementById('lbImage');
+    const btn = document.getElementById('lbDownloadBtn');
+    const label = document.getElementById('lbDownloadText');
+    const baseName = `${buildDownloadSlug(item)}-fullpage`;
+
+    if (btn) btn.disabled = true;
+    if (label) label.textContent = 'Đang xuất...';
+
+    const finish = (ext, viaFallback) => {
+      if (btn) btn.disabled = false;
+      if (label) label.textContent = '✓ Đã tải';
+      showToast(`⬇️ Đã tải ${baseName}.${ext}${viaFallback ? ' (bản gốc siêu nhẹ)' : ''}`);
+      setTimeout(() => {
+        if (label) label.textContent = 'Tải ảnh';
+      }, 2000);
+    };
+
+    try {
+      if (window.location.protocol !== 'file:' && img && img.complete && img.naturalWidth > 0) {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        const pngBlob = await new Promise((resolve) => {
+          try {
+            canvas.toBlob((blob) => resolve(blob), 'image/png');
+          } catch (err) {
+            resolve(null);
+          }
+        });
+
+        if (pngBlob) {
+          const blobUrl = URL.createObjectURL(pngBlob);
+          triggerDownloadHref(blobUrl, `${baseName}.png`, true);
+          finish('png', false);
+          return;
+        }
+      }
+
+      const src = item.full || (img && img.getAttribute('src'));
+      if (!src) throw new Error('Không tìm thấy đường dẫn ảnh');
+
+      if (window.location.protocol !== 'file:') {
+        const resp = await fetch(src);
+        if (resp.ok) {
+          const webpBlob = await resp.blob();
+          const blobUrl = URL.createObjectURL(webpBlob);
+          triggerDownloadHref(blobUrl, `${baseName}.webp`, true);
+          finish('webp', true);
+          return;
+        }
+      }
+
+      triggerDownloadHref(src, `${baseName}.webp`, false);
+      finish('webp', true);
+    } catch (err) {
+      console.error('Lỗi tải ảnh:', err);
+      if (btn) btn.disabled = false;
+      if (label) label.textContent = 'Tải ảnh';
+      showToast('⚠️ Chưa tải được ảnh, vui lòng thử lại sau khi ảnh hiển thị xong.');
     }
   }
 
@@ -1322,6 +1453,9 @@ template = """<!DOCTYPE html>
 
     if (e.key === 'Escape') {
       closeLightbox();
+    } else if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      downloadLightboxImage();
     } else if (e.key === 'ArrowRight') {
       nextLightbox();
     } else if (e.key === 'ArrowLeft') {

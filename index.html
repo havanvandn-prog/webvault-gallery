@@ -153,11 +153,13 @@
       color: var(--text-dim);
       letter-spacing: 0.8px;
       margin-bottom: 12px;
-      padding-left: 8px;
+      padding-left: 12px;
     }
 
     .nav-list {
       list-style: none;
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -303,6 +305,23 @@
       background: rgba(255, 255, 255, 0.1);
       border-color: var(--border-hover);
       color: #fff;
+    }
+
+    .btn-download {
+      background: linear-gradient(135deg, #10b981, #059669);
+      border-color: rgba(16, 185, 129, 0.45);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.28);
+    }
+    .btn-download:hover {
+      background: linear-gradient(135deg, #34d399, #10b981);
+      transform: translateY(-1px);
+      color: #fff;
+    }
+    .btn-download:disabled {
+      opacity: 0.7;
+      cursor: wait;
+      transform: none;
     }
 
     .btn-pitch {
@@ -849,6 +868,38 @@
       pointer-events: none;
     }
 
+    .lightbox-img-wrapper.is-loading {
+      display: none !important;
+    }
+    .lightbox-loader {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 5;
+      pointer-events: none;
+    }
+    .lightbox-loader.active {
+      display: flex;
+    }
+    .lightbox-spinner {
+      width: 34px;
+      height: 34px;
+      border: 3px solid rgba(255, 255, 255, 0.12);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: lbSpin 0.7s linear infinite;
+    }
+    @keyframes lbSpin {
+      to { transform: rotate(360deg); }
+    }
+
     /* THANH ĐIỀU KHIỂN ZOOM TRÊN HEADER */
     .lightbox-zoom-bar {
       position: relative;
@@ -1327,14 +1378,22 @@
     </div>
 
     <div class="lightbox-header-actions">
-      <a id="lbExternalLink" href="#" target="_blank" class="btn btn-secondary">
+      <button type="button" id="lbDownloadBtn" class="btn btn-download" onclick="downloadLightboxImage()" title="Tải nhanh ảnh giao diện full-page xuống máy (Phím D)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        <span id="lbDownloadText">Tải ảnh</span>
+      </button>
+      <a id="lbExternalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
         Mở Website Thật ↗
       </a>
       <button class="btn btn-secondary" onclick="closeLightbox()">Đóng (ESC)</button>
     </div>
   </div>
   <div class="lightbox-body mode-full" id="lbBody" onclick="handleLightboxBodyClick(event)">
-    <div class="lightbox-img-wrapper" id="lbImgWrapper" onclick="handleImageClick(event)" title="Nhấp để chuyển đổi giữa Fit toàn bộ giao diện và Phóng to 100%">
+    <div class="lightbox-loader" id="lbLoader">
+      <div class="lightbox-spinner" id="lbSpinner"></div>
+      <span id="lbLoaderText">Đang tải ảnh giao diện...</span>
+    </div>
+    <div class="lightbox-img-wrapper is-loading" id="lbImgWrapper" onclick="handleImageClick(event)" title="Nhấp để chuyển đổi giữa Fit toàn bộ giao diện và Phóng to 100%">
       <img id="lbImage" src="" alt="Full website preview">
     </div>
   </div>
@@ -3074,6 +3133,8 @@
 
   function handleImageClick(e) {
     e.stopPropagation();
+    const wrapper = document.getElementById('lbImgWrapper');
+    if (wrapper && wrapper.classList.contains('is-loading')) return;
     // Click vào ảnh: chuyển đổi giữa Chuẩn Web 100% và Fit toàn bộ
     if (currentLbMode === 'full') {
       setLightboxMode('fit');
@@ -3129,32 +3190,211 @@
     setLightboxMode('custom', ZOOM_LEVELS[newIndex]);
   }
 
+  let lbLoadToken = 0;
+
+  function resetLightboxMedia() {
+    lbLoadToken++;
+    const img = document.getElementById('lbImage');
+    const wrapper = document.getElementById('lbImgWrapper');
+    const loader = document.getElementById('lbLoader');
+    if (img) {
+      img.onload = null;
+      img.onerror = null;
+      img.removeAttribute('src');
+    }
+    if (wrapper) wrapper.classList.add('is-loading');
+    if (loader) loader.classList.remove('active');
+  }
+
+  function loadLightboxImage(src) {
+    resetLightboxMedia();
+    const token = ++lbLoadToken;
+    const img = document.getElementById('lbImage');
+    const wrapper = document.getElementById('lbImgWrapper');
+    const loader = document.getElementById('lbLoader');
+    const spinner = document.getElementById('lbSpinner');
+    const loaderText = document.getElementById('lbLoaderText');
+    const lbBody = document.getElementById('lbBody');
+    if (!img || !wrapper) return;
+
+    if (spinner) spinner.style.display = 'block';
+    if (loaderText) loaderText.textContent = 'Đang tải ảnh giao diện...';
+    if (loader) loader.classList.add('active');
+
+    let settled = false;
+    const reveal = () => {
+      if (token !== lbLoadToken) return;
+      if (loader) loader.classList.remove('active');
+      wrapper.classList.remove('is-loading');
+      if (lbBody) {
+        lbBody.scrollTop = 0;
+        lbBody.scrollLeft = 0;
+      }
+    };
+
+    const onLoadDone = () => {
+      if (settled || token !== lbLoadToken) return;
+      settled = true;
+      img.onload = null;
+      img.onerror = null;
+      if (typeof img.decode === 'function') {
+        img.decode().then(reveal).catch(reveal);
+      } else {
+        reveal();
+      }
+    };
+
+    img.onload = onLoadDone;
+    img.onerror = () => {
+      if (settled || token !== lbLoadToken) return;
+      settled = true;
+      img.onload = null;
+      img.onerror = null;
+      if (spinner) spinner.style.display = 'none';
+      if (loaderText) loaderText.textContent = '⚠️ Không thể tải ảnh xem trước.';
+    };
+
+    img.src = src;
+    if (img.complete && img.naturalWidth > 0) {
+      onLoadDone();
+    }
+  }
+
+  let currentLightboxItem = null;
+
+  function buildDownloadSlug(item) {
+    const raw = (item && (item.short_name || item.domain || item.id)) || 'website';
+    return raw
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .replace(/Đ/g, 'D')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'website';
+  }
+
+  function triggerDownloadHref(href, fileName, revokeAfter) {
+    const a = document.createElement('a');
+    a.href = href;
+    a.download = fileName;
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    if (revokeAfter) {
+      setTimeout(() => URL.revokeObjectURL(href), 5000);
+    }
+  }
+
+  async function downloadLightboxImage() {
+    if (!currentLightboxItem) return;
+    const item = currentLightboxItem;
+    const img = document.getElementById('lbImage');
+    const btn = document.getElementById('lbDownloadBtn');
+    const label = document.getElementById('lbDownloadText');
+    const baseName = `${buildDownloadSlug(item)}-fullpage`;
+
+    if (btn) btn.disabled = true;
+    if (label) label.textContent = 'Đang xuất...';
+
+    const finish = (ext, viaFallback) => {
+      if (btn) btn.disabled = false;
+      if (label) label.textContent = '✓ Đã tải';
+      showToast(`⬇️ Đã tải ${baseName}.${ext}${viaFallback ? ' (bản gốc siêu nhẹ)' : ''}`);
+      setTimeout(() => {
+        if (label) label.textContent = 'Tải ảnh';
+      }, 2000);
+    };
+
+    try {
+      // Trên HTTP/HTTPS (GitHub Pages / Local Server), chuyển trực tiếp sang PNG chuẩn tương thích 100%
+      if (window.location.protocol !== 'file:' && img && img.complete && img.naturalWidth > 0) {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        const pngBlob = await new Promise((resolve) => {
+          try {
+            canvas.toBlob((blob) => resolve(blob), 'image/png');
+          } catch (err) {
+            resolve(null);
+          }
+        });
+
+        if (pngBlob) {
+          const blobUrl = URL.createObjectURL(pngBlob);
+          triggerDownloadHref(blobUrl, `${baseName}.png`, true);
+          finish('png', false);
+          return;
+        }
+      }
+
+      // Fallback về file .webp gốc khi chạy qua file:/// hoặc khi canvas vượt giới hạn trình duyệt
+      const src = item.full || (img && img.getAttribute('src'));
+      if (!src) throw new Error('Không tìm thấy đường dẫn ảnh');
+
+      if (window.location.protocol !== 'file:') {
+        const resp = await fetch(src);
+        if (resp.ok) {
+          const webpBlob = await resp.blob();
+          const blobUrl = URL.createObjectURL(webpBlob);
+          triggerDownloadHref(blobUrl, `${baseName}.webp`, true);
+          finish('webp', true);
+          return;
+        }
+      }
+
+      triggerDownloadHref(src, `${baseName}.webp`, false);
+      finish('webp', true);
+    } catch (err) {
+      console.error('Lỗi tải ảnh:', err);
+      if (btn) btn.disabled = false;
+      if (label) label.textContent = 'Tải ảnh';
+      showToast('⚠️ Chưa tải được ảnh, vui lòng thử lại sau khi ảnh hiển thị xong.');
+    }
+  }
+
   function openLightbox(id) {
     const item = WEBSITES_DATA.find(w => w.id === id);
     if (!item) return;
+    currentLightboxItem = item;
 
-    document.getElementById('lbIndex').textContent = `${item.id}/20`;
+    const filtered = getFilteredWebsites();
+    const pos = filtered.findIndex(w => w.id === id) + 1;
+    const indexLabel = pos > 0 ? `${pos}/${filtered.length}` : item.id;
+
+    document.getElementById('lbIndex').textContent = indexLabel;
     document.getElementById('lbTitle').textContent = item.name;
     document.getElementById('lbExternalLink').href = item.url;
-    document.getElementById('lbImage').src = item.full;
+    const dlLabel = document.getElementById('lbDownloadText');
+    const dlBtn = document.getElementById('lbDownloadBtn');
+    if (dlLabel) dlLabel.textContent = 'Tải ảnh';
+    if (dlBtn) dlBtn.disabled = false;
 
     const modal = document.getElementById('lightboxModal');
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-
-    // Mặc định mở ở chế độ zoom 40% khi click vào ảnh
-    setLightboxMode('custom', 40);
     const lbBody = document.getElementById('lbBody');
     if (lbBody) {
       lbBody.scrollTop = 0;
       lbBody.scrollLeft = 0;
     }
+
+    // Mặc định mở ở chế độ zoom 40% khi click vào ảnh
+    setLightboxMode('custom', 40);
+    loadLightboxImage(item.full);
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
   }
 
   function closeLightbox() {
+    currentLightboxItem = null;
     const modal = document.getElementById('lightboxModal');
     modal.classList.remove('active');
     document.body.style.overflow = '';
+    resetLightboxMedia();
   }
 
   function handleLightboxBodyClick(e) {
@@ -3169,6 +3409,9 @@
 
     if (e.key === 'Escape') {
       closeLightbox();
+    } else if ((e.key === 'd' || e.key === 'D') && !e.ctrlKey && !e.metaKey && !e.altKey) {
+      e.preventDefault();
+      downloadLightboxImage();
     } else if (e.key === '+' || e.key === '=') {
       zoomStep(1);
     } else if (e.key === '-' || e.key === '_') {

@@ -172,6 +172,114 @@
       border-color: var(--border-hover);
     }
 
+    /* SEARCH BOX */
+    .staging-search-wrap {
+      position: relative;
+      flex: 1 1 240px;
+      max-width: 360px;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+    }
+
+    .staging-search-icon {
+      position: absolute;
+      left: 12px;
+      color: var(--text-dim);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+    }
+
+    .staging-search-input {
+      width: 100%;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 0 56px 0 36px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 12.5px;
+      outline: none;
+      transition: all 0.2s ease;
+    }
+    .staging-search-input::placeholder {
+      color: var(--text-dim);
+    }
+    .staging-search-input:focus {
+      background: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 59, 48, 0.6);
+      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.14);
+    }
+
+    .staging-search-clear {
+      position: absolute;
+      right: 8px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+    .staging-search-clear.visible {
+      display: inline-flex;
+    }
+    .staging-search-clear:hover {
+      background: rgba(255, 59, 48, 0.25);
+      color: #fff;
+    }
+
+    .staging-search-kbd {
+      position: absolute;
+      right: 10px;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 1px 6px;
+      pointer-events: none;
+    }
+    .staging-search-wrap.has-value .staging-search-kbd {
+      display: none;
+    }
+
+    .search-empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 56px 24px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+    }
+    .search-empty-state h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .search-empty-state p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .search-empty-actions {
+      display: inline-flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
     /* STAGING TABS BAR (CHUYỂN ĐỔI CHỦ ĐỀ ĐA NGÀNH) */
     .staging-tabs-bar {
       background: rgba(14, 14, 18, 0.95);
@@ -183,15 +291,54 @@
       backdrop-filter: blur(10px);
     }
 
-    .staging-tabs-container {
+    .staging-tabs-wrapper {
       max-width: 1440px;
       margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+    }
+
+    .tabs-nav-btn {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.06);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      user-select: none;
+    }
+    .tabs-nav-btn:hover:not(:disabled) {
+      background: rgba(255, 59, 48, 0.85);
+      border-color: #ff3b30;
+    }
+    .tabs-nav-btn:disabled {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    .staging-tabs-container {
+      flex: 1;
+      min-width: 0;
       display: flex;
       align-items: center;
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 2px;
       scrollbar-width: none;
+      scroll-behavior: smooth;
+      cursor: grab;
+    }
+    .staging-tabs-container.is-dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
     }
     .staging-tabs-container::-webkit-scrollbar {
       display: none;
@@ -723,8 +870,16 @@
       .staging-header {
         padding: 12px 16px;
       }
+      .staging-search-wrap {
+        flex: 1 1 100%;
+        max-width: 100%;
+        order: 3;
+      }
+      .staging-search-kbd {
+        display: none;
+      }
       .staging-tabs-bar {
-        top: 104px;
+        top: 148px;
         padding: 8px 16px;
       }
       .counter-strip {
@@ -755,6 +910,22 @@
         </div>
       </div>
 
+      <div class="staging-search-wrap" id="stagingSearchWrap">
+        <span class="staging-search-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input
+          type="text"
+          id="stagingSearchInput"
+          class="staging-search-input"
+          placeholder="Tìm theo tên, domain, mã, phong cách..."
+          autocomplete="off"
+          oninput="handleSearchInput(this.value)"
+        />
+        <span class="staging-search-kbd">/</span>
+        <button type="button" class="staging-search-clear" id="stagingSearchClear" onclick="clearSearch()" title="Xóa tìm kiếm (Esc)">×</button>
+      </div>
+
       <div class="staging-actions">
         <button class="btn btn-approve-all" id="btnToggleAll" onclick="toggleAll()">
           Chọn Tất Cả
@@ -774,7 +945,11 @@
 
   <!-- STAGING TABS BAR (CHỦ ĐỀ ĐA NGÀNH) -->
   <nav class="staging-tabs-bar">
-    <div class="staging-tabs-container">
+    <div class="staging-tabs-wrapper">
+      <button type="button" class="tabs-nav-btn" id="tabsPrevBtn" onclick="scrollTabs(-320)" title="Lướt sang trái" aria-label="Lướt sang trái">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <div class="staging-tabs-container" id="stagingTabsContainer">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
         <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">371</span>
       </button>
@@ -837,6 +1012,10 @@
       </button>
       <button class="staging-tab-btn" data-industry="tiec-cuoi" onclick="filterStagingTopic('tiec-cuoi')">
         <span>💍</span> Tiệc Cưới & Wedding <span class="tab-badge" id="badgeWedding">20</span>
+      </button>
+    </div>
+      <button type="button" class="tabs-nav-btn" id="tabsNextBtn" onclick="scrollTabs(320)" title="Lướt sang phải" aria-label="Lướt sang phải">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
     </div>
   </nav>
@@ -8164,6 +8343,45 @@
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
   let currentTopic = 'banh-mi-quoc-te';
+  let searchQuery = '';
+
+  function normalizeSearchText(str) {
+    return (str || '')
+      .toString()
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/đ/g, 'd')
+      .trim();
+  }
+
+  function handleSearchInput(val) {
+    searchQuery = val || '';
+    const wrap = document.getElementById('stagingSearchWrap');
+    const clearBtn = document.getElementById('stagingSearchClear');
+    const hasVal = searchQuery.trim().length > 0;
+    if (wrap) wrap.classList.toggle('has-value', hasVal);
+    if (clearBtn) clearBtn.classList.toggle('visible', hasVal);
+    renderStaging();
+  }
+
+  function clearSearch() {
+    searchQuery = '';
+    const input = document.getElementById('stagingSearchInput');
+    if (input) {
+      input.value = '';
+      input.focus();
+    }
+    const wrap = document.getElementById('stagingSearchWrap');
+    const clearBtn = document.getElementById('stagingSearchClear');
+    if (wrap) wrap.classList.remove('has-value');
+    if (clearBtn) clearBtn.classList.remove('visible');
+    renderStaging();
+  }
+
+  function searchAllTopics() {
+    filterStagingTopic('all');
+  }
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -8174,9 +8392,32 @@
     }
   }
 
+  function matchesSearchQuery(item, normalizedTerms) {
+    if (!normalizedTerms.length) return true;
+    const haystack = normalizeSearchText([
+      item.id,
+      item.name,
+      item.short_name,
+      item.domain,
+      item.url,
+      item.location,
+      item.industry_name,
+      item.category,
+      item.category_vn,
+      item.vibe,
+      item.desc
+    ].join(' '));
+    return normalizedTerms.every(term => haystack.includes(term));
+  }
+
   function getFilteredCandidates() {
-    if (currentTopic === 'all') return CANDIDATES;
-    return CANDIDATES.filter(c => c.industry === currentTopic);
+    const baseList = currentTopic === 'all'
+      ? CANDIDATES
+      : CANDIDATES.filter(c => c.industry === currentTopic);
+    const q = normalizeSearchText(searchQuery);
+    if (!q) return baseList;
+    const terms = q.split(/\s+/).filter(Boolean);
+    return baseList.filter(item => matchesSearchQuery(item, terms));
   }
 
   function filterStagingTopic(topic) {
@@ -8253,6 +8494,43 @@
 
       grid.appendChild(card);
     });
+
+    if (currentList.length === 0) {
+      const emptyBox = document.createElement('div');
+      emptyBox.className = 'search-empty-state';
+      const titleEl = document.createElement('h3');
+      titleEl.textContent = searchQuery.trim()
+        ? `Không tìm thấy mẫu nào khớp "${searchQuery.trim()}"`
+        : 'Chưa có mẫu nào trong chủ đề này';
+      const descEl = document.createElement('p');
+      descEl.textContent = currentTopic !== 'all' && searchQuery.trim()
+        ? 'Thử tìm trên toàn bộ các chủ đề nháp hoặc đổi từ khóa khác.'
+        : 'Thử nhập từ khóa khác như tên thương hiệu, domain, mã mẫu hoặc phong cách.';
+      const actionsEl = document.createElement('div');
+      actionsEl.className = 'search-empty-actions';
+
+      if (currentTopic !== 'all' && searchQuery.trim()) {
+        const allBtn = document.createElement('button');
+        allBtn.type = 'button';
+        allBtn.className = 'btn btn-sync-hub';
+        allBtn.textContent = `Tìm trong Tất Cả Nháp (${CANDIDATES.length})`;
+        allBtn.onclick = searchAllTopics;
+        actionsEl.appendChild(allBtn);
+      }
+      if (searchQuery.trim()) {
+        const clearBtn = document.createElement('button');
+        clearBtn.type = 'button';
+        clearBtn.className = 'btn btn-approve-all';
+        clearBtn.textContent = 'Xóa từ khóa';
+        clearBtn.onclick = clearSearch;
+        actionsEl.appendChild(clearBtn);
+      }
+
+      emptyBox.appendChild(titleEl);
+      emptyBox.appendChild(descEl);
+      if (actionsEl.children.length > 0) emptyBox.appendChild(actionsEl);
+      grid.appendChild(emptyBox);
+    }
 
     // Cập nhật thống kê
     const topicMapName = {
@@ -8535,7 +8813,28 @@
 
   document.addEventListener('keydown', (e) => {
     const modal = document.getElementById('lightboxModal');
-    if (!modal || !modal.classList.contains('active')) return;
+    const isLightboxOpen = modal && modal.classList.contains('active');
+    const searchInput = document.getElementById('stagingSearchInput');
+    const isTypingInInput = document.activeElement && (
+      document.activeElement.tagName === 'INPUT' ||
+      document.activeElement.tagName === 'TEXTAREA'
+    );
+
+    if (!isLightboxOpen) {
+      if ((e.key === '/' && !isTypingInInput) || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+        if (searchInput) {
+          e.preventDefault();
+          searchInput.focus();
+          searchInput.select();
+        }
+        return;
+      }
+      if (e.key === 'Escape' && document.activeElement === searchInput && searchQuery) {
+        clearSearch();
+        return;
+      }
+      return;
+    }
 
     if (e.key === 'Escape') {
       closeLightbox();
@@ -8568,12 +8867,89 @@
     }
   }, { passive: false });
 
+  function scrollTabs(delta) {
+    const container = document.getElementById('stagingTabsContainer');
+    if (!container) return;
+    container.scrollBy({ left: delta, behavior: 'smooth' });
+  }
+
+  function updateTabsNavButtons() {
+    const container = document.getElementById('stagingTabsContainer');
+    const prevBtn = document.getElementById('tabsPrevBtn');
+    const nextBtn = document.getElementById('tabsNextBtn');
+    if (!container || !prevBtn || !nextBtn) return;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    prevBtn.disabled = container.scrollLeft <= 2;
+    nextBtn.disabled = maxScroll <= 2 || container.scrollLeft >= maxScroll - 2;
+  }
+
+  function initTabsScrollSupport() {
+    const container = document.getElementById('stagingTabsContainer');
+    if (!container) return;
+
+    // Lăn con lăn chuột để cuộn ngang thanh tab
+    container.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+
+    // Kéo chuột để lướt thanh tab
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+    let moved = false;
+
+    container.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      moved = false;
+      startX = e.pageX - container.offsetLeft;
+      scrollStart = container.scrollLeft;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const x = e.pageX - container.offsetLeft;
+      const walk = x - startX;
+      if (Math.abs(walk) > 6) {
+        moved = true;
+        container.classList.add('is-dragging');
+        container.scrollLeft = scrollStart - walk;
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDown) return;
+      isDown = false;
+      container.classList.remove('is-dragging');
+    });
+
+    container.addEventListener('click', (e) => {
+      if (moved) {
+        e.preventDefault();
+        e.stopPropagation();
+        moved = false;
+      }
+    }, true);
+
+    container.addEventListener('scroll', updateTabsNavButtons);
+    window.addEventListener('resize', updateTabsNavButtons);
+    updateTabsNavButtons();
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initTopicFromUrl();
     // Cập nhật tab active
     document.querySelectorAll('.staging-tab-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.industry === currentTopic);
+      const isActive = btn.dataset.industry === currentTopic;
+      btn.classList.toggle('active', isActive);
+      if (isActive) {
+        btn.scrollIntoView({ behavior: 'auto', inline: 'center', block: 'nearest' });
+      }
     });
+    initTabsScrollSupport();
     renderStaging();
   });
 </script>

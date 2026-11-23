@@ -2831,6 +2831,36 @@
     document.body.removeChild(textarea);
   }
 
+  const SHORT_INDUSTRY_LABELS = {
+    'su-kien': 'Sự kiện & Activation',
+    'du-lich': 'Du lịch & Tour',
+    'du-hoc-dinh-cu-my': 'Du học & Định cư',
+    'mua-ban-oto-cu': 'Mua bán Ô tô cũ',
+    'ban-may-anh': 'Máy ảnh & Nhiếp ảnh',
+    'cafe-va-banh-mi': 'Cafe & Bánh mì',
+    'noi-that': 'Nội thất & Kiến trúc',
+    'noi-that-sang-trong': 'Nội thất sang trọng',
+    'landing-page-oto-mercedes': 'Landing Page Ô tô',
+    'du-an-thuc-te': 'Dự án thực tế',
+    'banh-mi-quoc-te': 'Tiệm Bánh mì',
+    'khach-san': 'Khách sạn & Resort',
+    'trung-tam-tieng-anh-dep': 'Trung tâm Tiếng Anh',
+    'trung-tam-anh-ngu': 'Trung tâm Anh ngữ',
+    'phong-thuy': 'Phong thủy',
+    'phong-kham-thu-y': 'Phòng khám Thú y',
+    'website-coupon-ma-giam-gia': 'Coupon & Săn Deal',
+    'landing-page-lap-mang': 'Landing Page Lắp mạng',
+    'lap-mang-fpt': 'Lắp mạng FPT',
+    'phong-tap-fitness': 'Fitness & Gym',
+    'ban-dong-ho': 'Bán Đồng hồ',
+    'decor-su-kien': 'Decor Sự kiện',
+    'tiec-cuoi': 'Tiệc cưới & Wedding'
+  };
+
+  function getShortIndustryLabel(item) {
+    return SHORT_INDUSTRY_LABELS[item.industry] || item.industry_name || 'Mẫu Web';
+  }
+
   // RENDER CARDS GRID
   function renderCards() {
     const grid = document.getElementById('cardsGrid');
@@ -2897,7 +2927,7 @@
             </span>
           </div>
 
-          <h3 class="card-title">${item.id}. ${item.short_name}</h3>
+          <h3 class="card-title" title="${item.id} — ${item.name || item.short_name}">Website ${getShortIndustryLabel(item)} | ${item.short_name}</h3>
           <p class="card-desc">${item.desc}</p>
 
           <!-- CARD ACTIONS: HÀNG 1 (COPY ẢNH + XEM FULL), HÀNG 2 (TRUY CẬP WEBSITE) -->

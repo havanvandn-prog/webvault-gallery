@@ -556,6 +556,10 @@
       padding: 2px 7px;
       border-radius: 4px;
       font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 54%;
     }
 
     .badge-vibe {
@@ -575,7 +579,8 @@
       font-size: 14px;
       font-weight: 700;
       color: #fff;
-      line-height: 1.35;
+      line-height: 1.4;
+      margin-bottom: auto;
     }
 
     .card-desc {
@@ -8392,12 +8397,45 @@
     }
   }
 
+  const SHORT_INDUSTRY_LABELS = {
+    'trung-tam-tieng-anh-dep': 'Trung tâm Tiếng Anh',
+    'banh-mi-quoc-te': 'Tiệm Bánh mì',
+    'khach-san': 'Khách sạn & Resort',
+    'landing-page-oto-mercedes': 'Landing Page Ô tô',
+    'noi-that-sang-trong': 'Nội thất sang trọng',
+    'noi-that': 'Nội thất & Kiến trúc',
+    'phong-thuy': 'Phong thủy',
+    'phong-kham-thu-y': 'Phòng khám Thú y',
+    'website-coupon-ma-giam-gia': 'Coupon & Săn Deal',
+    'landing-page-lap-mang': 'Landing Page Lắp mạng',
+    'lap-mang-fpt': 'Lắp mạng FPT',
+    'cafe-va-banh-mi': 'Cafe & Bánh mì',
+    'trung-tam-anh-ngu': 'Trung tâm Anh ngữ',
+    'ban-may-anh': 'Máy ảnh & Nhiếp ảnh',
+    'mua-ban-oto-cu': 'Mua bán Ô tô cũ',
+    'du-hoc-dinh-cu-my': 'Du học & Định cư',
+    'phong-tap-fitness': 'Fitness & Gym',
+    'ban-dong-ho': 'Bán Đồng hồ',
+    'decor-su-kien': 'Decor Sự kiện',
+    'tiec-cuoi': 'Tiệc cưới & Wedding',
+    'su-kien': 'Sự kiện & Activation',
+    'du-lich': 'Du lịch & Tour',
+    'du-an-thuc-te': 'Dự án thực tế'
+  };
+
+  function getShortIndustryLabel(item) {
+    return SHORT_INDUSTRY_LABELS[item.industry] || item.industry_name || 'Mẫu Web';
+  }
+
   function matchesSearchQuery(item, normalizedTerms) {
     if (!normalizedTerms.length) return true;
+    const shortIndustry = getShortIndustryLabel(item);
     const haystack = normalizeSearchText([
       item.id,
       item.name,
       item.short_name,
+      shortIndustry,
+      `Website ${shortIndustry} | ${item.short_name}`,
       item.domain,
       item.url,
       item.location,
@@ -8477,12 +8515,11 @@
 
         <div class="card-body">
           <div class="card-meta-row">
-            <span class="badge-industry">${item.industry_name || 'Mẫu Web'}</span>
+            <span class="badge-industry" title="${item.industry_name || getShortIndustryLabel(item)}">${getShortIndustryLabel(item)}</span>
             <span class="badge-vibe" title="${item.vibe}">${item.vibe}</span>
           </div>
 
-          <h3 class="card-title">${item.id.toUpperCase()}. ${item.short_name}</h3>
-          <p class="card-desc">${item.desc}</p>
+          <h3 class="card-title" title="${item.id.toUpperCase()} — ${item.name || item.short_name}">Website ${getShortIndustryLabel(item)} | ${item.short_name}</h3>
 
           <button class="approval-toggle-btn ${isSelected ? 'btn-selected' : 'btn-unselected'}" onclick="toggleApproval('${item.id}')">
             ${isSelected 

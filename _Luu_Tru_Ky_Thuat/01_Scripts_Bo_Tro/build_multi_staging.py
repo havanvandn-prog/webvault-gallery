@@ -789,12 +789,15 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">371</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">391</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="trung-tam-tieng-anh-dep" onclick="filterStagingTopic('trung-tam-tieng-anh-dep')">
+      <button class="staging-tab-btn active" data-industry="xay-dung" onclick="filterStagingTopic('xay-dung')">
+        <span>🏗️</span> Mảng Xây Dựng <span class="tab-badge" id="badgeXayDung">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="trung-tam-tieng-anh-dep" onclick="filterStagingTopic('trung-tam-tieng-anh-dep')">
         <span>🏫</span> Tiếng Anh (Bố Cục Đẹp) <span class="tab-badge" id="badgeAnhNguDep">20</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="banh-mi-quoc-te" onclick="filterStagingTopic('banh-mi-quoc-te')">
+      <button class="staging-tab-btn" data-industry="banh-mi-quoc-te" onclick="filterStagingTopic('banh-mi-quoc-te')">
         <span>🥖</span> Bánh Mì Quốc Tế <span class="tab-badge" id="badgeBanhMiQuocTe">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="khach-san" onclick="filterStagingTopic('khach-san')">
@@ -941,11 +944,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định phong-tap-fitness hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'banh-mi-quoc-te';
+  let currentTopic = 'xay-dung';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'banh-mi-quoc-te';
+    const indParam = params.get('industry') || params.get('topic') || 'xay-dung';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1034,6 +1037,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'xay-dung': 'Mảng Xây Dựng (Tổng Thầu VN, Xây Nhà Trọn Gói, Kết Cấu Thép & Tổng Thầu Quốc Tế)',
       'trung-tam-tieng-anh-dep': 'Trung Tâm Tiếng Anh Bố Cục Đẹp (Quốc Tế Editorial, EdTech & Trung Tâm Hiện Đại)',
       'banh-mi-quoc-te': 'Tiệm Bánh Mì Cho Người Nước Ngoài (Boutique VN, Châu Âu, Úc & Mỹ)',
       'khach-san': 'Khách Sạn & Khu Nghỉ Dưỡng (Boutique Luxury, Di Sản 5 Sao & Chuỗi Quốc Tế)',
@@ -1063,6 +1067,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeXayDung')) document.getElementById('badgeXayDung').textContent = CANDIDATES.filter(c => c.industry === 'xay-dung').length;
     if (document.getElementById('badgeBanhMiQuocTe')) document.getElementById('badgeBanhMiQuocTe').textContent = CANDIDATES.filter(c => c.industry === 'banh-mi-quoc-te').length;
     if (document.getElementById('badgeAnhNguDep')) document.getElementById('badgeAnhNguDep').textContent = CANDIDATES.filter(c => c.industry === 'trung-tam-tieng-anh-dep').length;
     if (document.getElementById('badgeKhachSan')) document.getElementById('badgeKhachSan').textContent = CANDIDATES.filter(c => c.industry === 'khach-san').length;

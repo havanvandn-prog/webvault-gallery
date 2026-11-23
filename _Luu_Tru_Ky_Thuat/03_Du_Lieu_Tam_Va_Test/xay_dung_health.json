@@ -1,0 +1,282 @@
+[
+  {
+    "slug": "xd_coteccons",
+    "name": "Coteccons",
+    "url": "https://www.coteccons.vn/",
+    "final_url": "https://www.coteccons.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "COTECCONS - Building Futures"
+  },
+  {
+    "slug": "xd_ricons",
+    "name": "Ricons",
+    "url": "https://www.ricons.vn/",
+    "final_url": "https://www.ricons.vn/",
+    "group": "tong-thau-vn",
+    "healthy": false,
+    "reason": "Lỗi kết nối website: HTTPSConnectionPool(host='www.ricons.vn', port=443): Max ret",
+    "title": ""
+  },
+  {
+    "slug": "xd_newtecons",
+    "name": "Newtecons",
+    "url": "https://newtecons.vn/",
+    "final_url": "https://newtecons.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Newtecons"
+  },
+  {
+    "slug": "xd_centralcons",
+    "name": "Central Construction",
+    "url": "https://www.centralcons.vn/",
+    "final_url": "https://www.centralcons.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "CÔNG TY CỔ PHẦN XÂY DỰNG CENTRAL"
+  },
+  {
+    "slug": "xd_unicons",
+    "name": "Unicons",
+    "url": "https://unicons.vn/",
+    "final_url": "https://unicons.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Trang chủ - UNICONS"
+  },
+  {
+    "slug": "xd_solenc",
+    "name": "SOL E&C",
+    "url": "https://solenc.vn/",
+    "final_url": "https://solenc.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Trang chủ | SOL E&amp;C - Since 2003"
+  },
+  {
+    "slug": "xd_hoabinh",
+    "name": "Hòa Bình Construction (HBC)",
+    "url": "https://hbcg.vn/",
+    "final_url": "https://hbcg.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "HOA BINH CONSTRUCTION GROUP"
+  },
+  {
+    "slug": "xd_deltagroup",
+    "name": "Delta Group",
+    "url": "https://deltagroup.vn/",
+    "final_url": "https://deltagroup.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Công ty TNHH Tập đoàn Xây dựng DELTA"
+  },
+  {
+    "slug": "xd_fecon",
+    "name": "FECON",
+    "url": "https://fecon.com.vn/",
+    "final_url": "https://fecon.com.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Tập đoàn Xây dựng và Phát triển hạ tầng hàng đầu Việt Nam - Công ty Cổ phần Tập đoàn FECON"
+  },
+  {
+    "slug": "xd_phuchung",
+    "name": "Phục Hưng Holdings",
+    "url": "https://phuchung.com.vn/",
+    "final_url": "https://phuchung.com.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Phục Hưng Holdings Construction Jsc"
+  },
+  {
+    "slug": "xd_dinco",
+    "name": "Dinco E&C",
+    "url": "https://dinco.com.vn/",
+    "final_url": "https://dinco.com.vn/",
+    "group": "tong-thau-vn",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "DINCO E&amp;C | Design and Build General Contractor in Vietnam"
+  },
+  {
+    "slug": "xd_sbshouse",
+    "name": "SBS House",
+    "url": "https://sbshouse.vn/",
+    "final_url": "https://sbshouse.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "SBS HOUSE - Công ty TNHH Thiết kế và Xây dựng SBS Đà Nẵng"
+  },
+  {
+    "slug": "xd_akisa",
+    "name": "Kiến Trúc Akisa",
+    "url": "https://akisa.vn/",
+    "final_url": "https://akisa.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Kiến trúc AKISA: Công Ty Thiết kế & Thi công Biệt thự Đẳng Cấp"
+  },
+  {
+    "slug": "xd_betaviet",
+    "name": "Betaviet Group",
+    "url": "https://betaviet.vn/",
+    "final_url": "https://betaviet.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Betaviet | Công ty xây dựng thiết kế thi công biệt thự, nội thất uy tín"
+  },
+  {
+    "slug": "xd_neohouse",
+    "name": "NeoHouse",
+    "url": "https://neohouse.vn/",
+    "final_url": "https://neohouse.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "NEOHouse | Công Ty Kiến Trúc Thiết Kế Xây Dựng Nhà Đẹp 2026"
+  },
+  {
+    "slug": "xd_nhattin",
+    "name": "Xây Dựng Nhất Tín",
+    "url": "https://xaydungnhattin.com/",
+    "final_url": "https://xaydungnhattin.com/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Công Ty Xây Dựng Nhất Tín"
+  },
+  {
+    "slug": "xd_kienanvinh",
+    "name": "Kiến An Vinh",
+    "url": "https://kienanvinh.vn/",
+    "final_url": "https://kienanvinh.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Công Ty Thiết Kế Xây Dựng Nhà Uy Tín Tphcm - Kiến An vinh"
+  },
+  {
+    "slug": "xd_greenhn",
+    "name": "GreenHN",
+    "url": "https://greenhn.vn/",
+    "final_url": "https://greenhn.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": ""
+  },
+  {
+    "slug": "xd_ancu",
+    "name": "Xây Dựng An Cư",
+    "url": "https://xaydungancu.com.vn/",
+    "final_url": "https://xaydungancu.com.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Công ty thiết kế xây dựng An Cư - Xây nhà trọn gói Tphcm"
+  },
+  {
+    "slug": "xd_minhbao",
+    "name": "Xây Dựng Minh Bảo",
+    "url": "https://minhbao.vn/",
+    "final_url": "https://minhbao.vn/",
+    "group": "xay-nha-tron-goi",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "CÔNG TY CỔ PHẦN THIẾT KẾ XÂY DỰNG MINH BẢO"
+  },
+  {
+    "slug": "xd_atad",
+    "name": "ATAD Steel Structure",
+    "url": "https://atad.vn/",
+    "final_url": "https://atad.vn/",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Steel Buildings, Steel Structure - ATAD Corporation"
+  },
+  {
+    "slug": "xd_bmbsteel",
+    "name": "BMB Steel",
+    "url": "https://bmbsteel.com.vn/",
+    "final_url": "https://bmbsteel.com.vn/en",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "BMB Steel - Pre-Engineered Steel Buildings &amp; Steel Struture"
+  },
+  {
+    "slug": "xd_suffolk",
+    "name": "Suffolk Construction",
+    "url": "https://www.suffolk.com/",
+    "final_url": "https://suffolk.com/",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Home | Suffolk Construction"
+  },
+  {
+    "slug": "xd_turner",
+    "name": "Turner Construction",
+    "url": "https://www.turnerconstruction.com/",
+    "final_url": "https://www.turnerconstruction.com/",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Making a Difference | Turner Construction Company"
+  },
+  {
+    "slug": "xd_bechtel",
+    "name": "Bechtel",
+    "url": "https://www.bechtel.com/",
+    "final_url": "https://www.bechtel.com/",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Bechtel: Engineering, Construction, Procurement &amp; Project Management"
+  },
+  {
+    "slug": "xd_skanska",
+    "name": "Skanska Group",
+    "url": "https://group.skanska.com/",
+    "final_url": "https://www.skanska.com/group/en",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "We build the places that move the world | Skanska"
+  },
+  {
+    "slug": "xd_clark",
+    "name": "Clark Construction",
+    "url": "https://www.clarkconstruction.com/",
+    "final_url": "https://www.clarkconstruction.com/",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": false,
+    "reason": "HTTP Error 403",
+    "title": ""
+  },
+  {
+    "slug": "xd_olsonkundig",
+    "name": "Olson Kundig",
+    "url": "https://olsonkundig.com/",
+    "final_url": "https://olsonkundig.com/",
+    "group": "cong-nghiep-quoc-te",
+    "healthy": true,
+    "reason": "URL hợp lệ",
+    "title": "Olson Kundig — A collaborative global design practice whose work expands the context of built and natural landscapes."
+  }
+]

@@ -8559,7 +8559,7 @@
     document.getElementById('statTopicName').textContent = topicMapName[currentTopic] || currentTopic;
     document.getElementById('statApproved').textContent = approvedInTopic;
     document.getElementById('statTotalTopic').textContent = currentList.length;
-    document.getElementById('btnApprovedCount').textContent = totalApprovedAll;
+    document.getElementById('btnApprovedCount').textContent = approvedInTopic;
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
@@ -8628,16 +8628,17 @@
   }
 
   function saveApprovalSelection() {
-    const approvedList = CANDIDATES.filter(c => approvalMap[c.id]);
+    const currentList = getFilteredCandidates();
+    const approvedList = currentList.filter(c => approvalMap[c.id]);
     if (approvedList.length === 0) {
-      showToast('⚠️ Bạn chưa chọn mẫu nào! Nhấn "+ Thêm Mẫu Này" để chọn.');
+      showToast('⚠️ Bạn chưa chọn mẫu nào trong danh sách đang xem! Nhấn "+ Thêm Mẫu Này" để chọn.');
       return;
     }
 
-    // Tạo danh sách URL để copy nhanh
+    // Tạo danh sách URL để copy nhanh đúng theo chuyên mục / bộ lọc đang xem
     const urlText = approvedList.map(c => c.url).join('\n');
     navigator.clipboard.writeText(urlText).then(() => {
-      showToast(`✓ Đã sao chép ${approvedList.length} link đã duyệt vào Clipboard! Bạn có thể dán vào khung chat.`);
+      showToast(`✓ Đã sao chép ${approvedList.length} link của chuyên mục đang xem vào Clipboard!`);
     }).catch(() => {
       showToast(`✓ Đã lưu ${approvedList.length} mẫu đã duyệt.`);
     });

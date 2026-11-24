@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">431</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">451</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="moi-gioi-nha-dat-cho-thue" onclick="filterStagingTopic('moi-gioi-nha-dat-cho-thue')">
+      <button class="staging-tab-btn active" data-industry="vat-lieu-xay-dung" onclick="filterStagingTopic('vat-lieu-xay-dung')">
+        <span>🧱</span> Vật Liệu Xây Dựng <span class="tab-badge" id="badgeVlxd">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="moi-gioi-nha-dat-cho-thue" onclick="filterStagingTopic('moi-gioi-nha-dat-cho-thue')">
         <span>🏘️</span> Môi Giới Nhà Đất & Cho Thuê <span class="tab-badge" id="badgeMoiGioiBds">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="xay-dung" onclick="filterStagingTopic('xay-dung')">
@@ -977,12 +980,12 @@ template = """<!DOCTYPE html>
     approvalMap = {};
   }
 
-  // Chủ đề đang xem (mặc định moi-gioi-nha-dat-cho-thue hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'moi-gioi-nha-dat-cho-thue';
+  // Chủ đề đang xem (mặc định vat-lieu-xay-dung hoặc đọc từ URL ?industry=...)
+  let currentTopic = 'vat-lieu-xay-dung';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'moi-gioi-nha-dat-cho-thue';
+    const indParam = params.get('industry') || params.get('topic') || 'vat-lieu-xay-dung';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1071,6 +1074,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'vat-lieu-xay-dung': 'Vật Liệu Xây Dựng (Gạch Ốp Lát, Đá Nhân Tạo, Gỗ, Cửa Nhôm Kính, Thiết Bị Vệ Sinh & Quốc Tế)',
       'moi-gioi-nha-dat-cho-thue': 'Môi Giới Nhà Đất Thổ Cư & Cho Thuê Căn Hộ (Sàn VN, Căn Hộ Dịch Vụ & Quốc Tế Chuẩn UI/UX)',
       'xay-dung': 'Mảng Xây Dựng (Tổng Thầu VN, Xây Nhà Trọn Gói, Kết Cấu Thép & Tổng Thầu Quốc Tế)',
       'trung-tam-tieng-anh-dep': 'Trung Tâm Tiếng Anh Bố Cục Đẹp (Quốc Tế Editorial, EdTech & Trung Tâm Hiện Đại)',
@@ -1102,6 +1106,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeVlxd')) document.getElementById('badgeVlxd').textContent = CANDIDATES.filter(c => c.industry === 'vat-lieu-xay-dung').length;
     if (document.getElementById('badgeMoiGioiBds')) document.getElementById('badgeMoiGioiBds').textContent = CANDIDATES.filter(c => c.industry === 'moi-gioi-nha-dat-cho-thue').length;
     if (document.getElementById('badgeXayDung')) document.getElementById('badgeXayDung').textContent = CANDIDATES.filter(c => c.industry === 'xay-dung').length;
     if (document.getElementById('badgeBanhMiQuocTe')) document.getElementById('badgeBanhMiQuocTe').textContent = CANDIDATES.filter(c => c.industry === 'banh-mi-quoc-te').length;

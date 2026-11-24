@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">471</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">491</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="nha-khoa" onclick="filterStagingTopic('nha-khoa')">
+      <button class="staging-tab-btn active" data-industry="spa-tham-my-vien" onclick="filterStagingTopic('spa-tham-my-vien')">
+        <span>💆‍♀️</span> Spa & Thẩm Mỹ Viện <span class="tab-badge" id="badgeSpa">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="nha-khoa" onclick="filterStagingTopic('nha-khoa')">
         <span>🦷</span> Nha Khoa & Trồng Răng <span class="tab-badge" id="badgeNhaKhoa">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="vat-lieu-xay-dung" onclick="filterStagingTopic('vat-lieu-xay-dung')">
@@ -983,12 +986,12 @@ template = """<!DOCTYPE html>
     approvalMap = {};
   }
 
-  // Chủ đề đang xem (mặc định nha-khoa hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'nha-khoa';
+  // Chủ đề đang xem (mặc định spa-tham-my-vien hoặc đọc từ URL ?industry=...)
+  let currentTopic = 'spa-tham-my-vien';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'nha-khoa';
+    const indParam = params.get('industry') || params.get('topic') || 'spa-tham-my-vien';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1077,6 +1080,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'spa-tham-my-vien': 'Spa, Thẩm Mỹ Viện & Clinic (Clinic Da Liễu VN, Day Spa 5 Sao & MedSpa Quốc Tế Chuẩn UI/UX)',
       'nha-khoa': 'Nha Khoa Thẩm Mỹ & Trồng Răng (Chuỗi Lớn VN, Phòng Khám Thẩm Mỹ & Quốc Tế Chuẩn UI/UX)',
       'vat-lieu-xay-dung': 'Vật Liệu Xây Dựng (Gạch Ốp Lát, Đá Nhân Tạo, Gỗ, Cửa Nhôm Kính, Thiết Bị Vệ Sinh & Quốc Tế)',
       'moi-gioi-nha-dat-cho-thue': 'Môi Giới Nhà Đất Thổ Cư & Cho Thuê Căn Hộ (Sàn VN, Căn Hộ Dịch Vụ & Quốc Tế Chuẩn UI/UX)',
@@ -1110,6 +1114,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeSpa')) document.getElementById('badgeSpa').textContent = CANDIDATES.filter(c => c.industry === 'spa-tham-my-vien').length;
     if (document.getElementById('badgeNhaKhoa')) document.getElementById('badgeNhaKhoa').textContent = CANDIDATES.filter(c => c.industry === 'nha-khoa').length;
     if (document.getElementById('badgeVlxd')) document.getElementById('badgeVlxd').textContent = CANDIDATES.filter(c => c.industry === 'vat-lieu-xay-dung').length;
     if (document.getElementById('badgeMoiGioiBds')) document.getElementById('badgeMoiGioiBds').textContent = CANDIDATES.filter(c => c.industry === 'moi-gioi-nha-dat-cho-thue').length;

@@ -190,11 +190,30 @@
       align-items: center;
       gap: 8px;
       overflow-x: auto;
-      padding-bottom: 2px;
-      scrollbar-width: none;
+      padding-bottom: 8px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.05);
+      cursor: grab;
+      user-select: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .staging-tabs-container.is-dragging,
+    .staging-tabs-container.is-dragging .staging-tab-btn {
+      cursor: grabbing;
     }
     .staging-tabs-container::-webkit-scrollbar {
-      display: none;
+      height: 6px;
+    }
+    .staging-tabs-container::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 999px;
+    }
+    .staging-tabs-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+    }
+    .staging-tabs-container::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.48);
     }
 
     .staging-tab-btn {
@@ -18443,8 +18462,70 @@
     }
   }, { passive: false });
 
+  function initStagingTabsDragScroll() {
+    const container = document.querySelector('.staging-tabs-container');
+    if (!container) return;
+
+    let isDown = false;
+    let hasDragged = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+
+    container.addEventListener('mousedown', (e) => {
+      if (e.button !== 0) return;
+      isDown = true;
+      hasDragged = false;
+      startX = e.clientX;
+      startScrollLeft = container.scrollLeft;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) {
+        hasDragged = true;
+        container.classList.add('is-dragging');
+        e.preventDefault();
+        container.scrollLeft = startScrollLeft - dx;
+      }
+    });
+
+    const stopDragging = () => {
+      if (!isDown) return;
+      isDown = false;
+      container.classList.remove('is-dragging');
+      if (hasDragged) {
+        setTimeout(() => { hasDragged = false; }, 0);
+      }
+    };
+
+    window.addEventListener('mouseup', stopDragging);
+    window.addEventListener('blur', stopDragging);
+
+    container.addEventListener('click', (e) => {
+      if (hasDragged) {
+        e.preventDefault();
+        e.stopPropagation();
+        hasDragged = false;
+      }
+    }, true);
+
+    container.addEventListener('dragstart', (e) => {
+      e.preventDefault();
+    });
+
+    container.addEventListener('wheel', (e) => {
+      if (container.scrollWidth <= container.clientWidth) return;
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     initTopicFromUrl();
+    initStagingTabsDragScroll();
     // Cập nhật tab active
     document.querySelectorAll('.staging-tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.industry === currentTopic);

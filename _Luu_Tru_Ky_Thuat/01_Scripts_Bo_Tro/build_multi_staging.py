@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">638</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">656</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="sua-chua-dien-lanh" onclick="filterStagingTopic('sua-chua-dien-lanh')">
+      <button class="staging-tab-btn active" data-industry="ve-sinh-chuyen-nha" onclick="filterStagingTopic('ve-sinh-chuyen-nha')">
+        <span>🚚</span> Vệ Sinh & Chuyển Nhà <span class="tab-badge" id="badgeVeSinhChuyenNha">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="sua-chua-dien-lanh" onclick="filterStagingTopic('sua-chua-dien-lanh')">
         <span>🔧</span> Điện Lạnh & Sửa Nhà <span class="tab-badge" id="badgeDienLanh">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="qua-tang-hoa-tuoi" onclick="filterStagingTopic('qua-tang-hoa-tuoi')">
@@ -1011,11 +1014,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'sua-chua-dien-lanh';
+  let currentTopic = 've-sinh-chuyen-nha';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'sua-chua-dien-lanh';
+    const indParam = params.get('industry') || params.get('topic') || 've-sinh-chuyen-nha';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1104,6 +1107,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      've-sinh-chuyen-nha': 'Vệ Sinh Công Nghiệp & Chuyển Nhà Trọn Gói (Chuyển Nhà VN, Vệ Sinh Văn Phòng & Chuẩn CRO Quốc Tế)',
       'sua-chua-dien-lanh': 'Sửa Chữa Điện Lạnh, Điện Nước & Chống Thấm (Dịch Vụ Địa Phương VN & Home Services Chuẩn CRO Quốc Tế)',
       'qua-tang-hoa-tuoi': 'Quà Tặng Doanh Nghiệp, Giỏ Quà Tết & Hoa Tươi (Shop Hoa VN, Quà B2B & Chuẩn UI/UX Quốc Tế)',
       'me-va-be': 'Mẹ & Bé (Chuỗi Siêu Thị Mẹ Bé VN, Đồ Sơ Sinh & Thương Hiệu Baby D2C Quốc Tế Chuẩn UI/UX)',
@@ -1146,6 +1150,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeVeSinhChuyenNha')) document.getElementById('badgeVeSinhChuyenNha').textContent = CANDIDATES.filter(c => c.industry === 've-sinh-chuyen-nha').length;
     if (document.getElementById('badgeDienLanh')) document.getElementById('badgeDienLanh').textContent = CANDIDATES.filter(c => c.industry === 'sua-chua-dien-lanh').length;
     if (document.getElementById('badgeQuaTang')) document.getElementById('badgeQuaTang').textContent = CANDIDATES.filter(c => c.industry === 'qua-tang-hoa-tuoi').length;
     if (document.getElementById('badgeMeVaBe')) document.getElementById('badgeMeVaBe').textContent = CANDIDATES.filter(c => c.industry === 'me-va-be').length;

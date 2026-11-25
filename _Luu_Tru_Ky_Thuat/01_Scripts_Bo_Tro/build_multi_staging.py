@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">725</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">742</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="phan-mem-saas" onclick="filterStagingTopic('phan-mem-saas')">
+      <button class="staging-tab-btn active" data-industry="bat-dong-san-du-an" onclick="filterStagingTopic('bat-dong-san-du-an')">
+        <span>🏙️</span> BĐS Dự Án <span class="tab-badge" id="badgeBdsDuAn">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="phan-mem-saas" onclick="filterStagingTopic('phan-mem-saas')">
         <span>🚀</span> Phần Mềm & SaaS <span class="tab-badge" id="badgeSaas">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="doanh-nghiep-b2b" onclick="filterStagingTopic('doanh-nghiep-b2b')">
@@ -1026,11 +1029,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'phan-mem-saas';
+  let currentTopic = 'bat-dong-san-du-an';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'phan-mem-saas';
+    const indParam = params.get('industry') || params.get('topic') || 'bat-dong-san-du-an';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1119,6 +1122,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'bat-dong-san-du-an': 'Bất Động Sản Dự Án (Chung Cư, Khu Đô Thị, Biệt Thự Nghỉ Dưỡng VN & Luxury Developments Quốc Tế)',
       'phan-mem-saas': 'Bán Sản Phẩm Số, Tài Khoản, Phần Mềm & SaaS (SaaS Việt Nam, Shop Tài Khoản Số & Siêu Phẩm UI/UX Quốc Tế)',
       'doanh-nghiep-b2b': 'Doanh Nghiệp B2B (Logistics, Luật, Kế Toán, In Ấn & Dịch Vụ Doanh Nghiệp VN + Quốc Tế)',
       'khoa-hoc-online-lms': 'Bán Khóa Học Online (LMS) & Coaching Cá Nhân (Nền Tảng Học VN, Đào Tạo Kỹ Năng & EdTech Quốc Tế)',
@@ -1166,6 +1170,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeBdsDuAn')) document.getElementById('badgeBdsDuAn').textContent = CANDIDATES.filter(c => c.industry === 'bat-dong-san-du-an').length;
     if (document.getElementById('badgeSaas')) document.getElementById('badgeSaas').textContent = CANDIDATES.filter(c => c.industry === 'phan-mem-saas').length;
     if (document.getElementById('badgeB2b')) document.getElementById('badgeB2b').textContent = CANDIDATES.filter(c => c.industry === 'doanh-nghiep-b2b').length;
     if (document.getElementById('badgeKhoaHoc')) document.getElementById('badgeKhoaHoc').textContent = CANDIDATES.filter(c => c.industry === 'khoa-hoc-online-lms').length;

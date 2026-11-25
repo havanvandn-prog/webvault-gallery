@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">571</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">589</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="dien-may-cong-nghe" onclick="filterStagingTopic('dien-may-cong-nghe')">
+      <button class="staging-tab-btn active" data-industry="gia-dung-thiet-bi-bep" onclick="filterStagingTopic('gia-dung-thiet-bi-bep')">
+        <span>🍳</span> Gia Dụng & Thiết Bị Bếp <span class="tab-badge" id="badgeGiaDung">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="dien-may-cong-nghe" onclick="filterStagingTopic('dien-may-cong-nghe')">
         <span>💻</span> Điện Máy & Công Nghệ <span class="tab-badge" id="badgeDienMay">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="thoi-trang-giay-dep" onclick="filterStagingTopic('thoi-trang-giay-dep')">
@@ -999,11 +1002,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'dien-may-cong-nghe';
+  let currentTopic = 'gia-dung-thiet-bi-bep';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'dien-may-cong-nghe';
+    const indParam = params.get('industry') || params.get('topic') || 'gia-dung-thiet-bi-bep';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1092,6 +1095,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'gia-dung-thiet-bi-bep': 'Đồ Gia Dụng Thông Minh & Thiết Bị Bếp (Hãng Gia Dụng VN, Thiết Bị Bếp & D2C Quốc Tế Chuẩn UI/UX)',
       'dien-may-cong-nghe': 'Điện Máy, Laptop & Điện Thoại (Chuỗi Bán Lẻ VN, Showroom Apple/Gaming & Chuẩn UI/UX Quốc Tế)',
       'thoi-trang-giay-dep': 'Thời Trang, Giày Dép & Phụ Kiện (Local Brand VN, Chuỗi Bán Lẻ & D2C Quốc Tế Chuẩn UI/UX)',
       'my-pham-tpcn': 'Mỹ Phẩm & Thực Phẩm Chức Năng (Local Brand VN, Bán Lẻ TPCN & D2C Skincare/Vitamin Quốc Tế)',
@@ -1130,6 +1134,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeGiaDung')) document.getElementById('badgeGiaDung').textContent = CANDIDATES.filter(c => c.industry === 'gia-dung-thiet-bi-bep').length;
     if (document.getElementById('badgeDienMay')) document.getElementById('badgeDienMay').textContent = CANDIDATES.filter(c => c.industry === 'dien-may-cong-nghe').length;
     if (document.getElementById('badgeThoiTrang')) document.getElementById('badgeThoiTrang').textContent = CANDIDATES.filter(c => c.industry === 'thoi-trang-giay-dep').length;
     if (document.getElementById('badgeMyPham')) document.getElementById('badgeMyPham').textContent = CANDIDATES.filter(c => c.industry === 'my-pham-tpcn').length;

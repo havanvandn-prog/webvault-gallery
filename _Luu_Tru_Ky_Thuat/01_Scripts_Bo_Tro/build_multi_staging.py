@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">656</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">673</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="ve-sinh-chuyen-nha" onclick="filterStagingTopic('ve-sinh-chuyen-nha')">
+      <button class="staging-tab-btn active" data-industry="nha-hang-am-thuc" onclick="filterStagingTopic('nha-hang-am-thuc')">
+        <span>🍽️</span> Nhà Hàng & Đặt Tiệc <span class="tab-badge" id="badgeNhaHang">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="ve-sinh-chuyen-nha" onclick="filterStagingTopic('ve-sinh-chuyen-nha')">
         <span>🚚</span> Vệ Sinh & Chuyển Nhà <span class="tab-badge" id="badgeVeSinhChuyenNha">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="sua-chua-dien-lanh" onclick="filterStagingTopic('sua-chua-dien-lanh')">
@@ -1014,11 +1017,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 've-sinh-chuyen-nha';
+  let currentTopic = 'nha-hang-am-thuc';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 've-sinh-chuyen-nha';
+    const indParam = params.get('industry') || params.get('topic') || 'nha-hang-am-thuc';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1107,6 +1110,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'nha-hang-am-thuc': 'Nhà Hàng, Lẩu Nướng & Đặt Tiệc (Chuỗi Ẩm Thực VN, Nhà Hàng Cao Cấp & Fine Dining Quốc Tế)',
       've-sinh-chuyen-nha': 'Vệ Sinh Công Nghiệp & Chuyển Nhà Trọn Gói (Chuyển Nhà VN, Vệ Sinh Văn Phòng & Chuẩn CRO Quốc Tế)',
       'sua-chua-dien-lanh': 'Sửa Chữa Điện Lạnh, Điện Nước & Chống Thấm (Dịch Vụ Địa Phương VN & Home Services Chuẩn CRO Quốc Tế)',
       'qua-tang-hoa-tuoi': 'Quà Tặng Doanh Nghiệp, Giỏ Quà Tết & Hoa Tươi (Shop Hoa VN, Quà B2B & Chuẩn UI/UX Quốc Tế)',
@@ -1150,6 +1154,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeNhaHang')) document.getElementById('badgeNhaHang').textContent = CANDIDATES.filter(c => c.industry === 'nha-hang-am-thuc').length;
     if (document.getElementById('badgeVeSinhChuyenNha')) document.getElementById('badgeVeSinhChuyenNha').textContent = CANDIDATES.filter(c => c.industry === 've-sinh-chuyen-nha').length;
     if (document.getElementById('badgeDienLanh')) document.getElementById('badgeDienLanh').textContent = CANDIDATES.filter(c => c.industry === 'sua-chua-dien-lanh').length;
     if (document.getElementById('badgeQuaTang')) document.getElementById('badgeQuaTang').textContent = CANDIDATES.filter(c => c.industry === 'qua-tang-hoa-tuoi').length;

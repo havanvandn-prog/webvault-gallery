@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">709</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">725</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="doanh-nghiep-b2b" onclick="filterStagingTopic('doanh-nghiep-b2b')">
+      <button class="staging-tab-btn active" data-industry="phan-mem-saas" onclick="filterStagingTopic('phan-mem-saas')">
+        <span>🚀</span> Phần Mềm & SaaS <span class="tab-badge" id="badgeSaas">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="doanh-nghiep-b2b" onclick="filterStagingTopic('doanh-nghiep-b2b')">
         <span>🏢</span> Doanh Nghiệp B2B <span class="tab-badge" id="badgeB2b">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="khoa-hoc-online-lms" onclick="filterStagingTopic('khoa-hoc-online-lms')">
@@ -1023,11 +1026,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'doanh-nghiep-b2b';
+  let currentTopic = 'phan-mem-saas';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'doanh-nghiep-b2b';
+    const indParam = params.get('industry') || params.get('topic') || 'phan-mem-saas';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1116,6 +1119,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'phan-mem-saas': 'Bán Sản Phẩm Số, Tài Khoản, Phần Mềm & SaaS (SaaS Việt Nam, Shop Tài Khoản Số & Siêu Phẩm UI/UX Quốc Tế)',
       'doanh-nghiep-b2b': 'Doanh Nghiệp B2B (Logistics, Luật, Kế Toán, In Ấn & Dịch Vụ Doanh Nghiệp VN + Quốc Tế)',
       'khoa-hoc-online-lms': 'Bán Khóa Học Online (LMS) & Coaching Cá Nhân (Nền Tảng Học VN, Đào Tạo Kỹ Năng & EdTech Quốc Tế)',
       'nha-hang-am-thuc': 'Nhà Hàng, Lẩu Nướng & Đặt Tiệc (Chuỗi Ẩm Thực VN, Nhà Hàng Cao Cấp & Fine Dining Quốc Tế)',
@@ -1162,6 +1166,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeSaas')) document.getElementById('badgeSaas').textContent = CANDIDATES.filter(c => c.industry === 'phan-mem-saas').length;
     if (document.getElementById('badgeB2b')) document.getElementById('badgeB2b').textContent = CANDIDATES.filter(c => c.industry === 'doanh-nghiep-b2b').length;
     if (document.getElementById('badgeKhoaHoc')) document.getElementById('badgeKhoaHoc').textContent = CANDIDATES.filter(c => c.industry === 'khoa-hoc-online-lms').length;
     if (document.getElementById('badgeNhaHang')) document.getElementById('badgeNhaHang').textContent = CANDIDATES.filter(c => c.industry === 'nha-hang-am-thuc').length;

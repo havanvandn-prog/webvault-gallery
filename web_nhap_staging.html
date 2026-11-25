@@ -172,99 +172,204 @@
       border-color: var(--border-hover);
     }
 
-    /* STAGING TABS BAR (CHUYỂN ĐỔI CHỦ ĐỀ ĐA NGÀNH) */
+    /* WORKSPACE SHELL + SIDEBAR TRÁI (PHƯƠNG ÁN 2) */
+    .staging-workspace-shell {
+      max-width: 1440px;
+      width: 100%;
+      margin: 18px auto 40px;
+      padding: 0 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      flex: 1;
+    }
+
     .staging-tabs-bar {
-      background: rgba(14, 14, 18, 0.95);
-      border-bottom: 1px solid var(--border);
-      padding: 10px 24px;
+      width: 280px;
+      flex-shrink: 0;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
       position: sticky;
-      top: 61px;
-      z-index: 45;
-      backdrop-filter: blur(10px);
+      top: 80px;
+      max-height: calc(100vh - 98px);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 35;
+    }
+
+    .staging-workspace-shell.sidebar-collapsed .staging-tabs-bar {
+      display: none;
+    }
+
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      padding: 2px 4px;
+    }
+
+    .sidebar-head-note {
+      font-size: 11px;
+      font-weight: 600;
+      color: #4ade80;
+    }
+
+    .sidebar-search-input {
+      width: 100%;
+      background: #08080b;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 12.5px;
+      padding: 8px 11px;
+      border-radius: 9px;
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.2s ease;
+    }
+    .sidebar-search-input:focus {
+      border-color: #3b82f6;
     }
 
     .staging-tabs-container {
-      max-width: 1440px;
-      margin: 0 auto;
       display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.28) rgba(255, 255, 255, 0.05);
-      cursor: grab;
-      user-select: none;
-      -webkit-overflow-scrolling: touch;
-    }
-    .staging-tabs-container.is-dragging,
-    .staging-tabs-container.is-dragging .staging-tab-btn {
-      cursor: grabbing;
-    }
-    .staging-tabs-container::-webkit-scrollbar {
-      height: 6px;
-    }
-    .staging-tabs-container::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 999px;
-    }
-    .staging-tabs-container::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.28);
-      border-radius: 999px;
-    }
-    .staging-tabs-container::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.48);
+      flex-direction: column;
+      gap: 4px;
+      overflow-y: auto;
+      padding-right: 3px;
     }
 
     .staging-tab-btn {
-      display: inline-flex;
+      width: 100%;
+      display: flex;
       align-items: center;
-      gap: 7px;
-      padding: 7px 14px;
-      border-radius: 20px;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 9px;
       font-size: 12.5px;
       font-weight: 600;
       color: var(--text-muted);
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: transparent;
+      border: 1px solid transparent;
       cursor: pointer;
-      transition: all 0.2s ease;
-      white-space: nowrap;
+      transition: all 0.15s ease;
+      text-align: left;
       user-select: none;
+      font-family: inherit;
     }
     .staging-tab-btn:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.06);
     }
     .staging-tab-btn.active {
-      background: #ff3b30;
+      background: rgba(255, 59, 48, 0.16);
       color: #fff;
-      border-color: #ff3b30;
-      box-shadow: 0 4px 14px rgba(255, 59, 48, 0.35);
+      border-color: rgba(255, 59, 48, 0.55);
+      box-shadow: 0 2px 10px rgba(255, 59, 48, 0.18);
+    }
+
+    .tab-label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+      flex: 1;
+    }
+    .tab-label-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tab-right-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .tag-new-dot {
+      font-size: 10px;
+      font-weight: 800;
+      padding: 1px 6px;
+      border-radius: 6px;
+      background: rgba(34, 197, 94, 0.16);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+    .tab-approved-chip {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #4ade80;
+      background: rgba(34, 197, 94, 0.14);
+      padding: 1px 6px;
+      border-radius: 8px;
     }
     .tab-badge {
-      background: rgba(0, 0, 0, 0.25);
+      background: rgba(0, 0, 0, 0.28);
       padding: 1px 7px;
       border-radius: 10px;
       font-size: 11px;
       font-weight: 700;
     }
     .staging-tab-btn.active .tab-badge {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 59, 48, 0.35);
       color: #fff;
+    }
+
+    .sidebar-empty-note {
+      display: none;
+      padding: 12px 8px;
+      font-size: 12px;
+      color: var(--text-dim);
+      text-align: center;
+    }
+
+    .staging-main-column {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .btn-toggle-sidebar {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 11px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease;
+    }
+    .btn-toggle-sidebar:hover {
+      background: rgba(255, 255, 255, 0.12);
     }
 
     /* COUNTER STRIP */
     .counter-strip {
-      max-width: 1440px;
-      margin: 16px auto 0;
-      padding: 0 24px;
+      margin: 0 0 16px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .counter-left-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -290,21 +395,21 @@
 
     /* MAIN CONTAINER & GRID */
     .main-container {
-      max-width: 1440px;
-      margin: 16px auto 40px;
-      padding: 0 24px;
       width: 100%;
       flex: 1;
     }
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 18px;
     }
 
-    @media (min-width: 1280px) {
+    @media (min-width: 1320px) {
       .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .staging-workspace-shell.sidebar-collapsed .cards-grid {
         grid-template-columns: repeat(4, 1fr);
       }
     }
@@ -764,19 +869,18 @@
       opacity: 1;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       .staging-header {
         padding: 12px 16px;
       }
+      .staging-workspace-shell {
+        padding: 0 16px;
+        flex-direction: column;
+      }
       .staging-tabs-bar {
-        top: 104px;
-        padding: 8px 16px;
-      }
-      .counter-strip {
-        padding: 0 16px;
-      }
-      .main-container {
-        padding: 0 16px;
+        width: 100%;
+        position: static;
+        max-height: 290px;
       }
       .cards-grid {
         grid-template-columns: 1fr;
@@ -817,9 +921,15 @@
     </div>
   </header>
 
-  <!-- STAGING TABS BAR (CHỦ ĐỀ ĐA NGÀNH) -->
-  <nav class="staging-tabs-bar">
-    <div class="staging-tabs-container">
+  <!-- WORKSPACE SHELL (SIDEBAR TRÁI + LƯỚI MẪU PHẢI) -->
+  <div class="staging-workspace-shell" id="stagingShell">
+    <aside class="staging-tabs-bar" aria-label="Danh sách ngành hàng">
+      <div class="sidebar-head">
+        <span>Danh Sách Ngành (<span id="sidebarTotalTopics">40</span>)</span>
+        <span class="sidebar-head-note">Mới nhất ở trên</span>
+      </div>
+      <input type="text" class="sidebar-search-input" id="sidebarTopicSearch" placeholder="🔍 Tìm nhanh ngành..." oninput="filterSidebarTopics()">
+      <div class="staging-tabs-container" id="stagingTabsContainer">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
         <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">742</span>
       </button>
@@ -940,25 +1050,34 @@
       <button class="staging-tab-btn" data-industry="tiec-cuoi" onclick="filterStagingTopic('tiec-cuoi')">
         <span>💍</span> Tiệc Cưới & Wedding <span class="tab-badge" id="badgeWedding">20</span>
       </button>
-    </div>
-  </nav>
+        <div class="sidebar-empty-note" id="sidebarEmptyNote">Không tìm thấy ngành phù hợp.</div>
+      </div>
+    </aside>
 
-  <!-- COUNTER STRIP -->
-  <div class="counter-strip">
-    <div class="counter-text">
-      Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Landing Page Lắp Đặt Mạng Internet & FPT (1-Page Chuẩn Chuyển Đổi Google Ads)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
-    </div>
-    <div class="topic-guide-pill">
-      💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
+    <div class="staging-main-column">
+      <!-- COUNTER STRIP -->
+      <div class="counter-strip">
+        <div class="counter-left-wrap">
+          <button type="button" class="btn-toggle-sidebar" id="btnToggleSidebar" onclick="toggleStagingSidebar()">
+            ☰ Ẩn danh sách ngành
+          </button>
+          <div class="counter-text">
+            Chủ đề đang xem: <b id="statTopicName" style="color:#fff;">Landing Page Lắp Đặt Mạng Internet & FPT (1-Page Chuẩn Chuyển Đổi Google Ads)</b> • Đang chọn <b id="statApproved">0</b> / <span id="statTotalTopic">20</span> mẫu
+          </div>
+        </div>
+        <div class="topic-guide-pill">
+          💡 Nhấn '+ Thêm Mẫu Này' để chọn mẫu bạn ưng ý đưa lên WebVault
+        </div>
+      </div>
+
+      <!-- MAIN CARDS -->
+      <main class="main-container">
+        <div class="cards-grid" id="cardsGrid">
+          <!-- Generated by JS -->
+        </div>
+      </main>
     </div>
   </div>
-
-  <!-- MAIN CARDS -->
-  <main class="main-container">
-    <div class="cards-grid" id="cardsGrid">
-      <!-- Generated by JS -->
-    </div>
-  </main>
 
   <!-- LIGHTBOX MODAL (XEM ẢNH FULL-PAGE) -->
   <div class="lightbox-modal" id="lightboxModal">
@@ -18462,70 +18581,102 @@
     }
   }, { passive: false });
 
-  function initStagingTabsDragScroll() {
-    const container = document.querySelector('.staging-tabs-container');
-    if (!container) return;
-
-    let isDown = false;
-    let hasDragged = false;
-    let startX = 0;
-    let startScrollLeft = 0;
-
-    container.addEventListener('mousedown', (e) => {
-      if (e.button !== 0) return;
-      isDown = true;
-      hasDragged = false;
-      startX = e.clientX;
-      startScrollLeft = container.scrollLeft;
-    });
-
-    window.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      const dx = e.clientX - startX;
-      if (Math.abs(dx) > 5) {
-        hasDragged = true;
-        container.classList.add('is-dragging');
-        e.preventDefault();
-        container.scrollLeft = startScrollLeft - dx;
-      }
-    });
-
-    const stopDragging = () => {
-      if (!isDown) return;
-      isDown = false;
-      container.classList.remove('is-dragging');
-      if (hasDragged) {
-        setTimeout(() => { hasDragged = false; }, 0);
-      }
-    };
-
-    window.addEventListener('mouseup', stopDragging);
-    window.addEventListener('blur', stopDragging);
-
-    container.addEventListener('click', (e) => {
-      if (hasDragged) {
-        e.preventDefault();
-        e.stopPropagation();
-        hasDragged = false;
-      }
-    }, true);
-
-    container.addEventListener('dragstart', (e) => {
-      e.preventDefault();
-    });
-
-    container.addEventListener('wheel', (e) => {
-      if (container.scrollWidth <= container.clientWidth) return;
-      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-        container.scrollLeft += e.deltaY;
-      }
-    }, { passive: false });
+  function normalizeTopicText(str) {
+    return (str || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase();
   }
+
+  function enhanceSidebarTabs() {
+    const btns = Array.from(document.querySelectorAll('#stagingTabsContainer .staging-tab-btn'));
+    const totalEl = document.getElementById('sidebarTotalTopics');
+    if (totalEl) totalEl.textContent = btns.length;
+
+    btns.forEach((btn, idx) => {
+      if (btn.dataset.enhanced === '1') return;
+      const badge = btn.querySelector('.tab-badge');
+      const iconSpan = btn.querySelector('span:not(.tab-badge)');
+      const iconHtml = iconSpan ? iconSpan.outerHTML : '';
+      const badgeHtml = badge ? badge.outerHTML : '';
+
+      // Lấy text tên ngành thuần túy
+      let labelText = '';
+      btn.childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          labelText += node.textContent;
+        }
+      });
+      labelText = labelText.trim();
+      const isNew = idx >= 1 && idx <= 5; // 5 ngành mới nhất ngay sau "Tất Cả Nháp"
+
+      btn.dataset.searchText = normalizeTopicText(labelText);
+      btn.dataset.enhanced = '1';
+      btn.innerHTML = `
+        <span class="tab-label-wrap">
+          ${iconHtml}
+          <span class="tab-label-text" title="${labelText}">${labelText}</span>
+        </span>
+        <span class="tab-right-meta">
+          ${isNew ? '<span class="tag-new-dot">Mới</span>' : ''}
+          <span class="tab-approved-chip" style="display:none;"></span>
+          ${badgeHtml}
+        </span>
+      `;
+    });
+  }
+
+  function updateSidebarApprovedChips() {
+    document.querySelectorAll('#stagingTabsContainer .staging-tab-btn').forEach(btn => {
+      const ind = btn.dataset.industry;
+      const chip = btn.querySelector('.tab-approved-chip');
+      if (!chip) return;
+      let count = 0;
+      if (ind === 'all') {
+        CANDIDATES.forEach(c => { if (approvalMap[c.id]) count++; });
+      } else {
+        CANDIDATES.forEach(c => { if (c.industry === ind && approvalMap[c.id]) count++; });
+      }
+      if (count > 0) {
+        chip.textContent = `✓${count}`;
+        chip.style.display = 'inline-block';
+      } else {
+        chip.style.display = 'none';
+      }
+    });
+  }
+
+  function filterSidebarTopics() {
+    const input = document.getElementById('sidebarTopicSearch');
+    const emptyNote = document.getElementById('sidebarEmptyNote');
+    if (!input) return;
+    const q = normalizeTopicText(input.value.trim());
+    let visibleCount = 0;
+    document.querySelectorAll('#stagingTabsContainer .staging-tab-btn').forEach(btn => {
+      const text = btn.dataset.searchText || normalizeTopicText(btn.textContent);
+      const match = !q || text.includes(q);
+      btn.style.display = match ? 'flex' : 'none';
+      if (match) visibleCount++;
+    });
+    if (emptyNote) emptyNote.style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  function toggleStagingSidebar() {
+    const shell = document.getElementById('stagingShell');
+    const btn = document.getElementById('btnToggleSidebar');
+    if (!shell) return;
+    const collapsed = shell.classList.toggle('sidebar-collapsed');
+    if (btn) {
+      btn.textContent = collapsed ? '☰ Hiện danh sách ngành' : '☰ Ẩn danh sách ngành';
+    }
+  }
+
+  const _origRenderStaging = renderStaging;
+  renderStaging = function() {
+    _origRenderStaging();
+    updateSidebarApprovedChips();
+  };
 
   document.addEventListener('DOMContentLoaded', () => {
     initTopicFromUrl();
-    initStagingTabsDragScroll();
+    enhanceSidebarTabs();
     // Cập nhật tab active
     document.querySelectorAll('.staging-tab-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.industry === currentTopic);

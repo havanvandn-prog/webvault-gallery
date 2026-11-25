@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">531</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">551</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="my-pham-tpcn" onclick="filterStagingTopic('my-pham-tpcn')">
+      <button class="staging-tab-btn active" data-industry="thoi-trang-giay-dep" onclick="filterStagingTopic('thoi-trang-giay-dep')">
+        <span>👗</span> Thời Trang & Giày Dép <span class="tab-badge" id="badgeThoiTrang">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="my-pham-tpcn" onclick="filterStagingTopic('my-pham-tpcn')">
         <span>💄</span> Mỹ Phẩm & TPCN <span class="tab-badge" id="badgeMyPham">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="phong-kham-y-te" onclick="filterStagingTopic('phong-kham-y-te')">
@@ -993,11 +996,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'my-pham-tpcn';
+  let currentTopic = 'thoi-trang-giay-dep';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'my-pham-tpcn';
+    const indParam = params.get('industry') || params.get('topic') || 'thoi-trang-giay-dep';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1086,6 +1089,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'thoi-trang-giay-dep': 'Thời Trang, Giày Dép & Phụ Kiện (Local Brand VN, Chuỗi Bán Lẻ & D2C Quốc Tế Chuẩn UI/UX)',
       'my-pham-tpcn': 'Mỹ Phẩm & Thực Phẩm Chức Năng (Local Brand VN, Bán Lẻ TPCN & D2C Skincare/Vitamin Quốc Tế)',
       'phong-kham-y-te': 'Phòng Khám Chuyên Khoa & Y Tế (Bệnh Viện Đa Khoa VN, Xét Nghiệm, Đặt Khám & Phòng Khám Quốc Tế)',
       'spa-tham-my-vien': 'Spa, Thẩm Mỹ Viện & Clinic (Clinic Da Liễu VN, Day Spa 5 Sao & MedSpa Quốc Tế Chuẩn UI/UX)',
@@ -1122,6 +1126,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeThoiTrang')) document.getElementById('badgeThoiTrang').textContent = CANDIDATES.filter(c => c.industry === 'thoi-trang-giay-dep').length;
     if (document.getElementById('badgeMyPham')) document.getElementById('badgeMyPham').textContent = CANDIDATES.filter(c => c.industry === 'my-pham-tpcn').length;
     if (document.getElementById('badgePhongKham')) document.getElementById('badgePhongKham').textContent = CANDIDATES.filter(c => c.industry === 'phong-kham-y-te').length;
     if (document.getElementById('badgeSpa')) document.getElementById('badgeSpa').textContent = CANDIDATES.filter(c => c.industry === 'spa-tham-my-vien').length;

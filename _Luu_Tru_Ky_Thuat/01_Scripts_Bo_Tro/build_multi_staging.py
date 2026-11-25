@@ -815,9 +815,12 @@ template = """<!DOCTYPE html>
   <nav class="staging-tabs-bar">
     <div class="staging-tabs-container">
       <button class="staging-tab-btn" data-industry="all" onclick="filterStagingTopic('all')">
-        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">608</span>
+        <span>⚡</span> Tất Cả Nháp <span class="tab-badge" id="badgeAll">624</span>
       </button>
-      <button class="staging-tab-btn active" data-industry="me-va-be" onclick="filterStagingTopic('me-va-be')">
+      <button class="staging-tab-btn active" data-industry="qua-tang-hoa-tuoi" onclick="filterStagingTopic('qua-tang-hoa-tuoi')">
+        <span>🎁</span> Quà Tặng & Hoa Tươi <span class="tab-badge" id="badgeQuaTang">20</span>
+      </button>
+      <button class="staging-tab-btn" data-industry="me-va-be" onclick="filterStagingTopic('me-va-be')">
         <span>🍼</span> Mẹ & Bé <span class="tab-badge" id="badgeMeVaBe">20</span>
       </button>
       <button class="staging-tab-btn" data-industry="gia-dung-thiet-bi-bep" onclick="filterStagingTopic('gia-dung-thiet-bi-bep')">
@@ -1005,11 +1008,11 @@ template = """<!DOCTYPE html>
   }
 
   // Chủ đề đang xem (mặc định my-pham-tpcn hoặc đọc từ URL ?industry=...)
-  let currentTopic = 'me-va-be';
+  let currentTopic = 'qua-tang-hoa-tuoi';
 
   function initTopicFromUrl() {
     const params = new URLSearchParams(window.location.search);
-    const indParam = params.get('industry') || params.get('topic') || 'me-va-be';
+    const indParam = params.get('industry') || params.get('topic') || 'qua-tang-hoa-tuoi';
     const validTopics = Array.from(document.querySelectorAll('.staging-tab-btn')).map(btn => btn.dataset.industry);
     if (indParam && validTopics.includes(indParam)) {
       currentTopic = indParam;
@@ -1098,6 +1101,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật thống kê
     const topicMapName = {
+      'qua-tang-hoa-tuoi': 'Quà Tặng Doanh Nghiệp, Giỏ Quà Tết & Hoa Tươi (Shop Hoa VN, Quà B2B & Chuẩn UI/UX Quốc Tế)',
       'me-va-be': 'Mẹ & Bé (Chuỗi Siêu Thị Mẹ Bé VN, Đồ Sơ Sinh & Thương Hiệu Baby D2C Quốc Tế Chuẩn UI/UX)',
       'gia-dung-thiet-bi-bep': 'Đồ Gia Dụng Thông Minh & Thiết Bị Bếp (Hãng Gia Dụng VN, Thiết Bị Bếp & D2C Quốc Tế Chuẩn UI/UX)',
       'dien-may-cong-nghe': 'Điện Máy, Laptop & Điện Thoại (Chuỗi Bán Lẻ VN, Showroom Apple/Gaming & Chuẩn UI/UX Quốc Tế)',
@@ -1138,6 +1142,7 @@ template = """<!DOCTYPE html>
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
+    if (document.getElementById('badgeQuaTang')) document.getElementById('badgeQuaTang').textContent = CANDIDATES.filter(c => c.industry === 'qua-tang-hoa-tuoi').length;
     if (document.getElementById('badgeMeVaBe')) document.getElementById('badgeMeVaBe').textContent = CANDIDATES.filter(c => c.industry === 'me-va-be').length;
     if (document.getElementById('badgeGiaDung')) document.getElementById('badgeGiaDung').textContent = CANDIDATES.filter(c => c.industry === 'gia-dung-thiet-bi-bep').length;
     if (document.getElementById('badgeDienMay')) document.getElementById('badgeDienMay').textContent = CANDIDATES.filter(c => c.industry === 'dien-may-cong-nghe').length;

@@ -18172,7 +18172,7 @@
     document.getElementById('statTopicName').textContent = topicMapName[currentTopic] || currentTopic;
     document.getElementById('statApproved').textContent = approvedInTopic;
     document.getElementById('statTotalTopic').textContent = currentList.length;
-    document.getElementById('btnApprovedCount').textContent = totalApprovedAll;
+    document.getElementById('btnApprovedCount').textContent = approvedInTopic;
 
     // Cập nhật số đếm badge các tab
     if (document.getElementById('badgeAll')) document.getElementById('badgeAll').textContent = CANDIDATES.length;
@@ -18260,19 +18260,47 @@
   }
 
   function saveApprovalSelection() {
-    const approvedList = CANDIDATES.filter(c => approvalMap[c.id]);
+    const currentList = getFilteredCandidates();
+    const approvedList = currentList.filter(c => approvalMap[c.id]);
     if (approvedList.length === 0) {
-      showToast('⚠️ Bạn chưa chọn mẫu nào! Nhấn "+ Thêm Mẫu Này" để chọn.');
+      showToast(
+        currentTopic === 'all'
+          ? '⚠️ Bạn chưa chọn mẫu nào! Nhấn "+ Thêm Mẫu Này" để chọn.'
+          : '⚠️ Bạn chưa chọn mẫu nào trong ngành này! Nhấn "+ Thêm Mẫu Này" hoặc "Chọn Hết" để chọn.'
+      );
       return;
     }
 
-    // Tạo danh sách URL để copy nhanh
+    // Tạo danh sách URL để copy nhanh (chỉ trong chủ đề đang xem; chọn Tất Cả Nháp sẽ copy toàn bộ)
     const urlText = approvedList.map(c => c.url).join('\n');
-    navigator.clipboard.writeText(urlText).then(() => {
-      showToast(`✓ Đã sao chép ${approvedList.length} link đã duyệt vào Clipboard! Bạn có thể dán vào khung chat.`);
-    }).catch(() => {
-      showToast(`✓ Đã lưu ${approvedList.length} mẫu đã duyệt.`);
-    });
+    const successMsg = currentTopic === 'all'
+      ? `✓ Đã sao chép ${approvedList.length} link đã duyệt vào Clipboard! Bạn có thể dán vào khung chat.`
+      : `✓ Đã sao chép ${approvedList.length} link đã duyệt của ngành này vào Clipboard! Bạn có thể dán vào khung chat.`;
+
+    const fallbackCopy = () => {
+      const ta = document.createElement('textarea');
+      ta.value = urlText;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try {
+        document.execCommand('copy');
+        showToast(successMsg);
+      } catch (err) {
+        showToast(`✓ Đã lưu ${approvedList.length} mẫu đã duyệt.`);
+      }
+      document.body.removeChild(ta);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(urlText).then(() => {
+        showToast(successMsg);
+      }).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
   }
 
   let toastTimer = null;
